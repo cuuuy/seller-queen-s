@@ -1,0 +1,205 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body style="background:#ddd;">
+	<div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader">
+			<div>
+				<a href=""><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>주문내역</h2>
+			<div class="marketHeader_mypage">
+				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
+				<div class="marketHeader_mypage_menu">
+					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
+					<div class="marketHeader_mypage_menu_top">
+						<span class="marketHeader_mypage_menu_top_profile"></span>
+						<h5>김셀럽 회원님, 환영합니다.</h5>
+					</div>
+					<ul class="marketHeader_mypage_menu_list">
+						<li><a href="market_order.html">주문내역</a></li>
+						<li><a href="market_cart.html">장바구니</a></li>
+						<li><a href="market_review.html">후기 게시판</a></li>
+						<li><a href="market_qna.html">문의 게시판</a></li>
+						<li><a href="market_see.html">최근 본 상품</a></li>
+					</ul>
+					<ul class="marketHeader_mypage_menu_logout">
+						<li>로그아웃</li>
+					</ul>
+				</div>
+			</div>
+		</header>
+		</div>
+		<div class="marketContent">
+			<div class="marketOrder marketOrderDetail">
+				<div>
+					<h3>2022.04.10</h3>
+					<ul class="marketOrder_list">
+						<li>
+							<span class="marketOrder_list_thumb"></span>
+							<div class="marketOrder_list_text">
+								<p class="marketOrder_list_text01"><a href="market_order_detail.html">상품 정보</a></p>
+								<p class="marketOrder_list_text02">TC 써지컬 하트 컬러 볼 팔찌</p>
+								<p class="marketOrder_list_text03">
+									<span class="marketOrder_list_text03_price">52,000원</span>
+									<span>그린</span>
+									<span>S</span>
+								</p>
+								<p class="marketOrder_list_text04">
+									배송완료
+								</p>
+							</div>
+						</li>
+					</ul>
+					<ul class="marketOrderDetail_btn">
+						<li>
+							<a href="" class="modalon">교환 신청</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" class="modalon">반품 신청</a>
+						</li>
+						<li>
+							<a href="" class="modalon">취소 신청</a>
+						</li>
+					</ul>
+				</div>
+				<div class="marketOrderDetail_wrap">
+					<h3>주문자 정보</h3>
+					<table class="marketOrderDetail_wrap_table">
+						<tr>
+							<th>이름</th>
+							<td>김셀럽</td>
+						</tr>
+						<tr>
+							<th>연락처</th>
+							<td>010-0000-0000</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td>서울특별시 강남구 삼성동 1-1</td>
+						</tr>
+						<tr>
+							<th>상세주소</th>
+							<td>11동 111호</td>
+						</tr>
+					</table>
+				</div>
+				<div class="marketOrderDetail_wrap">
+					<h3>배송지 정보</h3>
+					<table class="marketOrderDetail_wrap_table">
+						<tr>
+							<th>이름</th>
+							<td>김셀럽</td>
+						</tr>
+						<tr>
+							<th>연락처</th>
+							<td>010-0000-0000</td>
+						</tr>
+						<tr>
+							<th>주소</th>
+							<td>서울특별시 강남구 삼성동 1-1</td>
+						</tr>
+						<tr>
+							<th>상세주소</th>
+							<td>11동 111호</td>
+						</tr>
+					</table>
+				</div>
+				<div class="marketOrderDetail_wrap">
+					<h3>송장번호</h3>
+					<table class="marketOrderDetail_wrap_table">
+						<tr>
+							<th>송장번호</th>
+							<td>cj대한통운 3636364564</td>
+						</tr>
+					</table>
+				</div>
+				<div class="marketOrderDetail_wrap">
+					<h3>결제 정보</h3>
+					<table class="marketOrderDetail_wrap_table marketOrderDetail_wrap_table_right">
+						<tr>
+							<th>상품 금액</th>
+							<td>52,000원</td>
+						</tr>
+						<tr>
+							<th>배송비</th>
+							<td>3,000원</td>
+						</tr>
+						<tr>
+							<th>최종 결제금액</th>
+							<td>55,000원</td>
+						</tr>
+						<tr>
+							<th>결제 수단</th>
+							<td>무통장 입금</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="marketModal">
+				<div>
+					<h3>반품 신청</h3>
+					<div class="marketModal_box">
+						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<span>
+							사유를 선택하세요.
+						</span>
+						<div class="marketModal_box_button">
+							<button>단순변심</button>
+							<button>배송문제</button>
+							<button>상품문제</button>
+							<button>기타문제</button>
+						</div>
+					</div>
+					<a href="" class="back_btn w50">취소</a>
+					<a href="javascripot:void(0)" class="ok_btn w50 application">신청</a>
+				</div>
+			</div>
+			<div id="marketModal" class="marketModal02">
+				<div>
+					<h3>반품 신청</h3>
+					<p>	
+						신청이 완료 되었습니다. <br>회수할 물건이 있으시면 준비해주세요.
+					</p>
+					<a href="javascript:void(0)" class="ok_btn">확인</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+		$('#marketModal').hide();
+		$('.marketModal02').hide();
+
+		$('.modalon').click(function(){
+			$('#marketModal').show();
+		});
+		$('.application').click(function(){
+			$('#marketModal').hide();
+			$('.marketModal02').show();
+		});
+		
+	});
+</script>

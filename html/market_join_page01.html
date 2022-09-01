@@ -1,0 +1,58 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body style="background:#ddd;">
+	<div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href=""><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>이용약관 및 개인정보 동의</h2>
+		</div>
+		<div class="marketContent">
+			<div class="marketJoin">
+				<div class="marketJoin_priv">
+					<p>본 약관에서는 다음 용어를 사용합니다.<br>
+					1.1. ‘콘텐츠’란 문장, 음성, 음악, 이미지, 동영상, 소프트웨어, 프로그램, 코드 기타 정보를 말합니다.<br>
+					1.2. ‘본 콘텐츠’란 본 서비스를 통해 접속할 수 있는 콘텐츠를 말합니다.<br>
+					1.3. ‘투고 콘텐츠’란 고객이 본 서비스에 투고, 송신,업로드한 콘텐츠를 말합니다.<br>
+					1.4. ‘코인’이란 본 서비스가 유상으로 제공하는 서비스 또는 콘텐츠와 교환 가능한 전자적 가상통화를 말합니다.<br>
+					1.5. ‘개별 이용약관’이란 본 서비스에 관하여 본 약관과는 별도로 ‘약관’, 가이드라인’, ‘정책’ 등의 명칭으로 당사가 배포 또는 게시한 문서를 말합니다.<br><br>
+					2. 약관 동의<br>
+					2.1 고객은 본 약관의 규정에 따라 본 서비스를 이용해야 합니다. 고객은본 약관에 대해 유효하고 취소 불가능한 동의를 했을 경우에 한하여 본 서비스를 이용할 수 있습니다. 
+					<br>2.2. 고객이 미성년자일 경우에는 친권자 등 법정대리인의 동의를 얻은 후 본 서비스를 이용하십시오. 또한 고객이 본 서비스를 사업자를 위해 이용할 경우에는 당해 사업자 역시 본 약관에 동의한 후, 개별 이용약관의 규정에 따라 본 4서비스를 이용해야 합니다. <br>
+					1.5. ‘개별 이용약관’이란 본 서비스에 관하여 본 약관과는 별도로 ‘약관’, 가이드라인’, ‘정책’ 등의 명칭으로 당사가 배포 또는 게시한 문서를 말합니다.<br>
+					1.4. ‘코인’이란 본 서비스가 유상으로 제공하는 서비스 또는 콘텐츠와 교환 가능한 전자적 가상통화를 말합니다.</p>
+				</div>
+				<div class="marketJoin_btn">
+					<a href="market_join_page02.html" class="ok_btn">동의</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+</script>

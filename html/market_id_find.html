@@ -1,0 +1,59 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body style="background:#ddd;">
+	<div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href=""><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>아이디 찾기</h2>
+		</div>
+		<div class="marketContent">
+			<div class="marketJoin">
+				<div class="marketJoin_form">
+					<dl>
+						<dt>이름</dt>
+						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dt>연락처</dt>
+						<dd>
+							<input type="text" name="" placeholder="+82(한국)" class="w30">
+							<input type="text" name="" placeholder="전화번호를 입력해주세요." class="w70 ml">
+							<input type="text" name="" placeholder="인증번호를 입력해주세요." class="w70 mt">
+							<a href="" class="w30 mt ml gray">인증번호 전송</a>
+							<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
+						</dd>
+					</dl>
+				</div>
+				<div class="marketJoin_btn">
+					<a href="market_join_page03.html" class="ok_btn gray">다음</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+</script>

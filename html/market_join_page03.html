@@ -1,0 +1,115 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body style="background:#ddd;">
+	<div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href=""><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>회원가입</h2>
+		</div>
+		<div class="marketContent">
+			<div class="marketJoin">
+				<div class="marketJoin_form">
+					<dl>
+						<dt>이메일 <span>*이메일 형식을 확인해주세요.</span></dt>
+						<dd><input type="text" name="" placeholder="이메일 주소를 입력해주세요."></dd>
+						<dt>아이디</dt>
+						<dd><input type="text" name="" placeholder="아이디를 입력해주세요."></dd>
+						<dt>비밀번호</dt>
+						<dd><input type="text" name="" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요."></dd>
+						<dt>비밀번호 확인</dt>
+						<dd><input type="text" name="" placeholder="비밀번호를 한 번 더 입력해주세요."></dd>
+						<dt>이름</dt>
+						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dt>생년월일</dt>
+						<dd>
+							<select name="">
+								<option>년도</option>
+								<option>2022</option>
+								<option>2021</option>
+								<option>2020</option>
+								<option>2019</option>
+							</select>
+							<select name="">
+								<option>월</option>
+								<option>01</option>
+								<option>02</option>
+								<option>03</option>
+								<option>04</option>
+								<option>05</option>
+								<option>06</option>
+							</select>
+							<select name="">
+								<option>일</option>
+								<option>01</option>
+								<option>02</option>
+								<option>03</option>
+								<option>04</option>
+								<option>05</option>
+								<option>06</option>
+							</select>
+						</dd>
+						<dt>연락처</dt>
+						<dd>
+							<input type="text" name="" placeholder="+82(한국)" class="w30">
+							<input type="text" name="" placeholder="전화번호를 입력해주세요." class="w70 ml">
+							<input type="text" name="" placeholder="인증번호를 입력해주세요." class="w70 mt">
+							<a href="" class="w30 mt ml">인증번호 전송</a>
+						</dd>
+						<dt>주소/우편번호</dt>
+						<dd>
+							<input type="text" name="" placeholder="주소를 입력해주세요." class="w70">
+							<a href="" class="w30 ml">주소검색</a>
+							<input type="text" name="" placeholder="상세주소를 입력해주세요." class="mt">
+						</dd>
+					</dl>
+				</div>
+				<div class="marketJoin_btn">
+					<a href="market_join_page03.html" class="ok_btn">회원가입</a>
+				</div>
+			</div>
+			<div id="marketModal">
+				<div>
+					<h3>주문완료</h3>
+					<p>
+						안녕하세요. <span>김셀러</span> 회원님,
+						<br><br>
+						회원가입이 완료 되었습니다.<br>
+						레몬트리의 회원이 되신걸 환영합니다.
+						<br><br>
+						감사합니다.
+					</p>
+					<a href="" class="ok_btn">주문 내역 보기</a>
+					<a href="" class="back_btn">메인으로 돌아가기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+</script>

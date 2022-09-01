@@ -1,0 +1,49 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body style="background:#ddd;">
+	<div class="marketContainer">
+		<div class="marketContent">
+			<div class="marketMember">
+				<div>
+					<div class="marketMember_input">
+						<input type="text" name="" placeholder="아이디 입력">
+						<input type="text" name="" placeholder="비밀번호 입력">
+					</div>
+					<div class="marketMember_btn">
+						<a href="market_main.html" class="ok_btn">로그인</a>
+						<a href="market_join_page01.html" class="back_btn">회원가입</a>
+					</div>
+					<div class="marketMember_find">
+						<a href="market_idfind.html">아이디 찾기</a><br>
+						<a href="market_pwfind.html">비밀번호 찾기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+</script>

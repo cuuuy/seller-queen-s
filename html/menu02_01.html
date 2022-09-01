@@ -1,0 +1,49 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header"></div>
+		<div id="subvisual">
+			<h2>셀퀸 클래스</h2>
+			<p>온라인 판매! 셀러퀸즈 전문 강사별 교육 일정을 확인하고 진행해보세요!</p>
+		</div>
+		
+		<div id="content">
+			<div class="selClass">
+				<ul class="selClass_tab">
+					<li class="active">교육 일정</li>
+					<li>신청 내역</li>
+				</ul>
+				<div class="selClass_in">
+					<p><img src="../image/calender.jpg" alt=""></p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer"></div>
+	</div>
+</body>
+
+
+<script>
+	$(document).ready(function() {
+		$('.header').load('head.html');
+		$('.footer').load('footer.html');
+		
+		//클릭이벤트
+		$('.join_page_01 > a').click(function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		});
+	});
+
+</script>

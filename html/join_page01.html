@@ -1,0 +1,82 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header"></div>
+		<div class="join">
+			<ul id="join_tab">
+				<li class="active">
+					<span>1</span>
+					안내
+				</li>
+				<li>
+					<span>2</span>
+					약관 및 동의
+				</li>
+				<li>
+					<span>3</span>
+					정보입력
+				</li>
+				<li>
+					<span>4</span>
+					회원가입신청
+				</li>
+				<li>
+					<span>5</span>
+					결제하기
+				</li>
+				<li>
+					<span>6</span>
+					신청 완료
+				</li>
+			</ul>
+			<div class="join_page">
+				<a href="#" id="join_page_prev">
+					<img src="../image/join_arrow_prev.png" alt="">
+				</a>
+				<div class="join_page_01">
+					<a href="#">
+						<h3>셀러</h3>
+						<p>메인페이지 셀러 입점 신청에서도 진행하실 수 있습니다.</p>
+					</a>
+					<a href="#">
+						<h3>도매</h3>
+						<p>회원 가입 후 본사에서 승인을 받아야 이용하실 수 있습니다.</p>
+					</a>
+					<a href="#">
+						<h3>강사</h3>
+						<p>게시판 기능 및 강의 판매 포인트를 출금하실 수 있습니다.</p>
+					</a>
+				</div>
+				<a href="join_page02.html" id="join_page_next">
+					<img src="../image/join_arrow_next.png" alt="">
+				</a>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
+</body>
+
+
+<script>
+	$(document).ready(function() {
+		$('.header').load('head.html');
+		$('.footer').load('footer.html');
+		
+		//클릭이벤트
+		$('.join_page_01 > a').click(function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		});
+	});
+
+</script>

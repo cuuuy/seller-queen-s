@@ -1,0 +1,75 @@
+<div class="header_messageLine">
+	<div class="header_messageLine_message">
+		<span class="message_first">
+			온라인 셀러들의 도구,
+		</span>
+		<span class="message_second">
+			헬프스토어 셀러퀸즈
+		</span>
+	</div>
+</div>
+<div class="header_gnb">
+	<a href="/" class="header_gnb_logo">
+		<img src="../image/logo.png">
+	</a>
+	<div class="header_gnb_menus">
+		<div id="menu1">
+			<ul class="menus">
+				<li>
+					회사소개
+					<div class="menus_2depth">
+						<ul class="sub">
+							<li><a href="#">대표 소개</a></li>
+							<li><a href="#">위치 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					게시판
+					<div class="menus_2depth">
+						<ul class="sub">
+							<li><a href="#">셀퀸 클래스</a></li>
+							<li><a href="#">오늘의 강의(셀러I)</a></li>
+							<li><a href="#">오늘의 강의(셀러J)</a></li>
+							<li><a href="#">금손 협찬 요청</a></li>
+							<li><a href="#">본사 자료 게시판</a></li>
+							<li><a href="#">팸 게시판</a></li>
+							<li><a href="#">강의 소개</a></li>
+							<li><a href="#">강사 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					고객센터
+					<div class="menus_2depth">
+						<ul class="sub">
+							<li><a href="#">자주 묻는 질문</a></li>
+							<li><a href="#">본사 문의</a></li>
+							<li><a href="#">상품/배송 문의</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="header_gnb_loginSection">
+		<ul>
+			<li><a href="#">로그인</a></li>
+			<li><a href="#">회원가입</a></li>
+		</ul>
+	</div>
+</div>
+<div class="gnb_wrap">
+	
+</div>
+
+<script>
+$(".menus > li").mouseenter(function(){
+  $(".menus_2depth").stop().slideDown(400);
+  $(".gnb_wrap").stop().show(400);
+});
+$(".menus > li").mouseleave(function(){
+  $(".menus_2depth").stop().slideUp(100);
+  $(".gnb_wrap").stop().hide(100);
+});
+</script>
