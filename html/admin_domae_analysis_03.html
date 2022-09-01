@@ -1,0 +1,66 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li><a href="">도매 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>판매 분석</h3>
+				</div> 
+					<div class="adminContent_right">
+						<div class="adminContent_tab">
+							<ul>
+								<li><a href="">판매유형</a></li>
+								<li class="active"><a href="">누적 판매량/매출</a></li>
+								<li><a href="">기간 판매량 매출</a></li>
+							</ul>
+						</div>
+						<!-- script 들어가야 되는 div -->
+						<div class="adminContent_graph">
+							<img src="../image/domae_graph3.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
+	});
+
+</script>

@@ -1,0 +1,181 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li><a href="">관리자 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>정산 내역</h3>
+				</div> 
+					<div class="adminContent_right">
+						<div class="adminContent_tab">
+							<ul>
+								<li class="active"><a href="">정산완료 4</a></li>
+								<li><a href="">정산 대기0</a></li>
+							</ul>
+						</div>
+						<div class="adminContent_search">
+							<input type="search" name="" placeholder="상품명을 검색하세요.">
+							<a href="" class="check_btn">검색</a>
+						</div>
+						<div>
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="*">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="5%">
+									<col width="8%">
+									<col width="8%">
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>No.</th>
+									<th>상품명</th>
+									<th>도매처</th>
+									<th>판매가</th>
+									<th>상태</th>
+									<th>정산</th>
+									<th>수량</th>
+									<th>구매일자</th>
+									<th>판매마진</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>900,000원</td>
+										<td>발송완료</td>
+										<td>정산완료</td>
+										<td>1</td>
+										<td>20220401</td>
+										<td>903,000원</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>900,000원</td>
+										<td>발송완료</td>
+										<td>정산완료</td>
+										<td>1</td>
+										<td>20220401</td>
+										<td>903,000원</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>900,000원</td>
+										<td>발송완료</td>
+										<td>정산완료</td>
+										<td>1</td>
+										<td>20220401</td>
+										<td>903,000원</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>900,000원</td>
+										<td>발송완료</td>
+										<td>정산완료</td>
+										<td>1</td>
+										<td>20220401</td>
+										<td>903,000원</td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+						<div class="adminContent_pager">
+							<span class="active">1</span>
+							<span>2</span>
+							<span>3</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		$('.rightmenuWrap').load('admin_rightmenu.html');
+	});
+
+</script>

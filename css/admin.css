@@ -12,11 +12,11 @@
 
 .adminWrap_topmenu {padding:24px 0 0 0;}
 .adminWrap_topmenu ul {display:flex; justify-content: flex-end;}
-.adminWrap_topmenu ul li {width:80px;text-align:center;font-size:18px;line-height:36px;padding:0 0 6px 0;margin:0 0 0 12px;}
+.adminWrap_topmenu ul li {width:120px;text-align:center;font-size:18px;line-height:36px;padding:0 0 6px 0;margin:0 0 0 12px;}
 .adminWrap_topmenu ul li.active a {color:#4E327B;border-bottom:3px solid #4E327B}
 
 .adminWrap_title {display:flex;align-items: center;height:46px;border-bottom:1px solid #bababa;padding:0 0 16px 0;margin:0 0 24px 0;}
-.adminWrap_title h3 {width:120px;padding:0 10px;text-align:center;}
+.adminWrap_title h3 {width:160px;padding:0 10px;text-align:center;}
 .adminWrap_title p {font-size:14px;color:#707070;}
 
 .adminContent:after {content:"";display:block;clear:both;}
@@ -43,8 +43,8 @@
 
 .adminContent_search {margin:24px 0 36px;}
 .adminContent_search:after {content:"";display:block;clear:both;}
-.adminContent_search input {float:left;padding:0 26px;width:calc( 100% - 130px );height:32px;line-height:32px;background:url('../image/market_serch.png') no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
-.adminContent_search a {float:right;width:120px;height:32px;line-height:32px;border-radius:5px;background:#4E327B;text-align:center;color:#fff;}
+.adminContent_search input {float:left;padding:0 26px;width:calc( 100% - 260px );height:32px;line-height:32px;background:url('../image/market_serch.png') no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
+.adminContent_search a {float:right;width:120px;height:32px;line-height:32px;border-radius:5px;background:#4E327B;text-align:center;color:#fff;margin:2px;}
 
 .adminContent_table th {font-size:16px;font-weight:400;text-align:center;color:#000;line-height:30px;vertical-align:middle;}
 .adminContent_table td {font-size:16px;font-weight:400;text-align:center;color:#000;line-height:22px;padding:12px 8px;vertical-align:middle;}
@@ -58,3 +58,12 @@
 .adminContent_pager {text-align:center;}
 .adminContent_pager span {display:inline-block;margin:24px 0 0 0;padding:0 6px;font-weight:500;color:#9e9e9e;}
 .adminContent_pager span.active {font-weight:700;color:#4E327B;}
+
+.adminContent_total {color:#4E327B; margin : 10px;}
+
+.adminContent_date{ width: 150px;float : left;background-color: #EAE6F2;padding : 10px; margin: 10px;}
+.adminContent_date select option { width: 250px;}
+
+.adminContent_order:after {content:"";display:block;clear:both;}
+.adminContent_order input {float:left;padding:0 26px;width:calc( 100% - 260px );height:32px;line-height:32px;background:no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
+.adminContent_order a {float:right;width:120px;height:32px;line-height:32px;border-radius:5px;background:#4E327B;text-align:center;color:#fff;margin:2px;}
