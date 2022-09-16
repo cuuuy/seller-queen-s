@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -30,14 +31,17 @@
 			<div class="adminWrap">
 				 <div class="adminWrap_topmenu">
 					<ul>
-						<li><a href="">도매 센터</a></li>
+						<li><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li class="active"><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<a href="./admin_domae_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>주문/발송 관리</h3>
 				</div> 
-					<div class="adminContent_right">
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
 								<li class="active"><a href="">신규주문 8</a></li>
@@ -50,7 +54,7 @@
 						</div>
 						<div class="adminContent_search">
 							<input type="search" name="" placeholder="상품명을 검색하세요.">
-							<a href="" class="check_btn">송장 입력</a>
+							<a href="javascript:void(0);" class="check_btn" onclick="modal_popup();">송장 입력</a>
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
@@ -278,6 +282,28 @@
 			</div>
 		</div>
 	</div>
+	<div id="modal" class="adminModal" style="display:none;">
+		<div class="adminModal_ok adminModal_invoice">
+			<h3>송장입력</h3>
+			<div>
+				<div>
+					<h5>택배사</h5>
+					<select name="">
+						<option>cj 대한통운</option>
+						<option>로젠</option>
+						<option>우체국</option>
+					</select>
+				</div>
+				<div>
+					<h5>송장번호</h5>
+					<input type="text" name="" placeholder="">
+				</div>
+			</div>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" id="close_btn" class="ok_btn modalClose">확인</a>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -286,5 +312,34 @@
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
 	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
 
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	close_btn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	closeBtn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
 </script>

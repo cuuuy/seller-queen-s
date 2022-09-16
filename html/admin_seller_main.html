@@ -1,0 +1,871 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li class="active"><a href="./admin_main.html">셀러 센터</a></li>
+						<li><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_domae_main.html">강사 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>상품관리</h3>
+					<p>★셀러 안내 사항 : 상품의 공급은 도매판매자의 판매상품이 자동으로 업데이트 되며, 셀럽님들께서는 도매상의 상품을  자유롭게 ON/OFF하실 수 있습니다.</p>
+				</div> 
+				<div class="adminContent">
+					<div class="adminContent_leftmenu">
+						<h4>카테고리 관리</h4>
+						<ul>
+							<li class="adminContent_leftmenu_drop">ALL</li>
+						</ul>
+						<ul>
+							<li>
+								<div class="adminContent_leftmenu_title">
+									악세서리
+									<label class="switch">
+										<input type="checkbox">
+										<span class="slider round"></span>
+									</label>
+								</div>
+								<ul>
+									<li>
+										시계
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										팔찌
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										귀걸이
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<div class="adminContent_leftmenu_title">
+									의류
+									<label class="switch">
+										<input type="checkbox">
+										<span class="slider round"></span>
+									</label>
+								</div>
+								<ul>
+									<li>
+										상의
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										하의
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										아우터
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										신발
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<p class="adminContent_leftmenu_modify"><img src="../image/admin_products_modify.jpg" alt="" /></p>
+					</div>
+					<div class="adminContent_right">
+						<div class="adminContent_tab">
+							<ul>
+								<li class="active"><a href="">전체 10</a></li>
+								<li><a href="">판매중 0</a></li>
+								<li><a href="">품절 0</a></li>
+							</ul>
+						</div>
+						<div class="adminContent_check adminContent_check_right">
+							<input id="check01" type="checkbox">
+							<label for="check01"><span></span>베스트 아이템 설정</label>
+						</div>
+						<div class="adminContent_search">
+							<input type="search" name="" placeholder="상품명을 검색하세요.">
+							<a href="javascript:void(0)" class="check_btn onmodal">상품업로드</a>
+							<a href="javascript:void(0)" class="check_btn">검색</a>
+						</div>
+						<div>
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="*">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="5%">
+									<col width="10%">
+									<col width="10%">
+									<col width="8%">
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>NO.</th>
+									<th>상품명</th>
+									<th>도매처</th>
+									<th>카테고리</th>
+									<th>지정 판매가</th>
+									<th>상태</th>
+									<th>재고</th>
+									<th>등록일</th>
+									<th>배송비</th>
+									<th>상품 표시</th>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check07" type="checkbox">
+												<label for="check07"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check03" type="checkbox">
+												<label for="check03"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check04" type="checkbox">
+												<label for="check04"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check05" type="checkbox">
+												<label for="check05"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check06" type="checkbox">
+												<label for="check06"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="adminContent_pager">
+							<span class="active">1</span>
+							<span>2</span>
+							<span>3</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="adminModal modalPage01">
+			<div class="adminModal_cont">
+				<h3>상품 업로드</h3>
+				<a href="javascript:void(0)" class="adminModal_cont_plusbtn">+ 옵션추가</a>
+				<div>
+					<table class="adminModal_cont_table">
+						<colgroup>
+							<col width="*">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="15%">
+							<col width="8%">
+							<col width="10%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>상품명</th>
+								<th>도매처</th>
+								<th>카테고리</th>
+								<th>도매가</th>
+								<th>소매 지정 판매가</th>
+								<th>재고</th>
+								<th>배송비</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<span>하트 컬러 볼 시계</span>
+								</td>
+								<td>
+									<span>시계나라</span>
+								</td>
+								<td>
+									<span>
+										<select name="">
+											<option>시계</option>
+											<option>남성의류</option>
+											<option>악세서리</option>
+										</select>
+									</span>
+								</td>
+								<td>
+									<span>700,000원</span>
+								</td>
+								<td>
+									<span>900,000원</span>
+								</td>
+								<td>
+									<span>20</span>
+								</td>
+								<td>
+									<span>
+										<select name="">
+											<option>3,500원</option>
+											<option>3,000원</option>
+											<option>2,500원</option>
+										</select>
+									</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<h5>상품업로드 기간</h5>
+					<!-- 달력 스크립트 -->
+					<div>
+						
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="" class="ok_btn modalNext1">다음</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 옵션추가 -->
+		<div class="adminModal modalPage02">
+			<div class="adminModal_cont">
+				<h3>상품 옵션추가</h3>
+				<table class="adminModal_cont_table">
+					<colgroup>
+						<col width="*">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="12%">
+						<col width="8%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>상품명</th>
+							<th>도매처</th>
+							<th>카테고리</th>
+							<th>도매가</th>
+							<th>소매 지정 판매가</th>
+							<th>재고</th>
+							<th>배송비</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span><input type="text" name="" placeholder="상품명"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매처"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>시계</option>
+										<option>남성의류</option>
+										<option>악세서리</option>
+									</select></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="소매지정판매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="재고"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>3,500원</option>
+										<option>3,000원</option>
+										<option>2,500원</option>
+									</select></span>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span><input type="text" name="" placeholder="상품명"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매처"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>시계</option>
+										<option>남성의류</option>
+										<option>악세서리</option>
+									</select></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="소매지정판매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="재고"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>3,500원</option>
+										<option>3,000원</option>
+										<option>2,500원</option>
+									</select></span>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7">
+								<a href="" class="plusbtn">+</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="" class="ok_btn modalNext1-1">옵션추가완료</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 상품 업로드 -->
+		<div class="adminModal modalPage03">
+			<div class="adminModal_cont">
+				<h3>상품 업로드</h3>
+				<div>
+					<h5>메인 사진</h5>
+					<!-- 파일업로드 스크립트 -->
+					<div>
+						<a href="" class="adminModal_cont_uploadbtn">파일 찾기</a>
+					</div>
+				</div>
+				<div>
+					<h5>상품 사진 및 설명</h5>
+					<!-- 스마트에디터 -->
+					<div>
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="" class="ok_btn modalNext2">다음</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 완료 -->
+		<div class="adminModal modalPage04">
+			<div class="adminModal_ok">
+				<h3>상품 추가가 완료되었습니다!</h3>
+				<div class="adminModal_ok_btn">
+					<a href="" class="ok_btn modalClose">확인</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 카테고리관리 -->
+		<div class="adminModal admincategory">
+			<div class="adminModal_cont adminModal_category">
+				<h3>카테고리관리</h3>
+				<table class="adminModal_category_table">
+					<colgroup>
+						<col width="*">
+						<col width="22%">
+						<col width="22%">
+						<col width="22%">
+						<col width="22%">
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>대분류</th>
+							<td class="adminModal_category_table_1depth">
+								<input id="i1" type="checkbox">
+								<label for="i1"><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>의류</label>
+							</td>
+						</tr>
+						<tr>
+							<th>중분류</th>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+						</tr>
+						<tr>
+							<th>소분류</th>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+						</tr>
+						<tr>
+							<th>중분류</th>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+						</tr>
+						<tr>
+							<th>소분류</th>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+						</tr>
+						<tr>
+							<th>중분류</th>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+						</tr>
+						<tr>
+							<th>소분류</th>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="adminModal_category_plus">
+					<select name="">
+						<option>대분류 선택 및 입력</option>
+						<option>의류</option>
+						<option>의류</option>
+						<option>의류</option>
+					</select>
+					<select name="">
+						<option>중분류 선택 및 입력</option>
+						<option>아동복</option>
+						<option>아동복</option>
+						<option>아동복</option>
+					</select>
+					<select name="">
+						<option>소분류 선택 및 입력</option>
+						<option>상의</option>
+						<option>하의</option>
+						<option>아우터</option>
+						<option>신발</option>
+					</select>
+				</div>
+				<div class="adminModal_category_btn">
+					<a href="" class="on">추가</a>
+					<a href="">수정</a>
+					<a href="" class="plusnone">삭제</a>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="" class="ok_btn modalClose">저장</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
+
+		$('.adminModal').hide();
+		$('.adminModal a').attr('href','javascript:void(0)');
+		$('.onmodal').click(function(){
+			$('.modalPage01').show();
+		});
+		$('.adminModal_cont_plusbtn').click(function(){
+			$('.modalPage01').hide();
+			$('.modalPage02').show();
+		});
+		$('.modalNext1').click(function(){
+			$('.modalPage01').hide();
+			$('.modalPage03').show();
+		});
+		$('.modalNext1-1').click(function(){
+			$('.modalPage02').hide();
+			$('.modalPage01').show();
+		});
+		$('.modalNext2').click(function(){
+			$('.modalPage03').hide();
+			$('.modalPage04').show();
+		});
+		$('.modalClose').click(function(){
+			$('.adminModal').hide();
+		});
+		$('.adminModal_category_btn a').click(function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass('on');
+			$('.adminModal_category_plus').show();
+		});
+		$('.plusnone').click(function(){
+			$('.adminModal_category_plus').hide();
+		});
+		$('.adminContent_leftmenu_modify').click(function(){
+			$('.admincategory').show();
+		});
+
+	});
+
+</script>

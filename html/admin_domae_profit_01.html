@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -30,23 +31,26 @@
 			<div class="adminWrap">
 				 <div class="adminWrap_topmenu">
 					<ul>
-						<li><a href="">도매 센터</a></li>
+						<li><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li class="active"><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<a href="./admin_domae_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>프로핏</h3>
 				</div> 
-					<div class="adminContent_right">
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="active"><a href="">판매 프로핏 적립 현황</a></li>
-								<li><a href="">판매 프로핏 출금 현황</a></li>
+								<li class="active"><a href="./admin_domae_profit_01.html">판매 프로핏 적립 현황</a></li>
+								<li><a href="./admin_domae_profit_02.html">판매 프로핏 출금 현황</a></li>
 							</ul>
 						</div>
 						<div class="adminContent_search">
 							<input type="search" name="" placeholder="상품을 검색하세요.">
-							<a href="" class="check_btn">출금하기</a>
+							<a href="javascript:void(0)" class="check_btn" onclick="modal_popup();">출금하기</a>
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
@@ -79,11 +83,11 @@
 									<col width="3%">
 									<col width="*">
 									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
+									<col width="6%">
+									<col width="6%">
+									<col width="6%">
+									<col width="6%">
+									<col width="6%">
 								</colgroup>
 								<thead>
 									<th></th>
@@ -237,6 +241,53 @@
 			</div>
 		</div>
 	</div>
+	<div class="adminModal" id="modal" style="display:none;">
+		<div class="adminModal_ok adminModal_profit">
+			<h3>프로핏 출금하기</h3>
+			<div class="adminModal_profit_top">
+				<p>판매 프로핏</p>
+				<p>200,000원</p>
+			</div>
+			<table class="adminModal_profit_table">
+				<colgroup>
+					<col width="30%">
+					<col width="70%">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td>
+							<input type="search" name="" placeholder="이름">
+						</td>
+						<td>
+							<input type="search" name="" placeholder="주민번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<select name="">
+								<option>신한은행</option>
+								<option>국민은행</option>
+								<option>우리은행</option>
+								<option>하나은행</option>
+								<option>농협은행</option>
+							</select>
+						</td>
+						<td>
+							<input type="search" name="" placeholder="계좌번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="search" name="" placeholder="신청금액을 입력하세요">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" class="ok_btn" id="close_btn">출금하기</a>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -245,5 +296,34 @@
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
 	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
 
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	close_btn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	closeBtn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
 </script>

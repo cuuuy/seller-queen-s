@@ -1,169 +1,419 @@
-<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
 <body>
 	<div class="container">
-		<div class="header">
-			
+		<div class="header"></div>
+		<div id="subvisual">
+			<h2>팸 게시판</h2>
+			<p>셀러퀸즈 회원들과 팸을 맺어보세요!<br>다양한 정보와 혜택을 공유할 수 있습니다.</p>
 		</div>
-		<div class="body">
-			<div class="body_fam_mainImage">
-				<img src="../image/fam_main.png">
+		
+		<div id="content">
+			<div class="selClass">
+				<div class="adminContent_right" style="width:80%;margin: 200px 10% 200px 10%;">
+					<div>
+						<table class="adminContent_table">
+							<colgroup>
+								<col width="*">
+								<col width="10%">
+								<col width="10%">
+								<col width="10%">
+							</colgroup>
+							<thead>
+								<th>제목</th>
+								<th>작성</th>
+								<th>시간</th>
+								<th>조회</th>
+							</thead>
+							<tbody>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="adminContent_order">
+						<a href="javascript:void(0);" id="check_btn" onclick="">글쓰기</a>
+						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup2()">가입신청 현황</a>
+						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup()">팸 맴버</a>
+					</div>
+				</div>
 			</div>
-			
-			<div class="body_fam_section">
-				<div class="body_fam_menu">
-					<div class="body_fam_menu_01">
-						<b>인기팸</b>
-					</div>
-					<div class="body_fam_menu_02">
-						<b>전체팸</b>
-					</div>
-				</div>
-				<br>
-				<div class="body_fam_title">
-					<b>내가 참여중인 팸</b>
-				</div>
-				<div class="body_fam_content">
-					<table>
+		</div>
+		<div id="modal" class="adminModal modalPage04" style="display:none;">
+			<div class="adminModal_ok adminModal_order">
+				<h3>팸 맴버 11/20</h3>
+				<div>
+					<table class="adminContent_table">
 						<colgroup>
-							<col width="33%">
-							<col width="33%">
-							<col width="33%">
+							<col width="20%">
+							<col width="*">
+							<col width="20%">
 						</colgroup>
-						<tr>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
+						<thead>
+							<th></th>
+							<th>팸 맴버</th>
+							<th>방문</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton">
-									참여중
-								</a>
-							</td>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton">
-									참여중
-								</a>
-							</td>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton">
-									참여중
-								</a>
-							</td>
-						</tr>
-						<tr>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
 									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
-									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton2">
-									참여하기
-								</a>
-							</td>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
-									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
-									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton2">
-									참여하기
-								</a>
-							</td>
-							<td class="body_fam_content_td">
-								<div class="body_fam_content_div01">
-									<div class="body_fam_content_div01_img">
-										<img src="../image/won.png">
-									</div>
-									<div class="body_fam_content_div01_name">
-									<b>셀러고수 팸</b>
-									<br>
-									팸장 : 김민지
-									</div>
-								</div>
-								<div class="body_fam_content_div02">
-								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
-								</div>
-								<a href="#" class="body_fam_content_inputButton2">
-									참여하기
-								</a>
-							</td>
-						</tr>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>1시간 전</td>
+							</tr>
+						</tbody>
 					</table>
+					
+				</div>
+				<div class="adminModal_ok_btn" style="margin:0 auto 5px auto">
+					<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:45%;float:left;margin:0 5px 5px 5px;">강퇴</a>
+					<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" style="width:45%;float:left;margin:0 5px 5px 5px;">확인</a>
 				</div>
 			</div>
-			
-		</div>	
-
+		</div>
+		<div id="modal2" class="adminModal modalPage04" style="display:none;">
+			<div class="adminModal_ok adminModal_order">
+				<h3>가입신청 현황</h3>
+				<div>
+					<table class="adminContent_table">
+						<colgroup>
+							<col width="20%">
+							<col width="*">
+							<col width="20%">
+						</colgroup>
+						<thead>
+							<th></th>
+							<th>닉네임</th>
+							<th>등급</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td class="adminContent_table_name">
+									<p>팸 맴버 이름</p>
+								</td>
+								<td>Seller J</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</div>
+				<div class="adminModal_ok_btn" style="margin:0 auto 5px auto">
+					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2" style="width:45%;float:left;margin:0 5px 5px 5px;">거부</a>
+					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2_2" style="width:45%;float:left;margin:0 5px 5px 5px;">승인</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer"></div>
 	</div>
-	
 </body>
 
-<div class="footer">
-			
-</div>
-</html>
 
 <script>
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
+		
+		//클릭이벤트
+		$('.join_page_01 > a').click(function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		});
 	});
 	
+	
+
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
+
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	close_btn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	closeBtn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+
+	function modal_popup2(){
+		const modal2 = document.getElementById("modal2")
+		modal2.style.display = "flex"
+	}
+
+	const modal2 = document.getElementById("modal2")
+	const closeBtn2 = modal.querySelector(".close-area2")
+	const close_btn2 = modal.querySelector("#close_btn2")
+
+	close_btn2.addEventListener("click", e => {
+		modal2.style.display = "none"
+	})
+
+	closeBtn2.addEventListener("click", e => {
+		moda2l.style.display = "none"
+	})
+
+	modal2.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal2.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal2.style.display === "flex" && e.key === "Escape") {
+			modal2.style.display = "none"
+		}
+	})
+
 </script>

@@ -1,0 +1,44 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header"></div>
+		<div id="subvisual">
+			<h2>위치 소개</h2>
+		</div>
+		
+		<div id="content">
+			<div class="selClass">
+				<div class="selClass_in">
+					<p><img src="../image/ready_image.png" alt=""></p>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer"></div>
+	</div>
+</body>
+
+
+<script>
+	$(document).ready(function() {
+		$('.header').load('head.html');
+		$('.footer').load('footer.html');
+		
+		//클릭이벤트
+		$('.join_page_01 > a').click(function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		});
+	});
+
+</script>

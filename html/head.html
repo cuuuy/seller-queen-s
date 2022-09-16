@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <div class="header_messageLine">
 	<div class="header_messageLine_message">
 		<span class="message_first">
@@ -9,7 +10,7 @@
 	</div>
 </div>
 <div class="header_gnb">
-	<a href="/" class="header_gnb_logo">
+	<a href="../html/main.html" class="header_gnb_logo">
 		<img src="../image/logo.png">
 	</a>
 	<div class="header_gnb_menus">
@@ -19,8 +20,8 @@
 					회사소개
 					<div class="menus_2depth">
 						<ul class="sub">
-							<li><a href="#">대표 소개</a></li>
-							<li><a href="#">위치 소개</a></li>
+							<li><a href="./menu01_01.html">대표 소개</a></li>
+							<li><a href="./menu01_02.html">위치 소개</a></li>
 						</ul>
 					</div>
 				</li>
@@ -28,14 +29,14 @@
 					게시판
 					<div class="menus_2depth">
 						<ul class="sub">
-							<li><a href="#">셀퀸 클래스</a></li>
-							<li><a href="#">오늘의 강의(셀러I)</a></li>
-							<li><a href="#">오늘의 강의(셀러J)</a></li>
-							<li><a href="#">금손 협찬 요청</a></li>
-							<li><a href="#">본사 자료 게시판</a></li>
-							<li><a href="#">팸 게시판</a></li>
-							<li><a href="#">강의 소개</a></li>
-							<li><a href="#">강사 소개</a></li>
+							<li><a href="./menu02_01.html">셀퀸 클래스</a></li>
+							<li><a href="./menu02_02.html">오늘의 강의(셀러I)</a></li>
+							<li><a href="./menu02_03.html">오늘의 강의(셀러J)</a></li>
+							<li><a href="./menu02_04.html">금손 협찬 요청</a></li>
+							<li><a href="./menu02_05.html">본사 자료 게시판</a></li>
+							<li><a href="./menu02_06.html">팸 게시판</a></li>
+							<li><a href="./menu02_07.html">강의 소개</a></li>
+							<li><a href="./menu02_08.html">강사 소개</a></li>
 						</ul>
 					</div>
 				</li>
@@ -43,9 +44,17 @@
 					고객센터
 					<div class="menus_2depth">
 						<ul class="sub">
-							<li><a href="#">자주 묻는 질문</a></li>
-							<li><a href="#">본사 문의</a></li>
-							<li><a href="#">상품/배송 문의</a></li>
+							<li><a href="./menu03_01.html">자주 묻는 질문</a></li>
+							<li><a href="./menu03_02.html">본사 문의</a></li>
+							<li><a href="./menu03_03.html">상품/배송 문의</a></li>
+						</ul>
+					</div>
+				</li>
+				<li>
+					관리자
+					<div class="menus_2depth">
+						<ul class="sub">
+							<li><a href="./stanby.html">승인대기</a></li>
 						</ul>
 					</div>
 				</li>
@@ -54,9 +63,38 @@
 	</div>
 	<div class="header_gnb_loginSection">
 		<ul>
-			<li><a href="#">로그인</a></li>
-			<li><a href="#">회원가입</a></li>
+			<li><a href="./login.html">로그인</a></li>
+			<li><a href="./join_page01.html">회원가입</a></li>
 		</ul>
+		<div>
+			<a href="javascript:void(0)" onclick="mypage_modal_popup();">▼</a>
+			<div class="header_gnb_loginSection_modal">
+				<div class="header_gnb_loginSection_modal_content">
+					<h5>김셀럽 님(abc@gmail.com)
+						<span>회원 등급 : 셀러 J</span>
+					</h5>
+					<div class="modal_content_btn">
+						<a href="./admin_admin_main.html" id="" onclick="">나의 관리자 페이지로 이동</a>
+						<a href="./market_main.html" id="" onclick="">나의 쇼핑몰로 이동</a>
+					</div>
+
+					<div class="header_gnb_loginSection_modal_content_list">
+						<div>
+							<h5>오늘의 판매 건수</h5>
+							<p>102 건</p>
+						</div>
+						<div>
+							<h5>오늘의 판매 매출</h5>
+							<p>2,900,000원</p>
+						</div>
+						<div>
+							<h5>오늘의 광고 수익</h5>
+							<p>900,000원</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <div class="gnb_wrap">
@@ -72,4 +110,8 @@ $(".menus > li").mouseleave(function(){
   $(".menus_2depth").stop().slideUp(100);
   $(".gnb_wrap").stop().hide(100);
 });
+
+function mypage_modal_popup(){
+	$(".header_gnb_loginSection_modal").toggle();
+}
 </script>

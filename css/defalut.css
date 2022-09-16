@@ -86,7 +86,7 @@ th {
 	font-weight:bold;
 }
 
-input {border:none;outline:none;background:none;font-family:inherit;}
+input {border:none;outline:none;background:none;font-family:inherit;font-size:16px;}
 button {border:none;outline:none;background:none;font-family:inherit;
 	padding:0;
 	margin:0;
@@ -94,7 +94,7 @@ button {border:none;outline:none;background:none;font-family:inherit;
 	-mox-appearance:none;
 	-webkit-appearance:none;
 }
-select {border:none;outline:none;background:none;font-family:inherit;
+select {border:none;outline:none;background:none;font-family:inherit;font-size:16px;
 }
 
 

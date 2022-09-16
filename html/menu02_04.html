@@ -1,0 +1,135 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header"></div>
+		<div id="subvisual">
+			<h2>금손 협찬 요청</h2>
+		</div>
+		
+		<div id="content">
+			<div class="selClass">
+				<div class="adminContent_right" style="width:80%;margin: 200px 10% 200px 10%;">
+					<div>
+						<table class="adminContent_table">
+							<colgroup>
+								<col width="*">
+								<col width="10%">
+								<col width="10%">
+								<col width="10%">
+							</colgroup>
+							<thead>
+								<th>제목</th>
+								<th>작성</th>
+								<th>시간</th>
+								<th>조회</th>
+							</thead>
+							<tbody>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+								<tr>
+									<!-- <td>
+										<div class="adminContent_table_checkbox">
+											<input id="check02" type="checkbox">
+											<label for="check02"><span></span></label>
+										</div>
+									</td> -->
+									<td class="adminContent_table_name">
+										<p>게시글 제목</p>
+									</td>
+									<td>작성자 이름</td>
+									<td>2020-09-01</td>
+									<td>12</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="adminContent_order">
+						<a href="javascript:void(0);" id="check_btn" onclick="">글쓰기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer"></div>
+	</div>
+</body>
+
+
+<script>
+	$(document).ready(function() {
+		$('.header').load('head.html');
+		$('.footer').load('footer.html');
+		
+		//클릭이벤트
+		$('.join_page_01 > a').click(function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active');
+		});
+	});
+
+</script>
