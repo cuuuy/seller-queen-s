@@ -41,8 +41,8 @@
 		</div>
 		<div class="marketContent">
 			<div class="marketCart">
-				<h3>2022.04.10</h3>
-				<ul class="marketCart_list">
+				<!-- <h3>2022.04.10</h3> -->
+				<!-- <ul class="marketCart_list">
 					<li>
 						<div class="marketCart_list_check">
 							<input id="cart01" type="checkbox">
@@ -65,61 +65,84 @@
 							</div>
 						</div>
 					</li>
+				</ul> -->
+			</div>
+			<div class="marketCart_fix">
+				<a href="market_sell.html" class="ok_btn">(<span id="chk_count">0</span>) 총 <span id="chk_amount">0</span>원 결제하기</a>
+			</div>
+		</div>
+	</div>
+	<div class="marketDetail_fixbox">
+		<div class="marketDetail_fixbox_up_box">
+			<a href="javascript:void(0);" class="marketDetail_fixbox_up active"></a>
+			<div class="marketDetail_fixbox_show">
+				<ul>
 					<li>
-						<div class="marketCart_list_check">
-							<input id="cart02" type="checkbox">
-							<label for="cart02"><span></span></label>
-						</div>
-						<span class="marketCart_list_thumb"></span>
-						<div class="marketCart_list_text">
-							<p class="marketCart_list_text01">상품 정보</p>
-							<p class="marketCart_list_text02">TC 써지컬 하트 컬러 볼 팔찌</p>
-							<p class="marketCart_list_text03">
-								<span class="marketCart_list_text03_price">52,000원</span>
-								<span>그린</span>
-								<span>S</span>
-							</p>
-							<div class="marketCart_list_text_btnbox">
-								<button>-</button>
-								<p>1</p>
-								<button>+</button>
-								<a href="">옵션 변경</a>
-							</div>
-						</div>
+						<h4>배송방법</h4>
+						<ul>
+							<li class="co777">택배</li>
+						</ul>
 					</li>
-					<li>
-						<div class="marketCart_list_check">
-							<input id="cart03" type="checkbox">
-							<label for="cart03"><span></span></label>
-						</div>
-						<span class="marketCart_list_thumb"></span>
-						<div class="marketCart_list_text">
-							<p class="marketCart_list_text01">상품 정보</p>
-							<p class="marketCart_list_text02">TC 써지컬 하트 컬러 볼 팔찌</p>
-							<p class="marketCart_list_text03">
-								<span class="marketCart_list_text03_price">52,000원</span>
-								<span>그린</span>
-								<span>S</span>
-							</p>
-							<div class="marketCart_list_text_btnbox">
-								<button>-</button>
-								<p>1</p>
-								<button>+</button>
-								<a href="">옵션 변경</a>
-							</div>
-						</div>
+					<li><h4>배송비</h4>
+						<ul>
+							<li class="co777">3,000원 / 제주, 도서지역 추가 2000원</li>
+						</ul>
+					</li>
+					<li id="bottom_option_li"><h4>수량</h4>
+						<ul>
+							<li class="tac">- &nbsp;&nbsp; 1 &nbsp;&nbsp; +</li>
+						</ul>
+					</li>
+					<li><h4>COLOR</h4>
+						<ul>
+							<li>보라</li>
+							<li>연두</li>
+							<li>소라</li>
+						</ul>
+					</li>
+					<li><h4>SIZE</h4>
+						<ul>
+							<li>S</li>
+							<li>M</li>
+							<li>L</li>
+						</ul>
 					</li>
 				</ul>
-				<div class="marketCart_fix">
-					<a href="market_sell.html" class="ok_btn">(1) 총 55,000원 결제하기</a>
+				<div class="marketDetail_fixbox_up_box_price">
+					<p><span>0</span>개 선택</p>
+					<h4>총 <span>0</span>원</h4>
 				</div>
 			</div>
+		</div>
+		<div class="marketDetail_fixbox_btn">
+			<a href="javascript:void(0)" onclick="">
+				장바구니
+			</a>
+			<a href="javascript:void(0)" onclick="">
+				옵션 변경 하기
+			</a>
 		</div>
 	</div>
 </body>
 
 
 <script>
+	var user_id = localStorage.getItem('user_id');
+	
+	if(user_id == null){
+		user_id = -1;
+	}
+	
+	if(user_id == -1){
+		alert('로그인 후 이용가능합니다.');
+		location.href="./market_main.html";
+	}
+
+	var orders = [];
+	var ordersDict = {};
+	
+	var total_amount = 0;
+
 	$(function(){
 		$('.marketHeader_mypage_icon').click(function(){
 			$('.marketHeader_mypage_menu').animate({
@@ -132,4 +155,285 @@
 			}, 300);
 		});
 	});
+
+	$(document).ready(function() {
+
+		$('.marketDetail_fixbox_show > ul > li > ul').hide()
+		$('.marketDetail_fixbox_show > ul > li h4').click(function(){
+			$(this).siblings().slideToggle(400);
+			$(this).parent('li').toggleClass('active');
+		});
+
+		$('.marketDetail_fixbox').hide();
+		$('.marketDetail_fixbox_up').click(function(){
+			$(".marketDetail_fixbox").slideToggle(400);
+			//$(this).toggleClass('active');
+			//$(this).siblings('div').slideToggle(400);
+		});
+
+		$.get("http://43.200.169.89/products-in-cart?user_id="+1,result=>{
+			console.log(result);
+
+			orders = result;
+			
+			var tag = ``;
+
+			$.each(orders, function(n, info){
+				var unix_timestamp = info.enroll_time;
+				var date = new Date(unix_timestamp * 1000);
+				var mon = (date.getMonth()+1);
+				var formattedTime = date.getFullYear() + "." + mon + "." + date.getDate();
+
+				if(ordersDict[formattedTime] == null){
+					ordersDict[formattedTime] = [info];
+				}else{
+					var origin_arr = ordersDict[formattedTime];
+					origin_arr.push(info);
+				}
+			})
+
+			console.log('ordersDict',ordersDict);
+
+			var keys = Object.keys(ordersDict);
+			
+			var tag = ``;
+
+			$.each(keys, function(n, key){
+				var data_arr = ordersDict[key];
+				
+				tag += `<h3>${key}</h3>`;
+				tag += `<ul class="marketCart_list">`;
+
+				$.each(data_arr, function(m, order){
+					
+					var img_path = order.main_img_url.replace("public","");
+
+					 tag += `<li>
+						<div class="marketCart_list_check">
+							<input class="cart_checkbox" id="cart_`+order.order_id+`" type="checkbox" data-index='${order.order_id}' data-key='${order.product_price}'>
+							<label for="cart_`+order.order_id+`"><span></span></label>
+						</div>
+						<span class="marketCart_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+						<div class="marketCart_list_text">
+							<p class="marketCart_list_text01">상품 정보</p>
+							<p class="marketCart_list_text02">`+order.product_name+`</p>
+							<p class="marketCart_list_text03">
+								<span class="marketCart_list_text03_price">`+order.product_price+` 원</span>
+								<span>그린</span>
+								<span>S</span>
+							</p>
+							<div class="marketCart_list_text_btnbox">
+								<button class='minus_btn' data-index='${m}' data-key='${key}' >-</button>
+								<p>`+order.count+`</p>
+								<button class='plus_btn' data-index='${m}' data-key='${key}'>+</button>
+								<a href="javascript:void(0)" class='option_change_btn' data-index='${m}' data-key='${key}'>옵션 변경</a>
+							</div>
+						</div>
+					</li>`;
+				})
+
+				tag += `</ul>`;
+
+			})
+
+			$(".marketCart").html(tag);
+			
+		});
+
+		$('body').on('click', '.minus_btn', function(e){
+			var index = $(e.target).data('index');
+			var key = $(e.target).data('key');
+
+			var info = ordersDict[key][index];
+
+			$.post("http://43.200.169.89/revise-count-of-product-in-cart",{
+				id_in_cart : info.id,
+				count : info.count -1
+				},result=>{
+					if(result=="success"){
+						$(e.target).parent().find('p').text(info.count -1);
+					}else{
+						alert('error');
+					}
+			})
+		})
+
+		$('body').on('click', '.plus_btn', function(e){
+			var index = $(e.target).data('index');
+			var key = $(e.target).data('key');
+
+			var info = ordersDict[key][index];
+
+			$.post("http://43.200.169.89/revise-count-of-product-in-cart",{
+				id_in_cart : info.id,
+				count : info.count +1
+				},result=>{
+					if(result=="success"){
+						$(e.target).parent().find('p').text(info.count +1);
+					}else{
+						alert('error');
+					}
+			})
+		})
+
+		$('body').on('click', '.option_change_btn', function(e){
+
+			$('.marketDetail_fixbox').toggleClass('active');
+			$('.marketDetail_fixbox').slideToggle(400);
+
+			//var index = $(e.target).data('index');
+			//var key = $(e.target).data('key');
+			//
+			//var info = ordersDict[key][index];
+
+			//$.post("http://43.200.169.89/revise-option",{
+			//	product_id : info.id,
+			//	optoins : optoins
+			//	},result=>{
+			//		if(result=="success"){
+			//			alert('success');
+			//		}else{
+			//			alert('error');
+			//		}
+			//})
+		})
+
+		$('body').on('click', '.cart_checkbox', function(e){
+
+			var index = $(e.target).data('index');
+			var key = $(e.target).data('key');
+			
+			$("#chk_count").text();
+			$("#chk_amount").text(total_amount);
+			
+		})
+
+
+	});
+	
+	
+	
+	
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	function product_cart(){
+			
+		// ajax 통신
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/products-in-cart?user_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				var data_dict = [];
+
+				for(var i = 0; i < res.length; i++){
+					
+					
+					
+					var unix_timestamp = res[i].enroll_time;
+					var date = new Date(unix_timestamp * 1000);
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "." + mon + "." + date.getDate();
+					console.log(formattedTime);
+					
+					if(data_dict[formattedTime] == null){
+						var data = res[i];
+						data_dict[formattedTime] = [data];
+					}else{
+						var data_arr = data_dict[formattedTime];
+						data_arr.push(data);
+						data_dict[formattedTime] = data_arr;
+					}
+					
+					var new_html = `<li>
+						<div class="marketCart_list_check">
+							<input id="cart_`+res[i].order_id+`" type="checkbox">
+							<label for="cart_`+res[i].order_id+`"><span></span></label>
+						</div>
+						<span class="marketCart_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+						<div class="marketCart_list_text">
+							<p class="marketCart_list_text01">상품 정보</p>
+							<p class="marketCart_list_text02">`+res[i].product_name+`</p>
+							<p class="marketCart_list_text03">
+								<span class="marketCart_list_text03_price">`+res[i].product_price+` 원</span>
+								<span>그린</span>
+								<span>S</span>
+							</p>
+							<div class="marketCart_list_text_btnbox">
+								<button>-</button>
+								<p>`+res[i].count+`</p>
+								<button>+</button>
+								<a href="">옵션 변경</a>
+							</div>
+						</div>
+					</li>`;
+
+					//$(".marketCart_list").append(new_html);
+
+				}
+				
+				console.log(data_dict);
+				var keys = Object.keys(data_dict);
+				
+				var tag = ``;
+
+				for(var i =0; i < keys.length; i++){
+					var key = keys[i];
+					tag += `<h3>${key}</h3>
+					<ul class="marketCart_list">`;
+
+					var data_arr = data_dict[key];
+
+					for(var j =0; j < data_arr.length; j++){
+						
+						
+						var data = data_arr[j];
+						var img_path = data.main_img_url.replace("public","");
+						var option_parse = JSON.parse(data.options);
+
+						var parse_value = Object.values(option_parse)[0];
+
+						tag += `<li>
+							<div class="marketCart_list_check">
+								<input id="cart01" type="checkbox">
+								<label for="cart01"><span></span></label>
+							</div>
+							<span class="marketCart_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>
+							<div class="marketCart_list_text">
+								<p class="marketCart_list_text01">상품 정보</p>
+								<p class="marketCart_list_text02">${data.product_name}</p>
+								<p class="marketCart_list_text03">
+									<span class="marketCart_list_text03_price">${data.product_price}원</span>
+									<span>${parse_value}</span>
+								</p>
+								<div class="marketCart_list_text_btnbox">
+									<button>-</button>
+									<p>1</p>
+									<button>+</button>
+									<a href="">옵션 변경</a>
+								</div>
+							</div>
+						</li>`;
+
+					}
+
+					tag += `</ul>`;
+					
+				}
+
+				$(".marketCart_list").append(tag);
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

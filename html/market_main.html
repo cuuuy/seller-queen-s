@@ -13,36 +13,21 @@
 	<div class="marketContainer">
 		<div class="header"></div>
 		<div id="mainvisual">
+			<ul class="bxslider">
+			</ul>
 		</div>
+		
 		<div class="marketContent">
 			<div class="marketMain">
 				<div class="marketMain_best">
 					<div class="marketMain_title">
 						<h3>BEST PICK</h3>
 					</div>
-					<ul>
+					<ul id="best_ul">
 						<li>
 							<a href="">
 								<span class="marketMain_best_thumb"></span>
 								<p>끈팔 나시</p>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="marketMain_best_thumb"></span>
-								<p>써지컬 팔찌</p>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="marketMain_best_thumb"></span>
-								<p>felin 반팔티</p>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<span class="marketMain_best_thumb"></span>
-								<p>배색 블라우스</p>
 							</a>
 						</li>
 					</ul>
@@ -56,36 +41,9 @@
 							<option value="">인기순</option>
 						</select>
 					</div>
-					<ul>
+					<ul id="product_ul">
 						<li>
-							<a href="market_detail.html">
-								<span class="marketMain_all_thumb"></span>
-								<p class="marketMain_all_text">
-									[꾸안꾸/아방핏] 귀여움이 흐르는, 스트링 후드 니트가디건 (4color) 
-								</p>
-								<p><b>28,800원</b></p>
-							</a>
-						</li>
-						<li>
-							<a href="market_detail.html">
-								<span class="marketMain_all_thumb"></span>
-								<p class="marketMain_all_text">
-									[꾸안꾸/아방핏] 귀여움이 흐르는, 스트링 후드 니트가디건 (4color) 
-								</p>
-								<p><b>28,800원</b></p>
-							</a>
-						</li>
-						<li>
-							<a href="market_detail.html">
-								<span class="marketMain_all_thumb"></span>
-								<p class="marketMain_all_text">
-									[꾸안꾸/아방핏] 귀여움이 흐르는, 스트링 후드 니트가디건 (4color) 
-								</p>
-								<p><b>28,800원</b></p>
-							</a>
-						</li>
-						<li>
-							<a href="market_detail.html">
+							<a href="market_detail.html?product_id=1">
 								<span class="marketMain_all_thumb"></span>
 								<p class="marketMain_all_text">
 									[꾸안꾸/아방핏] 귀여움이 흐르는, 스트링 후드 니트가디건 (4color) 
@@ -102,9 +60,97 @@
 
 
 <script>
+
+	var user_id = localStorage.getItem('user_id');
+
 	$(document).ready(function() {
 		$('.header').load('market_header.html');
 		
+		product_road();
+		banner_road();
+		
 	});
+	
+	function banner_road(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/banners?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
 
+				for(var i =0; i < res.length; i++){
+					var img_path = res[i].image_url.replace("public","");
+					var tag = `<li><img src="http://43.200.169.89/${img_path}" /></li>`;
+
+					$(".bxslider").append(tag);
+				}
+				
+				$('.bxslider').bxSlider({
+					auto: true,
+					speed: 500,
+					pause: 4000,
+					autoControls: true,
+					pager: false,
+				});
+
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function product_road(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail-products?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				
+				for(var i = 0; i < res.length; i++){
+					
+					var img_path = res[i].main_img_url.replace("public","");
+
+					if(res[i].isShow == "YES"){
+						var tag = `<li>
+								<a href="market_detail.html?product_id=${res[i].id}">
+									<span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+									<p class="marketMain_all_text">
+										${res[i].product_name}
+									</p>
+									<p><b>${res[i].retail_price}원</b></p>
+								</a>
+							</li>`;
+						$("#product_ul").append(tag);
+					}
+					
+				}
+
+				for(var j = 0; j < res.length; j++){
+					
+					var img_path = res[j].main_img_url.replace("public","");
+
+					if(res[j].isBest == "YES"){
+						var tag = `<li>
+									<a href="market_detail.html?product_id=${res[j].id}">
+										<span class="marketMain_best_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;border-radius: 70px;"></span>
+										<p>${res[j].product_name}</p>
+									</a>
+								</li>`;
+							$("#best_ul").append(tag);
+						}
+					}
+					
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

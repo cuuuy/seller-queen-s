@@ -62,15 +62,18 @@
 		</div>
 	</div>
 	<div class="header_gnb_loginSection">
-		<ul>
-			<li><a href="./login.html">로그인</a></li>
+		<ul id="mypage_hover">
+			<!-- <li><a href="./login.html" id="log_text">로그인</a></li> -->
+			<li style="font-size:15px;" id="login_name_li"><span id="login_name" style="display:none;"></span></li>
+			<li><a href="javascript:void(0)" id="log_text" onclick="login_logout()">로그인</a></li>
 			<li><a href="./join_page01.html">회원가입</a></li>
 		</ul>
-		<div>
-			<a href="javascript:void(0)" onclick="mypage_modal_popup();">▼</a>
+		<div id="mypage_hover2">
+			<a href="javascript:void(0)" onclick="mypage_modal_popup();" ></a>
 			<div class="header_gnb_loginSection_modal">
 				<div class="header_gnb_loginSection_modal_content">
-					<h5>김셀럽 님(abc@gmail.com)
+					<h5>
+						김셀럽 님(abc@gmail.com)
 						<span>회원 등급 : 셀러 J</span>
 					</h5>
 					<div class="modal_content_btn">
@@ -113,5 +116,76 @@ $(".menus > li").mouseleave(function(){
 
 function mypage_modal_popup(){
 	$(".header_gnb_loginSection_modal").toggle();
+}
+$( document ).ready(function() {
+    
+	//console.log( localStorage.getItem('user_id') );
+	session_load();
+	
+	if(localStorage.getItem('user_id')){
+		$("#mypage_hover").mouseover(function(){
+			$(".header_gnb_loginSection_modal").toggle();
+		});
+
+		$("#mypage_hover").mouseout(function(){
+			$(".header_gnb_loginSection_modal").toggle();
+		});
+
+		$("#mypage_hover2").mouseover(function(){
+			$(".header_gnb_loginSection_modal").show();
+		});
+
+		$("#mypage_hover2").mouseout(function(){
+			$(".header_gnb_loginSection_modal").hide();
+		});
+	}
+
+	
+
+});
+
+function session_load(){
+	if(localStorage.getItem('user_id')){
+		var user = user_load(localStorage.getItem('user_id'));
+		console.log(user);
+		$("#log_text").text("로그아웃");
+		$("#login_name").show();
+		$("#login_name").text(user['data'].name+"님 환영합니다");
+	}else{
+		//console.log("logout");
+		$("#log_text").text("로그인");
+		$("#login_name").hide();
+	}
+}
+
+function login_logout(){
+	if(localStorage.getItem('user_id')){
+		localStorage.removeItem('user_id');
+		alert("로그아웃 되었습니다.");
+		location.href="./main.html";
+	}else{
+		location.href="./login.html";
+	}
+}
+
+function user_load(id){
+		
+	var myObject = new Object();
+
+	$.ajax({
+		type : "GET",            // HTTP method type(GET, POST) 형식이다.
+		async: false,
+		url : "http://43.200.169.89/user-info?user_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+		data : {
+			},            // Json 형식의 데이터이다.
+		success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+			myObject['data'] = res[0];
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+			alert("통신 실패.");
+		}
+	});
+	//console.log(myObject);
+	return myObject;
 }
 </script>

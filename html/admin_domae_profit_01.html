@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -12,6 +13,10 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/admin.js"></script>
+	<script src="../js/function.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -23,6 +28,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -54,40 +73,36 @@
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year1">
 							</select>
-							<select>
-								<option>4</option>
+							<select  name="search_month1">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day1">
 							</select>
 						</div>
-						
+						<div class="adminContent_date_middle">
+							<b>────</b>
+						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year2">
 							</select>
-							<select>
-								<option>6</option>
+							<select  name="search_month2">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day2">
 							</select>
 						</div>
-						<div>
+						<div style="min-height: 800px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
 									<col width="3%">
 									<col width="*">
 									<col width="10%">
-									<col width="6%">
-									<col width="6%">
-									<col width="6%">
-									<col width="6%">
-									<col width="6%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
 								</colgroup>
 								<thead>
 									<th></th>
@@ -100,7 +115,7 @@
 									<th>배송비</th>
 									<th>적립액</th>
 								</thead>
-								<tbody>
+								<tbody id="profit_tbody">
 									<tr>
 										<td>
 											<div class="adminContent_table_checkbox">
@@ -119,136 +134,27 @@
 										<td>3,500</td>
 										<td>17,500</td>
 									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>색감이 예쁜..</p>
-										</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>14,000</td>
-										<td>208,000</td>
-										<td>3,500</td>
-										<td>17,500</td>
-									</tr>
-									
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<div class="adminContent_pager" id="paging">
+							
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="adminModal" id="modal" style="display:none;">
+
+	<input type="hidden" name="profit_id">
+	<div class="adminModal modal-overlay" id="modal" style="display:none;background: rgba(0,0,0,0.4);">
 		<div class="adminModal_ok adminModal_profit">
 			<h3>프로핏 출금하기</h3>
 			<div class="adminModal_profit_top">
 				<p>판매 프로핏</p>
 				<p>200,000원</p>
 			</div>
-			<table class="adminModal_profit_table">
+			<table class="adminModal_profit_table" >
 				<colgroup>
 					<col width="30%">
 					<col width="70%">
@@ -256,35 +162,35 @@
 				<tbody>
 					<tr>
 						<td>
-							<input type="search" name="" placeholder="이름">
+							<input type="text" name="withdraw_name" placeholder="이름">
 						</td>
 						<td>
-							<input type="search" name="" placeholder="주민번호를 입력해주세요.">
+							<input type="text" name="withdraw_jumin" placeholder="주민번호를 입력해주세요.">
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<select name="">
-								<option>신한은행</option>
-								<option>국민은행</option>
-								<option>우리은행</option>
-								<option>하나은행</option>
-								<option>농협은행</option>
+							<select name="withdraw_bank">
+								<option value="sinhan">신한은행</option>
+								<option value="kookmin">국민은행</option>
+								<option value="woori">우리은행</option>
+								<option value="hana">하나은행</option>
+								<option value="nonghyup">농협은행</option>
 							</select>
 						</td>
 						<td>
-							<input type="search" name="" placeholder="계좌번호를 입력해주세요.">
+							<input type="text" name="withdraw_acount" placeholder="계좌번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
 						</td>
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="search" name="" placeholder="신청금액을 입력하세요">
+							<input type="text" name="withdraw_price" placeholder="신청금액을 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
 						</td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="adminModal_ok_btn">
-				<a href="javascript:void(0)" class="ok_btn" id="close_btn">출금하기</a>
+				<a href="javascript:void(0)" class="ok_btn" id="close_btn" onclick="profit_withdraw();">출금하기</a>
 			</div>
 		</div>
 	</div>
@@ -293,6 +199,16 @@
 </html>
 
 <script>
+
+	var profits = [];
+	var profit_id_arr = [];
+	var user_id = localStorage.getItem('user_id');
+	
+	var page_num = 0;
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
 	});
@@ -306,13 +222,13 @@
 	const closeBtn = modal.querySelector(".close-area")
 	const close_btn = modal.querySelector("#close_btn")
 
-	close_btn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
-
-	closeBtn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
 
 	modal.addEventListener("click", e => {
 		const evTarget = e.target
@@ -325,5 +241,191 @@
 		if(modal.style.display === "flex" && e.key === "Escape") {
 			modal.style.display = "none"
 		}
+	})
+	
+	function load_profit_list(datas){
+		//console.log('datas',datas);
+		var tag = ``;
+		var i = 0;
+
+		$.each(datas, function(m, profit){
+			
+			var unix_timestamp = profit.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();	
+			
+			 tag += `<tr>
+							<td>
+								<div class="adminContent_table_checkbox">
+									<input id="check${profit.id}" type="checkbox" name="chk_name" value="${profit.id}">
+									<label for="check${profit.id}"><span></span></label>
+								</div>
+							</td>
+							<td>${page_num-i}</td>
+							<td class="adminContent_table_name">
+								<p>${profit.product_name}</p>
+							</td>
+							<td>${profit.nickname}</td>
+							<td>${formattedTime}</td>
+							<td>${profit.wholesale_price.toLocaleString('ko-KR')}원</td>
+							<td>${profit.retail_price.toLocaleString('ko-KR')}원</td>
+							<td>${profit.delivery_fee.toLocaleString('ko-KR')}원</td>
+							<td>${profit.profit_amount.toLocaleString('ko-KR')}원</td>
+						</tr>`;
+			i++ ;
+		})
+
+
+		$("#profit_tbody").html(tag);
+
+	}
+
+	$.get("http://43.200.169.89/profits_by_seller?seller_id="+1,result=>{
+		console.log(result);
+
+		profits = result;
+		profits_origin = result;
+		
+		var time_arr = [];
+		$.each(profits_origin, function(i, res){
+			time_arr.push(res.enroll_time);
+		});
+
+		var date2 = new Date(Math.max.apply(null, time_arr) * 1000);
+		var mon2 = date2.getMonth()+1;
+		var day2 = date2.getDate();
+
+		var date3 = new Date(Math.min.apply(null, time_arr) * 1000);
+		var mon3 = date3.getMonth()+1;
+		var day3 = date3.getDate();
+		console.log(date3);
+		$("select[name=search_year1]").val(date3.getFullYear()).prop("selected",true);
+		$("select[name=search_month1]").val(mon3).prop("selected",true);
+		$("select[name=search_day1]").val(day3).prop("selected",true);
+		
+		$("select[name=search_year2]").val(date2.getFullYear()).prop("selected",true);
+		$("select[name=search_month2]").val(mon2).prop("selected",true);
+		$("select[name=search_day2]").val(day2).prop("selected",true);
+
+		$('#paging').pagination({
+			dataSource: profits,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_profit_list(data);
+			}
+		});
+		
+	});
+
+
+	function profit_withdraw(){
+
+		var name = $("input[name=withdraw_name").val();
+		var bank = $("select[name=withdraw_bank").val();
+		var bank_number = $("input[name=withdraw_acount").val();
+		var withdraw_amount = $("input[name=withdraw_price").val();
+		var withdraw_jumin = $("input[name=withdraw_jumin").val();
+		
+		if(name == ""){
+			alert("이름을 입력해주세요.");
+			return false;
+		}else if(withdraw_jumin == ""){
+			alert("주민번호를을 입력해주세요.");
+			return false;
+		}else if(bank == ""){
+			alert("은행을 입력해주세요.");
+			return false;
+		}else if(bank_number == ""){
+			alert("계좌번호를 입력해주세요.");
+			return false;
+		}else if(withdraw_amount == ""){
+			alert("신청금액을 입력해주세요.");
+			return false;
+		}
+
+		$("input[name=chk_name]:checked").each(function(){
+			profit_id_arr.push($(this).val());
+		});
+
+		if(profit_id_arr.length == 0){
+			alert("대상을 선택해주세요.");
+			return false;
+		}
+
+		console.log(profit_id_arr);
+		//return;
+		for(var i = 0; i < profit_id_arr.length; i++){
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : "http://43.200.169.89/request-widthdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : {
+						profit_id : profit_id_arr[i],
+						user_id : user_id,
+						name : name,
+						bank : bank,
+						bank_number : bank_number,
+						profit_type : 'sale',
+						withdraw_amount : withdraw_amount,
+						resident_number : withdraw_jumin,
+						enroll_time : enroll_time
+					},            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					console.log(res);
+
+					if(res == "success"){
+						alert("프로핏 출금신청이 완료되었습니다.");
+						location.reload();
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
+		}
+		
+	}
+
+	var selected_date = 0;
+	var date_filter = '';
+	var selected_date2 = 0;
+	var date_filter2 = '';
+	var selected_day = 0;
+	var selected_day2 = 0;
+
+	$(document).on('change','.date_filter_change',function(){
+		selected_day = "0" + $("select[name=search_day1]").val();
+		selected_date = $("select[name=search_year1]").val()+'-'+$("select[name=search_month1]").val()+'-'+selected_day.substr(-2);
+		//date_filter = (Date.now(selected_date)/1000);
+		selected_day2 = "0" + $("select[name=search_day2]").val();
+		selected_date2 = $("select[name=search_year2]").val()+'-'+$("select[name=search_month2]").val()+'-'+selected_day2.substr(-2);
+		//date_filter2 = (Date.now(selected_date2)/1000);
+
+		profits = profits_origin.filter(function(order_info){
+			var unix_timestamp = order_info.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var mon = "0" + (date.getMonth()+1);
+			var day = "0" + (date.getDate());
+			var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+			console.log('formattedTime', formattedTime);
+			//console.log('selected_date1',selected_date);
+			//console.log('selected_date2',selected_date2);
+			return formattedTime >= selected_date && formattedTime <= selected_date2
+		})
+
+		$('#paging').pagination({
+			dataSource: profits,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_profit_list(data);
+			}
+		});
+		//console.log(orders);
 	})
 </script>

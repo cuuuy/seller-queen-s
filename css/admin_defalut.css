@@ -45,6 +45,30 @@
   transition: .4s;
 }
 
+.slider2 {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #a590be;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider2:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  /* left: 4px; */
+  bottom: 4px;
+  background-color: #eae6f2;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
 input:checked + .slider {
   background-color: #a590be;
 }
@@ -68,6 +92,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 input[type="checkbox"]{ 
 	position:absolute; 
     width:1px; 
@@ -99,6 +124,7 @@ input[type="checkbox"] + label:before{
 input[type="checkbox"] + label span {position:absolute;top:6px;left:3px;width:14px;height:14px;border:1px solid #BABABA;}
 
 /* 보여질 부분의 스타일을 추가하면 된다. */
+
 input[type="checkbox"]:checked + label:after{ 
 	content: ''; 
     position:absolute; 
@@ -106,5 +132,5 @@ input[type="checkbox"]:checked + label:after{
     left:3px; 
     width:14px; 
     height:14px; 
-    background-color:#af9cc4;
+    background-color:#603A8A;
 }

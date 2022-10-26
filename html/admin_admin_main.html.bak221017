@@ -1,0 +1,1393 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+	<link href="../js/air-datepicker/dist/css/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
+    <script src="../js/air-datepicker/dist/js/datepicker.js"></script> <!-- Air datepicker js -->
+    <script src="../js/air-datepicker/dist/js/i18n/datepicker.ko.js"></script> <!-- 달력 한글 추가를 위해 커스텀 -->
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li class="active"><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>상품관리</h3>
+					<p>★셀러 안내 사항 : 상품의 공급은 도매판매자의 판매상품이 자동으로 업데이트 되며, 셀럽님들께서는 도매상의 상품을  자유롭게 ON/OFF하실 수 있습니다.</p>
+				</div> 
+				<div class="adminContent">
+					<div class="adminContent_leftmenu">
+						<h4>카테고리 관리</h4>
+						<ul>
+							<li class="adminContent_leftmenu_drop">ALL</li>
+						</ul>
+						<ul>
+							<li>
+								<div class="adminContent_leftmenu_title">
+									악세서리
+									<label class="switch">
+										<input type="checkbox">
+										<span class="slider round"></span>
+									</label>
+								</div>
+								<ul>
+									<li>
+										시계
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										팔찌
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										귀걸이
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<div class="adminContent_leftmenu_title">
+									의류
+									<label class="switch">
+										<input type="checkbox">
+										<span class="slider round"></span>
+									</label>
+								</div>
+								<ul>
+									<li>
+										상의
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										하의
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										아우터
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+									<li>
+										신발
+										<label class="switch">
+											<input type="checkbox">
+											<span class="slider round"></span>
+										</label>
+									</li>
+								</ul>
+							</li>
+						</ul>
+						<p class="adminContent_leftmenu_modify"><img src="../image/admin_products_modify.jpg" alt="" /></p>
+					</div>
+					<div class="adminContent_right">
+						<div class="adminContent_tab">
+							<ul>
+								<li class="active"><a href="">전체 10</a></li>
+								<li><a href="">판매중 0</a></li>
+								<li><a href="">품절 0</a></li>
+							</ul>
+						</div>
+						<div class="adminContent_check adminContent_check_right">
+							<input id="check01" type="checkbox">
+							<!-- <label for="check01"><span></span>베스트 아이템 설정</label> -->
+						</div>
+						<div class="adminContent_search">
+							<input type="search" name="" placeholder="상품명을 검색하세요.">
+							<a href="javascript:void(0)" class="check_btn onmodal">상품업로드</a>
+							<a href="javascript:void(0)" class="check_btn">검색</a>
+						</div>
+						<div>
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="*">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="5%">
+									<col width="10%">
+									<col width="10%">
+									<col width="8%">
+									<col width="8%">
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>NO.</th>
+									<th>상품명</th>
+									<th>도매처</th>
+									<th>카테고리</th>
+									<th>지정 판매가</th>
+									<th>상태</th>
+									<th>재고</th>
+									<th>등록일</th>
+									<th>배송비</th>
+									<th>상품 표시</th>
+									<th>베스트아이템 표시</th>
+								</thead>
+								<tbody id="product_road_tbody">
+									<!-- <tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check06" type="checkbox">
+												<label for="check06"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb"></span>
+											<p>하트 컬러 볼 시계</p>
+										</td>
+										<td>시계나라</td>
+										<td>시계</td>
+										<td>900,000원</td>
+										<td>판매중</td>
+										<td>20</td>
+										<td>20220401</td>
+										<td>3,000원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span class="slider"></span>
+											</label>
+										</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+						<div class="adminContent_pager">
+							<span class="active">1</span>
+							<span>2</span>
+							<span>3</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<form method="POST" enctype="multipart/form-data" id="uploadForm">
+		<div class="adminModal modalPage01">
+			<div class="adminModal_cont">
+				<h3>상품 업로드</h3>
+				<a href="javascript:void(0)" class="adminModal_cont_plusbtn">+ 옵션추가</a>
+				<div>
+					<table class="adminModal_cont_table">
+						<colgroup>
+							<col width="*">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="15%">
+							<col width="8%">
+							<col width="10%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>상품명</th>
+								<th>도매처</th>
+								<th>카테고리</th>
+								<th>도매가</th>
+								<th>소매 지정 판매가</th>
+								<th>재고</th>
+								<th>배송비</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<!-- <span>하트 컬러 볼 시계</span> -->
+									<input type="text" class="admin_input2" name="product_name">
+								</td>
+								<td>
+									<!-- <span>시계나라</span> -->
+									<input type="text" class="admin_input2" name="product_domae">
+								</td>
+								<td>
+									<span>
+										<select name="product_category">
+											<option value="시계">시계</option>
+											<option value="남성의류">남성의류</option>
+											<option value="악세서리">악세서리</option>
+										</select>
+									</span>
+								</td>
+								<td>
+									<!-- <span>700,000원</span> -->
+									<input type="text" class="admin_input2" name="product_domae_price">
+								</td>
+								<td>
+									<!-- <span>900,000원</span> -->
+									<input type="text" class="admin_input2" name="product_price">
+								</td>
+								<td>
+									<!-- <span>20</span> -->
+									<input type="text" class="admin_input2" name="product_amount">
+								</td>
+								<td>
+									<input type="text" class="admin_input2" name="product_deli">
+									<!-- <span>
+										<select name="product_deli">
+											<option value="3500">3,500원</option>
+											<option value="3000">3,000원</option>
+											<option value="2500">2,500원</option>
+										</select>
+									</span> -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<h5>상품업로드 기간</h5>
+					<!-- 달력 스크립트 -->
+					<div>
+						<div id="start_date">
+							<input type="text" name="start_date" style="display:none;">
+						</div>
+						<div id="end_date">
+							<input type="text" name="end_date" style="display:none;">
+						</div>
+					</div>
+				</div>
+				
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modalNext1" onclick="product_valid()">다음</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 옵션추가 -->
+		<div class="adminModal modalPage02">
+			<div class="adminModal_cont">
+				<h3>상품 옵션추가</h3>
+				<table class="adminModal_cont_table">
+					<colgroup>
+						<col width="*">
+						<col width="10%">
+						<col width="10%">
+						<col width="10%">
+						<col width="12%">
+						<col width="8%">
+						<col width="10%">
+					</colgroup>
+					<thead>
+						<tr>
+							<th>상품명</th>
+							<th>도매처</th>
+							<th>카테고리</th>
+							<th>도매가</th>
+							<th>소매 지정 판매가</th>
+							<th>재고</th>
+							<th>배송비</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span><input type="text" name="" placeholder="상품명"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매처"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>시계</option>
+										<option>남성의류</option>
+										<option>악세서리</option>
+									</select></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="소매지정판매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="재고"></span>
+							</td>
+							<td>
+								<input type="text" class="admin_input2" name="product_deli">
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>
+								<span><input type="text" name="" placeholder="상품명"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매처"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>시계</option>
+										<option>남성의류</option>
+										<option>악세서리</option>
+									</select></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="도매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="소매지정판매가"></span>
+							</td>
+							<td>
+								<span><input type="text" name="" placeholder="재고"></span>
+							</td>
+							<td>
+								<span><select name="">
+										<option>3,500원</option>
+										<option>3,000원</option>
+										<option>2,500원</option>
+									</select></span>
+							</td>
+						</tr> -->
+						<tr>
+							<td colspan="7">
+								<a href="" class="plusbtn">+</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="width:auto;overflow:auto;white-space: nowrap;">
+					<div class="option_div" id="first_option_div">
+						<p><input type="text" name="option_name" placeholder="옵션명 입력"></p>
+						<p id="option_p"><input type="text" name="option_selections" placeholder="옵션을 입력해주세요"></p>
+						<a style="text-align:center;" id="option_plus" onclick="option_plus()">+</a>
+					</div>
+					<!-- <div class="option_div">
+						<p><input type="text" name="option_name2" placeholder="옵션명 입력"></p>
+						<p id="option_p2"><input type="text" name="options2[]" placeholder="옵션을 입력해주세요"></p>
+						<a style="text-align:center;" id="option_plus2" onclick="option_plus(2)">+</a>
+					</div>
+					<div class="option_div">
+						<p><input type="text" name="option_name3" placeholder="옵션명 입력"></p>
+						<p id="option_p3"><input type="text" name="options3[]" placeholder="옵션을 입력해주세요"></p>
+						<a style="text-align:center;" id="option_plus3" onclick="option_plus(3)">+</a>
+					</div>
+					<div class="option_div">
+						<p><input type="text" name="option_name4" placeholder="옵션명 입력"></p>
+						<p id="option_p4"><input type="text" name="options4[]" placeholder="옵션을 입력해주세요"></p>
+						<a style="text-align:center;" id="option_plus4" onclick="option_plus(4)">+</a>
+					</div> -->
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a class="ok_btn modalNext1-1" onclick="option_add();">옵션추가완료</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 상품 업로드 -->
+		<div class="adminModal modalPage03">
+			<div class="adminModal_cont">
+				<h3>상품 업로드</h3>
+				<div>
+					<h5>메인 사진</h5>
+					<!-- 파일업로드 스크립트 -->
+					<!-- <form method="POST" enctype="multipart/form-data" id="uploadForm"> -->
+						<!-- <div> -->
+							<input type="file" name="main_img" id="main_img">
+							<!-- <a href="" class="adminModal_cont_uploadbtn">파일 찾기</a> -->
+						<!-- </div> -->
+					</form>
+				</div>
+				<div>
+					<h5>상품 사진 및 설명</h5>
+					<!-- 스마트에디터 -->
+					<textarea name="product_content" id="editor"></textarea>
+					<div>
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modalNext2" onclick="product_add()">다음</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- 완료 -->
+		<div class="adminModal modalPage04">
+			<div class="adminModal_ok">
+				<h3>상품 추가가 완료되었습니다!</h3>
+				<div class="adminModal_ok_btn">
+					<a href="" class="ok_btn modalClose">확인</a>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- 카테고리관리 -->
+		<div class="adminModal admincategory">
+			<div class="adminModal_cont adminModal_category" id="category_div">
+				<h3>카테고리관리</h3>
+				<div style="width:100%;overflow:auto;">
+				<table class="adminModal_category_table" style="white-space: nowrap;">
+					<!-- <colgroup>
+						<col width="*">
+						<col width="22%">
+						<col width="22%">
+						<col width="22%">
+						<col width="22%">
+					</colgroup> -->
+					<tbody>
+						<tr>
+							<th id="category_view_1">대분류</th>
+							<!-- <td class="adminModal_category_table_1depth">
+								<input id="i1" type="checkbox">
+								<label for="i1"><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="i2" type="checkbox">
+								<label for="i2"><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="i3" type="checkbox">
+								<label for="i3"><span></span>의류</label>
+							</td>
+							<td class="adminModal_category_table_1depth">
+								<input id="i4" type="checkbox">
+								<label for="i4"><span></span>의류</label>
+							</td> -->
+						</tr>
+						<tr>
+							<th id="category_view_2">중분류</th>
+							<!-- <td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td> -->
+						</tr>
+						<tr>
+							<th id="category_view_3">소분류</th>
+							<!-- <td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td> -->
+						</tr>
+						<!-- <tr>
+							<th>중분류</th>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+						</tr> -->
+						<!-- <tr>
+							<th>소분류</th>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+						</tr> -->
+						<!-- <tr>
+							<th>중분류</th>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+							<td class="adminModal_category_table_2depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>아동복</label>
+							</td>
+						</tr> -->
+						<!-- <tr>
+							<th>소분류</th>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+							<td class="adminModal_category_table_3depth">
+								<input id="" type="checkbox">
+								<label for=""><span></span>상의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>하의</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>아우터</label><br>
+								<input id="" type="checkbox">
+								<label for=""><span></span>신발</label>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+				</div>
+				<div class="adminModal_category_plus">
+					<select name="category_select">
+						<option value="">분류 선택</option>
+						<option value="category1">대분류</option>
+						<option value="category2">중분류</option>
+						<option value="category3">소분류</option>
+					</select>
+					<input type="text" name="category_name">
+				</div>
+				<!-- <div class="adminModal_category_plus">
+					<select name="category_1">
+						<option>대분류 선택 및 입력</option>
+						<option>의류</option>
+						<option>의류</option>
+						<option>의류</option>
+					</select>
+					<select name="category_2">
+						<option>중분류 선택 및 입력</option>
+						<option>아동복</option>
+						<option>아동복</option>
+						<option>아동복</option>
+					</select>
+					<select name="category_3">
+						<option>소분류 선택 및 입력</option>
+						<option>상의</option>
+						<option>하의</option>
+						<option>아우터</option>
+						<option>신발</option>
+					</select>
+				</div>-->
+				<div class="adminModal_category_btn">
+					<a href="javascript:void(0)" class="on" onclick="category_add()">추가</a>
+					<a href="javascript:void(0)" onclick="category_modify()">수정</a>
+					<a href="javascript:void(0)" class="plusnone" onclick="category_delete()">삭제</a>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="" class="ok_btn modalClose">저장</a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</body>
+
+</html>
+
+<script>
+	$(document).ready(function() {
+		
+		product_road();
+		category_road();
+
+		ClassicEditor.create( document.querySelector( '#editor' ), {
+			language: "ko"
+		});
+
+		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
+
+		$('.adminModal').hide();
+		$('.adminModal a').attr('href','javascript:void(0)');
+		$('.onmodal').click(function(){
+			$('.modalPage01').show();
+		});
+		$('.adminModal_cont_plusbtn').click(function(){
+			$('.modalPage01').hide();
+			$('.modalPage02').show();
+		});
+		$('.modalNext1').click(function(){
+			//$('.modalPage01').hide();
+			//$('.modalPage03').show();
+		});
+		$('.modalNext1-1').click(function(){
+			//$('.modalPage02').hide();
+			//$('.modalPage01').show();
+		});
+		$('.modalNext2').click(function(){
+			$('.modalPage03').hide();
+			$('.modalPage04').show();
+		});
+		$('.modalClose').click(function(){
+			$('.adminModal').hide();
+		});
+		$('.adminModal_category_btn a').click(function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass('on');
+			$('.adminModal_category_plus').show();
+		});
+		$('.plusnone').click(function(){
+			//$('.adminModal_category_plus').hide();
+		});
+		$('.adminContent_leftmenu_modify').click(function(){
+			$('.admincategory').show();
+		});
+
+	});
+	
+	$("#start_date").datepicker({
+		language: 'ko',
+		timepicker: true,
+		timeFormat: "hh:ii AA"
+	});
+
+	$("#end_date").datepicker({
+		language: 'ko',
+		timepicker: true,
+		timeFormat: "hh:ii AA"
+	});
+
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	function product_road(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail-products?user_id="+"1",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				//user_id : user_id,
+				//name : name,
+				//user_id : 1,
+				//name : "테스트의류",
+				//enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				for(var i = 0; i < res.length; i++){
+					
+					if(res[i].isShow=="YES"){
+						var isShow = "판매중";
+					}
+
+
+					var unix_timestamp = res[i].enroll_time;
+					var date = new Date(unix_timestamp * 1000);
+					var hours = date.getHours();
+					var minutes = "0" + date.getMinutes();
+					var seconds = "0" + date.getSeconds();
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+					var img_path = res[i].main_img_url.replace("public","");
+
+					var new_html = `<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check06" type="checkbox">
+												<label for="check06"><span></span></label>
+											</div>
+										</td>
+										<td>`+res[i].id+`</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+											<p>`+res[i].product_name+`</p>
+										</td>
+										<td>`+res[i].wholesaler+`</td>
+										<td>`+res[i].category_id+`</td>
+										<td>`+res[i].retail_price+`원</td>
+										<td>`+isShow+`</td>
+										<td>`+res[i].remain_count+`</td>
+										<td>`+formattedTime+`</td>
+										<td>`+res[i].delivery_fee+`원</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span id="product_show" class="slider" onclick="set_product_showed(`+res[i].id+`);"></span>
+												<span id="product_hide" class="slider" onclick="set_product_not_showed(`+res[i].id+`);" style="display:none;"></span>
+											</label>
+										</td>
+										<td>
+											<label class="switch">
+												<input type="checkbox">
+												<span id="best_product_show" class="slider" onclick="set_best_product_showed(`+res[i].id+`);"></span>
+												<span id="best_product_hide" class="slider" onclick="set_best_product_not_showed(`+res[i].id+`);" style="display:none;"></span>
+											</label>
+										</td>
+									</tr>`;
+
+					$("#product_road_tbody").append(new_html);
+				}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	function category_road(){
+		// ajax 통신
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/categories?user_id="+"1",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				//user_id : user_id,
+				//name : name,
+				//user_id : 1,
+				//name : "테스트의류",
+				//enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				//console.log(res.category_1);
+				
+
+				for(var i = 0; i < res.category_1.length; i++){
+					var category_view_1 = `<td class="adminModal_category_table_1depth">
+					<input id="category_id_`+res.category_1[i].id+`" type="checkbox">
+					<label for="category_id_`+res.category_1[i].id+`"><span></span>`+res.category_1[i].name+`</label>
+				</td>`;
+
+					$("select[name=category_1]").append("<option value=''>"+res.category_1[i].name+"</option>");
+					$("#category_view_1").after(category_view_1);
+				}
+
+				for(var i = 0; i < res.category_2.length; i++){
+					var category_view_2 = `<td class="adminModal_category_table_2depth">
+								<input id="category2_id_`+res.category_2[i].id+`" type="checkbox">
+								<label for="category2_id_`+res.category_2[i].id+`"><span></span>`+res.category_2[i].name+`</label>
+							</td>`;
+					$("select[name=category_2]").append("<option value=''>"+res.category_2[i].name+"</option>");
+					$("#category_view_2").after(category_view_2);
+				}
+
+				for(var i = 0; i < res.category_3.length; i++){
+					var category_view_3 = `<td class="adminModal_category_table_3depth">
+								<input id="category3_id_`+res.category_3[i].id+`" type="checkbox">
+								<label for="category3_id_`+res.category_3[i].id+`"><span></span>`+res.category_3[i].name+`</label>
+							</td>`;
+					$("select[name=category_3]").append("<option value=''>"+res.category_3[i].name+"</option>");
+					$("#category_view_3").after(category_view_3);
+				}
+				
+
+				//if(res == "success"){
+				//	alert("대분류 카테고리가 등록 되었습니다.");
+				//}else{
+				//	alert("오류 발생. 관리자에게 문의하세요.");
+				//}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	function category_add(){
+		var category_name = $("input[name=category_name]").val();
+		var category_select_val = $("select[name=category_select]").val();
+		//console.log(category_select_val);
+
+		if(category_select_val=="category1"){
+			// ajax 통신
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : "http://43.200.169.89/add-category1",      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : {
+					//user_id : user_id,
+					//name : name,
+					user_id : 1,
+					name : category_name,
+					enroll_time : enroll_time
+					},            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					console.log(res);
+
+					if(res == "success"){
+						alert("대분류 카테고리가 등록 되었습니다.");
+						location.reload();
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
+		}else if(category_select_val=="category2"){
+			// ajax 통신
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : "http://43.200.169.89/add-category2",      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : {
+					//user_id : user_id,
+					//name : name,
+					user_id : 1,
+					name : category_name,
+					parent_id : 3,
+					enroll_time : enroll_time
+					},            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					//alert(res);
+
+					if(res == "success"){
+						alert("중분류 카테고리가 등록 되었습니다.");
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
+		}else if(category_select_val=="category3"){
+			// ajax 통신
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : "http://43.200.169.89/add-category3",      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : {
+					//user_id : user_id,
+					//name : name,
+					user_id : 1,
+					name : category_name,
+					parent_id : 2,
+					enroll_time : enroll_time
+					},            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					//alert(res);
+
+					if(res == "success"){
+						alert("소분류 카테고리가 등록 되었습니다.");
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
+		}else if(category_select_val==""){
+			alert("분류를 선택해주세요.");
+		}
+		
+	}
+	
+	function category_modify(){
+	
+	}
+	
+	function category_delete(){
+		
+		var category_chk = $('input:checkbox[type=checkbox]:checked').attr('id');
+		if(category_chk == undefined){
+			alert('카테고리를 선택해주세요.');
+			return false;
+		}
+		console.log(category_chk);//category3_id_1
+		var category_num = category_chk.substr(8,1);
+		var category_id = category_chk.split("_");
+		console.log(category_id[2]);
+		//return false;
+		
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/delete-category"+category_num,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				user_id : 1,
+				category_id : category_id[2]
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("카테고리가 삭제 되었습니다.");
+					//category_road();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	function product_valid(){
+		var product_name = $("input[name=product_name]").val();
+		var product_domae = $("input[name=product_domae]").val();
+		var product_category = $("select[name=product_category]").val();
+		var product_domae_price = $("input[name=product_domae_price]").val();
+		var product_price = $("input[name=product_price]").val();
+		var product_amount = $("input[name=product_amount]").val();
+		var product_deli = $("input[name=product_deli]").val();
+		var start_date = $("input[name=start_date]").val();
+		var end_date = $("input[name=end_date]").val();
+		var product_content = $("textarea[name=product_name]").val();
+		//start_date = start_date/1000;
+		console.log(start_date);
+		if(product_name==""){
+			alert("상품명을 입력해주세요.");
+			return false;
+		}
+		if(product_domae==""){
+			alert("도매처를 입력해주세요.");
+			return false;
+		}
+		if(product_domae_price==""){
+			alert("도매가를 입력해주세요.");
+			return false;
+		}
+		if(product_price==""){
+			alert("소매 지정 판매가를 입력해주세요.");
+			return false;
+		}
+		if(product_amount==""){
+			alert("재고를 입력해주세요.");
+			return false;
+		}
+		if(product_deli==""){
+			alert("배송비를 입력해주세요.");
+			return false;
+		}
+		if(start_date==""){
+			alert("상품 업로드 시작을 입력해주세요.");
+			return false;
+		}
+		if(end_date==""){
+			alert("상품 업로드 종료를 입력해주세요.");
+			return false;
+		}
+		
+		$('.modalPage01').hide();
+		$('.modalPage03').show();
+
+	}
+	function product_add(){
+		
+		var product_name = $("input[name=product_name]").val();
+		var product_domae = $("input[name=product_domae]").val();
+		var product_category = $("select[name=product_category]").val();
+		var product_domae_price = $("input[name=product_domae_price]").val();
+		var product_price = $("input[name=product_price]").val();
+		var product_amount = $("input[name=product_amount]").val();
+		var product_deli = $("select[name=product_deli]").val();
+		var start_date = $("input[name=start_date]").val();
+		var end_date = $("input[name=end_date]").val();
+		var product_content = $("textarea[name=product_name]").val();
+
+		var form = $('#uploadForm')[0];
+		var form_data = new FormData();
+		
+		form_data.append('user_id', '1');
+		form_data.append('product_name', product_name);
+		form_data.append('wholesaler', '1');
+		form_data.append('category_id', '1');
+		form_data.append('wholesale_price', product_domae_price);
+		form_data.append('retail_price', product_price);
+		form_data.append('remain_count', product_amount);
+		form_data.append('delivery_fee', product_deli);
+		form_data.append('start_time', start_date);
+		form_data.append('end_time', end_date);
+		form_data.append('descStr', product_content);
+		form_data.append('enroll_time', enroll_time);
+		form_data.append('file', $("#main_img")[0].files[0]);
+		
+		//console.log(form_data);
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-retail-product",      // 컨트롤러에서 대기중인 URL 주소이다.
+			contentType: false,
+			processData: false,
+			//enctype: 'multipart/form-data',
+			data : form_data,            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					//alert("상품이 등록 되었습니다.");
+					//option_add();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_product_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/set_product_showed",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("상품 보이기가 적용되었습니다.");
+					$("#product_show").hide();
+					$("#product_hide").show();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_product_not_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/set_product_not_showed",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("상품 숨기기가 적용되었습니다.");
+					$("#product_show").show();
+					$("#product_hide").hide();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_best_product_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/check-best-item",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("베스트아이템 보이기가 적용되었습니다.");
+					$("#best_product_show").hide();
+					$("#best_product_hide").show();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_best_product_not_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/uncheck-best-item",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("베스트아이템 숨기기가 적용되었습니다.");
+					$("#best_product_show").show();
+					$("#best_product_hide").hide();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function option_plus(){
+		var option = $("#option_p");
+		var new_html = `<p><input type="text" name="option_selections[]" placeholder="옵션을 입력해주세요"></p>`;
+
+		option.after(new_html);
+
+	}
+
+	function option_add(){
+		
+		var options = [];
+		var eles = $('.option_div');
+
+		$.each(eles,function(n,e){
+		   var option_dict = {};
+		   var option_name = $(e).find("input[name='option_name']").val();
+		   
+		   var s_inputs = $(e).find("input[name='option_selections']");
+		   
+		   var option_selections = [];
+		   $.each(s_inputs,function(m,input){
+			  option_selections.push($(input).val());
+		   })
+		   
+		   option_dict['option_name'] = option_name;
+		   option_dict['selections'] = option_selections;
+		   
+		   options.push(option_dict);
+		   
+		});
+		options = JSON.stringify(options);
+		console.log(options);
+		//return false;
+
+		//var option_name_arr = [];
+		//var option_selections_arr = [];
+		//
+		//var eles = $(".option_div");
+		//
+		//$.each(eles, function(n,e){
+		//	//$(e).find('input[name=option_name]');
+		//	option_name_arr.push($(e).find('input[name=option_name]').val());
+		//	option_selections_arr.push($(e).find('input[name=option_selections]').val());
+		//	
+		//});
+		//
+		//console.log(option_name_arr);
+		//console.log(option_selections_arr);
+
+		//var option_name = $("input[name=option_name]").val();
+		//if(option_name != ""){
+		//	
+		//	var option_selections = [];
+		//	$("input[name='option_selections[]']").each(function() {
+		//		option_selections.push($(this).val());
+		//	});
+		//	
+		//	var options = {option_name:option_selections};
+		//	options = JSON.stringify(options);
+		//	console.log(options);
+		//}
+		//option_selections
+
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/add-option",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : 1,
+					options : options
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					alert("옵션이 추가되었습니다.");
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	$(".plusbtn").click(function(){
+		
+		var tag = `<div class="option_div">
+						<p><input type="text" name="option_name" placeholder="옵션명 입력"></p>
+						<p id="option_p"><input type="text" name="option_selections" placeholder="옵션을 입력해주세요"></p>
+						<a style="text-align:center;" id="option_plus" onclick="option_plus()" href="javascript:void(0)">+</a>
+					</div>`;
+		
+		$("#first_option_div").after(tag);
+
+	});
+</script>

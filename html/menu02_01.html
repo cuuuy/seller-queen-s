@@ -8,6 +8,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<link href='../js/fullcalendar/lib/main.css' rel='stylesheet' />
+	<script src='../js/fullcalendar/lib/main.min.js'></script>
+	<script src='../js/fullcalendar/lib/locales-all.min.js'></script>
 </head>
 <body>
 	<div class="container">
@@ -24,7 +27,12 @@
 					<!-- <li>신청 내역</li> -->
 				</ul>
 				<div class="selClass_in">
-					<p><img src="../image/calander_sample.png" alt=""></p>
+					<!-- <p><img src="../image/calander_sample.png" alt=""></p> -->
+					<div class="calendar_btn_wrap">
+						<a href="javascript:void(0)" class="calendar_btn cal on">캘린더형</a>
+						<a href="javascript:void(0)" class="calendar_btn list">리스트형</a>
+					</div>
+					<div id='calendar'></div>
 				</div>
 			</div>
 		</div>
@@ -44,6 +52,40 @@
 			$(this).addClass('active');
 			$(this).siblings().removeClass('active');
 		});
+
+		$('.calendar_btn').click(function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass('on')
+		});
 	});
+	document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+			height: '1100px',
+			width: '100%',
+            locale: "ko",
+			initialView: 'dayGridMonth',
+			headerToolbar: {
+						  start: "",
+						  center: "prev title next",
+						  end: "today",
+						},
+			events: [
+					  {
+						title: '행사',
+						start: '2022-10-25',
+						backgroundColor: '#8B0000',
+						borderColor:'#8B0000'
+					  },
+					  {
+						title: '이벤트',
+						start: '2022-10-07',
+						end: '2022-10-10',
+						backgroundColor: '#008404',
+						borderColor:'#008404'         
+					  }],
+        });
+        calendar.render();
+      });
 
 </script>

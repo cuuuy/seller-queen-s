@@ -2,15 +2,20 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/function.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -22,6 +27,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -40,7 +59,7 @@
 					<a href="./admin_domae_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>프로핏</h3>
 				</div> 
-					<div class="adminContent_right">
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
 								<li><a href="./admin_domae_profit_01.html">판매 프로핏 적립 현황</a></li>
@@ -53,29 +72,30 @@
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year1">
 							</select>
-							<select>
-								<option>4</option>
+							<select  name="search_month1">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day1">
 							</select>
 						</div>
-						
+						<div class="adminContent_date_middle">
+							<b>────</b>
+						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year2">
 							</select>
-							<select>
-								<option>6</option>
+							<select  name="search_month2">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day2">
 							</select>
 						</div>
-						<div>
+						<div class="adminContent_date">
+							<select name="">
+								<option>정산상태</option>
+							</select>
+						</div>
+						<div style="min-height: 800px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
@@ -93,7 +113,7 @@
 									<th>출금 예정일</th>
 									<th>진행상태</th>
 								</thead>
-								<tbody>
+								<tbody id="withdraw_tbody">
 									<tr>
 										<td>
 											<div class="adminContent_table_checkbox">
@@ -107,92 +127,10 @@
 										<td>20220401</td>
 										<td>출금대기</td>
 									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>11,600</td>
-										<td>20220401</td>
-										<td>20220401</td>
-										<td>출금대기</td>
-									</tr>
-									
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<div class="adminContent_pager" id="paging">
 						</div>
 					</div>
 				</div>
@@ -204,8 +142,159 @@
 </html>
 
 <script>
+
+	var withdraws = [];
+	var withdraws_origin = [];
+	var user_id = localStorage.getItem('user_id');
+	
+	var page_num = 0;
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
 	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
+
+	const modal = document.getElementById("modal")
+	//const closeBtn = modal.querySelector(".close-area")
+	//const close_btn = modal.querySelector("#close_btn")
+
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	//modal.addEventListener("click", e => {
+	//	const evTarget = e.target
+	//	if(evTarget.classList.contains("modal-overlay")) {
+	//		modal.style.display = "none"
+	//	}
+	//})
+
+	//window.addEventListener("keyup", e => {
+	//	if(modal.style.display === "flex" && e.key === "Escape") {
+	//		modal.style.display = "none"
+	//	}
+	//})
+	
+	function load_withdraw_list(datas){
+		//console.log('datas',datas);
+		var tag = ``;
+		var i = 0;
+
+		$.each(datas, function(m, withdraw){
+			
+			var unix_timestamp = withdraw.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();	
+			
+			var stateStr = '';
+			if(withdraw.stateStr=="requested"){
+				stateStr = "출금요청중";
+			}
+			 tag += `<tr>
+							<td>
+								<div class="adminContent_table_checkbox">
+									<input id="check${withdraw.id}" type="checkbox">
+									<label for="check${withdraw.id}"><span></span></label>
+								</div>
+							</td>
+							<td>${page_num-i}</td>
+							<td>${withdraw.withdraw_amount.toLocaleString('ko-KR')}원</td>
+							<td>${formattedTime}</td>
+							<td></td>
+							<td>${stateStr}</td>
+						</tr>`;
+			i++;
+		})
+
+
+		$("#withdraw_tbody").html(tag);
+
+	}
+
+	$.get("http://43.200.169.89/withdraw-infos-by-seller?seller_id="+user_id,result=>{
+		console.log(result);
+
+		withdraws = result;
+		withdraws_origin = result;
+		
+		var time_arr = [];
+		$.each(withdraws_origin, function(i, res){
+			time_arr.push(res.enroll_time);
+		});
+
+		var date2 = new Date(Math.max.apply(null, time_arr) * 1000);
+		var mon2 = date2.getMonth()+1;
+		var day2 = date2.getDate();
+
+		var date3 = new Date(Math.min.apply(null, time_arr) * 1000);
+		var mon3 = date3.getMonth()+1;
+		var day3 = date3.getDate();
+		console.log(date3);
+		$("select[name=search_year1]").val(date3.getFullYear()).prop("selected",true);
+		$("select[name=search_month1]").val(mon3).prop("selected",true);
+		$("select[name=search_day1]").val(day3).prop("selected",true);
+		
+		$("select[name=search_year2]").val(date2.getFullYear()).prop("selected",true);
+		$("select[name=search_month2]").val(mon2).prop("selected",true);
+		$("select[name=search_day2]").val(day2).prop("selected",true);
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+		
+	});
+	
+	var selected_date = 0;
+	var date_filter = '';
+	var selected_date2 = 0;
+	var date_filter2 = '';
+	var selected_day = 0;
+	var selected_day2 = 0;
+
+	$(document).on('change','.date_filter_change',function(){
+		selected_day = "0" + $("select[name=search_day1]").val();
+		selected_date = $("select[name=search_year1]").val()+'-'+$("select[name=search_month1]").val()+'-'+selected_day.substr(-2);
+		//date_filter = (Date.now(selected_date)/1000);
+		selected_day2 = "0" + $("select[name=search_day2]").val();
+		selected_date2 = $("select[name=search_year2]").val()+'-'+$("select[name=search_month2]").val()+'-'+selected_day2.substr(-2);
+		//date_filter2 = (Date.now(selected_date2)/1000);
+
+		withdraws = withdraws_origin.filter(function(info){
+			var unix_timestamp = info.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var mon = "0" + (date.getMonth()+1);
+			var day = "0" + (date.getDate());
+			var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+			console.log('formattedTime', formattedTime);
+			//console.log('selected_date1',selected_date);
+			//console.log('selected_date2',selected_date2);
+			return formattedTime >= selected_date && formattedTime <= selected_date2
+		})
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+		console.log(withdraws);
+	})
 
 </script>

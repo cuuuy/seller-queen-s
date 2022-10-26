@@ -8,6 +8,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../js/fontawesome-stars.css">
+	<script type="text/javascript" src="../js/jquery.barrating.min.js"></script>
 </head>
 <body style="background:#ddd;">
 	<div class="marketContainer">
@@ -46,22 +49,22 @@
 						<input id="cart01" type="checkbox">
 						<label for="cart01"><span></span>내가 쓴 후기만 보기</label>
 					</div>
-					<a href="market_review_write.html" class="marketReview_top_write">후기 작성</a>
+					<a href="javascript:void(0)" class="marketReview_top_write" onclick="market_review_write()">후기 작성</a>
 				</div>
-				<ul class="marketReview_list">
+				<ul class="marketReview_list" id="review_load">
 					<li>
 						<span class="marketReview_list_thumb"></span>
 						<div class="marketReview_list_text">
 							<h4>김셀럽</h4>
 							<div class="marketReview_list_text_star">
 								<h4>22-01-01 13:12 작성</h4>
-								<div>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-								</div>
+								<select class="star_point" name="star_point">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
 							</div>
 							<p>
 								옷 핏이 넘 예쁘고 포장도 깔끔하게 잘 왔어요~! 너무 예쁘네요 이거 입고 약속 나갔는데 친구들이 다 어디서 샀냐구 물어보네요 다른 색으로도 사려구요~! 여기 자주 이용 할게요 감사합니다
@@ -69,49 +72,8 @@
 							<p class="marketReview_list_pText">
 								도움이 되었어요 3
 							</p>
-						</div>
-					</li>
-					<li>
-						<span class="marketReview_list_thumb"></span>
-						<div class="marketReview_list_text">
-							<h4>김셀럽</h4>
-							<div class="marketReview_list_text_star">
-								<h4>22-01-01 13:12 작성</h4>
-								<div>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-								</div>
-							</div>
-							<p>
-								옷 핏이 넘 예쁘고 포장도 깔끔하게 잘 왔어요~! 너무 예쁘네요 이거 입고 약속 나갔는데 친구들이 다 어디서 샀냐구 물어보네요 다른 색으로도 사려구요~! 여기 자주 이용 할게요 감사합니다
-							</p>
-							<p class="marketReview_list_pText">
-								도움이 되었어요 3
-							</p>
-						</div>
-					</li>
-					<li>
-						<span class="marketReview_list_thumb"></span>
-						<div class="marketReview_list_text">
-							<h4>김셀럽</h4>
-							<div class="marketReview_list_text_star">
-								<h4>22-01-01 13:12 작성</h4>
-								<div>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-									<span><img src="../image/star.png" alt="" /></span>
-								</div>
-							</div>
-							<p>
-								옷 핏이 넘 예쁘고 포장도 깔끔하게 잘 왔어요~! 너무 예쁘네요 이거 입고 약속 나갔는데 친구들이 다 어디서 샀냐구 물어보네요 다른 색으로도 사려구요~! 여기 자주 이용 할게요 감사합니다
-							</p>
-							<p class="marketReview_list_pText">
-								도움이 되었어요 3
+							<p class="marketReport_list_pText">
+								신고하기
 							</p>
 						</div>
 					</li>
@@ -135,4 +97,189 @@
 			}, 300);
 		});
 	});
+	
+	var user_id = localStorage.getItem('user_id');
+
+	$(document).ready(function() {
+		
+		if(user_id == null){
+			user_id = -1; // 비회원
+		}
+		
+		var reviews = [];
+		review_load();
+	});
+	
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var product_id = urlParams.get('product_id');
+
+	function market_review_write(){
+		location.href="market_review_write.html?product_id="+product_id;
+	}
+
+	function review_load(){
+
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/reviews?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				reviews = res;
+
+
+				for(var i = 0; i < reviews.length; i++){
+					
+					var info = reviews[i];
+
+					var recommenders_arr = [];
+					var recommenders= res[i].recommenders;
+					
+					var recommenders_num = 0;
+					var unix_timestamp = res[i].enroll_time;
+					var date = new Date(unix_timestamp * 1000);
+					var hours = date.getHours();
+					var minutes = "0" + date.getMinutes();
+					var seconds = "0" + date.getSeconds();
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2);
+					var img_path = res[i].img_url.replace("public","");
+					
+					if (recommenders == null){
+						info.recommenders = [];
+						//recommenders = [];
+						recommenders_num = 0;
+					}else{
+
+						info.recommenders = JSON.parse(recommenders);
+
+						recommenders_num = JSON.parse(recommenders).length;
+						for(var j =0; j < recommenders_num; j++){
+							recommenders_arr.push(JSON.parse(recommenders)[j]);
+						}
+						console.log(recommenders_arr);
+					}
+					var new_html = `<li>
+											<span class="marketReview_list_thumb"></span>
+											<div class="marketReview_list_text">
+												<h4>${res[i].name}</h4>
+												<div class="marketReview_list_text_star">
+													<h4>${formattedTime} 작성</h4>
+													<select class="star_point" name="star_point">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+													</select>
+												</div>
+												<p>
+													${res[i].review_text}
+												</p>
+												<p class="marketReview_list_pText" "id="review_id_${res[i].id}" data-index="${i}">
+													도움이 되었어요 ${recommenders_num}
+												</p>
+												<p class="marketReport_list_pText" "id="report_id_${res[i].id}" data-index="${res[i].id}">
+													신고하기
+												</p>
+											</div>
+										</li>`;
+
+					$("#review_load").append(new_html);
+					
+					$('.star_point').barrating({
+						theme: 'fontawesome-stars',
+						initialRating: res[i].review_point,
+						readonly: true
+					});
+
+				}
+
+				
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+	
+	$('body').on('click','.marketReview_list_pText',function(e){
+		if(user_id == -1){
+			alert("로그인 후 리뷰추천이 가능합니다.");
+			return false;
+		}
+		var index = $(e.target).data('index');
+
+		var info = reviews[index];
+
+		var recommenders = info.recommenders;
+
+		var search_arr = recommenders.filter(function(id){
+			
+			return id == user_id;
+
+		})
+
+		if(search_arr.length == 0){
+			recommenders.push(user_id);
+			
+			$.post("http://43.200.169.89/revise-review-recommender",{
+				review_id : info.id,
+				recommenders : JSON.stringify(recommenders)
+			},result=>{
+				if(result == "success"){
+					$(e.target).text(`도움이 되었어요 ${recommenders.length}`)
+				}
+			})
+		}else{
+			alert("이미 추천하셨습니다.");
+		}
+
+	})
+
+	$('body').on('click','.marketReport_list_pText',function(e){
+		if(user_id == -1){
+			alert("로그인 후 신고가 가능합니다.");
+			return false;
+		}
+		var index = $(e.target).data('index');
+		//var info = reviews[index];
+		//
+		//var recommenders = info.recommenders;
+		//
+		//var search_arr = recommenders.filter(function(id){
+		//	
+		//	return id == user_id;
+		//
+		//})
+
+		//if(search_arr.length == 0){
+			//recommenders.push(user_id);
+			
+			$.post("http://43.200.169.89/send-report",{
+				user_id : user_id,
+				target_id : index,
+				typeStr : 'review',
+				enroll_time : enroll_time
+			},result=>{
+				if(result == "success"){
+					//$(e.target).text(`도움이 되었어요 ${recommenders.length}`)
+					alert('게시글이 신고되었습니다.');
+				}
+			})
+		//}else{
+			//alert("이미 신고하셨습니다.");
+		//}
+
+	})
+
 </script>

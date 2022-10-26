@@ -62,13 +62,13 @@
 					</ul>
 					<ul class="marketOrderDetail_btn">
 						<li>
-							<a href="javascript:void(0)" class="modalon">교환 신청</a>
+							<a href="javascript:void(0)" class="modalon" id="modalon1">교환 신청</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" class="modalon">반품 신청</a>
+							<a href="javascript:void(0)" class="modalon" id="modalon2">반품 신청</a>
 						</li>
 						<li>
-							<a href="javascript:void(0)" class="modalon">취소 신청</a>
+							<a href="javascript:void(0)" class="modalon" id="modalon3">취소 신청</a>
 						</li>
 					</ul>
 				</div>
@@ -145,7 +145,26 @@
 					</table>
 				</div>
 			</div>
-			<div id="marketModal">
+			<div id="marketModal1">
+				<div>
+					<h3>교환 신청</h3>
+					<div class="marketModal_box">
+						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<span>
+							사유를 선택하세요.
+						</span>
+						<div class="marketModal_box_button">
+							<button class="reason1" value="mind_change">단순변심</button>
+							<button class="reason1" value="deli_trouble">배송문제</button>
+							<button class="reason1" value="product_trouble">상품문제</button>
+							<button class="reason1" value="etc">기타문제</button>
+						</div>
+					</div>
+					<a href="" class="back_btn w50">취소</a>
+					<a href="javascripot:void(0)" class="ok_btn w50 application" onclick="exchange_order()">신청</a>
+				</div>
+			</div>
+			<div id="marketModal2">
 				<div>
 					<h3>반품 신청</h3>
 					<div class="marketModal_box">
@@ -154,17 +173,36 @@
 							사유를 선택하세요.
 						</span>
 						<div class="marketModal_box_button">
-							<button>단순변심</button>
-							<button>배송문제</button>
-							<button>상품문제</button>
-							<button>기타문제</button>
+							<button class="reason2" value="mind_change">단순변심</button>
+							<button class="reason2" value="deli_trouble">배송문제</button>
+							<button class="reason2" value="product_trouble">상품문제</button>
+							<button class="reason2" value="etc">기타문제</button>
 						</div>
 					</div>
 					<a href="" class="back_btn w50">취소</a>
-					<a href="javascripot:void(0)" class="ok_btn w50 application">신청</a>
+					<a href="javascripot:void(0)" class="ok_btn w50 application" onclick="return_order()">신청</a>
 				</div>
 			</div>
-			<div id="marketModal" class="marketModal02">
+			<div id="marketModal3">
+				<div>
+					<h3>취소 신청</h3>
+					<div class="marketModal_box">
+						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<span>
+							사유를 선택하세요.
+						</span>
+						<div class="marketModal_box_button">
+							<button class="reason3" value="mind_change">단순변심</button>
+							<button class="reason3" value="deli_trouble">배송문제</button>
+							<button class="reason3" value="product_trouble">상품문제</button>
+							<button class="reason3" value="etc">기타문제</button>
+						</div>
+					</div>
+					<a href="" class="back_btn w50">취소</a>
+					<a href="javascripot:void(0)" class="ok_btn w50 application" onclick="cancel_order()">신청</a>
+				</div>
+			</div>
+			<!-- <div id="marketModal" class="marketModal02">
 				<div>
 					<h3>반품 신청</h3>
 					<p>	
@@ -172,8 +210,9 @@
 					</p>
 					<a href="javascript:void(0)" class="ok_btn w50 application">확인</a>
 				</div>
-			</div>
+			</div> -->
 		</div>
+		
 	</div>
 </body>
 
@@ -190,11 +229,19 @@
 				'right': '-300px'
 			}, 300);
 		});
-		$('#marketModal').hide();
+		$('#marketModal1').hide();
+		$('#marketModal2').hide();
+		$('#marketModal3').hide();
 		$('.marketModal02').hide();
 
-		$('.modalon').click(function(){
-			$('#marketModal').show();
+		$('#modalon1').click(function(){
+			$('#marketModal1').show();
+		});
+		$('#modalon2').click(function(){
+			$('#marketModal2').show();
+		});
+		$('#modalon3').click(function(){
+			$('#marketModal3').show();
 		});
 		$('.application').click(function(){
 			$('#marketModal').hide();
@@ -202,4 +249,119 @@
 		});
 		
 	});
+	
+	$(document).ready(function(){
+		order_load();
+	});
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var order_id = urlParams.get('order_id');
+
+	function exchange_order(){
+		
+		var reason1 = $(".reason1").val();
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/exchange-order",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					order_id : order_id,
+					exchange_reason : reason1,
+					exchange_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				if(res == "success"){
+					alert("교환신청이 완료되었습니다.");
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function return_order(){
+
+		var reason2 = $(".reason2").val();
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/return-order",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					order_id : order_id,
+					return_reason : reason2,
+					return_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				if(res == "success"){
+					alert("반품신청이 완료되었습니다.");
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function cancel_order(){
+
+		var reason3 = $(".reason3").val();
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/cancel-order",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					order_id : order_id,
+					cancel_reason : reason3,
+					cancel_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				if(res == "success"){
+					alert("취소신청이 완료되었습니다.");
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function order_load(){
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/orders_by_order_key?order_key="+order_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

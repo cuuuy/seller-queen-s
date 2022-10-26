@@ -1,0 +1,51 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+</head>
+<body>
+	<div class="marketContainer">
+		<div class="marketContent">
+			<div class="marketMember">
+				<div>
+					<h3 style="text-align:center;">주문내역을 확인하시려면<br>아래 사항을 입력해주세요.</h3>
+					<br><br><br><br>
+					<div class="marketMember_input">
+						<input type="text" name="" placeholder="주문번호">
+						<input type="text" name="" placeholder="결제 비밀번호">
+					</div>
+					<div class="marketMember_btn">
+						<a href="market_main.html" class="ok_btn">주문내역 조회</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+
+<script>
+	$(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var product_id = urlParams.get('product_id');
+
+	
+</script>

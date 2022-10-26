@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
@@ -13,37 +14,36 @@
 	<div class="marketContainer">
 		<div class="header"></div>
 		<div class="marketContent">
-			<div class="marketDetail">
-				<div class="marketDetail_mainImg"></div>
+			<div class="marketDetail" id="marketDetail_mainImg">
+				<!-- <div class="marketDetail_mainImg" id="marketDetail_mainImg"></div> -->
 				<div class="marketDetail_con">
 					<div class="marketDetail_con_top">
-						<h3>TC 써지컬 하트 컬러 볼 팔찌</h3>
-						<table>
+						<h3 id="product_title"></h3>
+						<table id="option_table">
 							<tr>
 								<th class="marketDetail_top_price">판매가</th>
-								<td class="marketDetail_top_price">52,000원</td>
+								<td class="marketDetail_top_price" id="retail_price"></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<th>COLOR</th>
 								<td>
 									<select name="" id="">
-										<option value="">[선택] COLOR</option>
+										<option value="">[선택]</option>
 										<option value="">RED</option>
 										<option value="">GREEN</option>
 									</select>
 								</td>
-							</tr>
-							<tr>
-								<th>SIZE</th>
-								<td>
-									<select name="" id="">
-										<option value="">[선택] SIZE</option>
-										<option value="">M</option>
-										<option value="">L</option>
-									</select>
-								</td>
-							</tr>
+							</tr> -->
 						</table>
+					</div>
+					<div class="marketDetail_fixbox_btn2">
+						<!-- <a href="market_cart.html"> -->
+						<a href="javascript:void(0)" onclick="market_review();">
+							후기작성
+						</a>
+						<a href="javascript:void(0)" onclick="market_qna();">
+							문의하기
+						</a>
 					</div>
 					<div class="marketDetail_con_mid">
 						<ul class="marketDetail_con_mid_tab">
@@ -55,14 +55,15 @@
 						<!--상세정보-->
 						<div class="marketDetail_con_box01">
 							<div class="marketDetail_con_box_text">
-								<p>
+								<p id="product_descStr">&lt;상품정보&gt;</p><br><br>
+								<!-- <p>
 									&lt;상품정보&gt;<br><br>
 									크기 : 6.9*5.8mm<br>
 									색상 : 그린, 핑크<br>
 									재질 : 금속, 플라스틱<br><br>
 									<img src="../image/product01.png" alt=""><br><br>
 									<span>블링블링 티파니앤코 스타일의 팔찌에요!<br>데일리로 귀엽게 착용해보세요~</span>
-								</p>
+								</p> -->
 							</div>
 							<div class="marketDetail_con_btm">
 								<ul>
@@ -85,15 +86,15 @@
 										<table>
 											<tr>
 												<th>총 상품금액</th>
-												<td>52,000원</td>
+												<td id="product_amount">52,000원</td>
 											</tr>
 											<tr>
 												<th>총 배송비</th>
-												<td>+3000원</td>
+												<td id="deli_amount">+3000원</td>
 											</tr>
 											<tr>
 												<th>최종 주문금액</th>
-												<td>55,000원</td>
+												<td id="total_amount">55,000원</td>
 											</tr>
 										</table>
 									</li>
@@ -144,20 +145,22 @@
 								<li>
 									<h4>배송방법</h4>
 									<ul>
-										<li class="co777">택배</li>
+										<li class="co777 option1">택배</li>
+										<li class="co777 option1">직접수령</li>
 									</ul>
 								</li>
 								<li><h4>배송비</h4>
 									<ul>
-										<li class="co777">3,000원 / 제주, 도서지역 추가 2000원</li>
+										<li class="co777 option2">3,000원</li>
+										<li class="co777 option2">5,000원 (제주, 도서지역 추가 2000원)</li>
 									</ul>
 								</li>
-								<li><h4>수량</h4>
+								<li id="bottom_option_li"><h4>수량</h4>
 									<ul>
-										<li class="tac">- &nbsp;&nbsp; 1 &nbsp;&nbsp; +</li>
+										<li class="tac option3"><span class="option3_minus">-</span> &nbsp;&nbsp; <span class="option3_num">1</span> &nbsp;&nbsp; <span class="option3_plus">+</span></li>
 									</ul>
 								</li>
-								<li><h4>COLOR</h4>
+								<!-- <li><h4>COLOR</h4>
 									<ul>
 										<li>보라</li>
 										<li>연두</li>
@@ -170,7 +173,7 @@
 										<li>M</li>
 										<li>L</li>
 									</ul>
-								</li>
+								</li> -->
 							</ul>
 							<div class="marketDetail_fixbox_up_box_price">
 								<p>1개 선택</p>
@@ -179,10 +182,11 @@
 						</div>
 					</div>
 					<div class="marketDetail_fixbox_btn">
-						<a href="market_cart.html">
+						<!-- <a href="market_cart.html"> -->
+						<a href="javascript:void(0)" onclick="add_cart();">
 							장바구니
 						</a>
-						<a href="market_sell.html">
+						<a href="javascript:void(0)" onclick="move_order();">
 							결제하기
 						</a>
 					</div>
@@ -228,8 +232,8 @@
 		// 드롭다운
 		$('.marketDetail_fixbox_show > ul > li > ul').hide()
 		$('.marketDetail_fixbox_show > ul > li h4').click(function(){
-			$(this).siblings().slideToggle(400);
-			$(this).parent('li').toggleClass('active');
+			//$(this).siblings().slideToggle(400);
+			//$(this).parent('li').toggleClass('active');
 		});
 		
 		// 상세정보 드롭다운
@@ -237,6 +241,201 @@
 			$(this).children('div').stop().slideToggle(400);
 			$(this).toggleClass('slide');
 		});
+		
+		$(document).on("click",".marketDetail_fixbox_show > ul > li h4", function(){
+			$(this).siblings().slideToggle(400);
+			$(this).parent('li').toggleClass('active');
+		});
+
+		$(document).on("click",".marketDetail_fixbox_up", function(){
+			$('.marketDetail_fixbox_show > ul > li > ul').hide()
+		});
+		$(document).on("click",".option1", function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass("on");
+		});
+		$(document).on("click",".option2", function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass("on");
+		});
+
+		$(document).on("click",".option3_plus", function(){
+			var option3_num = parseInt($(".option3_num").text());
+			$(".option3_num").text(option3_num+1);
+		});
+
+		$(document).on("click",".option3_minus", function(){
+			var option3_num = parseInt($(".option3_num").text());
+			
+			if(option3_num == 1){
+				alert('최소 수량은 1개 입니다.');
+				return false;
+			}else{
+				$(".option3_num").text(option3_num-1);
+			}
+		});
+		
+
+		enroll_user_history();
+		product_road();
+
+	});
+	var user_id = localStorage.getItem('user_id');
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var product_id = urlParams.get('product_id');
+
+	function enroll_user_history(){//최근 본 상품 등록 function
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-user-history",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					user_id : '1',
+					product_id : product_id,
+					enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function add_cart(){ // 장바구니에 상품 추가 function
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/add-to-cart",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					user_id : user_id,
+					product_id : product_id,
+					enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				if(res == "success"){
+					alert("장바구니에 상품이 담겼습니다.");
+					//location.href="market_sell_ok.html";
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function product_road(){
+		// ajax 통신
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail_product-detail?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+
+				var img_path = res[0].main_img_url.replace("public","");
+				var new_html = `<div class="marketDetail_mainImg" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></div>`;
+				
+				var sum_price = res[0].retail_price+res[0].delivery_fee;
+
+				$("#retail_price").text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
+				$("#product_title").text(res[0].product_name);
+				$("#marketDetail_mainImg").prepend(new_html);
+				$("#product_amount").text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
+				$("#deli_amount").text("+"+res[0].delivery_fee.toLocaleString('ko-KR')+" 원");
+				$("#total_amount").text(sum_price.toLocaleString('ko-KR')+" 원");
+				$("#product_descStr").after(res[0].descStr);
+
+				var new_html2 = ``;
+				var new_html3 = ``;
+				var new_html4 = ``;
+				var new_html5 = ``;
+
+				for(var i = 0; i < res.length; i++){
+
+					var parse_option_key = Object.keys(JSON.parse(res[i].options));
+					var parse_option_value = Object.values(JSON.parse(res[i].options));
+					console.log(parse_option_key);
+					console.log(parse_option_value);
+
+					for(var j = 0; j < parse_option_value.length; j++){
+						
+						for(var k = 0; k < parse_option_value[j]['selections'].length; k++){
+							console.log(parse_option_value[j]['selections'][k]);
+							new_html3 += `<option class="" value="${parse_option_value[j]['selections'][k]}">${parse_option_value[j]['selections'][k]}</option>`;
+
+							new_html5 += `<li class="co777 option_li_${parse_option_value[j].option_name}" value="${parse_option_value[j]['selections'][k]}">${parse_option_value[j]['selections'][k]}</li>`;
+
+						}
+						new_html2 += `<tr>
+								<th>${parse_option_value[j].option_name}</th>
+								<td>
+									<select name="option_name_${parse_option_value[j].option_name}" id="">
+										<option value="">[선택]</option>
+									${new_html3}	
+									</select>
+								</td>
+							</tr>`;
+						new_html4 += `<li><h4>${parse_option_value[j].option_name}</h4>
+									<ul>
+										${new_html5}
+									</ul>
+								</li>`;
+
+						new_html3 = ``;
+						new_html5 = ``;
+						
+					}
+
+				}
+				$("#bottom_option_li").after(new_html4);
+				$("#option_table").append(new_html2);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	
+	$(document).on("click",".option_li_"+parse_option_value[j].option_name, function(){
+		$(this).addClass('on');
+		$(this).siblings().removeClass("on");
+		var classname = parse_option_value[j];
+		console.log(classname);
+		$('.option_name_'+classname);
+
+		//.val('11').prop("selected","selected")
 	});
 
+	function move_order(){
+		if(localStorage.getItem('user_id')){
+			location.href="market_sell.html?product_id="+product_id;
+		}else{
+			location.href="./market_login.html?product_id="+product_id;
+		}
+		
+	}
+
+	function market_review(){
+		location.href="market_review.html?product_id="+product_id;
+	}
+
+	function market_qna(){
+		location.href="market_qna.html?product_id="+product_id;
+	}
+	
 </script>

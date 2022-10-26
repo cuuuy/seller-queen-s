@@ -33,7 +33,7 @@
 			<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
 			<div class="marketHeader_mypage_menu_top">
 				<span class="marketHeader_mypage_menu_top_profile"></span>
-				<h5>김셀럽 회원님, 환영합니다.</h5>
+				<h5 id="market_right_name"></h5>
 			</div>
 			<ul class="marketHeader_mypage_menu_list">
 				<li><a href="market_order.html">주문내역</a></li>
@@ -43,7 +43,9 @@
 				<li><a href="market_see.html">최근 본 상품</a></li>
 			</ul>
 			<ul class="marketHeader_mypage_menu_logout">
-				<li>로그아웃</li>
+				<li id="market_right_logout"><a href="javascript:void(0)" onclick="marker_logout();">로그아웃</a></li>
+				<li id="market_right_join"><a href="./market_login.html">회원가입</a></li>
+				<li id="market_right_login"><a href="./market_login.html">로그인</a></li>
 			</ul>
 		</div>
 	</div>
@@ -71,4 +73,45 @@
 			}, 300);
 		});
 	});
+	$( document ).ready(function() {
+		
+		user_load();
+
+	});
+	function user_load(){
+		var user_id = localStorage.getItem('user_id');
+		console.log(user_id);
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/user-info?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				if(localStorage.getItem('user_id')){
+					$("#market_right_name").text(res[0].name+" 회원님, 환영합니다.");
+					$("#market_right_logout").show();
+					$("#market_right_join").hide();
+					$("#market_right_login").hide();
+				}else{
+					$("#market_right_name").text("비회원님, 환영합니다.");
+					$("#market_right_logout").hide();
+					$("#market_right_join").show();
+					$("#market_right_login").show();
+				}
+				
+					
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function marker_logout(){
+		localStorage.removeItem('user_id');
+		alert("로그아웃 되었습니다.");
+		location.href="./market_main.html";
+	}
 </script>

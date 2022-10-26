@@ -46,9 +46,9 @@
 						<input id="cart01" type="checkbox">
 						<label for="cart01"><span></span>내가 쓴 문의만 보기</label>
 					</div>
-					<a href="market_qna_write.html" class="marketQna_top_write">문의 작성</a>
+					<a href="javascript:void(0)" class="marketQna_top_write" onclick="market_qna_write()">문의 작성</a>
 				</div>
-				<ul class="marketQna_list">
+				<ul class="marketQna_list" id="qna_load">
 					<li>
 						<div class="marketQna_list_thumb">
 							<span></span>
@@ -65,7 +65,7 @@
 							</p>
 						</div>
 					</li>
-					<li>
+					<!-- <li>
 						<div class="marketQna_list_thumb">
 							<span></span>
 							배송 문의
@@ -103,7 +103,7 @@
 								안녕하세요 혹시 배송이 언제 쯤 되는건가요?
 							</p>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
@@ -124,4 +124,109 @@
 			}, 300);
 		});
 	});
+	
+	var user_id = localStorage.getItem('user_id');
+	if(user_id == null){
+		user_id = -1; // 비회원
+	}
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var product_id = urlParams.get('product_id');
+
+	function market_qna_write(){
+		location.href="market_qna_write.html?product_id="+product_id;
+	}
+	
+	
+	$(document).ready(function() {
+		qna_load();
+	});
+
+
+	function qna_load(){
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/inquiries_by_seller?seller_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				for(var i = 0; i < res.length; i++){
+
+					var unix_timestamp = res[i].enroll_time;
+					var date = new Date(unix_timestamp * 1000);
+					var hours = date.getHours();
+					var minutes = "0" + date.getMinutes();
+					var seconds = "0" + date.getSeconds();
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+					var img_path = res[i].img_url.replace("public","");
+					
+					var typeStr = '';
+
+					if(res[i].typeStr == "deli_qna"){
+						typeStr = '배송 문의';
+					}else if(res[i].typeStr == "product_qna"){
+						typeStr = '상품 문의';
+					}else if(res[i].typeStr == "cancel_qna"){
+						typeStr = '반품/취소 문의';
+					}else if(res[i].typeStr == "exchange_qna"){
+						typeStr = '교환 문의';
+					}else if(res[i].typeStr == "etc_qna"){
+						typeStr = '기타 문의';
+					}
+					var new_html = `<li>
+						<div class="marketQna_list_thumb">
+							<span></span>
+							${typeStr}
+						</div>
+						<div class="marketQna_list_text">
+							<div class="marketQna_list_text_button">
+								<h4>${res[i].name}</h4>
+								<a href="" class="a_no">답변미완료</a>
+							</div>
+							<h4>${formattedTime} 작성</h4>
+							<p>
+								${res[i].inquiry_text}
+							</p>
+							<p class="marketReport_list_pText" "id="report_id_${res[i].id}" data-index="${res[i].id}">
+								신고하기
+							</p>
+						</div>
+					</li>`;
+
+					$("#qna_load").append(new_html);
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+
+	$('body').on('click','.marketReport_list_pText',function(e){
+		if(user_id == -1){
+			alert("로그인 후 신고가 가능합니다.");
+			return false;
+		}
+		var index = $(e.target).data('index');
+			
+			$.post("http://43.200.169.89/send-report",{
+				user_id : user_id,
+				target_id : index,
+				typeStr : 'inquiry',
+				enroll_time : enroll_time
+			},result=>{
+				if(result == "success"){
+					alert('게시글이 신고되었습니다.');
+				}
+			})
+	})
 </script>

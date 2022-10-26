@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -11,6 +12,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<script src="../js/admin.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -25,7 +29,7 @@
 			</div>
 		</div>
 		<div class="admin_m_header">
-			<div>
+			<div class="ham">
 				<span></span>
 				<span></span>
 				<span></span>
@@ -45,7 +49,7 @@
 				 <div class="adminWrap_topmenu">
 					<ul>
 						<li><a href="./admin_admin_main.html">관리자 센터</a></li>
-						<li class="active"><a href="./admin_main.html">셀러 센터</a></li>
+						<li class="active"><a href="./admin_seller_main.html">셀러 센터</a></li>
 						<li><a href="./admin_domae_main.html">도매 센터</a></li>
 						<li><a href="./admin_domae_main.html">강사 센터</a></li>
 					</ul>
@@ -56,7 +60,7 @@
 					<p>★셀러 안내 사항 : 상품의 공급은 도매판매자의 판매상품이 자동으로 업데이트 되며, 셀럽님들께서는 도매상의 상품을  자유롭게 ON/OFF하실 수 있습니다.</p>
 				</div> 
 				<div class="adminContent">
-					<div class="adminContent_leftmenu">
+					<!-- <div class="adminContent_leftmenu">
 						<h4>카테고리 관리</h4>
 						<ul>
 							<li class="adminContent_leftmenu_drop">ALL</li>
@@ -135,37 +139,39 @@
 							</li>
 						</ul>
 						<p class="adminContent_leftmenu_modify"><img src="../image/admin_products_modify.jpg" alt="" /></p>
-					</div>
-					<div class="adminContent_right">
+					</div> -->
+					<!-- <div class="adminContent_right"> -->
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="active"><a href="">전체 10</a></li>
-								<li><a href="">판매중 0</a></li>
-								<li><a href="">품절 0</a></li>
+								<li class="filter_all active"><a href="javascript:void(0)">전체 <span class="total_num">0</span></a></li>
+								<li class="filter_sell"><a href="javascript:void(0)">판매중 <span class="sell_num">0</span></a></li>
+								<li class="filter_sold"><a href="javascript:void(0)">품절 <span class="sold_num">0</span></a></li>
 							</ul>
 						</div>
 						<div class="adminContent_check adminContent_check_right">
-							<input id="check01" type="checkbox">
-							<label for="check01"><span></span>베스트 아이템 설정</label>
+							<!-- <input id="check01" type="checkbox">
+							<label for="check01"><span></span>베스트 아이템 설정</label> -->
 						</div>
-						<div class="adminContent_search">
-							<input type="search" name="" placeholder="상품명을 검색하세요.">
-							<a href="javascript:void(0)" class="check_btn onmodal">상품업로드</a>
-							<a href="javascript:void(0)" class="check_btn">검색</a>
+						<div class="adminContent_search adminContent_search_long">
+							<input type="text" name="search_product" placeholder="상품명을 검색하세요." onkeyup="enterkey()">
+							<!-- <a href="javascript:void(0)" class="check_btn onmodal">상품업로드</a> -->
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
-						<div>
+						<div style="min-height: 700px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
 									<col width="3%">
 									<col width="*">
+									<col width="8%">
 									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="5%">
-									<col width="10%">
-									<col width="10%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
 									<col width="8%">
 								</colgroup>
 								<thead>
@@ -180,139 +186,10 @@
 									<th>등록일</th>
 									<th>배송비</th>
 									<th>상품 표시</th>
+									<th>베스트아이템 표시</th>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>시계</td>
-										<td>900,000원</td>
-										<td>판매중</td>
-										<td>20</td>
-										<td>20220401</td>
-										<td>3,000원</td>
-										<td>
-											<label class="switch">
-												<input type="checkbox">
-												<span class="slider"></span>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check07" type="checkbox">
-												<label for="check07"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>시계</td>
-										<td>900,000원</td>
-										<td>판매중</td>
-										<td>20</td>
-										<td>20220401</td>
-										<td>3,000원</td>
-										<td>
-											<label class="switch">
-												<input type="checkbox">
-												<span class="slider"></span>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check03" type="checkbox">
-												<label for="check03"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>시계</td>
-										<td>900,000원</td>
-										<td>판매중</td>
-										<td>20</td>
-										<td>20220401</td>
-										<td>3,000원</td>
-										<td>
-											<label class="switch">
-												<input type="checkbox">
-												<span class="slider"></span>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check04" type="checkbox">
-												<label for="check04"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>시계</td>
-										<td>900,000원</td>
-										<td>판매중</td>
-										<td>20</td>
-										<td>20220401</td>
-										<td>3,000원</td>
-										<td>
-											<label class="switch">
-												<input type="checkbox">
-												<span class="slider"></span>
-											</label>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check05" type="checkbox">
-												<label for="check05"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>시계</td>
-										<td>900,000원</td>
-										<td>판매중</td>
-										<td>20</td>
-										<td>20220401</td>
-										<td>3,000원</td>
-										<td>
-											<label class="switch">
-												<input type="checkbox">
-												<span class="slider"></span>
-											</label>
-										</td>
-									</tr>
-									<tr>
+								<tbody id="product_load_tbody">
+									<!-- <tr>
 										<td>
 											<div class="adminContent_table_checkbox">
 												<input id="check06" type="checkbox">
@@ -337,20 +214,17 @@
 												<span class="slider"></span>
 											</label>
 										</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<div class="adminContent_pager" id="paging">
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="adminModal modalPage01">
+		<div class="adminModal modalPage01" style="display:none;">
 			<div class="adminModal_cont">
 				<h3>상품 업로드</h3>
 				<a href="javascript:void(0)" class="adminModal_cont_plusbtn">+ 옵션추가</a>
@@ -431,7 +305,7 @@
 
 
 		<!-- 옵션추가 -->
-		<div class="adminModal modalPage02">
+		<div class="adminModal modalPage02" style="display:none;">
 			<div class="adminModal_cont">
 				<h3>상품 옵션추가</h3>
 				<table class="adminModal_cont_table">
@@ -533,7 +407,7 @@
 		</div>
 
 		<!-- 상품 업로드 -->
-		<div class="adminModal modalPage03">
+		<div class="adminModal modalPage03" style="display:none;">
 			<div class="adminModal_cont">
 				<h3>상품 업로드</h3>
 				<div>
@@ -557,7 +431,7 @@
 		</div>
 
 		<!-- 완료 -->
-		<div class="adminModal modalPage04">
+		<div class="adminModal modalPage04" style="display:none;">
 			<div class="adminModal_ok">
 				<h3>상품 추가가 완료되었습니다!</h3>
 				<div class="adminModal_ok_btn">
@@ -568,7 +442,7 @@
 
 
 		<!-- 카테고리관리 -->
-		<div class="adminModal admincategory">
+		<div class="adminModal admincategory" style="display:none;">
 			<div class="adminModal_cont adminModal_category">
 				<h3>카테고리관리</h3>
 				<table class="adminModal_category_table">
@@ -827,6 +701,15 @@
 </html>
 
 <script>
+
+	var productInfoDict = [];
+	var products= [];
+	var products_origin = [];
+	
+	var page_num = 0;
+
+	var user_id = localStorage.getItem('user_id');
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
 
@@ -866,6 +749,422 @@
 			$('.admincategory').show();
 		});
 
-	});
+		product_load();
 
+	});
+	
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	function load_product_list(datas){
+		console.log('datas',datas);
+		var new_html = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+			
+			var img_path = datas[i].main_img_url.replace("public","");
+			
+			var slider_show = 'slider';
+			var tag = ``;
+			if(datas[i].isShow == "YES"){
+				slider_show = "slider2";
+				tag += `<span id="product_hide" class="${slider_show}" onclick="set_product_not_showed(`+datas[i].id+`);"></span>`;
+			}else{
+				tag += `<span id="product_show" class="${slider_show}" onclick="set_product_showed(`+datas[i].id+`);"></span>`;
+			}
+
+			var tag2 = ``;
+			var slider_best = 'slider';
+			if(datas[i].isBest == "YES"){
+				slider_best = "slider2";
+				tag2 += `<span id="best_product_hide" class="${slider_best}" onclick="set_best_product_not_showed(`+datas[i].id+`);"></span>`;
+			}else{
+				tag2 += `<span id="best_product_show" class="${slider_best}" onclick="set_best_product_showed(`+datas[i].id+`);"></span>`;
+			}
+
+			if(datas[i].isShow=="YES"){
+				var isShow = "판매중";
+			}
+			var category_name = datas[i].category_id.split(">");
+					new_html += `<tr>
+								<td>
+									<div class="adminContent_table_checkbox">
+										<input id="check${datas[i].id}" type="checkbox">
+										<label for="check${datas[i].id}"><span></span></label>
+									</div>
+								</td>
+								<td>${page_num-i}</td>
+								<td class="adminContent_table_name">
+									<span class="adminContent_table_name_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+									<p>`+datas[i].product_name+`</p>
+								</td>
+								<td>`+datas[i].wholesaler+`</td>
+								<td>${category_name[1]} > ${category_name[2]}</td>
+								<td>${datas[i].retail_price.toLocaleString('ko-KR')}원</td>
+								<td>`+isShow+`</td>
+								<td>`+datas[i].remain_count+`</td>
+								<td>`+formattedTime+`</td>
+								<td>${datas[i].delivery_fee.toLocaleString('ko-KR')}원</td>
+								<td>
+									<label class="switch">
+										<input type="checkbox">
+										${tag}
+									</label>
+								</td>
+								<td>
+									<label class="switch">
+										<input type="checkbox">
+										${tag2}
+									</label>
+								</td>
+							</tr>`;
+
+			if(datas[i].user_type=="seller_J" || datas[i].user_type=="seller_I"){
+				//$("#user_load_tbody").append(new_html);
+				//user_count += 1;
+			}
+		}
+		
+		$("#product_load_tbody").html(new_html);
+
+	}
+
+	function product_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail-products?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+
+				products = res;
+				products_origin = res;
+
+				var tmp_arr = products_origin.filter(function(product_info){
+					return product_info.remain_count > 0;
+				})
+
+				var tmp_arr2 = products_origin.filter(function(product_info){
+					return product_info.remain_count <= 0;
+				})
+				
+				$(".total_num").text(products_origin.length);
+				$(".sell_num").text(tmp_arr.length);
+				$(".sold_num").text(tmp_arr2.length);
+
+				$('#paging').pagination({
+					dataSource: products,
+					callback: function(data, pagination) {
+						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+						load_product_list(data);
+					}
+				});
+
+				var product_amount_sell = 0;
+				var product_amount_sold = 0;
+
+				//for(var i = 0; i < res.length; i++){
+				//	
+				//	var isShow = '';
+				//
+				//	if(res[i].isShow=="YES"){
+				//		isShow = "판매중";
+				//	}else{
+				//		isShow = "대기중";
+				//	}
+				//
+				//	var unix_timestamp = res[i].enroll_time;
+				//	var date = new Date(unix_timestamp * 1000);
+				//	var hours = date.getHours();
+				//	var minutes = "0" + date.getMinutes();
+				//	var seconds = "0" + date.getSeconds();
+				//	var mon = (date.getMonth()+1);
+				//	var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+				//	var img_path = res[i].main_img_url.replace("public","");
+				//
+				//	var slider_show = 'slider';
+				//	var tag = ``;
+				//	if(res[i].isShow == "YES"){
+				//		slider_show = "slider2";
+				//		tag += `<span id="product_hide" class="${slider_show}" onclick="set_product_not_showed(`+res[i].id+`);"></span>`;
+				//	}else{
+				//		tag += `<span id="product_show" class="${slider_show}" onclick="set_product_showed(`+res[i].id+`);"></span>`;
+				//	}
+				//
+				//	var tag2 = ``;
+				//	var slider_best = 'slider';
+				//	if(res[i].isBest == "YES"){
+				//		slider_best = "slider2";
+				//		tag2 += `<span id="best_product_hide" class="${slider_best}" onclick="set_best_product_not_showed(`+res[i].id+`);"></span>`;
+				//	}else{
+				//		tag2 += `<span id="best_product_show" class="${slider_best}" onclick="set_best_product_showed(`+res[i].id+`);"></span>`;
+				//	}
+				//
+				//	
+				//	if(res[i].isShow == "YES"){
+				//		product_amount_sell += 1;
+				//	}
+				//
+				//	
+				//	if(res[i].remain_count == 0){
+				//		product_amount_sold = product_amount_sold + 1;
+				//	}
+				//
+				//	var new_html = `<tr>
+				//						<td>
+				//							<div class="adminContent_table_checkbox">
+				//								<input id="check06" type="checkbox">
+				//								<label for="check06"><span></span></label>
+				//							</div>
+				//						</td>
+				//						<td>${i+1}</td>
+				//						<td class="adminContent_table_name">
+				//							<span class="adminContent_table_name_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+				//							<p>`+res[i].product_name+`</p>
+				//						</td>
+				//						<td>`+res[i].wholesaler+`</td>
+				//						<td>`+res[i].category_id+`</td>
+				//						<td>${res[i].retail_price.toLocaleString('ko-KR')}원</td>
+				//						<td>`+isShow+`</td>
+				//						<td>`+res[i].remain_count+`</td>
+				//						<td>`+formattedTime+`</td>
+				//						<td>${res[i].delivery_fee.toLocaleString('ko-KR')}원</td>
+				//						<td>
+				//							<label class="switch">
+				//								<input type="checkbox">
+				//								${tag}
+				//							</label>
+				//						</td>
+				//						<td>
+				//							<label class="switch">
+				//								<input type="checkbox">
+				//								${tag2}
+				//							</label>
+				//						</td>
+				//					</tr>`;
+				//
+				//	$("#product_load_tbody").append(new_html);
+				//
+				//	$("#product_amount_all").find('span').text(res.length);
+				//	$("#product_amount_sell").find('span').text(product_amount_sell);
+				//	$("#product_amount_sold").find('span').text(product_amount_sold);
+				//}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_product_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/set_product_showed",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					//alert("상품 보이기가 적용되었습니다.");
+					//$("#product_show").hide();
+					//$("#product_hide").show();
+					location.reload();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_product_not_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/set_product_not_showed",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					//alert("상품 숨기기가 적용되었습니다.");
+					//$("#product_show").show();
+					//$("#product_hide").hide();
+					location.reload();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_best_product_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/check-best-item",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					//alert("베스트아이템 보이기가 적용되었습니다.");
+					//$("#best_product_show").hide();
+					//$("#best_product_hide").show();
+					location.reload();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function set_best_product_not_showed(product_id){
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/uncheck-best-item",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					product_id : product_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "success"){
+					//alert("베스트아이템 숨기기가 적용되었습니다.");
+					//$("#best_product_show").show();
+					//$("#best_product_hide").hide();
+					location.reload();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	
+	$(".filter_all").click(function(e){ // 판매중 클릭시 필터
+		
+		$("input[name=search_product]").val('');
+
+		$('#paging').pagination({
+			dataSource: products_origin,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_product_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_sell").click(function(e){ // 판매중 클릭시 필터
+		
+		$("input[name=search_product]").val('');
+
+		products = products_origin.filter(function(product_info){
+			return product_info.remain_count > 0;
+		})
+
+		$('#paging').pagination({
+			dataSource: products,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_product_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_sold").click(function(e){ // 판매중 클릭시 필터
+		
+		$("input[name=search_product]").val('');
+
+		products = products_origin.filter(function(product_info){
+			return product_info.remain_count <= 0;
+		})
+
+		$('#paging').pagination({
+			dataSource: products,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_product_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+	
+	$(".search_btn").click(function(e){
+		var search_word = $("input[name=search_product]").val();
+		
+		products = products_origin.filter(function(product_info){
+			return product_info.product_name.indexOf(search_word) > -1;
+		})
+
+		$('#paging').pagination({
+			dataSource: products,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_product_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) {
+			var search_word = $("input[name=search_product]").val();
+		
+			products = products_origin.filter(function(product_info){
+				return product_info.product_name.indexOf(search_word) > -1;
+			})
+
+			$('#paging').pagination({
+				dataSource: products,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_product_list(data);
+				}
+			});
+		}
+	}
 </script>

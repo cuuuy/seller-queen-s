@@ -15,11 +15,11 @@
 		<div class="join login">
 			<div>
 				<div class="marketMember_input">
-					<input type="text" name="" placeholder="아이디 입력">
-					<input type="text" name="" placeholder="비밀번호 입력">
+					<input type="text" name="idStr" placeholder="아이디 입력">
+					<input type="password" name="pwdStr" placeholder="비밀번호 입력">
 				</div>
 				<div class="marketMember_btn">
-					<a href="" class="ok_btn">로그인</a>
+					<a href="javascript:void(0)" class="ok_btn" onclick="login()">로그인</a>
 					<a href="./join_page01.html" class="back_btn">회원가입</a>
 				</div>
 				<div class="marketMember_find">
@@ -40,4 +40,48 @@
 		$('.footer').load('footer.html');
 	});
 	
+	function login(){
+		var idStr = $("input[name=idStr]").val();
+		var pwdStr = $("input[name=pwdStr]").val();
+
+		if(idStr==""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+
+		if(pwdStr==""){
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/login",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					idStr : idStr,
+					pwdStr : pwdStr
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				if(res.includes("success")){
+					alert("로그인 되었습니다.");
+					var user_id_session = res.slice(-1);
+					//console.log(user_id_session);
+					localStorage.setItem('user_id', user_id_session);
+					location.href="./main.html";
+				}else if(res == "not exist"){
+					alert("아이디가 존재하지 않습니다.");
+				}else if(res == "password invalid"){
+					alert("비밀번호가 일치하지 않습니다.");
+				}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

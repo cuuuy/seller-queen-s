@@ -5,9 +5,11 @@
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body style="background:#ddd;">
 	<div class="marketContainer">
@@ -24,14 +26,14 @@
 		<div class="marketContent">
 			<div class="marketSell">
 				<div class="marketSell_top">
-					<h3>주문 상품 총 2개</h3>
+					<h3>주문 상품 총 1개</h3>
 					<ul class="marketSell_top_list">
-						<li>
-							<span class="marketSell_top_list_thumb"></span>
+						<li id="img_li">
+							<!-- <span class="marketSell_top_list_thumb"></span> -->
 							<table class="marketSell_top_list_table">
 								<tr>
 									<th>판매가</th>
-									<td>52,000원</td>
+									<td id="product_price"></td>
 								</tr>
 								<tr>
 									<th>COLOR</th>
@@ -47,37 +49,9 @@
 								<tr>
 									<th>수량</th>
 									<td>
-										1
-										<button>-</button>
-										<button>+</button>
-									</td>
-								</tr>
-							</table>
-						</li>
-						<li>
-							<span class="marketSell_top_list_thumb"></span>
-							<table class="marketSell_top_list_table">
-								<tr>
-									<th>판매가</th>
-									<td>52,000원</td>
-								</tr>
-								<tr>
-									<th>COLOR</th>
-									<td>그린</td>
-								</tr>
-								<tr>
-									<th>SIZE</th>
-									<td>
-										S
-										<a href="" class="marketSell_top_list_table_option">옵션변경</a>
-									</td>
-								</tr>
-								<tr>
-									<th>수량</th>
-									<td>
-										1
-										<button>-</button>
-										<button>+</button>
+										<span id="product_amount">1</span>
+										<button onclick="amount_minus()">-</button>
+										<button onclick="amount_plus()">+</button>
 									</td>
 								</tr>
 							</table>
@@ -87,21 +61,21 @@
 				<div class="marketSell_info">
 					<h3>주문자 정보</h3>
 					<table class="marketSell_top_table">
-						<tr>
+						<tr id="name_tr">
 							<th>이름</th>
-							<td>김셀럽</td>
+							<td id="user_name"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td>010-0000-0000</td>
+							<td id="user_phone"></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td>서울특별시 강남구 삼성동 1-1</td>
+							<td id="user_addr"></td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
-							<td>11동 111호</td>
+							<td id="user_addr2"></td>
 						</tr>
 					</table>
 				</div>
@@ -110,34 +84,34 @@
 						<h3>배송지 정보</h3>
 						<div class="marketSell_form_check">
 							<div>
-								<input name="sell" id="sell01" type="radio">
+								<input name="sell" id="sell01" type="radio" onclick="same_addr()">
 								<label for="sell01"><span></span>주문자 정보와 동일</label>
 							</div>
-							<div>
-								<input name="sell" id="sell02" type="radio">
+							<div id="default_deli">
+								<input name="sell02" id="sell02" type="radio">
 								<label for="sell02"><span></span>기본 배송지로 지정</label>
 							</div>
 						</div>
 					</div>
 					<table class="marketSell_form_table">
-						<tr>
+						<tr id="name_tr2">
 							<th>이름</th>
-							<td><input type="text" placeholder="이름을 입력해주세요"></td>
+							<td><input type="text" placeholder="이름을 입력해주세요" name="place_name"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td><input type="text" placeholder="연락처를 입력해주세요"></td>
+							<td><input type="text" placeholder="연락처를 입력해주세요" name="place_phone"></td>
 						</tr>
 						<tr>
 							<th>주소</th>
 							<td>
-								<input type="text" placeholder="주소를 검색하세요" class="w70">
-								<a href="">주소검색</a>
+								<input type="text" placeholder="주소를 검색하세요" class="w70" id="order_addr" name="place_addr">
+								<a href="javascript:void(0)" onclick="findAddr()">주소검색</a>
 							</td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
-							<td><input type="text" placeholder="상세주소를 입력해주세요"></td>
+							<td><input type="text" placeholder="상세주소를 입력해주세요" name="place_addr2"></td>
 						</tr>
 						<tr height="40">
 							<th></th>
@@ -145,11 +119,11 @@
 						</tr>
 						<tr height="40">
 							<td colspan="2">
-								<select name="" id="">
+								<select name="sell_desc" id="">
 									<option value="" class="sel_d">배송시 요청사항을 선택해주세요</option>
-									<option value="">경비실</option>
-									<option value="">문앞에</option>
-									<option value="">전화</option>
+									<option value="경비실">경비실</option>
+									<option value="문앞에">문앞에</option>
+									<option value="전화">전화</option>
 								</select>
 							</td>
 						</tr>
@@ -191,38 +165,75 @@
 					<table class="marketSell_allPrice_table">
 						<tr>
 							<th>총 상품금액</th>
-							<td>52,000원</td>
+							<td id="product_price2"></td>
 						</tr>
 						<tr>
 							<th>총 배송비</th>
-							<td>+3000원</td>
+							<td id="product_deli"></td>
 						</tr>
 						<tr>
 							<th>최종 주문금액</th>
-							<td>55,000원</td>
+							<td id="product_total_amount"></td>
 						</tr>
 					</table>
 				</div>
 				<div class="marketSell_payment">
 					<h3>결제방법</h3>
 					<div>
-						<a href="">계좌 간편결제</a>
-						<a href="">카드</a>
-						<a href="">무통장 입금</a>
-						<a href="">일반 간편카드</a>
+						<a href="javascript:void(0)" class="pay_method" data-type="1">계좌 간편결제</a>
+						<a href="javascript:void(0)" class="pay_method" data-type="2">카드</a>
+						<a href="javascript:void(0)" class="pay_method" data-type="3">무통장 입금</a>
+						<a href="javascript:void(0)" class="pay_method" data-type="4">일반 간편카드</a>
 					</div>
 				</div>
 				<div class="marketCart_fix">
-					<a href="market_sell_ok.html" class="ok_btn">(1) 총 55,000원 결제하기</a>
+					<!-- <a href="market_sell_ok.html" class="ok_btn" onclick="order_add()">(1) 총 55,000원 결제하기</a> -->
+					<a href="javascript:void(0)" class="ok_btn" onclick="order_add()">(1) 총 <span id="bottom_price"></span> 결제하기</a>
+				</div>
+			</div>
+			<div id="marketModal" style="display:none;">
+				<div>
+					<h3>주문완료</h3>
+					
+					<p>
+						안녕하세요. <span id="final_modal_name">김셀러</span> 회원님,
+						<br><br>
+						<span id="final_modal_product_name">TC 써지컬 하트 컬러 볼 팔찌 외 0건</span><br>
+						주문이 정상적으로 처리되었습니다.
+						<br><br>
+						감사합니다.
+						<br><br>
+						<div id="non_member_div">
+							<span>주문번호는</span>
+							<span id="order_num"></span>
+							입니다.
+							<br><br>
+							<span>결제 비밀번호는</span>
+							<span id="order_pw"></span>
+							입니다.
+						</div>
+					</p>
+					</b>
+					<a href="./market_order.html" class="ok_btn">주문 내역 보기</a>
+					<a href="./market_main.html" class="back_btn">메인으로 돌아가기</a>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </body>
 
 
 <script>
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
 	$(function(){
+		$('.marketSell_payment a').click(function(){
+			$(this).addClass('on');
+			$(this).siblings().removeClass('on');
+		});
 		$('.marketHeader_mypage_icon').click(function(){
 			$('.marketHeader_mypage_menu').animate({
 				'right': '0'
@@ -236,5 +247,332 @@
 		$('.marketSell_top h3').click(function(){
 			$(this).siblings('ul').slideToggle();
 		});
+
+		$("#sell_agree01").click(function(){
+			var checked = $('#sell_agree01').is(':checked');
+			if(checked == true){
+				$("#sell_agree02").prop('checked', true);
+				$("#sell_agree03").prop('checked', true);
+				$("#sell_agree04").prop('checked', true);
+				$("#sell_agree05").prop('checked', true);
+			}else{
+				$("#sell_agree02").prop('checked', false);
+				$("#sell_agree03").prop('checked', false);
+				$("#sell_agree04").prop('checked', false);
+				$("#sell_agree05").prop('checked', false);
+			}
+			
+		});
 	});
+
+	$( document ).ready(function() {
+    
+		user_load();
+		product_load();
+		
+		if(localStorage.getItem('user_id')){
+			$("#non_member_div").remove();
+		}else{
+			$("#user_name").append(`<input type="text" placeholder="이름을 입력해주세요" name="place_name">`);
+			$("#name_tr").after(`<tr>
+							<th>결제비밀번호</th>
+							<td id="user_pw"><input type="text" placeholder="비밀번호를 입력해주세요" name="place_pw"></td>
+						</tr>`);
+			$("#name_tr2").after(`<tr>
+							<th>결제비밀번호</th>
+							<td id="user_pw"><input type="text" placeholder="비밀번호를 입력해주세요" name="place_pw"></td>
+						</tr>`);
+			$("#user_phone").append(`<input type="text" placeholder="연락처를 입력해주세요" name="place_phone">`);
+			$("#user_addr").append(`<input type="text" placeholder="주소를 검색하세요" class="w70" id="order_addr2" name="place_addr"><a href="javascript:void(0)" onclick="findAddr2()">주소검색</a>`);
+			$("#user_addr2").append(`<input type="text" placeholder="상세주소를 입력해주세요" name="place_addr2">`);
+			$(".marketSell_info").addClass("marketSell_form_table");
+
+			$("#default_deli").hide();
+			
+		}
+		
+		
+
+
+	});
+
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var product_id = urlParams.get('product_id');
+
+	function findAddr(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				//document.getElementById('member_post').value = data.zonecode;
+				if(roadAddr !== ''){
+					document.getElementById("order_addr").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("order_addr").value = jibunAddr;
+				}
+			}
+		}).open();
+	}
+
+	function findAddr2(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				//document.getElementById('member_post').value = data.zonecode;
+				if(roadAddr !== ''){
+					document.getElementById("order_addr2").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("order_addr2").value = jibunAddr;
+				}
+			}
+		}).open();
+	}
+
+	function same_addr(){
+		$("input[name=place_name]").val($("#user_name").text());
+		$("input[name=place_phone]").val($("#user_phone").text());
+		$("input[name=place_addr]").val($("#user_addr").text());
+		$("input[name=place_addr2]").val($("#user_addr2").text());
+	}
+
+	function amount_plus(){
+		var product_amount = $("#product_amount").text();
+		$("#product_amount").text(parseInt(product_amount)+1);
+	}
+
+	function amount_minus(){
+		var product_amount = $("#product_amount").text();
+		if(product_amount==1){
+			alert("수량은 최소 1이여야 합니다.");
+		}else{
+			$("#product_amount").text(parseInt(product_amount)-1);
+		}
+	}
+
+	function order_add(){
+		var user_id = localStorage.getItem('user_id');
+		var count = $("#product_amount").text();
+		var user_name = $("input[name=place_name]").val();
+		var place_phone = $("input[name=place_phone]").val();
+		var address1 = $("input[name=place_addr]").val();
+		var address2 = $("input[name=place_addr2]").val();
+		var product_price = $("#product_price").text().replace(' 원','');
+		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
+		var sell_desc = $("select[name=sell_desc]").val();
+		var pay_by = $(".pay_method.on").text();
+		//$(".pay_method").click(function(){
+		//	pay_by = $(this).text();
+		//})
+		
+		if(user_name == ""){
+			alert('이름을 입력해주세요.');
+			return;
+		}
+
+		if(place_phone == ""){
+			alert('연락처를 입력해주세요.');
+			return;
+		}
+
+		if(address1 == ""){
+			alert('주소를 입력해주세요.');
+			return;
+		}
+
+		if(address2 == ""){
+			alert('상세주소를 입력해주세요.');
+			return;
+		}
+
+		if(sell_desc == ""){
+			alert('요청사항을 입력해주세요.');
+			return;
+		}
+
+		if(pay_by == ""){
+			alert('결제방법을 선택해주세요.');
+			return;
+		}
+
+		var new_user_id = '';
+		var pay_password = "";
+		if(localStorage.getItem('user_id')){
+			new_user_id = user_id;
+		}else{
+			new_user_id = '-1';
+			pay_password = $("input[name=place_pw]").val();
+		}
+
+		var options = {'color':'blue'};
+		options = JSON.stringify(options);
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-order",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					user_id : new_user_id,
+					product_id : product_id,
+					count : count,
+					options : options,
+					name : user_name,
+					phone : place_phone,
+					address1 : address1,
+					address2 : address2,
+					requests_str : sell_desc,
+					product_price : product_price,
+					delivery_fee : delivery_fee,
+					order_time : enroll_time,
+					order_key : enroll_time+"_"+new_user_id,
+					pay_by : pay_by,
+					pay_password : pay_password
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				var res_split = res.split("__");
+				if(res_split[0] == "success"){
+					//alert("결제가 등록 되었습니다.");
+					//location.href="market_sell_ok.html";
+					money_add(res_split[1]);
+					$("#marketModal").show();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function money_add(order_id){
+		
+		var product_price = $("#product_price").text().replace(' 원','');
+		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
+		var pay_amount = parseInt(product_price) + parseInt(delivery_fee);
+		var pay_by = $(".pay_method.on").text();
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/paid",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					user_id : 1,
+					pay_type : pay_by,
+					pay_time : enroll_time,
+					pay_amount : pay_amount,
+					order_id : order_id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+
+				if(res == "success"){
+					//alert("결제가 등록 되었습니다.");
+					//location.href="market_sell_ok.html?product_id="+product_id;
+					
+					var user_id = '';
+
+					if(localStorage.getItem('user_id')){
+						user_id = localStorage.getItem('user_id');
+					}else{
+						user_id = "-1";
+					}
+
+					var order_num = btoa(user_id+'_'+product_id+'_'+enroll_time+'_'+'');
+					var order_num_1 = order_num.substr(0,4);
+					var order_num_2 = order_num.substr(4,4);
+					var order_num_3 = order_num.substr(8,4);
+					//console.log(order_num_1);
+					//console.log(order_num_2);
+					//console.log(order_num_3);
+
+					$("#order_num").text(order_num_1+"_"+order_num_2+"_"+order_num_3);
+					$("#order_pw").text($("input[name=place_pw]").val());
+					
+					
+
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function user_load(){
+		var user_id = localStorage.getItem('user_id');
+		console.log(user_id);
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/user-info?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				
+				if(localStorage.getItem('user_id')){
+					$("#user_name").text(res[0].name);
+					$("#user_phone").text(res[0].phone_nation+" "+res[0].phone);
+					$("#user_addr").text(res[0].address1);
+					$("#user_addr2").text(res[0].address2);
+					$("#final_modal_name").text(res[0].name);
+				}else{
+					$("#final_modal_name").text("비회원");
+				}
+				
+				
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function product_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail_product-detail?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				
+				var img_path = res[0].main_img_url.replace("public","");
+				var tag = `<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>`;
+				$("#img_li").append(tag);
+				$("#product_price").text(res[0].retail_price+" 원");
+				$("#product_price2").text(res[0].retail_price+" 원");
+				$("#product_deli").text("+"+res[0].delivery_fee+" 원");
+				$("#product_total_amount").text(res[0].retail_price+res[0].delivery_fee+" 원");
+				$("#bottom_price").text(res[0].retail_price+res[0].delivery_fee+" 원");
+				$("#final_modal_product_name").text(res[0].product_name + " 외 0건");
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

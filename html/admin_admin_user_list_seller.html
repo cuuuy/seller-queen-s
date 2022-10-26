@@ -1,0 +1,526 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<script src="../js/admin.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				<div class="adminWrap_topmenu">
+					<ul>
+						<li class="active"><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
+					</ul>
+				</div>
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li><a href="admin_admin_user_list.html">일반 회원 관리</a></li>
+						<li class="active"><a href="admin_admin_user_list_seller.html">셀러 회원 관리</a></li>
+						<li><a href="admin_admin_user_list_domae.html">도매 회원 관리</a></li>
+						<li><a href="admin_admin_user_list_teacher.html">강사 회원 관리</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href="./admin_admin_main.html"><img src="../image/admin_back.png" alt="" /></a>
+					<h3>일반회원관리</h3>
+				</div> 
+					<div class="adminContent" style="height:auto;">
+						<div class="adminContent_tab">
+							<ul>
+								<li class="active"><a href="">사용자 목록</a></li>
+							</ul>
+						</div>
+						<div class="adminContent_search ">
+							<a href="javascript:void(0)" class="check_btn search_btn">사용자 추가</a>
+							<input type="search" name="search_product" placeholder="사용자 이름/ 아이디/ 가입 마켓을 검색해주세요." onkeyup="enterkey()">
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
+							
+						</div>
+						<div class="adminContent_total">
+							총 회원수 <span id="user_count"></span>명
+						</div>
+						<div style="min-height: 700px;">
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="*">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="5%">
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>NO.</th>
+									<th>이름</th>
+									<th>계정</th>
+									<th>ID</th>
+									<th>회원유형</th>
+									<th>닉네임</th>
+									<th>가입일</th>
+									<th>판매/광고 프로핏</th>
+									<th>누적 판매 금액</th>
+									<th>셀러 마켓으로 이동</th>
+									<th>수정</th>
+								</thead>
+								<tbody id="user_load_tbody">
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="adminContent_pager" id="paging">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<input type="hidden" name="user_id">
+	<div id="modal" class="adminModal modal-overlay" style="display:none;">
+		<div class="adminModal_ok adminModal_invoice" style="width:1000px;">
+			<h3 style="font-size:30px;">회원 수정</h3>
+			<div style="margin: 0 100px 0 100px;">
+				<div>
+					<div href="javascript:void(0)" id="seller_j_btn" class="seller_selection_btn" data-type="J" style="width: 100px;float:left;height: 35px;line-height: 35px;">셀러 J</div>
+					<div href="javascript:void(0)" id="seller_i_btn" class="seller_selection_btn" data-type="I" style="width: 100px;float:right;height: 35px;line-height: 35px;">셀러 I</div>
+				</div>
+				<br><br>
+				<div>
+					<h5 style="text-align:left;">이름</h5>
+					<input type="text" name="user_modi_name" placeholder="" style="text-align:left;">
+				</div>
+				<div>
+					<h5 style="text-align:left;">닉네임</h5>
+					<input type="text" name="user_modi_nickname" placeholder="" style="text-align:left;">
+				</div>
+				<div>
+					<h5 style="text-align:left;">연락처</h5>
+					<input type="text" name="user_modi_phone" placeholder="" style="text-align:left;">
+				</div>
+				<div>
+					<h5 style="text-align:left;">생년월일</h5>
+					<select name="user_modi_year" style="float:left; width:20%;">
+					</select>
+					<select name="user_modi_month" style="float:left; width:20%;">
+					</select>
+					<select name="user_modi_day" style="float:left; width:20%;">
+					</select>
+				</div>
+				<br>
+				<div>
+					<h5 style="text-align:left;">주소</h5>
+					
+					<div class="adminModal_ok_btn" style="">
+						<input type="text" id="user_modi_addr" name="user_modi_addr" placeholder="" style="margin-bottom:5px;width:70%;float:left;text-align:left;">
+						<a href="javascript:void(0)" id="" class="ok_btn" onclick="findAddr()" style="width: 100px;float:right;height: 35px;line-height: 35px;">주소검색</a>
+					</div>
+					<input type="text" name="user_modi_addr2" placeholder="" style="text-align:left;">
+				</div>
+			</div>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" id="close_btn" class="ok_btn modalClose" onclick="user_save()" style="width:78%;margin:auto;">변경 정보 저장</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<script>
+
+	var userInfoDict = {};
+	var users = [];
+	var users_origin = [];
+	var page_num = 0;
+
+	$(document).ready(function() {
+
+
+		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
+
+		user_load();
+	
+	$(".seller_selection_btn").click(function(e){
+		$(".seller_selection_btn").removeClass('active');
+		$(e.target).addClass('active');
+	})
+
+	var year_tag = ``;
+	for(var y = 1950 ; y <= 2022; y++){
+		year_tag += `<option value="${y}">${y}</option>`
+	}
+	$("select[name=user_modi_year]").append(year_tag);
+
+	var month_tag = ``;
+	for(var m = 1 ; m <= 12; m++){
+		month_tag += `<option value="${m}">${m}</option>`
+	}
+	$("select[name=user_modi_month]").append(month_tag);
+
+	var day_tag = ``;
+	for(var d = 1 ; d <= 31; d++){
+		day_tag += `<option value="${d}">${d}</option>`
+	}
+	$("select[name=user_modi_day]").append(day_tag);
+
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	close_btn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+
+		
+
+	});
+	//$("#seller_j_btn").click(function(){
+	//	$(this).toggleClass("ok_btn back_btn");
+	//	$("#seller_i_btn").toggleClass("back_btn ok_btn");
+	//})
+	//
+	//$("#seller_i_btn").click(function(){
+	//	$(this).toggleClass("ok_btn back_btn");
+	//	$("#seller_j_btn").toggleClass("back_btn ok_btn");
+	//})
+	function modi_modal_pop(id){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+		$("input[name=user_id]").val(id);
+
+		var user_info = users.filter(function(user){
+			return user.id == id;
+		})[0];
+		
+		$("input[name=user_modi_name]").val(user_info.name);
+		$("input[name=user_modi_nickname]").val(user_info.nickname);
+		$("input[name=user_modi_phone]").val(user_info.name);
+		$("input[name=user_modi_phone]").val(user_info.phone);
+		$("input[name=user_modi_addr]").val(user_info.address1);
+		$("input[name=user_modi_addr2]").val(user_info.address2);
+		var unix_timestamp = user_info.birth_time;
+		var date = new Date(unix_timestamp * 1000);
+		var hours = date.getHours();
+		var minutes = "0" + date.getMinutes();
+		var seconds = "0" + date.getSeconds();
+		var year = date.getFullYear();
+		var mon = (date.getMonth()+1);
+		var day = date.getDate();
+		var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+		$("select[name=user_modi_year]").val(year);
+		$("select[name=user_modi_month]").val(mon);
+		$("select[name=user_modi_day]").val(day);
+
+		$(".seller_selection_btn").removeClass('active');
+
+		if(user_info.user_type=="seller_J"){
+			$("#seller_j_btn").addClass('active');
+		}else{
+			$("#seller_i_btn").addClass('active');
+		}
+		console.log(user_info);
+	}
+	
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	var user_count = 0;
+
+	function load_user_list(datas){
+
+		var tag = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+			
+			var paidInfoDictResult = 0;
+			if(paidInfoDict[datas[i].id]){
+				paidInfoDictResult = paidInfoDict[datas[i].id];
+			}else{
+				paidInfoDictResult = 0;
+			}
+
+			//var productCountDictResult = 0;
+			//if(productCountDict[datas[i].id]){
+			//	productCountDictResult = productCountDict[datas[i].id];
+			//}else{
+			//	productCountDictResult = 0;
+			//}
+
+			var profitInfoDictResult = 0;
+			if(profitInfoDict[datas[i].id]){
+				profitInfoDictResult = profitInfoDict[datas[i].id];
+			}else{
+				profitInfoDictResult = 0;
+			}
+
+			//var reviewCountDict = 0;
+			//if(userInfoDict.reviewCountDict[i]){
+			//	reviewCountDict = userInfoDict.reviewCountDict[i];
+			//}
+			//
+			//var inquiryCountDict = 0;
+			//if(userInfoDict.inquiryCountDict[i]){
+			//	inquiryCountDict = userInfoDict.inquiryCountDict[i];
+			//}
+
+					tag+= `<tr>
+								<td>
+									<div class="adminContent_table_checkbox">
+										<input id="check${datas[i].id}" type="checkbox">
+										<label for="check${datas[i].id}"><span></span></label>
+									</div>
+								</td>
+								<td>${page_num-i}</td>
+								<td>`+datas[i].name+`</td>
+								<td>`+datas[i].email+`</td>
+								<td>`+datas[i].idStr+`</td>
+								<td>`+datas[i].user_type+`</td>
+								<td>`+datas[i].nickname+`</td>
+								<td>${formattedTime}</td>
+								<td>500,000/300,000</td>
+								<td>${paidInfoDictResult.toLocaleString('ko-KR')}원</td>
+								<td>이동</td>
+								<td>
+									<div class="adminContent_order">
+										<a href="javascript:void(0)" class="check_btn" onclick="modi_modal_pop(${datas[i].id})">수정</a>
+									</div>
+								</td>
+							</tr>`;
+
+			if(datas[i].user_type=="seller_J" || datas[i].user_type=="seller_I"){
+				//$("#user_load_tbody").append(new_html);
+				//user_count += 1;
+			}
+		}
+		
+		$("#user_load_tbody").html(tag);
+
+	}
+	function user_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/sellers",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				//user_id : user_id,
+				//name : name,
+				//user_id : 1,
+				//name : "테스트의류",
+				//enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				userInfoDict = res;
+				users = userInfoDict['users'];
+				users_origin = res;
+				paidInfoDict = userInfoDict['paidInfoDict'];
+				productCountDict = userInfoDict['productCountDict'];
+				profitInfoDict = userInfoDict['profitInfoDict'];
+
+				$('#paging').pagination({
+					dataSource: users,
+					callback: function(data, pagination) {
+						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+						load_user_list(data);
+					}
+				});
+
+				$("#user_count").text(users.length);
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function user_save(){
+		var user_id = $("input[name=user_id]").val();
+		var name = $("input[name=user_modi_name]").val();
+		
+		var user_modi_year = $("select[name=user_modi_year]").val();
+		var user_modi_month = $("select[name=user_modi_month]").val();
+		var user_modi_day = $("select[name=user_modi_day]").val();
+		var total_day = user_modi_year+'-'+user_modi_month+'-'+user_modi_day;
+		var birth_time = new Date(total_day);
+		var new_time = birth_time.getTime()/1000;
+		console.log(new_time);
+
+		var phone = $("input[name=user_modi_phone]").val();
+		var address1 = $("input[name=user_modi_addr]").val();
+		var address2 = $("input[name=user_modi_addr2]").val();
+		var nickname = $("input[name=user_modi_nickname]").val();
+		
+		if($(".seller_selection_btn.active").length == 0){
+			alert('셀러 타입을 선택해주세요.');
+			return;
+		}
+		var user_type = $(".seller_selection_btn.active").data('type');
+		var new_user_type = '';
+
+		if(user_type=='J'){
+			new_user_type = "seller_J";
+		}else if(user_type=='I'){
+			new_user_type = "seller_I";
+		}
+
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/revise-user",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					user_id : user_id,
+					name : name,
+					birth_time : new_time,
+					phone : phone,
+					address1 : address1,
+					address2 : address2,
+					nickname : nickname,
+					user_type : new_user_type
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				if(res == "success"){
+					alert("회원수정이 완료 되었습니다.");
+					//category_road();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+
+	function findAddr(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				//document.getElementById('member_post').value = data.zonecode;
+				if(roadAddr !== ''){
+					document.getElementById("user_modi_addr").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("user_modi_addr").value = jibunAddr;
+				}
+			}
+		}).open();
+	}
+
+	$(".search_btn").click(function(e){
+		var search_word = $("input[name=search_product]").val();
+		
+		userInfoDict = users_origin['users'].filter(function(user_info){
+			return (user_info.name.indexOf(search_word) > -1 || user_info.idStr.indexOf(search_word) > -1) && (user_info.user_type == "seller_I" || user_info.user_type == "seller_J");
+		});
+		$('#paging').pagination({
+			dataSource: userInfoDict,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_user_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) {
+			var search_word = $("input[name=search_product]").val();
+		
+			userInfoDict = users_origin['users'].filter(function(user_info){
+				return (user_info.name.indexOf(search_word) > -1 || user_info.idStr.indexOf(search_word) > -1) && (user_info.user_type == "seller_I" || user_info.user_type == "seller_J");
+			});
+			$('#paging').pagination({
+				dataSource: userInfoDict,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_user_list(data);
+				}
+			});
+		}
+	}
+</script>

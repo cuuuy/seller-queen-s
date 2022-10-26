@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -11,6 +12,10 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/admin.js"></script>
+	<script src="../js/Chart.min.js"></script>
+	<script src="../js/utils.js"></script>
+	<script src="../js/function.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -22,6 +27,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -37,10 +56,10 @@
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href="./admin_domae_main.html"><img src="../image/admin_back.png" alt="" /></a>
+					<a href="./admin_seller_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>판매 분석</h3>
 				</div> 
-					<div class="adminContent_right">
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
 								<li><a href="./admin_seller_analysis_01.html">판매유형</a></li>
@@ -48,9 +67,40 @@
 								<li class="active"><a href="./admin_seller_analysis_03.html">기간 판매량 매출</a></li>
 							</ul>
 						</div>
+						<br><br><br>
+						<div class="adminContent_date">
+							<select name="search_year1">
+							</select>
+							<select  name="search_month1">
+							</select>
+							<select  name="search_day1">
+							</select>
+						</div>
+						
+						<div class="adminContent_date">
+							<select name="search_year2">
+							</select>
+							<select  name="search_month2">
+							</select>
+							<select  name="search_day2">
+							</select>
+						</div>
+						<br><br><br><br>
 						<!-- script 들어가야 되는 div -->
-						<div class="adminContent_graph">
-							<img src="../image/domae_graph3.png">
+						<div class="adminContent_graph" style="height:50%;">
+							<!-- <img src="../image/domae_graph3.png"> -->
+							<p style="font-size:20px;"><b>기간 판매량</b></p><br>
+							<span style="font-size:20px;">총 판매량 : 500</span>
+							<span style="float:right;font-size:15px;">단위 : 수(량)</span>
+							<canvas id="canvas"></canvas>
+							<div style="font-size:25px;text-align:center;margin:0 0 0 35px;">2020.06.01 ─────── 2020.06.01</div>
+						</div>
+						<div class="adminContent_graph" style="height:50%;">
+							<p style="font-size:20px;"><b>기간 매출</b></p><br>
+							<span style="font-size:20px;">기간 판매 매출 : 7,500,000</span>
+							<span style="float:right;font-size:15px;">단위 : 만원</span>
+							<canvas id="canvas2"></canvas>
+							<div style="font-size:25px;text-align:center;margin:0 0 0 35px;">2020.06.01 ─────── 2020.06.01</div>
 						</div>
 					</div>
 				</div>
@@ -62,8 +112,104 @@
 </html>
 
 <script>
+	var pay_info = [];
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
-	});
 
+		$.get("http://43.200.169.89/pay_infos?seller_id="+1,result=>{
+			console.log(result);
+
+			pay_info = result;
+			
+			
+		});
+	});
+	
+	var color = Chart.helpers.color;
+	var ChartData = {            
+		labels: [], // 챠트의 항목명 설정
+		datasets: [{
+			label: '',  // 데이터셑의 이름
+			pointRadius: 15, // 꼭지점의 원크기
+			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+			backgroundColor: [
+				'rgba(36, 10, 83, 0.8)'
+            ], // 챠트의 백그라운드 색상
+			borderColor: 'white', // 챠트의 테두리 색상
+			borderWidth: 1, // 챠트의 테두리 굵기
+			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+			data: [50]  // 해당 데이터셋의 데이터 리스트
+		}]
+
+	};
+
+	window.onload = function() {
+		var ctx = document.getElementById('canvas').getContext('2d');
+		window.myHorizontalBar = new Chart(ctx, {
+			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
+			// ex) horizontalBar, line, bar, pie, bubble
+			type: 'bar', 
+			data: ChartData,
+			options: {
+				responsive: true,                    
+				maintainAspectRatio: false    ,
+				title: {
+					display: false,
+					text: '판매유형'
+				},
+				scales: {
+					xAxes: [{
+						barThickness: 60,  // number (pixels) or 'flex'
+						maxBarThickness: 80 // number (pixels)
+					}]
+				}
+			}
+		});
+
+		var ctx2 = document.getElementById('canvas2').getContext('2d');
+		window.myHorizontalBar = new Chart(ctx2, {
+			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
+			// ex) horizontalBar, line, bar, pie, bubble
+			type: 'bar', 
+			data: ChartData2,
+			options: {
+				responsive: true,                    
+				maintainAspectRatio: false    ,
+				title: {
+					display: false,
+					text: '판매유형'
+				},
+				scales: {
+					xAxes: [{
+						barThickness: 60,  // number (pixels) or 'flex'
+						maxBarThickness: 80 // number (pixels)
+					}]
+				}
+			}
+		});
+
+	};
+
+
+
+	var color = Chart.helpers.color;
+	var ChartData2 = {            
+		labels: [], // 챠트의 항목명 설정
+		datasets: [{
+			label: '',  // 데이터셑의 이름
+			pointRadius: 15, // 꼭지점의 원크기
+			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+			backgroundColor: [
+				'rgba(36, 10, 83, 0.8)'
+            ], // 챠트의 백그라운드 색상
+			borderColor: 'white', // 챠트의 테두리 색상
+			borderWidth: 1, // 챠트의 테두리 굵기
+			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+			data: [50]  // 해당 데이터셋의 데이터 리스트
+		}]
+
+	};
 </script>

@@ -1,0 +1,334 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li class="active"><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>주문/발송 관리</h3>
+				</div> 
+					<div class="adminContent">
+						<div class="adminContent_tab">
+							<ul>
+								<li class="active"><a href="">신규주문 8</a></li>
+								<li><a href="">입금대기 3</a></li>
+								<li><a href="">결제 완료 5</a></li>
+								<li><a href="">배송 준비중 0</a></li>
+								<li><a href="">발송 완료 0</a></li>
+								<li><a href="">전체 8</a></li>
+							</ul>
+						</div>
+						<div class="adminContent_search">
+							<input type="search" name="" placeholder="상품명을 검색하세요.">
+							<a href="javascript:void(0)" class="check_btn" onclick="modal_popup();">송장입력</a>
+							<a href="" class="check_btn">검색</a>
+						</div>
+						<div class="adminContent_date">
+							<select>
+								<option>2022</option>
+							</select>
+							<select>
+								<option>4</option>
+							</select>
+							<select>
+								<option>11</option>
+							</select>
+						</div>
+						
+						<div class="adminContent_date">
+							<select>
+								<option>2022</option>
+							</select>
+							<select>
+								<option>6</option>
+							</select>
+							<select>
+								<option>11</option>
+							</select>
+						</div>
+						<div>
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="*">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>No.</th>
+									<th>상품명</th>
+									<th>도매처</th>
+									<th>소매처</th>
+									<th>판매가</th>
+									<th>상태</th>
+									<th>재고</th>
+									<th>구매일자</th>
+									<th>배송비</th>
+									<th>최종 금액</th>
+									<th>택배사</th>
+									<th>수정</th>
+								</thead>
+								<tbody id="order_road_tbody">
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="adminContent_pager" id="paging">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 완료 -->
+	<div id="modal" class="adminModal modalPage04" style="display:none;">
+		<div class="adminModal_ok adminModal_order">
+			<h3>송장 입력</h3>
+			<div>
+				<table class="adminModal_order_table">
+				   <colgroup>
+					 <col width="20%">
+					 <col width="20%">
+					 <col width="20%">
+					 <col width="*">
+				   </colgroup>
+				   <tbody>
+						<tr>
+					   		<th>주문건수</th>
+					   		<th>택배건수</th>
+							<th>택배사</th>
+							<th>송장번호</th>
+						</tr>
+						<tr>
+					   		<td>- 1 +</td>
+							<td>- 1 +</td>
+							<td>
+								<select>
+									<option>cj 대한통운</option>
+									<option>로젠택배</option>
+								</select>
+							</td>
+					   		<td>
+								<input type="text">
+							</td>
+						</tr>
+				   </tbody>
+				</table>
+				
+			</div>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" onclick="">송장완료</a>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+
+<script>
+
+	var orders = [];
+
+	$(document).ready(function() {
+		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
+
+		order_road();
+
+	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
+
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	function load_order_list(datas){
+		//console.log('datas',datas);
+		var tag = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+			
+			//var img_path = datas[i].main_img_url.replace("public","");
+			var product_sum = datas[i].product_price + datas[i].delivery_fee;
+			if(datas[i].isShow=="YES"){
+				var isShow = "판매중";
+			}
+
+					tag+= `<tr>
+								<td>
+									<div class="adminContent_table_checkbox">
+										<input id="check02" type="checkbox">
+										<label for="check02"><span></span></label>
+									</div>
+								</td>
+								<td>1</td>
+								<td class="adminContent_table_name">
+									<span class="adminContent_table_name_thumb"></span>
+									<p>하트 컬러 볼 시계</p>
+								</td>
+								<td>시계나라</td>
+								<td>레몬트리</td>
+								<td>${datas[i].product_price.toLocaleString('ko-KR')}원</td>
+								<td>발송완료</td>
+								<td>20</td>
+								<td>20220401</td>
+								<td>${datas[i].delivery_fee.toLocaleString('ko-KR')}원</td>
+								<td>${product_sum.toLocaleString('ko-KR')}원</td>
+								<td>cj 대한통운</td>
+								<td>
+									<div class="adminContent_order">
+										<a href="javascript:void(0);" class="check_btn" onclick="">수정</a>
+									</div>
+								</td>
+							</tr>`;
+
+			if(datas[i].user_type=="seller_J" || datas[i].user_type=="seller_I"){
+				//$("#user_load_tbody").append(new_html);
+				//user_count += 1;
+			}
+		}
+		
+		$("#order_road_tbody").html(tag);
+
+	}
+
+	function order_road(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/orders_by_seller?seller_id="+"1",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				orders = res;
+				
+				$('#paging').pagination({
+					dataSource: orders,
+					callback: function(data, pagination) {
+						load_order_list(data);
+					}
+				});
+
+				//for(var i = 0; i < res.length; i++){
+				//	
+				//	//var img_path = res[i].main_img_url.replace("public","");
+				//	var product_sum = res[i].product_price + res[i].delivery_fee;
+				//	var new_html = `<tr>
+				//						<td>
+				//							<div class="adminContent_table_checkbox">
+				//								<input id="check02" type="checkbox">
+				//								<label for="check02"><span></span></label>
+				//							</div>
+				//						</td>
+				//						<td>1</td>
+				//						<td class="adminContent_table_name">
+				//							<span class="adminContent_table_name_thumb"></span>
+				//							<p>하트 컬러 볼 시계</p>
+				//						</td>
+				//						<td>시계나라</td>
+				//						<td>레몬트리</td>
+				//						<td>`+res[i].product_price+`원</td>
+				//						<td>발송완료</td>
+				//						<td>20</td>
+				//						<td>20220401</td>
+				//						<td>`+res[i].delivery_fee+`원</td>
+				//						<td>`+product_sum+`원</td>
+				//						<td>cj 대한통운</td>
+				//						<td>
+				//							<div class="adminContent_order">
+				//								<a href="javascript:void(0);" class="check_btn" onclick="">수정</a>
+				//							</div>
+				//						</td>
+				//					</tr>`;
+				//
+				//	$("#order_road_tbody").append(new_html);
+				//}
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+</script>

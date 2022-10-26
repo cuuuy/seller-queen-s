@@ -42,83 +42,13 @@
 		<div class="marketContent">
 			<div class="marketSee">
 				<ul class="marketSee_list">
-					<li>
+					<!-- <li>
 						<a href="market_detail.html">
 						<span class="marketSee_list_thumb"></span>
 						</a>
 						<h4>52,000원</h4>
 						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
-					<li>
-						<a href="market_detail.html">
-						<span class="marketSee_list_thumb"></span>
-						</a>
-						<h4>52,000원</h4>
-						<p>TC 써지컬 하트 컬러</p>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
@@ -139,4 +69,46 @@
 			}, 300);
 		});
 	});
+	
+	$(document).ready(function() {
+		user_history();
+	});
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+
+	function user_history(){
+			
+			// ajax 통신
+			$.ajax({
+				type : "GET",            // HTTP method type(GET, POST) 형식이다.
+				url : "http://43.200.169.89/user-history?user_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : {
+						
+					},            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					console.log(res);
+
+					for(var i = 0; i < res.length; i++){
+						
+						var img_path = res[i].main_img_url.replace("public","");
+
+						var new_html = `<li>
+							<a href="market_detail.html?product_id=`+res[i].product_id+`">
+							<span class="marketSee_list_thumb" style="background: url(http://43.200.169.89`+img_path+`); background-size:cover;"></span>
+							</a>
+							<h4>`+res[i].retail_price+`원</h4>
+							<p>`+res[i].product_name+`</p>
+						</li>`;
+
+						$(".marketSee_list").append(new_html);
+
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
+		}
 </script>

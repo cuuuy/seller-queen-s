@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -11,6 +12,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<script src="../js/admin.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -22,6 +26,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -37,32 +55,32 @@
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<a href="./admin_admin_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>신고/차단 관리</h3>
 				</div> 
 					<div class="adminContent_right">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="active"><a href="">신고 4</a></li>
-								<li><a href="">차단 0</a></li>
+								<li class="active"><a href="">신고 <span>4</span></a></li>
+								<li><a href="">차단 <span>0</span></a></li>
 							</ul>
 						</div>
 						<div class="adminContent_search">
 							<input type="search" name="" placeholder="신고내용/닉네임을 입력해주세요.">
-							<a href="" class="check_btn">신고/차단하기</a>
-							<a href="" class="check_btn">검색</a>
+							<!-- <a href="javascript:void(0)" class="check_btn">신고/차단하기</a> -->
+							<a href="javascript:void(0)" class="check_btn">검색</a>
 						</div>
-						<div>
+						<div style="min-height: 600px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
 									<col width="3%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
 									<col width="*">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
 									<col width="10%">
 								</colgroup>
 								<thead>
@@ -73,143 +91,15 @@
 									<th>닉네임</th>
 									<th>신고일</th>
 									<th>신고유형</th>
-									<th>신고 내용</th>
+									<th>게시글 내용</th>
 									<th>차단</th>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<p>adcd@hamil.com</p>
-										</td>
-										<td>tjdwldkdlel</td>
-										<td>레몬트리</td>
-										<td>20220401</td>
-										<td>문의글</td>
-										<td>악성 리뷰를 남기는거 같아요</td>
-										<td>차단</td>
-									</tr>
+								<tbody id="report_tbody">
+									
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<div class="adminContent_pager" id="paging">
 						</div>
 					</div>
 				</div>
@@ -221,8 +111,122 @@
 </html>
 
 <script>
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	var reports = [];
+	var reports_origin = [];
+	
+	var page_num = 0;
+
+	var sum_arr = [];
+
+	var user_id = localStorage.getItem('user_id');
+	if(user_id == null){
+		user_id = -1; // 비회원
+	}
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
 	});
+	
+	function load_report_list(datas){
+		console.log('datas', datas[0]);
+		
+		var sum_arr = [];
+		
+
+		var tag = ``;
+
+		for(var i = 0; i < datas.length; i++){
+			
+			console.log('sum_arr',sum_arr);
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+
+			var unix_timestamp2 = datas[i].reported_time;
+			var date2 = new Date(unix_timestamp2 * 1000);
+			var mon2 = (date2.getMonth()+1);
+			var formattedTime2 = date2.getFullYear() + "-" + mon + "-" + date2.getDate();
+			
+			var typeStr = '';
+			var desc = '';
+			if(datas[i].review_text){
+				typeStr = '후기글';
+				desc = datas[i].review_text;
+			}else if(datas[i].inquiry_text){
+				typeStr = '문의글';
+				desc = datas[i].inquiry_text;
+			}
+			tag+= `<tr>
+						<td>
+							<div class="adminContent_table_checkbox">
+								<input id="check${datas[i].id}" type="checkbox">
+								<label for="check${datas[i].id}"><span></span></label>
+							</div>
+						</td>
+						<td>${page_num-i}</td>
+						<td class="adminContent_table_name">
+							<p>${datas[i].email}</p>
+						</td>
+						<td>${datas[i].idStr}</td>
+						<td>${datas[i].nickname}</td>
+						<td>${formattedTime2}</td>
+						<td>${typeStr}</td>
+						<td>${desc}</td>
+						<td>
+							<div class="adminContent_order">
+								<a href="javascript:void(0)" class="check_btn" onclick="report_ban(${datas[i].id},'${typeStr}')">차단하기</a>
+							</div>
+						</td>
+					</tr>`;
+		}
+		
+		$("#report_tbody").html(tag);
+
+	}
+
+	$.get("http://43.200.169.89/reports", function(data){
+		$.each(data['reviews'], function(i, result){
+			sum_arr.push(result);
+		})
+		$.each(data['inquiry'], function(i, result){
+			sum_arr.push(result);
+		})
+		//console.log('sum_arr', sum_arr);
+
+		$.each(data, function(i, result){
+			
+			$('#paging').pagination({
+				dataSource: sum_arr,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_report_list(data);
+				}
+			})
+		})
+	});
+	function report_ban(target_id,typeStr){
+		var new_typeStr = '';
+		if(typeStr=="문의글"){
+			new_typeStr = "inquiry";
+		}else if(typeStr=="후기글"){
+			new_typeStr = "review";
+		}
+		$.post("http://43.200.169.89/ban",{
+			typeStr : new_typeStr,
+			target_id : target_id,
+			},result=>{
+				if(result == "success"){
+					alert("차단되었습니다.");
+				}
+		})
+	}
+	
 
 </script>

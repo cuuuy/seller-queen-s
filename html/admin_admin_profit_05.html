@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -11,6 +12,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/function.js"></script>
+	<script src="../js/admin.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -22,6 +25,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -40,46 +57,55 @@
 					<a href="./admin_admin_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>프로핏</h3>
 				</div> 
-					<div class="adminContent_right">
+					<div class="adminContent">
 						<div class="adminContent_tab">
 							<ul>
 								<li><a href="./admin_admin_profit_01.html">회원 리스트</a></li>
 								<li><a href="./admin_admin_profit_02.html">출금신청 리스트</a></li>
-								<li><a href="">판매수수료 리스트</a></li>
+								<li><a href="./admin_admin_profit_03.html">판매수수료 리스트</a></li>
 								<li><a href="./admin_admin_profit_04.html">판매수수료 적립현황</a></li>
 								<li class="active"><a href="./admin_admin_profit_05.html">광고수수료 적립현황</a></li>
-								<li><a href="">판매수수료 출금 현황</a></li>
+								<li><a href="./admin_admin_profit_06.html">판매수수료 출금 현황</a></li>
 								<li><a href="./admin_admin_profit_07.html">광고수수료 출금 현황</a></li>
 							</ul>
 						</div>
+						<div class="adminContent_profit">
+							89,000원
+						</div>
 						<div class="adminContent_search">
-							<input type="search" name="" placeholder="상품을 검색하세요.">
-							<select href="" class="check_btn">
+							<input type="search" name="" placeholder="상품을 검색하세요." style="width: calc( 100% - 400px );">
+							<select class="check_btn adminContent_search_select">
 								<option>판매 프로핏</option>
 							</select>
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year1">
 							</select>
-							<select>
-								<option>4</option>
+							<select  name="search_month1">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day1">
 							</select>
 						</div>
-						
+						<div class="adminContent_date_middle">
+							<b>────</b>
+						</div>
 						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+							<select name="search_year2">
 							</select>
-							<select>
-								<option>6</option>
+							<select  name="search_month2">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day2">
+							</select>
+						</div>
+						<div class="adminContent_date2">
+							<select name="" >
+								<option>회원등급</option>
+							</select>
+						</div>
+						<div class="adminContent_date2">
+							<select name="">
+								<option>정산상태</option>
 							</select>
 						</div>
 						<div class="adminContent_order">

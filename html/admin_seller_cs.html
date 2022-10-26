@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
@@ -11,6 +12,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/admin.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -22,6 +26,20 @@
 				<span class="message_second">
 					헬프스토어 셀러퀸즈
 				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
 			</div>
 		</div>
 		<div class="adminContainer">
@@ -43,27 +61,27 @@
 					<div class="adminContent_right">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="active"><a href="">신규 문의 4</a></li>
-								<li><a href="">상품 문의 7</a></li>
-								<li><a href="">반품/취소 문의 0</a></li>
-								<li><a href="">교환 문의 0</a></li>
-								<li><a href="">기타 문의 0</a></li>
-								<li><a href="">전체 8</a></li>
+								<li class="filter_new active"><a href="javascript:void(0)">신규 문의 <span class="new_span">0</span></a></li>
+								<li class="filter_qna"><a href="javascript:void(0)">상품 문의 <span class="qna_span">0</span></a></li>
+								<li class="filter_return"><a href="javascript:void(0)">반품/취소 문의 <span class="return_span">0</span></a></li>
+								<li class="filter_change"><a href="javascript:void(0)">교환 문의 <span class="change_span">0</span></a></li>
+								<li class="filter_etc"><a href="javascript:void(0)">기타 문의 <span class="etc_span">0</span></a></li>
+								<li class="filter_all"><a href="javascript:void(0)">전체 <span class="all_span">0</span></a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search">
-							<input type="search" name="" placeholder="문의내용/닉네임을 입력해주세요.">
-							<a href="" class="check_btn">검색</a>
+						<div class="adminContent_search adminContent_search_long">
+							<input type="search" name="search_qna" placeholder="문의내용/닉네임을 입력해주세요." onkeyup="enterkey()">
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
-						<div>
+						<div style="min-height: 600px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
 									<col width="3%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
 									<col width="*">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
 									<col width="10%">
 									<col width="10%">
 									<col width="10%">
@@ -81,118 +99,26 @@
 									<th>답변</th>
 									<th>수정</th>
 								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>abcdef</td>
-										<td>배송</td>
-										<td>안녕하세요 3일전 주문했는데 언제쯤</td>
-										<td>20220401</td>
-										<td>미등록</td>
-										<td>답변하기</td>
-										<td>
-											<div class="adminContent_order">
-											<a href="" class="check_btn">수정</a>
-										</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>abcdef</td>
-										<td>배송</td>
-										<td>안녕하세요 3일전 주문했는데 언제쯤</td>
-										<td>20220401</td>
-										<td>미등록</td>
-										<td>답변하기</td>
-										<td>
-											<div class="adminContent_order">
-											<a href="" class="check_btn">수정</a>
-										</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>abcdef</td>
-										<td>배송</td>
-										<td>안녕하세요 3일전 주문했는데 언제쯤</td>
-										<td>20220401</td>
-										<td>미등록</td>
-										<td>답변하기</td>
-										<td>
-											<div class="adminContent_order">
-											<a href="" class="check_btn">수정</a>
-										</div>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>abcdef</td>
-										<td>배송</td>
-										<td>안녕하세요 3일전 주문했는데 언제쯤</td>
-										<td>20220401</td>
-										<td>미등록</td>
-										<td>답변하기</td>
-										<td>
-											<div class="adminContent_order">
-											<a href="" class="check_btn">수정</a>
-										</div>
-										</td>
-									</tr>
+								<tbody id="qna_load">
+									
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_search">
-							<a href="" class="check_btn">삭제</a>
-							<a href="" class="check_btn">수정</a>
-						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<!-- <div class="adminContent_search">
+							<a href="javascript:void(0)" class="check_btn">복구</a>
+							<a href="javascript:void(0)" class="check_btn">삭제</a>
+							<a href="javascript:void(0)" class="check_btn">수정</a>
+						</div> -->
+						<div class="adminContent_pager" id="paging">
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div id="modal_top_div">
+		
+			
 		</div>
 	</div>
 </body>
@@ -200,8 +126,461 @@
 </html>
 
 <script>
+
+	var qnaDict = {};
+	var qnas = [];
+	var qnas_origin = [];
+	
+	var page_num = 0;
+
+	var now_date2 = new Date();
+	var now_mon = (now_date2.getMonth()+1);
+	var now_formattedTime = now_date2.getFullYear() + "-" + now_mon + "-" + now_date2.getDate();
+
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
+		
+		qna_load();
+		
 	});
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	function load_qna_list(datas){
+		console.log('datas',datas);
+		var tag = ``;
+		var new_html = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var product = product_load(datas[i].product_id);
+			var user = user_load(datas[i].user_id);
+			var inquiry = inquiry_load(datas[i].seller_id);
+			//console.log(inquiry['data'].inquiry_id);
+			
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+			
+			var img_path = product['data'].main_img_url.replace("public","");
+			
+			var today = new Date();
+			var hours = today.getHours();
+			var minutes = "0" + today.getMinutes();
+			var seconds = "0" + today.getSeconds();
+			var mon = (today.getMonth()+1);
+			var formattedTime2 = today.getFullYear() + "-" + mon + "-" + today.getDate();
+
+			var typeStr = '';
+
+			if(datas[i].typeStr == "deli_qna"){
+				typeStr = '배송 문의';
+			}else if(datas[i].typeStr == "product_qna"){
+				typeStr = '상품 문의';
+			}else if(datas[i].typeStr == "cancel_qna"){
+				typeStr = '반품/취소 문의';
+			}else if(datas[i].typeStr == "exchange_qna"){
+				typeStr = '교환 문의';
+			}else if(datas[i].typeStr == "etc_qna"){
+				typeStr = '기타 문의';
+			}
+			var inquiry_reply = '';
+			var reply_chk = '';
+
+			if(inquiry['data'].inquiry_id == datas[i].id){
+				inquiry_reply = inquiry['data'].answer_text;
+				reply_chk = '등록';
+			}else{
+				reply_chk = '미등록';
+			}
+			
+			if(datas[i].isShow=="YES"){
+				var isShow = "판매중";
+			}
+
+					new_html += `<tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check${datas[i].id}" type="checkbox">
+												<label for="check${datas[i].id}"><span></span></label>
+											</div>
+										</td>
+										<td>${page_num-i}</td>
+										<td class="adminContent_table_name">
+											<span class="adminContent_table_name_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+											<p>${product['data'].product_name}</p>
+										</td>
+										<td>${datas[i].idStr}</td>
+										<td>${typeStr}</td>
+										<td>${datas[i].inquiry_text}</td>
+										<td>${formattedTime}</td>
+										<td>${reply_chk}</td>
+										<td>
+											<div class="adminContent_order">
+												<a href="javascript:void(0)" class="check_btn onmodal" onclick="show_reply(${datas[i].id});">답변하기</a>
+											</div>
+										</td>
+										<td>
+											<div class="adminContent_order">
+												<a href="javascript:void(0)" class="check_btn" onclick="show_reply_modi(${datas[i].id});">수정</a>
+											</div>
+										</td>
+									</tr>`;
+
+					tag += `<div class="adminModal modalPage01" style="display: block;" id="modal_reply_id_${datas[i].id}">
+									<div class="adminModal_cont" id="">
+									<h3>문의 답변</h3>
+									<div>
+										<h5 style="margin-bottom:20px;color:#603A8A;"><b>문의</b></h5>
+										<p style="font-size:15px;" id="qna_text">${datas[i].inquiry_text}</p>
+										<p style="float:right;">${formattedTime} 작성자 : ${user['data'].name}</p>
+									</div>
+									<div>
+										<h5 style="margin-bottom:20px;color:#603A8A;"><b>답변</b></h5>
+										<textarea name="answer_text" id="editor" rows="30%" cols="100%" style="padding : 20px;border: none; background-color:#EAE6F2;" placeholder="답변을 입력해주세요.">${inquiry_reply}</textarea></br>
+										<p style="float:right;">${formattedTime2} 작성자 : 관리자</p>
+										<div>
+										</div>
+									</div>
+									<div class="adminModal_cont_btn">
+										<a href="javascript:window.location.reload()" class="back_btn modalClose">취소</a>
+										<a href="javascript:void(0)" class="ok_btn modalNext1" onclick="save_reply(${datas[i].id})">완료</a>
+									</div>
+								</div>
+							</div>
+								`;
+		}
+		
+		$("#qna_load").html(new_html);
+		$("#modal_top_div").html(tag);
+		$('.adminModal').hide();
+	}
+
+	function qna_load(){
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/inquiries_by_seller?seller_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				qnas = res;
+				qnas_origin = res;
+
+				$('#paging').pagination({
+					dataSource: qnas,
+					callback: function(data, pagination) {
+						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+						load_qna_list(data);
+					}
+				});
+				
+				var tmp_arr = qnas_origin.filter(function(qna_info){
+					return qna_info.typeStr == "product_qna";
+				})
+
+				var tmp_arr2 = qnas_origin.filter(function(qna_info){
+					return qna_info.typeStr == "cancel_qna";
+				})
+
+				var tmp_arr3 = qnas_origin.filter(function(qna_info){
+					return qna_info.typeStr == "exchange_qna";
+				})
+
+				var tmp_arr4 = qnas_origin.filter(function(qna_info){
+					return qna_info.typeStr == "etc_qna";
+				})
+
+				var tmp_arr5 = qnas_origin.filter(function(qna_info){
+					var unix_timestamp = qna_info.enroll_time;
+					var date = new Date(unix_timestamp * 1000);
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+
+					return formattedTime == now_formattedTime;
+				})
+				
+				$(".new_span").text(tmp_arr5.length);
+				$(".qna_span").text(tmp_arr.length);
+				$(".return_span").text(tmp_arr2.length);
+				$(".change_span").text(tmp_arr3.length);
+				$(".etc_span").text(tmp_arr4.length);
+				$(".all_span").text(qnas_origin.length);
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+	
+	function product_load(id){
+		
+		var myObject = new Object();
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			async: false,
+			url : "http://43.200.169.89/retail_product-detail?product_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				myObject['data'] = res[0];
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+		//console.log(myObject);
+		return myObject;
+	}
+
+	function user_load(id){
+		
+		var myObject = new Object();
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			async: false,
+			url : "http://43.200.169.89/user-info?user_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				myObject['data'] = res[0];
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+		//console.log(myObject);
+		return myObject;
+	}
+	
+	function show_reply(id){
+		//console.log(id);
+		$('#modal_reply_id_'+id).show();
+	}
+
+	function save_reply(id){
+		var answer_text = $("textarea[name=answer_text]").val();
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-inquiry-answer",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					inquiry_id : id,
+					seller_id : '1',
+					answer_text : answer_text,
+					enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+
+				if(res == "success"){
+					alert("문의 답변이 완료되었습니다.");
+					location.reload();
+				}else{
+					alert("오류 발생. 관리자에게 문의하세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	function show_reply_modi(id){
+		$('#modal_reply_id_'+id).show();
+	}
+
+	function inquiry_load(id){
+		
+		var myObject = new Object();
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			async: false,
+			url : "http://43.200.169.89/inquiry_answers_by_user?seller_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+				myObject['data'] = res[0];
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+		//console.log(myObject);
+		return myObject;
+	}
+
+	$(".filter_new").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			var unix_timestamp = qna_info.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+
+			return formattedTime == now_formattedTime;
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_qna").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.typeStr == "etc_qna";
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_return").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.typeStr == "cancel_qna";// To Do 신규 요청 처리
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_change").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.typeStr == "exchange_qna";
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".filter_etc").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.typeStr == "etc_qna";
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+	
+	$(".filter_all").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		$('#paging').pagination({
+			dataSource: qnas_origin,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".search_btn").click(function(e){ //To Do API 변경되면 검색 테스트
+		var search_word = $("input[name=search_qna]").val();
+		
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.product_name.indexOf(search_word) > -1;
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) { //To Do API 변경되면 검색 테스트
+			var search_word = $("input[name=search_qna]").val();
+		
+			qnas = qnas_origin.filter(function(qna_info){
+				return qna_info.product_name.indexOf(search_word) > -1;
+			})
+
+			$('#paging').pagination({
+				dataSource: qnas,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_qna_list(data);
+				}
+			});
+		}
+	}
 
 </script>

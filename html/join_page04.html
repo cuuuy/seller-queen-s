@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body>
@@ -56,39 +57,39 @@
 							<tr>
 								<th>이메일</th>
 								<td>
-									<input type="text" placeholder="이메일 주소를 입력해주세요.">
+									<input type="text" id="email" placeholder="이메일 주소를 입력해주세요.">
 								</td>
-								<td><a href="">중복확인</a></td>
+								<td><a href="javascript:void(0)" onclick="emil_check()">중복확인</a></td>
 							</tr>
 							<tr>
 								<th>아이디</th>
 								<td>
-									<input type="text" placeholder="아이디를 입력해주세요.">
+									<input type="text" id="id" placeholder="아이디를 입력해주세요.">
 								</td>
-								<td><a href="">중복확인</a></td>
+								<td><a href="javascript:void(0)" onclick="id_check()">중복확인</a></td>
 							</tr>
 							<tr>
 								<th>비밀번호</th>
 								<td colspan="2">
-									<input type="text" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요.">
+									<input type="password" id="pw" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요.">
 								</td>
 							</tr>
 							<tr>
 								<th>비밀번호 확인</th>
 								<td colspan="2">
-									<input type="text" placeholder="비밀번호를 한 번 더 입력해주세요.">
+									<input type="password" placeholder="비밀번호를 한 번 더 입력해주세요.">
 								</td>
 							</tr>
 							<tr>
 								<th>이름</th>
 								<td colspan="2">
-									<input type="text" placeholder="이름을 입력해주세요.">
+									<input type="text" id="name" placeholder="이름을 입력해주세요.">
 								</td>
 							</tr>
 							<tr>
 								<th rowspan="2">닉네임</th>
 								<td>
-									<input type="text" placeholder="닉네임을 입력해주세요.">
+									<input type="text" id="nickname" placeholder="닉네임을 입력해주세요.">
 								</td>
 								<td><a href="">중복확인</a></td>
 							</tr>
@@ -98,53 +99,53 @@
 							<tr>
 								<th>생년월일</th>
 								<td colspan="2">
-									<select name="" id="">
-										<option value="">2022</option>
-										<option value="">2021</option>
-										<option value="">2020</option>
-										<option value="">2019</option>
-										<option value="">2018</option>
-										<option value="">2017</option>
-										<option value="">2016</option>
-										<option value="">2015</option>
+									<select name="" id="birth_time1">
+										<option value="2022">2022</option>
+										<option value="2021">2021</option>
+										<option value="2020">2020</option>
+										<option value="2019">2019</option>
+										<option value="2018">2018</option>
+										<option value="2017">2017</option>
+										<option value="2016">2016</option>
+										<option value="2015">2015</option>
 									</select>
-									<select name="" id="">
-										<option value="">01</option>
-										<option value="">02</option>
-										<option value="">03</option>
-										<option value="">04</option>
-										<option value="">05</option>
-										<option value="">06</option>
+									<select name="" id="birth_time2">
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
 									</select>
-									<select name="" id="">
-										<option value="">01</option>
-										<option value="">02</option>
-										<option value="">03</option>
-										<option value="">04</option>
-										<option value="">05</option>
-										<option value="">06</option>
+									<select name="" id="birth_time3">
+										<option value="01">01</option>
+										<option value="02">02</option>
+										<option value="03">03</option>
+										<option value="04">04</option>
+										<option value="05">05</option>
+										<option value="06">06</option>
 									</select>
 								</td>
 							</tr>
 							<tr>
 								<th rowspan="2">주소</th>
 								<td>
-									<input type="text" placeholder="주소를 입력해주세요.">
+									<input type="text" id="member_addr" placeholder="주소를 입력해주세요.">
 								</td>
-								<td><a href="">주소검색</a></td>
+								<td><a href="javascript:void(0)" onclick="findAddr()">주소검색</a></td>
 							</tr>
 							<tr>
 								<td colspan="2">
-									<input type="text" placeholder="상세주소를 입력해주세요.">
+									<input type="text" id="member_addr2" placeholder="상세주소를 입력해주세요.">
 								</td>
 							</tr>
 							<tr>
 								<th>연락처</th>
 								<td>
-									<input type="text" placeholder="+82(한국)" class="w30">
-									<input type="text" placeholder="전화번호를 입력해주세요." class="w70">
+									<input type="text" placeholder="+82(한국)" class="w30" id="phone_nation">
+									<input type="text" placeholder="전화번호를 입력해주세요." class="w70" id="phone">
 								</td>
-								<td><a href="">인증번호 전송</a></td>
+								<td><a href="javascript:alert('인증번호가 전송되었습니다.');">인증번호 전송</a></td>
 							</tr>
 							<tr>
 								<th>인증번호</th>
@@ -156,21 +157,22 @@
 							<tr>
 								<th>추천인 연락처</th>
 								<td>
-									<input type="text" placeholder="+82(한국)" class="w30">
-									<input type="text" placeholder="전화번호를 입력해주세요." class="w70">
+									<input type="text" placeholder="+82(한국)" class="w30" id="recommender_phone_nation">
+									<input type="text" placeholder="전화번호를 입력해주세요." class="w70" id="recommender_phone">
 								</td>
 								<td></td>
 							</tr>
 							<tr>
 								<th>추천인 이름</th>
 								<td>
-									<input type="text" placeholder="추천인 이름을 입력해주세요.">
+									<input type="text" placeholder="추천인 이름을 입력해주세요." id="recommender_name">
 								</td>
 								<td></td>
 							</tr>
 						</tbody>
 					</table>
-					<a href="join_page05.html" class="ok_btn">회원가입 신청</a>
+					<!-- <a href="join_page05.html" class="ok_btn">회원가입 신청</a> -->
+					<a href="javascript:void(0)" onclick="join_submit()" class="ok_btn">회원가입 신청</a>
 				</div>
 				<a href="javascript:void(0);" id="join_page_next">
 					<img src="../image/join_arrow_next.png" alt="">
@@ -192,5 +194,152 @@
 			$('.join_page_03_privacy > p').css('height','auto');
 		});
 	});
+	
+	
+	//var user_type = $("#user_type").val();
+	//var enroll_time = $("#enroll_time").val();
 
+	function findAddr(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+				// 우편번호와 주소 정보를 해당 필드에 넣는다.
+				//document.getElementById('member_post').value = data.zonecode;
+				if(roadAddr !== ''){
+					document.getElementById("member_addr").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("member_addr").value = jibunAddr;
+				}
+			}
+		}).open();
+	}
+
+	function emil_check(){
+		var email = $("#email").val();
+		
+		if(email==""){
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/check-email",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				email : email
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "can make"){
+					alert("등록가능한 이메일 입니다.");
+				}else if(res == "already exist"){
+					alert("이미 존재하는 이메일 입니다. 다른 이메일을 사용해 주세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function id_check(){
+		var id = $("#id").val();
+		if(id==""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/check-idStr",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				idStr : id
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				//alert(res);
+
+				if(res == "can make"){
+					alert("등록가능한 아이디 입니다.");
+				}else if(res == "already exist"){
+					alert("이미 존재하는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	
+
+	function join_submit(){
+		
+		var email = $("#email").val();
+		var id = $("#id").val();
+		var pw = $("#pw").val();
+		var name = $("#name").val();
+		var birth_time = $("#birth_time1").val() + $("#birth_time2").val() + $("#birth_time3").val();
+		var phone_nation = $("#phone_nation").val();
+		var phone = $("#phone").val();
+		var address1 = $("#member_addr").val();
+		var address2 = $("#member_addr2").val();
+		var nickname = $("#nickname").val();
+		var recommender_phone_nation = $("#recommender_phone_nation").val();
+		var recommender_phone = $("#recommender_phone").val();
+		var recommender_name = $("#recommender_name").val();
+
+		var now_date = Date.now();
+		var enroll_time = now_date/1000;
+		
+		if(id==""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+
+		// ajax 통신
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-user",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				 email : email,
+				 idStr : id,
+				 pwdStr : pw,
+				 name : name,
+				 birth_time : birth_time,
+				 phone_nation : phone_nation,
+				 phone : phone,
+				 address1 : address1,
+				 address2 : address2,
+				 nickname : nickname,
+				 recommender_phone_nation : recommender_phone_nation,
+				 recommender_phone : recommender_phone,
+				 recommender_name : recommender_name,
+				 user_type : "seller",
+				 enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				alert("회원가입 신청이 완료되었습니다.");
+				location.href="./main.html";
+				//if(res == "can make"){
+				//	alert("등록가능한 아이디 입니다.");
+				//}else if(res == "already exist"){
+				//	alert("이미 존재하는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+				//}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

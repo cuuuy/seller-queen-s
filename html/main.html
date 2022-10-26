@@ -2,7 +2,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
@@ -26,7 +27,7 @@
 							<a href="join_page02.html">셀러 입점 신청</a>
 						</div>
 					</li>
-					<li class="body_mainSlide02">
+					<!-- <li class="body_mainSlide02">
 						<div class="mainSlede_text">
 							<span>GLOBAL 해외배송 02</span>
 							<h2>셀러퀸즈 도소매 분양형 쇼핑몰<br>쉽고 간편한 해외배송</h2>
@@ -41,19 +42,19 @@
 							<p>도소매 분양형 쇼핑몰 연동 시, 효과적인 도소매를 운영하실 수 있습니다.</p>
 							<a href="join_page02.html">셀러 입점 신청</a>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<script type="text/javascript">
-				$(document).ready(function() {
-					$('.bxslider').bxSlider({
-						auto: true,
-						speed: 500,
-						pause: 4000,
-						autoControls: true,
-						pager: true,
-					});
-				});
+				//$(document).ready(function() {
+				//	$('.bxslider').bxSlider({
+				//		auto: true,
+				//		speed: 500,
+				//		pause: 4000,
+				//		autoControls: true,
+				//		pager: true,
+				//	});
+				//});
 
 			</script>
 			<div class="body_section body_quick">
@@ -262,6 +263,9 @@
 
 <script>
 	$(document).ready(function() {
+		
+		banner_road();
+		
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
 		
@@ -309,5 +313,44 @@
 			$(this).siblings().removeClass('active');
 		});
 	});
+	
+	function banner_road(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/banners?user_id="+"-1",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
 
+				for(var i =0; i < res.length; i++){
+					var img_path = res[i].image_url.replace("public","");
+					var tag = `<li>
+									<div class="mainSlede_text">
+										<span>GLOBAL 해외배송 01</span>
+										<h2>셀러퀸즈 도소매 분양형 쇼핑몰<br>쉽고 간편한 해외배송</h2>
+										<p>도소매 분양형 쇼핑몰 연동 시, 효과적인 도소매를 운영하실 수 있습니다.</p>
+										<a href="join_page02.html">셀러 입점 신청</a>
+									</div>
+									<img class="body_mainSlide01" src="http://43.200.169.89/${img_path}" />
+								</li>`;
+
+					$(".bxslider").append(tag);
+				}
+				
+				$('.bxslider').bxSlider({
+					auto: true,
+					speed: 500,
+					pause: 4000,
+					autoControls: true,
+					pager: false,
+				});
+
+				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>
