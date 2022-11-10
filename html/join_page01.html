@@ -44,20 +44,20 @@
 					<img src="../image/join_arrow_prev.png" alt="">
 				</a>
 				<div class="join_page_01">
-					<a href="#">
+					<a href="#" class="user_type" id="seller">
 						<h3>셀러</h3>
 						<p>메인페이지 셀러 입점 신청에서도 진행하실 수 있습니다.</p>
 					</a>
-					<a href="#">
+					<a href="#" class="user_type" id="wholesaler">
 						<h3>도매</h3>
 						<p>회원 가입 후 본사에서 승인을 받아야 이용하실 수 있습니다.</p>
 					</a>
-					<a href="#">
+					<a href="#" class="user_type" id="teacher">
 						<h3>강사</h3>
 						<p>게시판 기능 및 강의 판매 포인트를 출금하실 수 있습니다.</p>
 					</a>
 				</div>
-				<a href="join_page02.html" id="join_page_next">
+				<a href="javascript:void(0);" id="join_page_next">
 					<img src="../image/join_arrow_next.png" alt="">
 				</a>
 			</div>
@@ -68,6 +68,10 @@
 
 
 <script>
+
+	
+	var user_type = '';
+
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
@@ -78,5 +82,16 @@
 			$(this).siblings().removeClass('active');
 		});
 	});
+	
+	$(".user_type").click(function(e){
+		user_type = $(this).attr('id');
+		if(user_type == "seller"){
+			$("#join_page_next").attr("href","join_page02.html?user_type="+user_type);
+		}else{
+			$("#join_page_next").attr("href","join_page03.html?user_type="+user_type);
+		}
+		
+	})
 
+	console.log(user_type);
 </script>

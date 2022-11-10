@@ -395,8 +395,8 @@
 				</table>
 				<div style="white-space: nowrap;overflow:auto;display:flex;">
 					<div class="option_div" id="first_option_div">
-						<p><input type="text" name="option_name" placeholder="옵션명 입력"></p>
-						<p id="option_p"><input type="text" name="option_selections" placeholder="옵션을 입력해주세요"></p>
+						<p><input type="text" class="option_name" name="option_name" placeholder="옵션명 입력"></p>
+						<p id="option_p"><input type="text" class="option_selections" name="option_selections" placeholder="옵션을 입력해주세요"></p>
 						<a style="text-align:center;" class="option_plus" id="option_plus" onclick="option_plus()">+</a>
 					</div>
 					<!-- <div class="option_div">
@@ -434,7 +434,7 @@
 							<input type="file" name="main_img" id="main_img">
 							<!-- <a href="" class="adminModal_cont_uploadbtn">파일 찾기</a> -->
 						<!-- </div> -->
-					</form>
+					
 				</div>
 				<div>
 					<h5 style="margin-bottom:10px;">상품 사진 및 설명</h5>
@@ -460,7 +460,7 @@
 			</div>
 		</div>
 
-
+        </form>
 		<!-- 카테고리관리 -->
 		<div class="adminModal admincategory" style="display:none;">
 			<div class="adminModal_cont adminModal_category" id="category_div">
@@ -576,11 +576,12 @@
 			//$('.modalPage01').show();
 		});
 		$('.modalNext2').click(function(){
-			$('.modalPage03').hide();
-			$('.modalPage04').show();
+			//$('.modalPage03').hide();
+			//$('.modalPage04').show();
 		});
 		$('.modalClose').click(function(){
 			$('.adminModal').hide();
+            location.reload();
 		});
 		$('.adminModal_category_btn a').click(function(){
 			$(this).addClass('on');
@@ -728,11 +729,12 @@
 					
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			var img_path = datas[i].main_img_url.replace("public","");
 			
@@ -1022,11 +1024,37 @@
 		}
 		
 		$('.modalPage01').hide();
-		$('.modalPage03').show();
+		$('.modalPage02').show();
 
 	}
 	function product_add(){
 		
+        if($("#main_img").val()==""){
+            alert("메인 사진을 입력해주세요.");
+            return false;
+        }
+        var options = [];
+		var eles = $('.option_div');
+
+		$.each(eles,function(n,e){
+		   var option_dict = {};
+		   var option_name = $(e).find("input[name='option_name']").val();
+		   
+		   var s_inputs = $(e).find("input[name='option_selections']");
+		   
+		   var option_selections = [];
+		   $.each(s_inputs,function(m,input){
+			  option_selections.push($(input).val());
+		   })
+		   
+		   option_dict['option_name'] = option_name;
+		   option_dict['selections'] = option_selections;
+		   
+		   options.push(option_dict);
+		   
+		});
+		options = JSON.stringify(options);
+
 		var product_name = $("input[name=product_name]").val();
 		var product_domae = $("input[name=product_domae]").val();
 		var product_category = $("select[name=product_category]").val();
@@ -1055,9 +1083,10 @@
 		form_data.append('descStr', product_content);
 		form_data.append('enroll_time', enroll_time);
 		form_data.append('file', $("#main_img")[0].files[0]);
+        form_data.append('options', options);
 		
-		//console.log(form_data);
-
+		console.log(form_data);
+        //return;
 		// ajax 통신
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
@@ -1071,8 +1100,8 @@
 				console.log(res);
 				var new_res = res.split('__');
 				if(new_res[0] == "success"){
-					//alert("상품이 등록 되었습니다.");
-					//option_add();
+					$('.modalPage03').hide();
+			        $('.modalPage04').show();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}
@@ -1191,59 +1220,93 @@
 		$(e.target).before(option_html);
 	})
 	function option_add(){
-		
-		var options = [];
-		var eles = $('.option_div');
+        
+        var exit = false;
 
-		$.each(eles,function(n,e){
-		   var option_dict = {};
-		   var option_name = $(e).find("input[name='option_name']").val();
-		   
-		   var s_inputs = $(e).find("input[name='option_selections']");
-		   
-		   var option_selections = [];
-		   $.each(s_inputs,function(m,input){
-			  option_selections.push($(input).val());
-		   })
-		   
-		   option_dict['option_name'] = option_name;
-		   option_dict['selections'] = option_selections;
-		   
-		   options.push(option_dict);
-		   
-		});
-		options = JSON.stringify(options);
-		console.log(options);
-		//return false;
+        jQuery('.option_name').each(function() {
+            var currentElement = $(this);
 
-		$.ajax({
-			type : "POST",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/add-option",      // 컨트롤러에서 대기중인 URL 주소이다.
-			data : {
-					product_id : 14,
-					options : options
-				},            // Json 형식의 데이터이다.
-			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
-				//alert(res);
+            var value = currentElement.val(); // if it is an input/select/textarea field
+            if(value == ""){
+                alert("옵션명을 입력해주세요.");
+                exit = true;
+                return false;
+            }
+        });
+        if(exit){
+            return false;
+        }
 
-				if(res == "success"){
-					alert("옵션이 추가되었습니다.");
-				}else{
-					alert("오류 발생. 관리자에게 문의하세요.");
-				}
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-				alert("통신 실패.")
-			}
-		});
+        var exit2 = false;
+        jQuery('.option_selections').each(function() {
+            var currentElement = $(this);
+
+            var value = currentElement.val(); // if it is an input/select/textarea field
+            if(value == ""){
+                alert("옵션을 입력해주세요.");
+                exit2 = true;
+                return false;
+            }
+        });
+		if(exit2){
+            return false;
+        }
+
+        $('.modalPage02').hide();
+		$('.modalPage03').show();
+
+		// var options = [];
+		// var eles = $('.option_div');
+
+		// $.each(eles,function(n,e){
+		//    var option_dict = {};
+		//    var option_name = $(e).find("input[name='option_name']").val();
+		   
+		//    var s_inputs = $(e).find("input[name='option_selections']");
+		   
+		//    var option_selections = [];
+		//    $.each(s_inputs,function(m,input){
+		// 	  option_selections.push($(input).val());
+		//    })
+		   
+		//    option_dict['option_name'] = option_name;
+		//    option_dict['selections'] = option_selections;
+		   
+		//    options.push(option_dict);
+		   
+		// });
+		// options = JSON.stringify(options);
+		// console.log(options);
+		// //return false;
+
+		// $.ajax({
+		// 	type : "POST",            // HTTP method type(GET, POST) 형식이다.
+		// 	url : "http://43.200.169.89/add-option",      // 컨트롤러에서 대기중인 URL 주소이다.
+		// 	data : {
+		// 			product_id : 14,
+		// 			options : options
+		// 		},            // Json 형식의 데이터이다.
+		// 	success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+		// 		// 응답코드 > 0000
+		// 		//alert(res);
+
+		// 		if(res == "success"){
+		// 			alert("옵션이 추가되었습니다.");
+		// 		}else{
+		// 			alert("오류 발생. 관리자에게 문의하세요.");
+		// 		}
+		// 	},
+		// 	error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+		// 		alert("통신 실패.")
+		// 	}
+		// });
 	}
 
 	$(".plusbtn").click(function(){
 		
 		var tag = `<div class="option_div">
-						<p><input type="text" name="option_name" placeholder="옵션명 입력"></p>
-						<p id="option_p"><input type="text" name="option_selections" placeholder="옵션을 입력해주세요"></p>
+						<p><input type="text" class="option_name" name="option_name" placeholder="옵션명 입력"></p>
+						<p id="option_p"><input type="text" class="option_selections" name="option_selections" placeholder="옵션을 입력해주세요"></p>
 						<a style="text-align:center;" class="option_plus" id="option_plus" onclick="option_plus()" href="javascript:void(0)">+</a>
 					</div>`;
 		

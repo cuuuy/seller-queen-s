@@ -26,7 +26,7 @@
 		<div class="marketContent">
 			<div class="marketSell">
 				<div class="marketSell_top">
-					<h3>주문 상품 총 1개</h3>
+					<h3>주문 상품 총 <span id="cart_count"></span>개</h3>
 					<ul class="marketSell_top_list">
 						<!-- <li id="img_li">
 							<table class="marketSell_top_list_table">
@@ -81,7 +81,7 @@
 				</div>
 				<div class="marketSell_form">
 					<div>
-						<h3 style="border:none;">배송지 정보<a href="javascript:void(0)" class="address_btn">배송지 변경</a></h3>
+						<h3 style="border:none;">배송지 정보</h3>
 						<div class="marketSell_form_check">
 							<div>
 								<input name="sell" id="sell01" type="radio" onclick="same_addr()">
@@ -188,7 +188,7 @@
 				</div>
 				<div class="marketCart_fix">
 					<!-- <a href="market_sell_ok.html" class="ok_btn" onclick="order_add()">(1) 총 55,000원 결제하기</a> -->
-					<a href="javascript:void(0)" class="ok_btn" onclick="order_add()">(1) 총 <span id="bottom_price"></span> 결제하기</a>
+					<a href="javascript:void(0)" class="ok_btn" onclick="order_ready()">총 <span id="bottom_price"></span> 결제하기</a>
 				</div>
 			</div>
 			<div id="marketModal" style="display:none;">
@@ -247,44 +247,9 @@
                                 </td>
                             </tr>
                         </table>
+                        
                     </div> -->
-					<a href="javascript:void(0)" class="ok_btn new_address">배송지 추가</a>
-					<a href="javascript:void(0)" class="back_btn close_btn">닫기</a>
-				</div>
-			</div>
-
-            <div id="marketModal3" style="display:none;">
-				<div class="marketSell2">
-					<h3>신규배송지 추가하기</h3>
-					<div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
-                        <table class="marketSell_top_table">
-                            <tr id="name_tr">
-                                <th>이름</th>
-                                <td id="">
-                                    <input type="text" name="new_name" placeholder="이름을 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>연락처</th>
-                                <td id="">
-                                    <input type="text" name="new_phone" placeholder="연락처를 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>주소</th>
-                                <td id="">
-                                    <input type="text" name="new_address" placeholder="주소를 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>상세주소</th>
-                                <td id="">
-                                    <input type="text" name="new_address2" placeholder="상세주소를 입력해주세요.">
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-					<a href="javascript:void(0)" class="ok_btn" onclick="address_add();">저장</a>
+					<a href="javascript:void(0)" class="ok_btn">배송지 추가</a>
 					<a href="javascript:void(0)" class="back_btn close_btn">닫기</a>
 				</div>
 			</div>
@@ -298,6 +263,7 @@
 
 	var now_date = new Date();
 	var enroll_time = parseInt(now_date.getTime()/1000);
+    var enroll_time2 = parseInt(now_date.getTime());
 	
 	var user_id = localStorage.getItem('user_id');
 	if(user_id == null){
@@ -350,12 +316,6 @@
 
         $(".close_btn").click(function(){
             $("#marketModal2").hide();
-            $("#marketModal3").hide();
-        })
-
-        $(".new_address").click(function(){
-            $("#marketModal2").hide();
-            $("#marketModal3").show();
         })
 	});
 
@@ -387,10 +347,16 @@
 
 		
 		
-
+        //amount_re();
 		user_load();
-		product_load();
+		//product_load();
 
+        var cart_arr = JSON.parse(localStorage.getItem('cart_arr'));
+		$("#cart_count").text(cart_arr.length);
+        $.each(cart_arr, function(id, val){
+
+            //cart_product_load(val);
+        })
 
 	});
 	$(document).on("ready", function(){
@@ -404,6 +370,29 @@
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
 
+    var products_arr = [];
+    var products_origin = [];
+    var selected_cart_arr = [];
+    var cart_arr = JSON.parse(localStorage.getItem('cart_arr'));
+
+    $.get("http://43.200.169.89/products-in-cart?user_id="+user_id,result=>{
+        console.log(result);
+        //selected_cart_arr = result['products'].id.filter(x => cart_arr.id.includes(x));
+        $.each(cart_arr, function(c, val){
+            selected_cart_arr.push(result['products'].find(v => v.id == val));
+        })
+        
+        $.each(selected_cart_arr, function(c2, val2){
+            var options = JSON.parse(val2.options);
+            console.log('options',options)
+            cart_product_load(val2.product_id, options, val2.id, val2.count);
+        })
+
+        //console.log(selected_cart_arr);
+        
+    });
+
+    
 	function findAddr(){
 		new daum.Postcode({
 			oncomplete: function(data) {
@@ -466,47 +455,52 @@
 		
 	}
 
-	function amount_plus(){
-		var product_amount = $("#product_amount").text();
-		$("#product_amount").text(parseInt(product_amount)+1);
+	function amount_plus(cart_id){
+		var product_amount = $(".product_amount_"+cart_id).text();
+        var product_price = $(".product_price_"+cart_id).text();
+		$(".product_amount_"+cart_id).text(parseInt(product_amount)+1);
 		count  = parseInt(product_amount)+1;
-		amount_re();
+		amount_re_plus(product_price);
 	}
 
-	function amount_minus(){
-		var product_amount = $("#product_amount").text();
+	function amount_minus(cart_id){
+		var product_amount = $(".product_amount_"+cart_id).text();
+        var product_price = $(".product_price_"+cart_id).text();
 		if(product_amount==1){
 			alert("수량은 최소 1이여야 합니다.");
 		}else{
-			$("#product_amount").text(parseInt(product_amount)-1);
+			$(".product_amount_"+cart_id).text(parseInt(product_amount)-1);
 			count  = parseInt(product_amount)-1;
-			amount_re();
+			amount_re_minus(product_price);
 		}
 	}
 	
-	function amount_re(){
-		var one_price = local_data.price/local_data.count;
-		
-		$("#product_price2").text((one_price * count)+" 원");
-		$("#product_total_amount").text(((one_price * count)+local_data.deli_fee)+" 원");
-		$("#bottom_price").text(((one_price * count)+local_data.deli_fee)+" 원");
+	function amount_re_minus(product_price){
+		var product_price2 = $("#product_price2").text().replace(" 원", "").replace(",","");
+        product_price2 = parseInt(product_price2);
+		var product_deli = parseInt($("#product_deli").text());
+        product_price = parseInt(product_price);
+		$("#product_price2").text((product_price2-product_price).toLocaleString('ko-KR')+" 원");
+		$("#product_total_amount").text(((product_price2-product_price)+product_deli).toLocaleString('ko-KR')+" 원");
+		$("#bottom_price").text(((product_price2-product_price)+product_deli).toLocaleString('ko-KR')+" 원");
+	}
+
+    function amount_re_plus(product_price){
+		var product_price2 = $("#product_price2").text().replace(" 원", "").replace(",","");
+        product_price2 = parseInt(product_price2);
+		var product_deli = parseInt($("#product_deli").text());
+        product_price = parseInt(product_price);
+		$("#product_price2").text((product_price2+product_price).toLocaleString('ko-KR')+" 원");
+		$("#product_total_amount").text(((product_price2+product_price)+product_deli).toLocaleString('ko-KR')+" 원");
+		$("#bottom_price").text(((product_price2+product_price)+product_deli).toLocaleString('ko-KR')+" 원");
 	}
     function delivery_load(){
         $.get("http://43.200.169.89/user_address?user_id="+user_id,function(res){
             console.log(res);
             var tag = `<h3>신규배송지 추가하기</h3>`;
             $.each(res, function(i, r){
-                var defalut = '';
-                if(r.isDefault=="YES"){
-                    defalut = "기본배송지";
-                }
                 tag += `<div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
                         <table class="marketSell_top_table">
-                            <colgroup>
-                                <col width="30%">
-                                <col width="*">
-                            </colgroup>
-                            <div style="text-align:left">${defalut}</div>
                             <tr id="name_tr">
                                 <th>이름</th>
                                 <td id="address_user_name">${r.user_name}</td>
@@ -525,8 +519,8 @@
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <a href="javascript:void(0)" class="ok_btn" style="width: 30%;height:40px;line-height: 40px;float: left;" onclick="delivery_delete(${r.id});">삭제</a>
-					                <a href="javascript:void(0)" class="back_btn close_btn" style="width: 30%; height:40px;line-height: 40px;float: right;" onclick="address_default(${r.id})">선택</a>
+                                    <a href="javascript:void(0)" class="ok_btn" style="width: 30%;height:40px;line-height: 40px;float: left;">삭제</a>
+					                <a href="javascript:void(0)" class="back_btn close_btn" style="width: 30%; height:40px;line-height: 40px;float: right;">선택</a>
                                 </td>
                             </tr>
                         </table>
@@ -535,72 +529,18 @@
             $(".marketSell > h3").html(tag);
         })
     }
-    function delivery_delete(id){
-        $.post("http://43.200.169.89/delete_user_address",{
-            user_id : user_id,
-            address_id : id,
-        },result=>{
-            if(result == "success"){
-                delivery_load();
-            }
-        })
-    }
-    $(document).on("click",".marketSell_plus > h3", function(){
+    $(document).on("click",".marketSell_plus", function(){
         $("#marketModal2").show();
         delivery_load();
     })
-
-    $(document).on("click",".address_btn", function(){
-        $("#marketModal2").show();
-        delivery_load();
-    })
-
-    function address_default(id){
-        $.post("http://43.200.169.89/setAddress_forDefault",{
-            user_id : user_id,
-            address_id : id,
-        },result=>{
-            if(result == "success"){
-                delivery_load();
-            }
-        })
-    }
-    function address_add(){
-        var user_name = $("input[name=new_name]").val();
-		var user_phone = $("input[name=new_phone]").val();
-        var address1 = $("input[name=new_address]").val();
-		var address2 = $("input[name=new_address2]").val();
-
-        $.post("http://43.200.169.89/add_user_address",{
-            user_name : user_name,
-            user_phone : user_phone,
-            user_id : user_id,
-            address1 : address1,
-            address2 : address2,
-            isDefault : "NO",
-            enroll_time : enroll_time
-        },result=>{
-            if(result == "success"){
-                $("#marketModal3").hide();
-                $("#marketModal2").show();
-                delivery_load();
-            }
-        })
-    }
-
 	function delivery_add(){
-        var user_name = $("input[name=place_name]").val();
-		var user_phone = $("input[name=place_phone]").val();
         var address1 = $("input[name=place_addr]").val();
 		var address2 = $("input[name=place_addr2]").val();
-
         $.post("http://43.200.169.89/add_user_address",{
-            user_name : user_name,
-            user_phone : user_phone,
             user_id : user_id,
             address1 : address1,
             address2 : address2,
-            isDefault : "YES",
+            isDefalt : "T",
             enroll_time : enroll_time
         },result=>{
             if(result == "success"){
@@ -609,29 +549,17 @@
             }
         })
     }
-
-	function order_add(){
-        if($("#sell02").is(':checked')){
-            delivery_add();
-        }
-
-		var user_id = localStorage.getItem('user_id');
-		var count = $("#product_amount").text();
+    function order_ready(){
+        
 		var user_name = $("input[name=place_name]").val();
 		var place_phone = $("input[name=place_phone]").val();
 		var address1 = $("input[name=place_addr]").val();
 		var address2 = $("input[name=place_addr2]").val();
-		var product_price = $("#product_price").text().replace(' 원','');
 		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
 		var sell_desc = $("select[name=sell_desc]").val();
 		var pay_by = $(".pay_method.on").text();
 
-		
-		//$(".pay_method").click(function(){
-		//	pay_by = $(this).text();
-		//})
-		
-		if(user_name == ""){
+        if(user_name == ""){
 			alert('이름을 입력해주세요.');
 			return;
 		}
@@ -685,7 +613,34 @@
 			alert('결제방법을 선택해주세요.');
 			return;
 		}
-		
+        
+        if($("#sell02").is(':checked')){
+            delivery_add();
+        }
+
+        $.each(cart_arr, function(i, v){
+            order_add(v);
+        })
+    }
+	function order_add(cart_id){
+        console.log(1);
+        var selected_order_arr = [];
+
+        $.each(selected_cart_arr, function(i, v){
+            selected_order_arr = selected_cart_arr.find(v => v.id == cart_id);
+        })
+        //console.log(selected_order_arr);
+        var user_id = localStorage.getItem('user_id');
+        var count = $(".product_amount_"+cart_id).text();
+        var product_price = $(".product_price_"+cart_id).text().replace(' 원','');
+        var place_phone = $("input[name=place_phone]").val();
+        var address1 = $("input[name=place_addr]").val();
+		var address2 = $("input[name=place_addr2]").val();
+        var sell_desc = $("select[name=sell_desc]").val();
+        var pay_by = $(".pay_method.on").text();
+        var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
+        var user_name = $("input[name=place_name]").val();
+        
 		var new_user_id = '';
 		var pay_password = "";
 		if(localStorage.getItem('user_id')){
@@ -694,78 +649,64 @@
 			new_user_id = '-1';
 			pay_password = $("input[name=place_pw]").val();
 		}
-		
 
 		var options = {};
 
+        var new_option = JSON.parse(selected_order_arr.options);
 
-		$.each(local_data['option_name'], function(i, r){
-			options[r] = local_data['options_arr'][i];
+		$.each(new_option, function(i, r){
+            var o_k = Object.keys(r);
+            var o_v = Object.values(r);
+			options[o_k] = o_v[0];
 		})
 
-		//var options = {'color':'blue'};
-		//console.log(options);
-		//return;
-
 		options = JSON.stringify(options);
-
-		var order_key_full = btoa(pay_password+'__'+enroll_time+'__'+user_id+'__'+product_id);
+        //console.log(options);
+        //return;
+		var order_key_full = btoa(pay_password+'__'+enroll_time+'__'+user_id+'__'+selected_order_arr.product_id);
 		var order_num_1 = order_key_full.substr(0,4);
 		var order_num_2 = order_key_full.substr(4,4);
 		var order_num_3 = order_key_full.substr(8,4);
 
 		var order_key = order_num_1+"_"+order_num_2+"_"+order_num_3;
 
-		// ajax 통신
-		$.ajax({
-			type : "POST",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/enroll-order",      // 컨트롤러에서 대기중인 URL 주소이다.
-			data : {
-					user_id : new_user_id,
-					product_id : product_id,
-					count : count,
-					options : options,
-					name : user_name,
-					phone : place_phone,
-					address1 : address1,
-					address2 : address2,
-					requests_str : sell_desc,
-					product_price : product_price,
-					delivery_fee : delivery_fee,
-					order_time : enroll_time,
-					order_key : order_key,
-					pay_by : pay_by,
-					pay_password : pay_password,
-					order_key_full : order_key_full
-				},            // Json 형식의 데이터이다.
-			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
-				console.log(res);
-
-				var res_split = res.split("__");
-				if(res_split[0] == "success"){
-					//alert("결제가 등록 되었습니다.");
-					//location.href="market_sell_ok.html";
-					money_add(res_split[1],order_key_full);
-					$("#marketModal").show();
-					$("#order_num").text(order_num_1+"_"+order_num_2+"_"+order_num_3);
-					$("#order_pw").text($("input[name=place_pw]").val());
-				}else{
-					alert("오류 발생. 관리자에게 문의하세요.");
-				}
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-				alert("통신 실패.")
-			}
-		});
+        $.post("http://43.200.169.89/enroll-order",{
+            user_id : new_user_id,
+            product_id : selected_order_arr.product_id,
+            count : selected_order_arr.count,
+            options : options,
+            name : user_name,
+            phone : place_phone,
+            address1 : address1,
+            address2 : address2,
+            requests_str : sell_desc,
+            product_price : product_price,
+            delivery_fee : selected_order_arr.delivery_fee,
+            order_time : enroll_time,
+            order_key : order_key,
+            pay_by : pay_by,
+            pay_password : pay_password,
+            order_key_full : order_key_full
+        },result=>{
+            
+            var res_split = result.split("__");
+            if(res_split[0] == "success"){
+                money_add(res_split[1],order_key_full);
+                $("#marketModal").show();
+                $("#order_num").text(order_num_1+"_"+order_num_2+"_"+order_num_3);
+                $("#order_pw").text($("input[name=place_pw]").val());
+            }else{
+                alert("오류 발생. 관리자에게 문의하세요.");
+            }
+        });
 	}
 
 	function money_add(order_id,order_key_full){
 
 		var user_id = localStorage.getItem('user_id');
-		var product_price = $("#product_price").text().replace(' 원','');
+		var product_price2 = $("#product_price2").text().replace(' 원','');
 		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
-		var pay_amount = parseInt(product_price) + parseInt(delivery_fee);
+		var pay_amount = parseInt(product_price2) + parseInt(delivery_fee);
 		var pay_by = $(".pay_method.on").text();
 		
 		var new_user_id = '';
@@ -835,8 +776,10 @@
 			}
 		});
 	}
-
-	function product_load(){
+	var sum_price = 0;
+    var sum_amount = 0;
+    var bottom_price = 0;
+	function cart_product_load(product_id, options, cart_id, cart_count){
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/retail_product-detail?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -847,122 +790,60 @@
 				console.log(res);
 				products = res;
 				var img_path = res[0].main_img_url.replace("public","");
-				//var tag = ``;
-				//$("#img_li").append(tag);
-				var tag = `<li id="img_li">
+				var tag = `<li class="img_li">
 							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>
 							<table class="marketSell_top_list_table">
-								<tr>
+								<tr class="first_tr_${cart_id}">
 									<th>판매가</th>
-									<td id="product_price"></td>
+									<td class="product_price_${cart_id}"></td>
 								</tr>
-								<tr id="first_tr">
+								<tr>
 									<th>수량</th>
 									<td>
-										<span id="product_amount">1</span>
+										<span class="product_amount_${cart_id}">1</span>
 									</td>
 									<td>
-										<button onclick="amount_minus()">-</button>
-										<button onclick="amount_plus()">+</button>
+										<button onclick="amount_minus(${cart_id})">-</button>
+										<button onclick="amount_plus(${cart_id})">+</button>
 									</td>
 								</tr>
 							</table>
 						</li>`;
 				$(".marketSell_top_list").append(tag);
+                $(".product_amount_"+cart_id).text(cart_count);
+				$(".product_price_"+cart_id).text(res[0].retail_price+" 원");
+				$("#final_modal_product_name").text(res[0].product_name + " 외 "+parseInt(cart_arr.length-1)+"건");
+                
+                sum_price = sum_price + (parseInt($(".product_price_"+cart_id).text()) * parseInt($(".product_amount_"+cart_id).text()));
+                console.log(sum_price);
+                var total_price = sum_price+res[0].delivery_fee;
+                $("#product_price2").text(sum_price.toLocaleString('ko-KR')+" 원");
+                $("#product_deli").text(res[0].delivery_fee.toLocaleString('ko-KR')+" 원");
+                $("#product_total_amount").text(total_price.toLocaleString('ko-KR')+" 원");
+                $("#bottom_price").text(total_price.toLocaleString('ko-KR')+" 원");
 
-				$("#product_price").text(res[0].retail_price+" 원");
-				//$("#product_price2").text(res[0].retail_price+" 원");
-				//$("#product_deli").text("+"+res[0].delivery_fee+" 원");
-				//$("#product_total_amount").text(res[0].retail_price+res[0].delivery_fee+" 원");
-				//$("#bottom_price").text(res[0].retail_price+res[0].delivery_fee+" 원");
-				$("#final_modal_product_name").text(res[0].product_name + " 외 0건");
-				
-				if(localStorage.getItem('local_data')){
-					local_data = JSON.parse(localStorage.getItem("local_data"));
-					//localStorage.removeItem('local_data');
 
-					console.log('local_data',local_data);
+                var option_name_tag = ``;
+                console.log(options);
+                $.each(options, function(i, r){
 
-					$("#product_amount").text(local_data.count);
+                    option_name = Object.keys(r);
+                    option_value = Object.values(r);
 
-					$("#product_price2").text(local_data.price+" 원");
-					$("#product_deli").text("+ "+local_data.deli_fee+" 원");
-					$("#product_total_amount").text(local_data.total_amount+" 원");
-					$("#bottom_price").text(local_data.total_amount+" 원");
+                    option_name_tag += `<tr>
+                                            <th class="option_key_default_${option_name}">${option_name}</th>
+                                            <td class="option_value_default_${option_value}">${option_value}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" class="marketSell_top_list_table_option" onclick="option_change(${cart_id})">옵션변경</a>
+                                            </td>
+                                        </tr>`;
+                    $(".first_tr_"+cart_id).after(option_name_tag);
+                    option_name_tag = ``;
+                })
 
-					var option_name_tag = ``;
-					$.each(local_data['option_name'], function(i, r){
-						option_name_tag += `<tr>
-												<th class="option_key_default_${r}">${r}</th>
-												<td class="option_value_default_${local_data['options_arr'][i]}">${local_data['options_arr'][i]}</td>
-												<td>
-													<a href="javascript:void(0)" class="marketSell_top_list_table_option" onclick="option_change()">옵션변경</a>
-												</td>
-											</tr>`; 
-					})
 
-					$("#first_tr").after(option_name_tag);
-					
-					
 
-				}else if(cart == "on"){
-					var cart_arr = JSON.parse(localStorage.getItem('cart_arr'));
-					
-					$.each(cart_arr, function(id, val){
-
-						cart_product_load(val);
-					})
-
-				}else{
-					alert("잘못된 접근입니다.");
-					location.href="./market_main.html";
-					return false;
-				}
-
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-				alert("통신 실패.")
-			}
-		});
-	}
-	
-	function cart_product_load(product_id){
-		$.ajax({
-			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/retail_product-detail?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
-			data : {
-					
-				},            // Json 형식의 데이터이다.
-			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				console.log(res);
-				products = res;
-				var img_path = res[0].main_img_url.replace("public","");
-				var tag = `<li id="img_li">
-							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>
-							<table class="marketSell_top_list_table">
-								<tr id="first_tr">
-									<th>판매가</th>
-									<td id="product_price"></td>
-								</tr>
-								<tr>
-									<th>수량</th>
-									<td>
-										<span id="product_amount">1</span>
-									</td>
-									<td>
-										<button onclick="amount_minus()">-</button>
-										<button onclick="amount_plus()">+</button>
-									</td>
-								</tr>
-							</table>
-						</li>`;
-				$(".marketSell_top_list").append(tag);
-				$("#product_price").text(res[0].retail_price+" 원");
-				//$("#product_price2").text(res[0].retail_price+" 원");
-				//$("#product_deli").text("+"+res[0].delivery_fee+" 원");
-				//$("#product_total_amount").text(res[0].retail_price+res[0].delivery_fee+" 원");
-				//$("#bottom_price").text(res[0].retail_price+res[0].delivery_fee+" 원");
-				$("#final_modal_product_name").text(res[0].product_name + " 외 0건");
+                
 
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
@@ -994,8 +875,6 @@
 								</td>
 							</tr>`;
 			options_value = ``;
-			//console.log($(".option_key_default_"+r.option_name).next().text())
-			//$("select[name=option_change_value_"+r.option_name+"]").val($(".option_key_default_"+r.option_name).next().text()).prop("selected",true);
 
 		})
 		
@@ -1008,8 +887,6 @@
 			$("select[name=option_change_value_"+r.option_name+"]").val($(".option_key_default_"+r.option_name).next().text()).prop("selected",true);
 
 		})
-		//local_data.option_name.push();
-		//console.log(local_data);
 
 	}
 

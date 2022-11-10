@@ -11,7 +11,61 @@
 </head>
 <body style="background:#ddd;">
 	<div class="marketContainer">
-		<div class="header"></div>
+		<div class="header">
+            <header class="marketHeader">
+                <div>
+                    <a href=""><img src="../image/market_back.png" alt=""></a>
+                </div>
+                <h1 class="marketHeader_logo"></h1>
+                <div class="marketHeader_serch">
+                    <input type="text" name="search_order" class="header_search_input" onkeyup="enterkey()">
+                    <button class="search_btn"><img src="../image/market_serch.png" alt=""></button>
+                </div>
+                <div class="marketHeader_ham">
+                    <a href="javascript:void(0);" class="marketHeader_ham_icon"><img src="../image/market_nav.png" alt=""></a>
+                    <div class="marketHeader_ham_menu">
+                        <p class="marketHeader_ham_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
+                        <ul class="marketHeader_ham_menu_list">
+                            <li><a href="javascript:void(0)" class="category_all arrow">전체</a>
+                                <!-- <ul>
+                                    <li class="right_1depth"><a href="javascript:void(0)" class="arrow">악세서리</a>
+                                        <ul>
+                                            <li class="right_2depth"><a href="javascript:void(0)">아동복</a>
+                                                <ul>
+                                                    <li class="right_3depth"><a href="javascript:void(0)">아동복1</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul> -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="marketHeader_mypage">
+                    <a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
+                    <div class="marketHeader_mypage_menu">
+                        <p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
+                        <div class="marketHeader_mypage_menu_top">
+                            <span class="marketHeader_mypage_menu_top_profile"></span>
+                            <h5 id="market_right_name"></h5>
+                        </div>
+                        <ul class="marketHeader_mypage_menu_list">
+                            <!-- <li><a href="market_order.html">주문내역</a></li> -->
+                            <li><a href="market_cart.html">장바구니</a></li>
+                            <!-- <li><a href="market_review.html">후기 게시판</a></li>
+                            <li><a href="market_qna.html">문의 게시판</a></li> -->
+                            <li><a href="market_see.html">최근 본 상품</a></li>
+                        </ul>
+                        <ul class="marketHeader_mypage_menu_logout">
+                            <li id="market_right_logout"><a href="javascript:void(0)" onclick="marker_logout();">로그아웃</a></li>
+                            <li id="market_right_join"><a href="./market_login.html">회원가입</a></li>
+                            <li id="market_right_login"><a href="./market_login.html">로그인</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
 		<div id="mainvisual">
 			<ul class="bxslider">
 			</ul>
@@ -35,10 +89,10 @@
 				<div class="marketMain_all">
 					<div class="marketMain_title">
 						<h3>모든 상품 보기</h3>
-						<select name="" id="">
-							<option value="">신상순</option>
-							<option value="">가격순</option>
-							<option value="">인기순</option>
+						<select name="all_product_view" id="">
+							<option value="date">신상순</option>
+							<option value="price">가격순</option>
+							<option value="popular">인기순</option>
 						</select>
 					</div>
 					<ul id="product_ul">
@@ -62,19 +116,210 @@
 <script>
 
 	var user_id = localStorage.getItem('user_id');
+	
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var market_name = urlParams.get('market_name');
+    var products_origin = [];
+    var product_sort = [];
 
+    var sort_result = [];
+    
+	if(market_name==null){
+		market_name = 'test9'; // To Do 코드 수정 필요 
+	}
+
+	var seller_id = '';
 	$(document).ready(function() {
-		$('.header').load('market_header.html');
+		//$('.header').load('market_header.html');
 		
 		product_road();
 		banner_road();
+        user_load();
+		category_load();
+		$(".right_2depth").hide();
+		$(".right_3depth").hide();
+		
+        $(".marketHeader_logo").text(market_name);
 		
 	});
+    $(function(){
+		$('.marketHeader_mypage_icon').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_mypage_menu_close').click(function(){
+			$('.marketHeader_mypage_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+		$('.marketHeader_ham_icon').click(function(){
+			$('.marketHeader_ham_menu').animate({
+				'right': '0'
+			}, 300);
+		});
+		$('.marketHeader_ham_menu_close').click(function(){
+			$('.marketHeader_ham_menu').animate({
+				'right': '-300px'
+			}, 300);
+		});
+	});
+
+	function user_load(){
+		var user_id = localStorage.getItem('user_id');
+		console.log(user_id);
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/user-info?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				//console.log(res);
+				if(localStorage.getItem('user_id')){
+					$("#market_right_name").text(res[0].name+" 회원님, 환영합니다.");
+					$("#market_right_logout").show();
+					$("#market_right_join").hide();
+					$("#market_right_login").hide();
+					$(".marketHeader_mypage_menu_list").append("<li><a href='market_order.html'>주문내역</a></li>");
+				}else{
+					$("#market_right_name").text("비회원님, 환영합니다.");
+					$("#market_right_logout").hide();
+					$("#market_right_join").show();
+					$("#market_right_login").show();
+					$(".marketHeader_mypage_menu_list").append("<li><a href='market_non_member_order.html'>주문내역</a></li>");
+				}
+				
+					
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function marker_logout(){
+		localStorage.removeItem('user_id');
+		alert("로그아웃 되었습니다.");
+		location.href="./market_main.html";
+	}
 	
+	$(document).on('click','.category_all',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		
+		$(".right_2depth").slideToggle();
+		$(".right_3depth").slideToggle();
+	})
+
+	$(document).on('click','.right_1depth > a',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		$(this).parent().find(".right_2depth").slideToggle();
+	})
+
+	$(document).on('click','.right_2depth > a',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		$(this).parent().find(".right_3depth").slideToggle();
+	})
+
+    $(document).on('click','.right_3depth > a',function(){
+        var search_word = $(this).text();
+            
+        data = products_origin.filter(function(product_info){
+            var catogory3 = product_info.category_id.split('>')[2];
+            console.log(catogory3);
+            return catogory3.indexOf(search_word) > -1;
+        })
+        product_road_list(data);
+	})
+
+	function category_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/categories",      // 컨트롤러에서 대기중인 URL 주소이다.
+			async : false,
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(datas){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				//console.log(datas);
+				var cate = JSON.parse(datas['categories']);
+				console.log("cate",cate);
+
+				var tag = ``;
+				var tag2 = ``;
+				var tag3 = ``;
+
+				for(var i = 0; i < cate.length; i++){
+					if(cate[i].children.length != 0){
+						for(var j = 0; j < cate[i].children.length; j++){
+							if(cate[i].children[j].children.length != 0){
+								for(var k = 0; k < cate[i].children[j].children.length; k++){
+									tag3 += `<ul>
+												<li class="right_3depth"><a href="javascript:void(0)">${cate[i].children[j].children[k].category_name}</a></li>
+											</ul>`;
+								}
+								
+							}else{
+								tag3 = ``;
+							}
+							tag2 += `<ul>
+										<li class="right_2depth"><a href="javascript:void(0)" class="arrow">${cate[i].children[j].category_name}</a>
+											${tag3}
+										</li>
+									</ul>`;
+
+							tag3 = ``;//초기화
+						}
+						
+					}else{
+						tag2 = ``;
+					}
+					
+
+					tag += `<ul>
+								<li class="right_1depth"><a href="javascript:void(0)" class="arrow">${cate[i].category_name}</a>
+									${tag2}
+								</li>
+							</ul>`;
+
+					tag2 = ``; // 초기화
+					
+
+				}
+				
+				$(".category_all").after(tag);
+				
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	$.ajax({
+		type : "GET",            // HTTP method type(GET, POST) 형식이다.
+		url : "http://43.200.169.89/getSellerId_by_marketName?market_name="+market_name,      // 컨트롤러에서 대기중인 URL 주소이다.
+		async:false,
+		data : {
+			},            // Json 형식의 데이터이다.
+		success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+			seller_id = res.id;
+			
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+			alert("통신 실패.")
+		}
+	});
+
+
 	function banner_road(){
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/banners?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/banners?user_id="+seller_id,      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
@@ -92,7 +337,7 @@
 					speed: 500,
 					pause: 4000,
 					autoControls: true,
-					pager: false,
+					pager: true,
 				});
 
 				
@@ -102,55 +347,98 @@
 			}
 		});
 	}
+    
+    
+    function product_road_list(datas){
+        console.log(datas);
+        var tag = ``;
+        for(var i = 0; i < datas.length; i++){
+            
+            var img_path = datas[i].main_img_url.replace("public","");
+            
+            if(datas[i].isShow == "YES"){
+                tag += `<li>
+                        <a href="market_detail.html?product_id=${datas[i].id}">
+                            <span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+                            <p class="marketMain_all_text">
+                                ${datas[i].product_name}
+                            </p>
+                            <p><b>${datas[i].retail_price}원</b></p>
+                        </a>
+                    </li>`;
+                
+            }
+            
+        }
+        $("#product_ul").html(tag);
 
+        for(var j = 0; j < datas.length; j++){
+            
+            var img_path = datas[j].main_img_url.replace("public","");
+
+            if(datas[j].isBest == "YES"){
+                var tag = `<li>
+                            <a href="market_detail.html?product_id=${datas[j].id}">
+                                <span class="marketMain_best_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;border-radius: 70px;"></span>
+                                <p>${datas[j].product_name}</p>
+                            </a>
+                        </li>`;
+                    $("#best_ul").append(tag);
+                }
+            }
+    }
 	function product_road(){
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/retail-products?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/retail-products?user_id="+seller_id,      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				console.log(res);
-				
-				for(var i = 0; i < res.length; i++){
-					
-					var img_path = res[i].main_img_url.replace("public","");
+				products_origin = res;
 
-					if(res[i].isShow == "YES"){
-						var tag = `<li>
-								<a href="market_detail.html?product_id=${res[i].id}">
-									<span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
-									<p class="marketMain_all_text">
-										${res[i].product_name}
-									</p>
-									<p><b>${res[i].retail_price}원</b></p>
-								</a>
-							</li>`;
-						$("#product_ul").append(tag);
-					}
-					
-				}
+                $(document).on("change","select[name=all_product_view]", function(){
+                    $("input[name=search_order]").val('');
+                    if($("select[name=all_product_view]").val() == "date"){
+                        sort_result = res.sort(function(a, b){
+                            return b['enroll_time'] - a['enroll_time'];
+                        })
+                        product_road_list(sort_result);
+                    }else if($("select[name=all_product_view]").val() == "price"){
+                        sort_result = res.sort(function(a, b){
+                            return a['retail_price'] - b['retail_price'];
+                        })
+                        product_road_list(sort_result);
+                    }else if($("select[name=all_product_view]").val() == "popular"){
+                        
+                    }
+                })
 
-				for(var j = 0; j < res.length; j++){
-					
-					var img_path = res[j].main_img_url.replace("public","");
-
-					if(res[j].isBest == "YES"){
-						var tag = `<li>
-									<a href="market_detail.html?product_id=${res[j].id}">
-										<span class="marketMain_best_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;border-radius: 70px;"></span>
-										<p>${res[j].product_name}</p>
-									</a>
-								</li>`;
-							$("#best_ul").append(tag);
-						}
-					}
-					
-				
+                product_road_list(res);
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.")
 			}
 		});
+	}
+   
+	$(".search_btn").click(function(e){
+		var search_word = $("input[name=search_order]").val();
+		
+		data = products_origin.filter(function(product_info){
+			return product_info.product_name.indexOf(search_word) > -1;
+		})
+        product_road_list(data);
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) {
+			var search_word = $("input[name=search_order]").val();
+
+			data = products_origin.filter(function(product_info){
+				return product_info.product_name.indexOf(search_word) > -1;
+			})
+            product_road_list(data);
+		}
 	}
 </script>

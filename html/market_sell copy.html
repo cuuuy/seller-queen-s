@@ -81,7 +81,7 @@
 				</div>
 				<div class="marketSell_form">
 					<div>
-						<h3 style="border:none;">배송지 정보<a href="javascript:void(0)" class="address_btn">배송지 변경</a></h3>
+						<h3 style="border:none;">배송지 정보</h3>
 						<div class="marketSell_form_check">
 							<div>
 								<input name="sell" id="sell01" type="radio" onclick="same_addr()">
@@ -222,7 +222,7 @@
             <div id="marketModal2" style="display:none;">
 				<div class="marketSell">
 					<h3>신규배송지 추가하기</h3>
-					<!-- <div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
+					<div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
                         <table class="marketSell_top_table">
                             <tr id="name_tr">
                                 <th>이름</th>
@@ -247,44 +247,9 @@
                                 </td>
                             </tr>
                         </table>
-                    </div> -->
-					<a href="javascript:void(0)" class="ok_btn new_address">배송지 추가</a>
-					<a href="javascript:void(0)" class="back_btn close_btn">닫기</a>
-				</div>
-			</div>
-
-            <div id="marketModal3" style="display:none;">
-				<div class="marketSell2">
-					<h3>신규배송지 추가하기</h3>
-					<div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
-                        <table class="marketSell_top_table">
-                            <tr id="name_tr">
-                                <th>이름</th>
-                                <td id="">
-                                    <input type="text" name="new_name" placeholder="이름을 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>연락처</th>
-                                <td id="">
-                                    <input type="text" name="new_phone" placeholder="연락처를 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>주소</th>
-                                <td id="">
-                                    <input type="text" name="new_address" placeholder="주소를 입력해주세요.">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>상세주소</th>
-                                <td id="">
-                                    <input type="text" name="new_address2" placeholder="상세주소를 입력해주세요.">
-                                </td>
-                            </tr>
-                        </table>
+                        
                     </div>
-					<a href="javascript:void(0)" class="ok_btn" onclick="address_add();">저장</a>
+					<a href="javascript:void(0)" class="ok_btn">배송지 추가</a>
 					<a href="javascript:void(0)" class="back_btn close_btn">닫기</a>
 				</div>
 			</div>
@@ -350,12 +315,6 @@
 
         $(".close_btn").click(function(){
             $("#marketModal2").hide();
-            $("#marketModal3").hide();
-        })
-
-        $(".new_address").click(function(){
-            $("#marketModal2").hide();
-            $("#marketModal3").show();
         })
 	});
 
@@ -492,115 +451,22 @@
 		$("#bottom_price").text(((one_price * count)+local_data.deli_fee)+" 원");
 	}
     function delivery_load(){
-        $.get("http://43.200.169.89/user_address?user_id="+user_id,function(res){
+        $.get("http://43.200.169.89/user_address",function(res){
             console.log(res);
-            var tag = `<h3>신규배송지 추가하기</h3>`;
-            $.each(res, function(i, r){
-                var defalut = '';
-                if(r.isDefault=="YES"){
-                    defalut = "기본배송지";
-                }
-                tag += `<div style="border: 1px solid #563B80;padding: 5px; margin-bottom: 10px;">
-                        <table class="marketSell_top_table">
-                            <colgroup>
-                                <col width="30%">
-                                <col width="*">
-                            </colgroup>
-                            <div style="text-align:left">${defalut}</div>
-                            <tr id="name_tr">
-                                <th>이름</th>
-                                <td id="address_user_name">${r.user_name}</td>
-                            </tr>
-                            <tr>
-                                <th>연락처</th>
-                                <td id="address_user_phone">${r.user_phone}</td>
-                            </tr>
-                            <tr>
-                                <th>주소</th>
-                                <td id="address_user_addr">${r.address1}</td>
-                            </tr>
-                            <tr>
-                                <th>상세주소</th>
-                                <td id="address_user_addr2">${r.address2}</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <a href="javascript:void(0)" class="ok_btn" style="width: 30%;height:40px;line-height: 40px;float: left;" onclick="delivery_delete(${r.id});">삭제</a>
-					                <a href="javascript:void(0)" class="back_btn close_btn" style="width: 30%; height:40px;line-height: 40px;float: right;" onclick="address_default(${r.id})">선택</a>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>`
-            })
-            $(".marketSell > h3").html(tag);
         })
     }
-    function delivery_delete(id){
-        $.post("http://43.200.169.89/delete_user_address",{
-            user_id : user_id,
-            address_id : id,
-        },result=>{
-            if(result == "success"){
-                delivery_load();
-            }
-        })
-    }
-    $(document).on("click",".marketSell_plus > h3", function(){
+    $(document).on("click",".marketSell_plus", function(){
         $("#marketModal2").show();
         delivery_load();
     })
-
-    $(document).on("click",".address_btn", function(){
-        $("#marketModal2").show();
-        delivery_load();
-    })
-
-    function address_default(id){
-        $.post("http://43.200.169.89/setAddress_forDefault",{
-            user_id : user_id,
-            address_id : id,
-        },result=>{
-            if(result == "success"){
-                delivery_load();
-            }
-        })
-    }
-    function address_add(){
-        var user_name = $("input[name=new_name]").val();
-		var user_phone = $("input[name=new_phone]").val();
-        var address1 = $("input[name=new_address]").val();
-		var address2 = $("input[name=new_address2]").val();
-
-        $.post("http://43.200.169.89/add_user_address",{
-            user_name : user_name,
-            user_phone : user_phone,
-            user_id : user_id,
-            address1 : address1,
-            address2 : address2,
-            isDefault : "NO",
-            enroll_time : enroll_time
-        },result=>{
-            if(result == "success"){
-                $("#marketModal3").hide();
-                $("#marketModal2").show();
-                delivery_load();
-            }
-        })
-    }
-
 	function delivery_add(){
-        var user_name = $("input[name=place_name]").val();
-		var user_phone = $("input[name=place_phone]").val();
         var address1 = $("input[name=place_addr]").val();
 		var address2 = $("input[name=place_addr2]").val();
-
         $.post("http://43.200.169.89/add_user_address",{
-            user_name : user_name,
-            user_phone : user_phone,
             user_id : user_id,
             address1 : address1,
             address2 : address2,
-            isDefault : "YES",
+            isDefalt : "T",
             enroll_time : enroll_time
         },result=>{
             if(result == "success"){

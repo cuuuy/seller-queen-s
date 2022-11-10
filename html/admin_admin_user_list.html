@@ -54,7 +54,7 @@
 						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
 					</ul>
 				</div>
-				 <div class="adminWrap_topmenu">
+				 <div class="adminWrap_topmenu adminWrap_topmenu_m">
 					<ul>
 						<li class="active"><a href="admin_admin_user_list.html">일반 회원 관리</a></li>
 						<li><a href="admin_admin_user_list_seller.html">셀러 회원 관리</a></li>
@@ -157,11 +157,12 @@
 
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			var reviewCountDict = 0;
 			if(users_origin.reviewCountDict[i]){
@@ -177,7 +178,7 @@
 			if(datas[i].user_type == 'normal'){
 				user_type = '일반회원';
 			}
-			var new_html = `<tr>
+			new_html += `<tr>
 								<td>
 									<div class="adminContent_table_checkbox">
 										<input id="check${datas[i].id}" type="checkbox">

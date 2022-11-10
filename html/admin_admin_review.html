@@ -146,19 +146,21 @@
 
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			var img_path = datas[i].img_url.replace("public","");
 			
 			var today = new Date();
 			var hours = today.getHours();
 			var minutes = "0" + today.getMinutes();
 			var seconds = "0" + today.getSeconds();
-			var mon = (today.getMonth()+1);
-			var formattedTime2 = today.getFullYear() + "-" + mon + "-" + today.getDate();
+			var mon = "0" + (today.getMonth()+1);
+            var day = "0" + (today.getDate());
+			var formattedTime2 = today.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			var review_reply = '';
 			var reply_chk = '';
@@ -234,7 +236,7 @@
 
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/reviews_by_seller?seller_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/reviews_for_manger",      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.

@@ -44,12 +44,12 @@
 					<img src="../image/join_arrow_prev.png" alt="">
 				</a>
 				<div class="join_page_02">
-					<a href="#">
+					<a href="#" class="seller_type" id="I">
 						<h3>셀러 I</h3>
 						<p>셀러 결제 가격 299만원</p>
 					</a>
-					<a href="#">
-						<h3>도매</h3>
+					<a href="#" class="seller_type" id="J">
+						<h3>셀러 J</h3>
 						<p>셀러 결제 가격 199만원</p>
 					</a>
 				</div>
@@ -64,6 +64,13 @@
 
 
 <script>
+
+	var seller_type = '';
+	
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var user_type = urlParams.get('user_type');
+	
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
@@ -74,5 +81,10 @@
 			$(this).siblings().removeClass('active');
 		});
 	});
-
+	
+	$(".seller_type").click(function(e){
+		seller_type = $(this).attr('id');
+		$("#join_page_next").attr("href","join_page03.html?user_type="+user_type+"&seller_type="+seller_type);
+		
+	})
 </script>

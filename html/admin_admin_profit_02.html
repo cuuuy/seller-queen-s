@@ -113,8 +113,8 @@
 							</select>
 						</div>
 						<div class="adminContent_order">
-							<a href="javascript:void(0)" class="check_btn confirm_btn">지급하기</a>
-							<a href="javascript:void(0)" class="check_btn">회수하기</a>
+							<a href="javascript:void(0)" class="check_btn confirm_btn" onclick="profit_send()">지급하기</a>
+							<a href="javascript:void(0)" class="check_btn" onclick="profit_refund()">회수하기</a>
 						</div>
 						<div>
 							<table class="adminContent_table">
@@ -167,6 +167,7 @@
 	var withdraws = [];
 	var withdraws_origin = [];
 	var user_id = localStorage.getItem('user_id');
+    var profit_id_arr = [];
 
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
@@ -189,7 +190,9 @@
 			var stateStr = '';
 			if(withdraw.stateStr=="requested"){
 				stateStr = "출금요청중";
-			}
+			}else if(withdraw.stateStr=="confirmed"){
+                stateStr = "지급완료";
+            }
 			
 			var bank_name = '';
 			if(withdraw.bank == 'sinhan'){
@@ -201,15 +204,15 @@
 			 tag += `<tr>
 							<td>
 								<div class="adminContent_table_checkbox">
-									<input id="check${withdraw.id}" type="checkbox">
+                                    <input id="check${withdraw.id}" type="checkbox" name="chk_name" value="${withdraw.id}">
 									<label for="check${withdraw.id}"><span></span></label>
 								</div>
 							</td>
 							<td>1</td>
 							<td class="adminContent_table_name">
-								<p></p>
+								<p>${withdraw.idStr}</p>
 							</td>
-							<td></td>
+							<td>${withdraw.phone}</td>
 							<td>${withdraw.resident_number}</td>
 							<td>${withdraw.name}</td>
 							<td>${bank_name}</td>
@@ -345,4 +348,40 @@
 		});
 		//console.log(withdraws);
 	})
+
+    function profit_send(){
+
+        $("input[name=chk_name]:checked").each(function(){
+			profit_id_arr.push($(this).val());
+		});
+
+		if(profit_id_arr.length == 0){
+			alert("대상을 선택해주세요.");
+			return false;
+		}
+        for(var i = 0; i < profit_id_arr.length; i++){
+            $.ajax({
+                type : "POST",            // HTTP method type(GET, POST) 형식이다.
+                url : "http://43.200.169.89/confirm-withdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
+                data : {
+                    request_id : profit_id_arr[i]
+                    },            // Json 형식의 데이터이다.
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                    // 응답코드 > 0000
+                    console.log(res);
+
+                    if(res == "success"){
+                        alert("프로핏 지급이 완료되었습니다.");
+                        location.reload();
+                    }else{
+                        alert("오류 발생. 관리자에게 문의하세요.");
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+            });
+        }
+        
+    }
 </script>

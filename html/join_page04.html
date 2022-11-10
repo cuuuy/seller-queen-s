@@ -46,7 +46,7 @@
 					<img src="../image/join_arrow_prev.png" alt="">
 				</a>
 				<div class="join_page_04">
-					<h5>셀러</h5>
+					<h5 class="user_type"></h5>
 					<table class="join_form">
 						<colgroup>
 							<col width="16.8%">
@@ -77,7 +77,7 @@
 							<tr>
 								<th>비밀번호 확인</th>
 								<td colspan="2">
-									<input type="password" placeholder="비밀번호를 한 번 더 입력해주세요.">
+									<input type="password" id="pw2" placeholder="비밀번호를 한 번 더 입력해주세요.">
 								</td>
 							</tr>
 							<tr>
@@ -86,44 +86,24 @@
 									<input type="text" id="name" placeholder="이름을 입력해주세요.">
 								</td>
 							</tr>
-							<tr>
+							<tr id="nickname_tr">
 								<th rowspan="2">닉네임</th>
 								<td>
 									<input type="text" id="nickname" placeholder="닉네임을 입력해주세요.">
 								</td>
 								<td><a href="">중복확인</a></td>
 							</tr>
-							<tr>
+							<tr id="nickname_tr2">
 								<td colspan="2" class="text">* 닉네임은 최초 입력 후 1회 변경만 가능합니다. 닉네임은 셀러 마켓 메인으로 표시 됩니다.</td>
 							</tr>
 							<tr>
 								<th>생년월일</th>
 								<td colspan="2">
-									<select name="" id="birth_time1">
-										<option value="2022">2022</option>
-										<option value="2021">2021</option>
-										<option value="2020">2020</option>
-										<option value="2019">2019</option>
-										<option value="2018">2018</option>
-										<option value="2017">2017</option>
-										<option value="2016">2016</option>
-										<option value="2015">2015</option>
+									<select name="birth_time1" id="birth_time1">
 									</select>
-									<select name="" id="birth_time2">
-										<option value="01">01</option>
-										<option value="02">02</option>
-										<option value="03">03</option>
-										<option value="04">04</option>
-										<option value="05">05</option>
-										<option value="06">06</option>
+									<select name="birth_time2" id="birth_time2">
 									</select>
-									<select name="" id="birth_time3">
-										<option value="01">01</option>
-										<option value="02">02</option>
-										<option value="03">03</option>
-										<option value="04">04</option>
-										<option value="05">05</option>
-										<option value="06">06</option>
+									<select name="birth_time3" id="birth_time3">
 									</select>
 								</td>
 							</tr>
@@ -154,7 +134,7 @@
 								</td>
 								<td><a href="">확인</a></td>
 							</tr>
-							<tr>
+							<tr id="recommend1">
 								<th>추천인 연락처</th>
 								<td>
 									<input type="text" placeholder="+82(한국)" class="w30" id="recommender_phone_nation">
@@ -162,7 +142,7 @@
 								</td>
 								<td></td>
 							</tr>
-							<tr>
+							<tr id="recommend2">
 								<th>추천인 이름</th>
 								<td>
 									<input type="text" placeholder="추천인 이름을 입력해주세요." id="recommender_name">
@@ -185,19 +165,57 @@
 
 
 <script>
+	
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var user_type = urlParams.get('user_type');
+	var seller_type = urlParams.get('seller_type');
+
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
 		
-		//개인정보 드롭다운
 		$('.pra_drop').click(function(){
 			$('.join_page_03_privacy > p').css('height','auto');
 		});
+
+		var user_type_string = "";
+		if(user_type=="seller"){
+			user_type_string = "셀러";
+		}else if(user_type=="wholesaler"){
+			user_type_string = "도매";
+			$("#recommend1").hide();
+			$("#recommend2").hide();
+		}else if(user_type=="teacher"){
+			user_type_string = "강사";
+			$("#recommend1").hide();
+			$("#recommend2").hide();
+			$("#nickname_tr").hide();
+			$("#nickname_tr2").hide();
+		}
+		$(".user_type").text(user_type_string);
+
+		var option1 = ``;
+		for(var i = 1950; i <= 2020; i++){
+			option1 += `<option value="${i}">${i}</option>`;
+		}
+
+		var option2 = ``;
+		for(var i = 1; i <= 12; i++){
+			option2 += `<option value="${i}">${i}</option>`;
+		}
+
+		var option3 = ``;
+		for(var i = 1; i <= 31; i++){
+			option3 += `<option value="${i}">${i}</option>`;
+		}
+
+		$("#birth_time1").append(option1);
+		$("#birth_time2").append(option2);
+		$("#birth_time3").append(option3);
 	});
 	
 	
-	//var user_type = $("#user_type").val();
-	//var enroll_time = $("#enroll_time").val();
 
 	function findAddr(){
 		new daum.Postcode({
@@ -205,13 +223,9 @@
 				
 				console.log(data);
 				
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
 				var roadAddr = data.roadAddress; // 도로명 주소 변수
 				var jibunAddr = data.jibunAddress; // 지번 주소 변수
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				//document.getElementById('member_post').value = data.zonecode;
+
 				if(roadAddr !== ''){
 					document.getElementById("member_addr").value = roadAddr;
 				} 
@@ -229,7 +243,7 @@
 			alert("이메일을 입력해주세요.");
 			return false;
 		}
-		// ajax 통신
+
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/check-email",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -237,7 +251,6 @@
 				email : email
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
 				//alert(res);
 
 				if(res == "can make"){
@@ -258,7 +271,7 @@
 			alert("아이디를 입력해주세요.");
 			return false;
 		}
-		// ajax 통신
+
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/check-idStr",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -266,7 +279,6 @@
 				idStr : id
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
 				//alert(res);
 
 				if(res == "can make"){
@@ -287,6 +299,7 @@
 		var email = $("#email").val();
 		var id = $("#id").val();
 		var pw = $("#pw").val();
+		var pw2 = $("#pw2").val();
 		var name = $("#name").val();
 		var birth_time = $("#birth_time1").val() + $("#birth_time2").val() + $("#birth_time3").val();
 		var phone_nation = $("#phone_nation").val();
@@ -298,15 +311,70 @@
 		var recommender_phone = $("#recommender_phone").val();
 		var recommender_name = $("#recommender_name").val();
 
-		var now_date = Date.now();
-		var enroll_time = now_date/1000;
+		var now_date = new Date();
+		var enroll_time = parseInt(now_date.getTime()/1000);
 		
+		if(email==""){
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+
 		if(id==""){
 			alert("아이디를 입력해주세요.");
 			return false;
 		}
 
-		// ajax 통신
+		if(pw==""){
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+
+		if(pw2==""){
+			alert("비밀번호를 한번 더 입력해주세요.");
+			return false;
+		}
+
+		if(name==""){
+			alert("이름을 한번 더 입력해주세요.");
+			return false;
+		}
+
+		if(seller_type != null){
+			if(nickname==""){
+				alert("닉네임을 입력해주세요.");
+				return false;
+			}
+		}
+
+		if(address1==""){
+			alert("주소를 입력해주세요.");
+			return false;
+		}
+
+		if(address2==""){
+			alert("상세주소를 입력해주세요.");
+			return false;
+		}
+
+		if(phone_nation==""){
+			alert("국가번호를 입력해주세요.");
+			return false;
+		}
+
+		if(phone==""){
+			alert("전화번호를 입력해주세요.");
+			return false;
+		}
+
+		console.log(seller_type);
+
+		var new_user_type = '';
+		if(seller_type == "null"){
+			new_user_type = user_type;
+		}else if(seller_type != "null"){
+			new_user_type = user_type+"_"+seller_type;
+		}
+
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/enroll-user",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -324,18 +392,19 @@
 				 recommender_phone_nation : recommender_phone_nation,
 				 recommender_phone : recommender_phone,
 				 recommender_name : recommender_name,
-				 user_type : "seller",
+				 user_type : new_user_type,
 				 enroll_time : enroll_time
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
 				alert("회원가입 신청이 완료되었습니다.");
-				location.href="./main.html";
-				//if(res == "can make"){
-				//	alert("등록가능한 아이디 입니다.");
-				//}else if(res == "already exist"){
-				//	alert("이미 존재하는 아이디 입니다. 다른 아이디를 사용해 주세요.");
-				//}
+				if(user_type=="seller"){
+					location.href="./join_page07.html";
+				}else if(user_type=="wholesaler"){
+					location.href="./join_page08.html";
+				}else if(user_type=="teacher"){
+					location.href="./join_page09.html";
+				}
+				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.")

@@ -109,6 +109,12 @@
 
 
 <script>
+	
+	var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var user_type = urlParams.get('user_type');
+	var seller_type = urlParams.get('seller_type');
+
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
@@ -117,6 +123,9 @@
 		$('.pra_drop').click(function(){
 			$('.join_page_03_privacy > p').css('height','auto');
 		});
+
+		$(".ok_btn").attr("href","join_page04.html?user_type="+user_type+"&seller_type="+seller_type);
+		$("#join_page_next").attr("href","join_page04.html?user_type="+user_type+"&seller_type="+seller_type);
 	});
 
 </script>

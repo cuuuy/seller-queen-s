@@ -12,32 +12,7 @@
 <body style="background:#ddd;">
 	<div class="marketContainer">
 		<div class="header">
-			<header class="marketHeader">
-			<div>
-				<a href=""><img src="../image/market_back.png" alt=""></a>
-			</div>
-			<h2>문의 게시판</h2>
-			<div class="marketHeader_mypage">
-				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
-				<div class="marketHeader_mypage_menu">
-					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
-					<div class="marketHeader_mypage_menu_top">
-						<span class="marketHeader_mypage_menu_top_profile"></span>
-						<h5>김셀럽 회원님, 환영합니다.</h5>
-					</div>
-					<ul class="marketHeader_mypage_menu_list">
-						<li><a href="market_order.html">주문내역</a></li>
-						<li><a href="market_cart.html">장바구니</a></li>
-						<li><a href="market_review.html">후기 게시판</a></li>
-						<li><a href="market_qna.html">문의 게시판</a></li>
-						<li><a href="market_see.html">최근 본 상품</a></li>
-					</ul>
-					<ul class="marketHeader_mypage_menu_logout">
-						<li>로그아웃</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+			
 		</div>
 		<div class="marketContent">
 			<div class="marketQna">
@@ -49,7 +24,7 @@
 					<a href="javascript:void(0)" class="marketQna_top_write" onclick="market_qna_write()">문의 작성</a>
 				</div>
 				<ul class="marketQna_list" id="qna_load">
-					<li>
+					<!-- <li>
 						<div class="marketQna_list_thumb">
 							<span></span>
 							배송 문의
@@ -64,7 +39,7 @@
 								안녕하세요 혹시 배송이 언제 쯤 되는건가요?
 							</p>
 						</div>
-					</li>
+					</li> -->
 					<!-- <li>
 						<div class="marketQna_list_thumb">
 							<span></span>
@@ -106,6 +81,19 @@
 					</li> -->
 				</ul>
 			</div>
+			<div id="marketModal" style="display:none;">
+				<div>
+					<p>
+						안녕하세요.
+						<br><br>
+						문의 게시판은 로그인 후 작성 및 후기가 가능합니다.<br>
+						로그인 후 이용해주세요.
+						<br><br>
+						감사합니다.
+					</p>
+					<a href="./market_login.html" class="ok_btn">확 인</a>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
@@ -125,9 +113,15 @@
 		});
 	});
 	
+	$('.header').load('market_subheader.html');
+
 	var user_id = localStorage.getItem('user_id');
 	if(user_id == null){
 		user_id = -1; // 비회원
+	}
+	
+	if(user_id == '-1'){
+		$("#marketModal").show();
 	}
 
 	var now_date = Date.now();
@@ -144,6 +138,7 @@
 	
 	$(document).ready(function() {
 		qna_load();
+		qna_re_load();
 	});
 
 
@@ -183,14 +178,14 @@
 						typeStr = '기타 문의';
 					}
 					var new_html = `<li>
-						<div class="marketQna_list_thumb">
-							<span></span>
+						<div class="marketQna_list_thumb" >
+							<span style="background: url(http://43.200.169.89/${img_path}) no-repeat; background-size:cover;"></span>
 							${typeStr}
 						</div>
 						<div class="marketQna_list_text">
 							<div class="marketQna_list_text_button">
 								<h4>${res[i].name}</h4>
-								<a href="" class="a_no">답변미완료</a>
+								<a href="" class="a_no">답변 미완료</a>
 							</div>
 							<h4>${formattedTime} 작성</h4>
 							<p>
@@ -204,6 +199,24 @@
 
 					$("#qna_load").append(new_html);
 				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+
+	function qna_re_load(){
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/inquiry_answers_by_user?seller_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.");

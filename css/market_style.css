@@ -21,11 +21,14 @@
 .marketHeader_ham_menu_close {cursor:pointer;padding:0 16px;}
 .marketHeader_ham_menu_list li {border-bottom:1px solid #EAE6F2;line-height:42px;font-size: 14px;font-weight: 500;text-align: right;color: #563B80;}
 .marketHeader_ham_menu_list li a.arrow {background:url('../image/market_arrow_p.png') no-repeat;background-position: right 13px center;}
+.marketHeader_ham_menu_list li a.arrow_down {background:url('../image/market_arrow_p_down.png') no-repeat;background-position: right 13px center;}
 .marketHeader_ham_menu_list li a{width:100%;color: #563B80;padding:0 35px;}
 
 .marketContent {min-height:100%;}
-.marketContent h3 {font-size: 16px;font-weight: 400;}
-.marketContent h4 {font-size: 14px;font-weight: 400;}
+.marketContent h3 {font-size: 16px;font-weight: 400;border-bottom: 1px solid #BABABA;    line-height: 24px;
+    padding: 0 0 6px;
+    margin: 0 0 18px;}
+.marketContent h4 {font-size: 14px;font-weight: 500;}
 .marketContent h5 {font-size: 12px;font-weight: 400;}
 .marketContent p {font-size: 10px;font-weight: 400;color: #000;}
 .marketContent .co777 {color:#707070;}
@@ -33,7 +36,7 @@
 .marketContent a.ok_btn {display:block;width:100%;height:45px;line-height:45px;text-align:Center;border-radius: 5px;background: #563b80;color:#fff;font-size: 14px;font-weight: 500;}
 .marketContent a.back_btn {display:block;width:100%;height:45px;line-height:45px;margin:0 0 5px 0;text-align:Center;border-radius: 5px;border:1px solid #563b80;color:#563b80;font-size: 14px;font-weight: 500;}
 
-.co777.on {background-color:#EAE6F2;border: 3px solid white;}
+.co777.on {color:#563B80;font-weight: 600;}
 
 /*main*/
 #mainvisual {width:100%;height:140px;background: #EAE6F2;}
@@ -64,7 +67,7 @@
 .marketMain_all ul li:nth-child(3) .marketMain_all_thumb {background:url('../image/market_img03.png') no-repeat; background-size:cover;}
 .marketMain_all ul li:nth-child(4) .marketMain_all_thumb {background:url('../image/market_img04.png') no-repeat; background-size:cover;}
 .marketMain_all ul li p{color: #707070;line-height:13px;}
-.marketMain_all ul li p.marketMain_all_text{margin: 5px 0 15px;}
+.marketMain_all ul li p.marketMain_all_text{margin: 5px 0 15px;min-height: 30px;}
 
 
 /*상세페이지*/
@@ -113,8 +116,8 @@
 
 
 /*장바구니*/
-.marketCart {min-height:100vh;padding:0 19px;}
-.marketCart > h3 {border-bottom:1px solid #BABABA;line-height:24px;padding:0 0 6px;margin:0 0 18px;}
+.marketCart {min-height:100vh;padding:0 19px;    margin-bottom: 200px;}
+.marketCart > h3 {border-bottom:1px solid #BABABA;line-height:24px;padding:0 0 6px;margin:0 0 18px;    font-weight: 600;}
 .marketCart input[type="checkbox"]{ 
 	position:absolute; 
     width:1px; 
@@ -163,8 +166,9 @@
 .marketCart_list .marketCart_list_text {float:right;width:calc( 100% - 135px);padding:0 0 0 12px;}
 .marketCart_list .marketCart_list_text p {font-size: 14px;line-height:20px;}
 .marketCart_list .marketCart_list_text p.marketCart_list_text01 {padding:0 0 6px;border-bottom: 1px solid #EAE6F2;margin-bottom: 6px;}
-.marketCart_list .marketCart_list_text p.marketCart_list_text03 span {display:inline-block;line-height:13px;}
+.marketCart_list .marketCart_list_text p.marketCart_list_text03 span {display:inline-block;line-height:13px;padding:5px;}
 .marketCart_list .marketCart_list_text p.marketCart_list_text03 span.marketCart_list_text03_price {padding: 0 5px 0 0;border-right:1px solid #000;}
+.marketCart_list .marketCart_list_text p.marketCart_list_text04 {font-size:14px;color:#603A8A;    color: #603A8A; margin-top: 5px;}
 .marketCart_list .marketCart_list_text_btnbox {display:flex;margin:10px 0 0 0;}
 .marketCart_list .marketCart_list_text_btnbox button {width:25px;height:25px;border:1px solid #563B80;border-radius: 3px;text-align:center;color: #563B80;font-size: 18px;cursor:pointer;}
 .marketCart_list .marketCart_list_text_btnbox a {width:77px;height:25px;border:1px solid #563B80;border-radius: 3px;text-align:center;color: #563B80;font-size: 12px;cursor:pointer;line-height:22px;margin:0 0 0 8px;}
@@ -179,6 +183,14 @@
 .marketSell > div:first-child {padding:0 0 24px 0;}
 .marketSell th {font-size: 14px;font-weight: 400;text-align: left; line-height:30px;}
 .marketSell td {font-size: 14px;font-weight: 400;text-align: left; line-height:30px;color:#5A3E86;}
+
+.marketSell2 {padding:0 19px 78px;}
+.marketSell2 > div {padding:24px 0;border-bottom:1px solid #BABABA;}
+.marketSell2 > div:first-child {padding:0 0 24px 0;}
+.marketSell2 th {font-size: 14px;font-weight: 400;text-align: left; line-height:30px;}
+.marketSell2 td {font-size: 14px;font-weight: 400;text-align: left; line-height:30px;color:#5A3E86;}
+.marketSell2 input {background: #EAE6F2;}
+
 .marketSell_top h3 {font-weight: 500;background:url('../image/market_arrow_up.png') right center no-repeat;border-bottom:1px solid #BABABA;line-height:32px;cursor:pointer;margin:0 0 24px 0;}
 .marketSell_top_list li:after {content:"";display:block;clear:both;}
 .marketSell_top_list li {margin:0 0 55px 0;}
@@ -204,7 +216,7 @@
 	display:inline-block; 
     position:relative; 
     padding-left:26px; 
-    cursor:pointer; 
+    cursor:pointer;
 }
 .marketSell input[type="checkbox"] + label:before, .marketSell input[type="radio"] + label:before{ 
 	content:''; 
@@ -260,7 +272,7 @@
 #marketModal > div p span {color:#603A8A;}
 #marketModal a.ok_btn {margin:0 0 6px 0;}
 
-#marketModal1{position:absolute;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.2);padding:0 19px;}
+#marketModal1{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
 #marketModal1 > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;}
 #marketModal1 > div > div {padding:32px 24px;}
 #marketModal1 > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;border-bottom:1px solid #bababa;}
@@ -268,7 +280,7 @@
 #marketModal1 > div p span {color:#603A8A;}
 #marketModal1 a.ok_btn {margin:0 0 6px 0;}
 
-#marketModal2{position:absolute;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.2);padding:0 19px;}
+#marketModal2{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
 #marketModal2 > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;}
 #marketModal2 > div > div {padding:32px 24px;}
 #marketModal2 > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;border-bottom:1px solid #bababa;}
@@ -276,7 +288,7 @@
 #marketModal2 > div p span {color:#603A8A;}
 #marketModal2 a.ok_btn {margin:0 0 6px 0;}
 
-#marketModal3{position:absolute;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.2);padding:0 19px;}
+#marketModal3{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
 #marketModal3 > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;}
 #marketModal3 > div > div {padding:32px 24px;}
 #marketModal3 > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;border-bottom:1px solid #bababa;}
@@ -285,24 +297,24 @@
 #marketModal3 a.ok_btn {margin:0 0 6px 0;}
 
 .marketModal_box span {display:block;padding:20px 0;}
-.marketModal_box_button {display:flex;justify-content: space-between;}
+.marketModal_box_button {display:flex;justify-content: space-between;margin-top:10px;}
 .marketModal_box_button button {color:#BABABA;cursor:pointer}
 .marketModal_box_button button:active, .marketModal_box_button button:focus {color:#563b80;}
 
 
 /* 주문내역 */
 .marketOrder {min-height:100vh;padding:0 19px;}
-.marketOrder div > h3 {border-bottom:1px solid #BABABA;line-height:24px;padding:0 0 6px;margin:0 0 18px;}
+.marketOrder div > h3 {border-bottom:1px solid #BABABA;line-height:24px;padding:0 0 6px;margin:0 0 18px;font-weight: 600;}
 .marketOrder_list li {margin:0 0 46px;}
 .marketOrder_list li:after {content: "";display:block;clear:both;}
 .marketOrder_list .marketOrder_list_check {position:relative;width: 18px;margin: 0 13px 0 0;}
 .marketOrder_list .marketOrder_list_thumb {float:left;display:block;width:109px;height:109px;background:#EAE6F2;}
 .marketOrder_list .marketOrder_list_text {float:right;width:calc( 100% - 109px);padding:0 0 0 12px;}
-.marketOrder_list .marketOrder_list_text p {font-size: 14px;line-height:20px;}
+.marketOrder_list .marketOrder_list_text p {font-size: 15px;line-height:20px;font-weight: 400;padding:3px;}
 .marketOrder_list .marketOrder_list_text p.marketOrder_list_text01 {padding:0 0 6px;border-bottom: 1px solid #EAE6F2;margin-bottom: 6px;background:url('../image/market_arrow_l.png') right center no-repeat;}
-.marketOrder_list .marketOrder_list_text p.marketOrder_list_text03 span {display:inline-block;line-height:13px;}
+.marketOrder_list .marketOrder_list_text p.marketOrder_list_text03 span {display:inline-block;line-height:13px; padding:5px;}
 .marketOrder_list .marketOrder_list_text p.marketOrder_list_text03 span.marketOrder_list_text03_price {padding: 0 5px 0 0;border-right:1px solid #000;}
-.marketOrder_list .marketOrder_list_text p.marketOrder_list_text04 {font-size:12px;color:#603A8A;margin:12px 0 0 0;}
+.marketOrder_list .marketOrder_list_text p.marketOrder_list_text04 {font-size:12px;color:#603A8A;margin:0 0 0 0;}
 .marketOrder_list .marketOrder_list_text_btnbox {display:flex;margin:10px 0 0 0;}
 .marketOrder_list .marketOrder_list_text_btnbox button {width:25px;height:25px;border:1px solid #563B80;border-radius: 3px;text-align:center;color: #563B80;font-size: 18px;cursor:pointer;box-sizing:border-box;padding:0;}
 .marketOrder_list .marketOrder_list_text_btnbox a {width:77px;height:25px;border:1px solid #563B80;border-radius: 3px;text-align:center;color: #563B80;font-size: 12px;cursor:pointer;line-height:22px;margin:0 0 0 8px;}
@@ -522,3 +534,30 @@
 
 .bxslider img{height : 140px; margin: auto;
     display: block;}
+
+
+.marketSell_info_options select{
+	width: 100%;
+    background: #EAE6F2;
+    height: 27px;
+    border: none;
+    margin: 0 0 6px 0;
+    padding: 0 6px;
+    line-height: 27px;
+}
+.right_1depth{font-size: 18px !important; }
+.right_2depth{font-size: 15px !important; }
+.right_3depth{font-size: 12px !important; border:none !important; line-height:32px !important;}
+
+.reason_radio_focus {color:#5A3E86;font-weight: 700;}
+.marketHeader_logo {color: #563B80;font-weight: 700;font-size: 18px;}
+.address_btn {    display: inline-block;
+    width: 79px;
+    height: 27px;
+    border-radius: 5px;
+    background: #603A8A;
+    text-align: center;
+    color: #fff;
+    line-height: 27px;
+    margin: 0 0 0 6px;
+font-size: 13px;}

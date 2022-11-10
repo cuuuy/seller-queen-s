@@ -158,6 +158,11 @@
 	});
 	
 
+    var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
+    
 	function load_order_list(datas){
 		//console.log('datas',datas);
 		var tag = ``;
@@ -176,11 +181,12 @@
 			//console.log('product', product);
 			var unix_timestamp = datas[i].order_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
 			var img_path = product['data'].main_img_url.replace("public","");
 			var product_sum = datas[i].product_price + datas[i].delivery_fee;
@@ -216,15 +222,10 @@
 				var isShow = "판매중";
 			}
 			
-			var delivery_company_name = '';
+			var delivery_company_id = '';
 
-			if(datas[i].delivery_company_name == 'cj'){
-				delivery_company_name = 'cj 대한통운';
-			}else if(datas[i].delivery_company_name == 'rozen'){
-				delivery_company_name = '로젠택배';
-			}else if(datas[i].delivery_company_name == 'woo'){
-				delivery_company_name = '우채국 택배';
-			}
+			var delivery_company_name = '';
+			delivery_company_name = delivery_company_name_switch(datas[i].delivery_company_name);
 
 			var invoice_number = '';
 			if(invoice['data']){
@@ -240,25 +241,16 @@
 		
 				var unix_timestamp = datas[i].exchange_time;
 				var date = new Date(unix_timestamp * 1000);
-				var hours = date.getHours();
-				var minutes = "0" + date.getMinutes();
-				var seconds = "0" + date.getSeconds();
-				var mon = (date.getMonth()+1);
-				time_string = date.getFullYear() + "-" + mon + "-" + date.getDate();
+                var hours = date.getHours();
+                var minutes = "0" + date.getMinutes();
+                var seconds = "0" + date.getSeconds();
+                var mon = "0" + (date.getMonth()+1);
+                var day = "0" + (date.getDate());
+                time_string = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			}
 
 			var total_price = datas[i].product_price+datas[i].delivery_fee;
 			
-			var delivery_company_name = '';
-
-			if(datas[i].delivery_company_name == 'cj'){
-				delivery_company_name = 'cj 대한통운';
-			}else if(datas[i].delivery_company_name == 'rozen'){
-				delivery_company_name = '로젠택배';
-			}else if(datas[i].delivery_company_name == 'woo'){
-				delivery_company_name = '우채국 택배';
-			}
-
 			tag+= `<tr>
 						<td>
 							<div class="adminContent_table_checkbox">
@@ -305,7 +297,7 @@
 
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/orders_by_seller?seller_id="+"1",      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/orders_by_seller?seller_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				
 				},            // Json 형식의 데이터이다.

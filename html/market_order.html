@@ -12,40 +12,15 @@
 <body style="background:#ddd;">
 	<div class="marketContainer">
 		<div class="header">
-			<header class="marketHeader">
-			<div>
-				<a href=""><img src="../image/market_back.png" alt=""></a>
-			</div>
-			<h2>주문내역</h2>
-			<div class="marketHeader_mypage">
-				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
-				<div class="marketHeader_mypage_menu">
-					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
-					<div class="marketHeader_mypage_menu_top">
-						<span class="marketHeader_mypage_menu_top_profile"></span>
-						<h5>김셀럽 회원님, 환영합니다.</h5>
-					</div>
-					<ul class="marketHeader_mypage_menu_list">
-						<li><a href="market_order.html">주문내역</a></li>
-						<li><a href="market_cart.html">장바구니</a></li>
-						<li><a href="market_review.html">후기 게시판</a></li>
-						<li><a href="market_qna.html">문의 게시판</a></li>
-						<li><a href="market_see.html">최근 본 상품</a></li>
-					</ul>
-					<ul class="marketHeader_mypage_menu_logout">
-						<li>로그아웃</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+		
 		</div>
 		<div class="marketContent">
 			<div class="marketOrder">
-				<div>
+				<!-- <div>
 					<h3>2022.10.07</h3>
 					<ul class="marketOrder_list" id="marketOrder_list">
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -66,11 +41,14 @@
 		});
 	});
 	
+	$('.header').load('market_subheader.html');
+
 	$(document).ready(function(){
 		order_load();
 	});
 	
 	var user_id = localStorage.getItem('user_id')
+	var ordersDict = {};
 
 	function order_load(){
 
@@ -84,31 +62,95 @@
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				// 응답코드 > 0000
 				console.log(res);
+
+				$.each(res, function(n, info){
+					var unix_timestamp = info.order_time;
+					var date = new Date(unix_timestamp * 1000);
+					var mon = (date.getMonth()+1);
+					var formattedTime = date.getFullYear() + "." + mon + "." + date.getDate();
+
+					if(ordersDict[formattedTime] == null){
+						ordersDict[formattedTime] = [info];
+					}else{
+						var origin_arr = ordersDict[formattedTime];
+						origin_arr.push(info);
+					}
+				})
+
+				var keys = Object.keys(ordersDict);
 				
-				for(var i = 0; i < res.length; i++){
-					var new_html = `<li>
-						<span class="marketOrder_list_thumb"></span>
-						<div class="marketOrder_list_text">
-							<p class="marketOrder_list_text01"><a href="market_order_detail.html?order_id=`+res[i].id+`">상품 정보</a></p>
-							<p class="marketOrder_list_text02">TC 써지컬 하트 컬러 볼 팔찌</p>
-							<p class="marketOrder_list_text03">
-								<span class="marketOrder_list_text03_price">52,000원</span>
-								<span>그린</span>
-								<span>S</span>
-							</p>
-							<div class="marketOrder_list_text_btnbox">
-								<button>-</button>
-								<p>1</p>
-								<button>+</button>
-								<a href="">옵션 변경</a>
+				var tag = ``;
+
+				$.each(keys, function(n, key){
+					var data_arr = ordersDict[key];
+					tag += `<div>`;
+					tag += `<h3>${key}</h3>`;
+					tag += `<ul class="marketOrder_list">`;
+
+					var tag2 = ``;
+					var options = [];
+					var options_val = [];
+
+					$.each(data_arr, function(m, order){
+
+						var k = 0;
+						options = JSON.parse(order.options);
+						
+						$.each(options, function(o,opt){
+							
+							options_val.push(opt);
+							tag2 += `<span>${options_val[k]}</span>`;
+							
+							k++;
+						})
+
+						options_val = [];
+
+						var product = product_load(order.product_id);
+						var img_path = product['data'].main_img_url.replace("public","");
+						var total_amount = (order.product_price * order.count) + order.delivery_fee;
+
+						if(order.cancel_reason != "none"){
+							statusStr = "취소신청";
+						}else if(order.exchange_reason != "none"){
+							statusStr = "교환신청";
+						}else if(order.return_reason != "none"){
+							statusStr = "반품신청";
+						}else	if(order.statusStr == "paid"){
+							statusStr = '결제완료';
+						}else{
+							statusStr = order.statusStr;
+						}
+						tag += `<li>
+							<span class="marketOrder_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+							<div class="marketOrder_list_text">
+								<p class="marketOrder_list_text01"><a href="market_order_detail.html?order_id=`+order.id+`&order_key=${order.order_key}">상품 정보</a></p>
+								<p class="marketOrder_list_text02">${product['data'].product_name}</p>
+								<p class="marketOrder_list_text03">
+									<span class="marketOrder_list_text03_price">${total_amount.toLocaleString('ko-KR')}원</span>
+									<!-- <span>그린</span>
+									<span>S</span> -->
+									${tag2}
+								</p>
+								<p class="marketOrder_list_text04">${statusStr}</p>
+								<!-- <div class="marketOrder_list_text_btnbox">
+									<button>-</button>
+									<p>1</p>
+									<button>+</button>
+									<a href="">옵션 변경</a>
+								</div> -->
 							</div>
-						</div>
-					</li>`;
+						</li>`;
 
-					$("#marketOrder_list").append(new_html);
+						
+						tag2 = ``;
+					})
 
-				}
+					tag += `</ul>`;
+					tag += `</div>`;
+				})
 				
+				$(".marketOrder").html(tag);
 
 				//if(res == "success"){
 				//	alert("결제가 등록 되었습니다.");
@@ -121,5 +163,27 @@
 				alert("통신 실패.")
 			}
 		});
+	}
+
+	function product_load(id){
+		
+		var myObject = new Object();
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			async: false,
+			url : "http://43.200.169.89/retail_product-detail?product_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				myObject['data'] = res[0];
+				products = res;
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+		//console.log(myObject);
+		return myObject;
 	}
 </script>

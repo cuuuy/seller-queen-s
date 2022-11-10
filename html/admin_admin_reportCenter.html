@@ -61,14 +61,14 @@
 					<div class="adminContent_right">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="active"><a href="">신고 <span>4</span></a></li>
-								<li><a href="">차단 <span>0</span></a></li>
+								<li class="filter_report active"><a href="javascript:void(0)">신고 <span class="report_span">0</span></a></li>
+								<li class="filter_ban"><a href="javascript:void(0)">차단 <span class="ban_span">0</span></a></li>
 							</ul>
 						</div>
 						<div class="adminContent_search">
-							<input type="search" name="" placeholder="신고내용/닉네임을 입력해주세요.">
+							<input type="search" name="" placeholder="신고내용/닉네임을 입력해주세요." onkeyup="enterkey()">
 							<!-- <a href="javascript:void(0)" class="check_btn">신고/차단하기</a> -->
-							<a href="javascript:void(0)" class="check_btn">검색</a>
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
 						<div style="min-height: 600px;">
 							<table class="adminContent_table">
@@ -143,16 +143,20 @@
 			console.log('sum_arr',sum_arr);
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
-			var unix_timestamp2 = datas[i].reported_time;
-			var date2 = new Date(unix_timestamp2 * 1000);
-			var mon2 = (date2.getMonth()+1);
-			var formattedTime2 = date2.getFullYear() + "-" + mon + "-" + date2.getDate();
+			var today = new Date();
+			var hours = today.getHours();
+			var minutes = "0" + today.getMinutes();
+			var seconds = "0" + today.getSeconds();
+			var mon = "0" + (today.getMonth()+1);
+            var day = "0" + (today.getDate());
+			var formattedTime2 = today.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			var typeStr = '';
 			var desc = '';
@@ -198,7 +202,10 @@
 		$.each(data['inquiry'], function(i, result){
 			sum_arr.push(result);
 		})
-		//console.log('sum_arr', sum_arr);
+		console.log('sum_arr', sum_arr);
+        
+        reports = sum_arr;
+        reports_origin = sum_arr;
 
 		$.each(data, function(i, result){
 			
@@ -210,6 +217,18 @@
 				}
 			})
 		})
+
+        var tmp_arr = reports_origin.filter(function(report_info){
+            return report_info.reported == "YES";
+        })
+
+        var tmp_arr2 = reports_origin.filter(function(report_info){
+            return report_info.typeStr == "cancel_qna";
+        })
+
+        $(".report_span").text(tmp_arr.length);
+		$(".ban_span").text(tmp_arr2.length);
+
 	});
 	function report_ban(target_id,typeStr){
 		var new_typeStr = '';
@@ -228,5 +247,76 @@
 		})
 	}
 	
+    $(".filter_report").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+        reports = reports_origin.filter(function(report_info){
+            return report_info.reported == "YES";
+        })
+
+		$('#paging').pagination({
+			dataSource: reports,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_report_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+    $(".filter_all").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		$('#paging').pagination({
+			dataSource: reports,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_report_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+
+	$(".search_btn").click(function(e){ //To Do API 변경되면 검색 테스트
+		var search_word = $("input[name=search_qna]").val();
+		
+		reports = reports_origin.filter(function(report_info){
+			return report_info.nickname.indexOf(search_word) > -1;
+		})
+
+		$('#paging').pagination({
+			dataSource: reports,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_report_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) { //To Do API 변경되면 검색 테스트
+			var search_word = $("input[name=search_qna]").val();
+		
+			reports = reports_origin.filter(function(report_info){
+				return report_info.nickname.indexOf(search_word) > -1;
+			})
+
+			$('#paging').pagination({
+				dataSource: reports,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_report_list(data);
+				}
+			});
+		}
+	}
 
 </script>

@@ -670,8 +670,21 @@ border-radius: 31px;margin:0 0 42px 0;color:#040404;font-size: 22px;font-weight:
 }
 
 #calendar{
-	width: 60%;
+	width: 90%;
     height: 800px;
     margin: auto;
 }
+
+.fc-sticky{
+    font-size: 15px;
+}
+
+.fc-col-header{
+
+    height: 50px !important;
+    border-top: 5px solid #4E327B !important;
+    line-height:52px !important;
+}
+
+.datepickers-container{z-index: 9999999!important}
 

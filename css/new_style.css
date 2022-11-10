@@ -824,7 +824,7 @@ border-radius: 5px;box-sizing: border-box;}
 .fc-daygrid-event {background:none !important;border:none !important;}
 .fc-event-title {color:#111;}
 
-.calendar_btn_wrap {width:60%;text-align:right;margin:0 auto 40px;}
+.calendar_btn_wrap {width:90%;text-align:right;margin:0 auto 40px;}
 .calendar_btn {width:120px;height:28px;line-height:26px;text-align:center;border:1px solid #4E327B;color:#4E327B;border-radius:50px;display:inline-block;box-sizing:border-box;	padding:0 0 0 16px;}
 .calendar_btn.cal {background:url('../image/cal_cal_on.png') no-repeat;background-size:12px;background-position:left 24px center;}
 .calendar_btn.list {background:url('../image/cal_list_on.png') no-repeat;background-size:12px;background-position:left 24px center;}

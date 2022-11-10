@@ -73,26 +73,27 @@
 			<div class="header_gnb_loginSection_modal">
 				<div class="header_gnb_loginSection_modal_content">
 					<h5>
-						김셀럽 님(abc@gmail.com)
-						<span>회원 등급 : 셀러 J</span>
+						<span id="head_user_name" style="display: contents;"></span> 님(<span id="head_user_mail" style="display: contents;"></span>)
+						<span>회원 등급 : <span id="head_user_type" style="display: contents;"></span></span>
 					</h5>
 					<div class="modal_content_btn">
 						<a href="./admin_admin_main.html" id="" onclick="">나의 관리자 페이지로 이동</a>
-						<a href="./market_main.html" id="" onclick="">나의 쇼핑몰로 이동</a>
+						<!-- <a href="./market_main.html" id="" onclick="">나의 쇼핑몰로 이동</a> -->
+						<a href="./my_info_modify.html" id="" onclick="">나의 정보 관리</a>
 					</div>
 
 					<div class="header_gnb_loginSection_modal_content_list">
 						<div>
 							<h5>오늘의 판매 건수</h5>
-							<p>102 건</p>
+							<p>0 건</p>
 						</div>
 						<div>
 							<h5>오늘의 판매 매출</h5>
-							<p>2,900,000원</p>
+							<p>0원</p>
 						</div>
 						<div>
 							<h5>오늘의 광고 수익</h5>
-							<p>900,000원</p>
+							<p>0원</p>
 						</div>
 					</div>
 				</div>
@@ -143,14 +144,36 @@ $( document ).ready(function() {
 	
 
 });
+var market_name = '';
 
 function session_load(){
 	if(localStorage.getItem('user_id')){
 		var user = user_load(localStorage.getItem('user_id'));
-		console.log(user);
+		//console.log(user);
+
+		var user_type = '';
+		if(user['data'].user_type=="seller_J"){
+			user_type = "셀러 J";
+		}else if(user['data'].user_type=="seller_I"){
+			user_type = "셀러 I";
+		}else if(user['data'].user_type=="wholesaler"){
+			user_type = "도매상";
+		}else if(user['data'].user_type=="teacher"){
+			user_type = "강사";
+		}else{
+			user_type = user['data'].user_type;
+		}
+		$("#head_user_type").text(user_type);
+		
+		$("#head_user_name").text(user['data'].name);
+		$("#head_user_mail").text(user['data'].email);
+
+		market_name = user['data'].market_name;
 		$("#log_text").text("로그아웃");
 		$("#login_name").show();
 		$("#login_name").text(user['data'].name+"님 환영합니다");
+		var a_href = "./market_main.html?market_name="+market_name;
+		$(".modal_content_btn").append("<a href="+a_href+" id='' onclick=''>나의 쇼핑몰로 이동</a>");
 	}else{
 		//console.log("logout");
 		$("#log_text").text("로그인");

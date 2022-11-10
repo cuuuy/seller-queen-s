@@ -8,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body style="background:#ddd;">
 	<div class="marketContainer">
@@ -23,64 +24,60 @@
 				<div class="marketJoin_form">
 					<dl>
 						<dt>이메일 <span>*이메일 형식을 확인해주세요.</span></dt>
-						<dd><input type="text" name="" placeholder="이메일 주소를 입력해주세요."></dd>
+						<dd><input type="text" id="email" name="email" placeholder="이메일 주소를 입력해주세요."></dd>
 						<dt>아이디</dt>
-						<dd><input type="text" name="" placeholder="아이디를 입력해주세요."></dd>
+						<dd><input type="text" id="id" name="id" placeholder="아이디를 입력해주세요."></dd>
 						<dt>비밀번호</dt>
-						<dd><input type="text" name="" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요."></dd>
+						<dd><input type="password" id="pw" name="pw" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요."></dd>
 						<dt>비밀번호 확인</dt>
-						<dd><input type="text" name="" placeholder="비밀번호를 한 번 더 입력해주세요."></dd>
+						<dd><input type="password" id="pw2" name="pw2" placeholder="비밀번호를 한 번 더 입력해주세요."></dd>
 						<dt>이름</dt>
-						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dd><input type="text" id="name" name="name" placeholder="이름을 입력해주세요."></dd>
 						<dt>생년월일</dt>
 						<dd>
-							<select name="">
-								<option>년도</option>
-								<option>2022</option>
-								<option>2021</option>
-								<option>2020</option>
-								<option>2019</option>
+							<select name="birth_year" id="birth_time1">
 							</select>
-							<select name="">
-								<option>월</option>
-								<option>01</option>
-								<option>02</option>
-								<option>03</option>
-								<option>04</option>
-								<option>05</option>
-								<option>06</option>
+							<select name="birth_month" id="birth_time2">
 							</select>
-							<select name="">
-								<option>일</option>
-								<option>01</option>
-								<option>02</option>
-								<option>03</option>
-								<option>04</option>
-								<option>05</option>
-								<option>06</option>
+							<select name="birth_day" id="birth_time3">
 							</select>
 						</dd>
 						<dt>연락처</dt>
 						<dd>
-							<input type="text" name="" placeholder="+82(한국)" class="w30">
-							<input type="text" name="" placeholder="전화번호를 입력해주세요." class="w70 ml">
+							<input type="text" id="phone_nation" name="phone_nation" placeholder="+82(한국)" class="w30">
+							<input type="text" id="phone" name="phone" placeholder="전화번호를 입력해주세요." class="w70 ml">
 							<input type="text" name="" placeholder="인증번호를 입력해주세요." class="w70 mt">
-							<a href="" class="w30 mt ml">인증번호 전송</a>
+							<a href="javascript:alert('인증번호가 발송되었습니다.');" class="w30 mt ml">인증번호 전송</a>
 						</dd>
 						<dt>주소/우편번호</dt>
 						<dd>
-							<input type="text" name="" placeholder="주소를 입력해주세요." class="w70">
-							<a href="" class="w30 ml">주소검색</a>
-							<input type="text" name="" placeholder="상세주소를 입력해주세요." class="mt">
+							<input type="text" id="addr" name="addr" placeholder="주소를 입력해주세요." class="w70">
+							<a href="javascript:void(0)" class="w30 ml" onclick="findAddr()">주소검색</a>
+							<input type="text" id="addr2" name="addr2" placeholder="상세주소를 입력해주세요." class="mt">
 						</dd>
 					</dl>
 				</div>
 				<div class="marketJoin_btn">
-					<a href="market_join_page03.html" class="ok_btn">회원가입</a>
+					<a href="javascript:void(0)" class="ok_btn" onclick="join_submit();">회원가입</a>
+				</div>
+				<div id="marketModal" style="display:none;">
+					<div>
+						<h3>주문완료</h3>
+						<p>
+							안녕하세요. <span id="name_span"></span> 회원님,
+							<br><br>
+							회원가입이 완료 되었습니다.<br>
+							<!-- 레몬트리의 --> 회원이 되신걸 환영합니다.
+							<br><br>
+							감사합니다.
+						</p>
+						<a href="./market_main.html" class="ok_btn">확 인</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 </body>
 
 
@@ -97,4 +94,140 @@
 			}, 300);
 		});
 	});
+
+	var option1 = ``;
+	for(var i = 1950; i <= 2020; i++){
+		option1 += `<option value="${i}">${i}</option>`;
+	}
+
+	var option2 = ``;
+	for(var i = 1; i <= 12; i++){
+		option2 += `<option value="${i}">${i}</option>`;
+	}
+
+	var option3 = ``;
+	for(var i = 1; i <= 31; i++){
+		option3 += `<option value="${i}">${i}</option>`;
+	}
+
+	$("#birth_time1").append(option1);
+	$("#birth_time2").append(option2);
+	$("#birth_time3").append(option3);
+
+	function findAddr(){
+		new daum.Postcode({
+			oncomplete: function(data) {
+				
+				console.log(data);
+				
+				var roadAddr = data.roadAddress; // 도로명 주소 변수
+				var jibunAddr = data.jibunAddress; // 지번 주소 변수
+
+				if(roadAddr !== ''){
+					document.getElementById("addr").value = roadAddr;
+				} 
+				else if(jibunAddr !== ''){
+					document.getElementById("addr").value = jibunAddr;
+				}
+			}
+		}).open();
+	}
+
+	function join_submit(){
+		
+		var email = $("#email").val();
+		var id = $("#id").val();
+		var pw = $("#pw").val();
+		var pw2 = $("#pw2").val();
+		var name = $("#name").val();
+		var birth_time = $("#birth_time1").val() + $("#birth_time2").val() + $("#birth_time3").val();
+		var phone_nation = $("#phone_nation").val();
+		var phone = $("#phone").val();
+		var address1 = $("#addr").val();
+		var address2 = $("#addr2").val();
+		//var nickname = $("#nickname").val();
+		//var recommender_phone_nation = $("#recommender_phone_nation").val();
+		//var recommender_phone = $("#recommender_phone").val();
+		//var recommender_name = $("#recommender_name").val();
+
+		var now_date = new Date();
+		var enroll_time = parseInt(now_date.getTime()/1000);
+		
+		if(email==""){
+			alert("이메일을 입력해주세요.");
+			return false;
+		}
+
+		if(id==""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+
+		if(pw==""){
+			alert("비밀번호를 입력해주세요.");
+			return false;
+		}
+
+		if(pw2==""){
+			alert("비밀번호를 한번 더 입력해주세요.");
+			return false;
+		}
+
+		if(name==""){
+			alert("이름을 한번 더 입력해주세요.");
+			return false;
+		}
+
+		if(address1==""){
+			alert("주소를 입력해주세요.");
+			return false;
+		}
+
+		if(address2==""){
+			alert("상세주소를 입력해주세요.");
+			return false;
+		}
+
+		if(phone_nation==""){
+			alert("국가번호를 입력해주세요.");
+			return false;
+		}
+
+		if(phone==""){
+			alert("전화번호를 입력해주세요.");
+			return false;
+		}
+
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/enroll-user",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				 email : email,
+				 idStr : id,
+				 pwdStr : pw,
+				 name : name,
+				 birth_time : birth_time,
+				 phone_nation : phone_nation,
+				 phone : phone,
+				 address1 : address1,
+				 address2 : address2,
+				 nickname : '',
+				 recommender_phone_nation : '',
+				 recommender_phone : '',
+				 recommender_name : '',
+				 user_type : 'normal',
+				 enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				$("#name_span").text(name);
+
+				alert("회원가입이 완료되었습니다.");
+				$("#marketModal").show();
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
 </script>

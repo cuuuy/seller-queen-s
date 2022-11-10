@@ -8,43 +8,19 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+    <script src="../js/function.js"></script>
 </head>
 <body style="background:#ddd;">
 	<div class="marketContainer">
 		<div class="header">
-			<header class="marketHeader">
-			<div>
-				<a href=""><img src="../image/market_back.png" alt=""></a>
-			</div>
-			<h2>주문내역</h2>
-			<div class="marketHeader_mypage">
-				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
-				<div class="marketHeader_mypage_menu">
-					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
-					<div class="marketHeader_mypage_menu_top">
-						<span class="marketHeader_mypage_menu_top_profile"></span>
-						<h5>김셀럽 회원님, 환영합니다.</h5>
-					</div>
-					<ul class="marketHeader_mypage_menu_list">
-						<li><a href="market_order.html">주문내역</a></li>
-						<li><a href="market_cart.html">장바구니</a></li>
-						<li><a href="market_review.html">후기 게시판</a></li>
-						<li><a href="market_qna.html">문의 게시판</a></li>
-						<li><a href="market_see.html">최근 본 상품</a></li>
-					</ul>
-					<ul class="marketHeader_mypage_menu_logout">
-						<li>로그아웃</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+			
 		</div>
 		<div class="marketContent">
 			<div class="marketOrder marketOrderDetail">
 				<div>
-					<h3>2022.04.10</h3>
+					<h3 id="order_day"></h3>
 					<ul class="marketOrder_list">
-						<li>
+						<!-- <li>
 							<span class="marketOrder_list_thumb"></span>
 							<div class="marketOrder_list_text">
 								<p class="marketOrder_list_text01"><a href="market_order_detail.html">상품 정보</a></p>
@@ -58,7 +34,7 @@
 									배송완료
 								</p>
 							</div>
-						</li>
+						</li> -->
 					</ul>
 					<ul class="marketOrderDetail_btn">
 						<li>
@@ -77,19 +53,19 @@
 					<table class="marketOrderDetail_wrap_table">
 						<tr>
 							<th>이름</th>
-							<td>김셀럽</td>
+							<td id="user_name"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td>010-0000-0000</td>
+							<td id="user_phone"></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td>서울특별시 강남구 삼성동 1-1</td>
+							<td id="user_addr"></td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
-							<td>11동 111호</td>
+							<td id="user_addr2"></td>
 						</tr>
 					</table>
 				</div>
@@ -98,19 +74,19 @@
 					<table class="marketOrderDetail_wrap_table">
 						<tr>
 							<th>이름</th>
-							<td>김셀럽</td>
+							<td id="deli_user_name"></td>
 						</tr>
 						<tr>
 							<th>연락처</th>
-							<td>010-0000-0000</td>
+							<td id="deli_user_phone"></td>
 						</tr>
 						<tr>
 							<th>주소</th>
-							<td>서울특별시 강남구 삼성동 1-1</td>
+							<td id="deli_user_addr"></td>
 						</tr>
 						<tr>
 							<th>상세주소</th>
-							<td>11동 111호</td>
+							<td id="deli_user_addr2"></td>
 						</tr>
 					</table>
 				</div>
@@ -119,7 +95,7 @@
 					<table class="marketOrderDetail_wrap_table">
 						<tr>
 							<th>송장번호</th>
-							<td>cj대한통운 3636364564</td>
+							<td id="invoice_number"></td>
 						</tr>
 					</table>
 				</div>
@@ -128,28 +104,32 @@
 					<table class="marketOrderDetail_wrap_table marketOrderDetail_wrap_table_right">
 						<tr>
 							<th>상품 금액</th>
-							<td>52,000원</td>
+							<td id="pay_amount"></td>
+						</tr>
+						<tr>
+							<th>수량</th>
+							<td id="pay_num"></td>
 						</tr>
 						<tr>
 							<th>배송비</th>
-							<td>3,000원</td>
+							<td id="pay_delivery_fee"></td>
 						</tr>
 						<tr>
 							<th>최종 결제금액</th>
-							<td>55,000원</td>
+							<td id="pay_total_amount"></td>
 						</tr>
 						<tr>
 							<th>결제 수단</th>
-							<td>무통장 입금</td>
+							<td id="pay_method"></td>
 						</tr>
 					</table>
 				</div>
 			</div>
-			<div id="marketModal1">
+			<div id="marketModal1" class="modal-overlay">
 				<div>
 					<h3>교환 신청</h3>
 					<div class="marketModal_box">
-						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<h4 class="product_name"></h4>
 						<span>
 							사유를 선택하세요.
 						</span>
@@ -164,11 +144,11 @@
 					<a href="javascripot:void(0)" class="ok_btn w50 application" onclick="exchange_order()">신청</a>
 				</div>
 			</div>
-			<div id="marketModal2">
+			<div id="marketModal2" class="modal-overlay">
 				<div>
 					<h3>반품 신청</h3>
 					<div class="marketModal_box">
-						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<h4 class="product_name"></h4>
 						<span>
 							사유를 선택하세요.
 						</span>
@@ -183,11 +163,11 @@
 					<a href="javascripot:void(0)" class="ok_btn w50 application" onclick="return_order()">신청</a>
 				</div>
 			</div>
-			<div id="marketModal3">
+			<div id="marketModal3" class="modal-overlay">
 				<div>
 					<h3>취소 신청</h3>
 					<div class="marketModal_box">
-						<h4>TC 써지컬 하트 컬러 볼 팔찌 / 그린 / S</h4>
+						<h4 class="product_name"></h4>
 						<span>
 							사유를 선택하세요.
 						</span>
@@ -218,6 +198,12 @@
 
 
 <script>
+	
+	var user_id = localStorage.getItem('user_id');
+	if(user_id == null){
+		user_id = -1; // 비회원
+	}
+
 	$(function(){
 		$('.marketHeader_mypage_icon').click(function(){
 			$('.marketHeader_mypage_menu').animate({
@@ -250,8 +236,54 @@
 		
 	});
 	
+	$('.header').load('market_subheader.html');
+
+	var modal = document.getElementById("marketModal1");
+	var modal2 = document.getElementById("marketModal2");
+	var modal3 = document.getElementById("marketModal3");
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+
+	modal2.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal2.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal2.style.display = "none"
+		}
+	})
+
+	modal3.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal3.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal3.style.display = "none"
+		}
+	})
+
 	$(document).ready(function(){
 		order_load();
+		user_load();
 	});
 
 	var now_date = Date.now();
@@ -260,6 +292,7 @@
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var order_id = urlParams.get('order_id');
+	var order_key = urlParams.get('order_key');
 
 	function exchange_order(){
 		
@@ -280,6 +313,7 @@
 
 				if(res == "success"){
 					alert("교환신청이 완료되었습니다.");
+					location.reload();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}
@@ -309,6 +343,7 @@
 
 				if(res == "success"){
 					alert("반품신청이 완료되었습니다.");
+					location.reload();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}
@@ -338,9 +373,39 @@
 
 				if(res == "success"){
 					alert("취소신청이 완료되었습니다.");
+					location.reload();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+	
+	function user_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/user-info?user_id="+user_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+					
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				//console.log(res);
+				
+				if(localStorage.getItem('user_id')){
+					$("#user_name").text(res[0].name);
+					$("#user_phone").text(res[0].phone_nation+" "+res[0].phone);
+					$("#user_addr").text(res[0].address1);
+					$("#user_addr2").text(res[0].address2);
+					$("#final_modal_name").text(res[0].name);
+				}else{
+					$("#final_modal_name").text("비회원");
+				}
+				
+				
+
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.")
@@ -352,16 +417,126 @@
 
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/orders_by_order_key?order_key="+order_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/order_by_order_id?order_id="+order_id,      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				console.log(res);
+				
+				var product = product_load(res[0].product_id);
+				console.log(product);
+				var img_path = product['data'].main_img_url.replace("public","");
+				var pay_amount = res[0].product_price * res[0].count;
+				var total_amount = (res[0].product_price * res[0].count) + res[0].delivery_fee;
+				var tag2 = ``;
+				var options = [];
+				var options_val = [];
+				var k = 0;
+				options = JSON.parse(res[0].options);
+
+				$.each(options, function(o,opt){
+					
+					options_val.push(opt);
+					tag2 += `<span>${options_val[k]}</span>`;
+					
+					k++;
+				})
+
+				options_val = [];
+
+				var statusStr = '';
+
+				if(res[0].cancel_reason != "none"){
+					statusStr = "취소신청";
+					$(".marketOrderDetail_btn").hide();
+				}else if(res[0].exchange_reason != "none"){
+					statusStr = "교환신청";
+					$(".marketOrderDetail_btn").hide();
+				}else if(res[0].return_reason != "none"){
+					statusStr = "반품신청";
+					$(".marketOrderDetail_btn").hide();
+				}else	if(res[0].statusStr == "paid"){
+					statusStr = '결제완료';
+				}else{
+					statusStr = res[0].statusStr;
+				}
+				var tag = `<li>
+							<span class="marketOrder_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+							<div class="marketOrder_list_text">
+								<p class="marketOrder_list_text01"><a href="market_detail.html?product_id=${product['data'].id}">상품 정보</a></p>
+								<p class="marketOrder_list_text02">${product['data'].product_name}</p>
+								<p class="marketOrder_list_text03">
+									<span class="marketOrder_list_text03_price">${total_amount.toLocaleString('ko-KR')}원</span>
+									<!-- <span>그린</span>
+									<span>S</span> -->
+									${tag2}
+								</p>
+								<p class="marketOrder_list_text04">
+									${statusStr}
+								</p>
+							</div>
+						</li>`;
+				
+				$(".marketOrder_list").append(tag)
+				tag2 = ``;
+
+				$("#deli_user_name").text(res[0].name);
+				$("#deli_user_phone").text(res[0].phone);
+				$("#deli_user_addr").text(res[0].address1);
+				$("#deli_user_addr2").text(res[0].address2);
+
+				$("#pay_amount").text(res[0].product_price.toLocaleString('ko-KR')+" 원");
+				$("#pay_num").text(res[0].count+" 개");
+				$("#pay_delivery_fee").text(res[0].delivery_fee.toLocaleString('ko-KR')+" 원");
+				$("#pay_total_amount").text(total_amount.toLocaleString('ko-KR')+" 원");
+				$("#pay_method").text(res[0].pay_by);
+
+				var unix_timestamp = res[0].order_time;
+				var date = new Date(unix_timestamp * 1000);
+				var hours = date.getHours();
+				var minutes = "0" + date.getMinutes();
+				var seconds = "0" + date.getSeconds();
+				var mon = (date.getMonth()+1);
+				var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+				$("#order_day").text(formattedTime);
+				
+                
+				if(res[0].delivery_company_name != null){
+                    var delivery_company_name = '';
+			        delivery_company_name = delivery_company_name_switch(res[0].delivery_company_name);
+					$("#invoice_number").text(delivery_company_name+" "+res[0].invoice_number);
+				}else{
+					$("#invoice_number").text("준비중");
+				}
+				
+				$(".product_name").text(product['data'].product_name)
 				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.")
 			}
 		});
+	}
+
+	function product_load(id){
+		
+		var myObject = new Object();
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			async: false,
+			url : "http://43.200.169.89/retail_product-detail?product_id="+id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				myObject['data'] = res[0];
+				products = res;
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+		//console.log(myObject);
+		return myObject;
 	}
 </script>

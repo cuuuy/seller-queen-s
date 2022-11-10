@@ -138,7 +138,7 @@
 			url = "http://43.200.169.89/enroll-review";
 			form_data.append('file', $("#main_img")[0].files[0]);
 		}
-
+		console.log(form_data);
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : url,      // 컨트롤러에서 대기중인 URL 주소이다.

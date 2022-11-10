@@ -96,6 +96,8 @@
 	});
 	var typeStr = '';
 	$(".reason_radio").click(function(){
+		$(this).parent().addClass("reason_radio_focus");
+		$(this).parent().siblings().removeClass("reason_radio_focus");
 		typeStr = $(".reason").val();
 	});
 	var now_date = Date.now();

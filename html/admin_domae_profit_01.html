@@ -152,7 +152,7 @@
 			<h3>프로핏 출금하기</h3>
 			<div class="adminModal_profit_top">
 				<p>판매 프로핏</p>
-				<p>200,000원</p>
+				<p id="profit_amount">0원</p>
 			</div>
 			<table class="adminModal_profit_table" >
 				<colgroup>
@@ -214,6 +214,18 @@
 	});
 	
 	function modal_popup(){
+        var total_price = 0;
+        $("input[name=chk_name]:checked").each(function(){
+			profit_id_arr.push($(this).val());
+            total_price = total_price + $(this).data("price");
+		});
+        //console.log(total_price);
+		if(profit_id_arr.length == 0){
+			alert("대상을 선택해주세요.");
+			return false;
+		}
+
+        $("#profit_amount").text(total_price.toLocaleString('ko-KR')+" 원");
 		const modal = document.getElementById("modal")
 		modal.style.display = "flex"
 	}
@@ -252,16 +264,17 @@
 			
 			var unix_timestamp = profit.enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();	
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			 tag += `<tr>
 							<td>
 								<div class="adminContent_table_checkbox">
-									<input id="check${profit.id}" type="checkbox" name="chk_name" value="${profit.id}">
+									<input id="check${profit.id}" type="checkbox" name="chk_name" value="${profit.id}" data-price="${parseInt(profit.profit_amount)}">
 									<label for="check${profit.id}"><span></span></label>
 								</div>
 							</td>
@@ -274,7 +287,7 @@
 							<td>${profit.wholesale_price.toLocaleString('ko-KR')}원</td>
 							<td>${profit.retail_price.toLocaleString('ko-KR')}원</td>
 							<td>${profit.delivery_fee.toLocaleString('ko-KR')}원</td>
-							<td>${profit.profit_amount.toLocaleString('ko-KR')}원</td>
+							<td>${parseInt(profit.profit_amount).toLocaleString('ko-KR')}원</td>
 						</tr>`;
 			i++ ;
 		})
@@ -329,7 +342,7 @@
 		var bank_number = $("input[name=withdraw_acount").val();
 		var withdraw_amount = $("input[name=withdraw_price").val();
 		var withdraw_jumin = $("input[name=withdraw_jumin").val();
-		
+		var profit_amount = $("#profit_amount").text();
 		if(name == ""){
 			alert("이름을 입력해주세요.");
 			return false;
@@ -346,7 +359,13 @@
 			alert("신청금액을 입력해주세요.");
 			return false;
 		}
+        profit_amount = parseInt(profit_amount.replace(" 원",""));
 
+        if(withdraw_amount > profit_amount){
+            alert("신청금액은 판매 프로핏보다 작아야합니다.");
+            return false;
+        }
+        
 		$("input[name=chk_name]:checked").each(function(){
 			profit_id_arr.push($(this).val());
 		});

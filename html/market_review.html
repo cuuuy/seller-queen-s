@@ -15,32 +15,7 @@
 <body style="background:#ddd;">
 	<div class="marketContainer">
 		<div class="header">
-			<header class="marketHeader">
-			<div>
-				<a href=""><img src="../image/market_back.png" alt=""></a>
-			</div>
-			<h2>후기 게시판</h2>
-			<div class="marketHeader_mypage">
-				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
-				<div class="marketHeader_mypage_menu">
-					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
-					<div class="marketHeader_mypage_menu_top">
-						<span class="marketHeader_mypage_menu_top_profile"></span>
-						<h5>김셀럽 회원님, 환영합니다.</h5>
-					</div>
-					<ul class="marketHeader_mypage_menu_list">
-						<li><a href="market_order.html">주문내역</a></li>
-						<li><a href="market_cart.html">장바구니</a></li>
-						<li><a href="market_review.html">후기 게시판</a></li>
-						<li><a href="market_qna.html">문의 게시판</a></li>
-						<li><a href="market_see.html">최근 본 상품</a></li>
-					</ul>
-					<ul class="marketHeader_mypage_menu_logout">
-						<li>로그아웃</li>
-					</ul>
-				</div>
-			</div>
-		</header>
+			
 		</div>
 		<div class="marketContent">
 			<div class="marketReview">
@@ -52,7 +27,7 @@
 					<a href="javascript:void(0)" class="marketReview_top_write" onclick="market_review_write()">후기 작성</a>
 				</div>
 				<ul class="marketReview_list" id="review_load">
-					<li>
+					<!-- <li>
 						<span class="marketReview_list_thumb"></span>
 						<div class="marketReview_list_text">
 							<h4>김셀럽</h4>
@@ -76,10 +51,24 @@
 								신고하기
 							</p>
 						</div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
+			<div id="marketModal" style="display:none;">
+				<div>
+					<p>
+						안녕하세요.
+						<br><br>
+						후기 게시판은 로그인 후 작성 및 후기가 가능합니다.<br>
+						로그인 후 이용해주세요.
+						<br><br>
+						감사합니다.
+					</p>
+					<a href="./market_login.html" class="ok_btn">확 인</a>
+				</div>
+			</div>
 		</div>
+		
 	</div>
 </body>
 
@@ -98,6 +87,8 @@
 		});
 	});
 	
+	$('.header').load('market_subheader.html');
+
 	var user_id = localStorage.getItem('user_id');
 
 	$(document).ready(function() {
@@ -108,6 +99,10 @@
 		
 		var reviews = [];
 		review_load();
+
+		if(user_id == '-1'){
+			$("#marketModal").show();
+		}
 	});
 	
 	var now_date = Date.now();
@@ -120,6 +115,82 @@
 	function market_review_write(){
 		location.href="market_review_write.html?product_id="+product_id;
 	}
+
+    function review_load_list(reviews){
+        
+        var new_html = ``;
+
+        for(var i = 0; i < reviews.length; i++){
+			
+            var info = reviews[i];
+
+            var recommenders_arr = [];
+            var recommenders= reviews[i].recommenders;
+            
+            var recommenders_num = 0;
+            var unix_timestamp = reviews[i].enroll_time;
+            var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = (date.getMonth()+1);
+            var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2);
+            var img_path = reviews[i].img_url.replace("public","");
+            if (recommenders == null){
+                info.recommenders = [];
+                //recommenders = [];
+                recommenders_num = 0;
+            }else{
+
+                info.recommenders = recommenders;
+
+                recommenders_num = recommenders.length;
+                for(var j =0; j < recommenders_num; j++){
+                    recommenders_arr.push(JSON.parse(recommenders)[j]);
+                }
+            }
+            new_html += `<li>
+                                    <span class="marketReview_list_thumb" style="background: url(http://43.200.169.89/${img_path}) no-repeat; background-size:cover;"></span>
+                                    <div class="marketReview_list_text">
+                                        <h4>${reviews[i].name}</h4>
+                                        <div class="marketReview_list_text_star">
+                                            <h4>${formattedTime} 작성</h4>
+                                            <select class="star_point_${i}" name="star_point">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                        <p>
+                                            ${reviews[i].review_text}
+                                        </p>
+                                        <p class="marketReview_list_pText" "id="review_id_${reviews[i].id}" data-index="${i}">
+                                            도움이 되었어요 ${recommenders_num}
+                                        </p>
+                                        <p class="marketReport_list_pText" "id="report_id_${reviews[i].id}" data-index="${reviews[i].id}">
+                                            신고하기
+                                        </p>
+                                    </div>
+                                </li>`;
+
+            
+                                
+            
+
+        }
+        $("#review_load").html(new_html);
+
+        for(var k = 0; k < reviews.length; k++){
+            console.log(reviews[k].review_point);
+            $('.star_point_'+k).barrating({
+                theme: 'fontawesome-stars',
+                initialRating: reviews[k].review_point,
+                readonly: true
+            });
+        }
+    }
 
 	function review_load(){
 
@@ -135,75 +206,7 @@
 				
 				reviews = res;
 
-
-				for(var i = 0; i < reviews.length; i++){
-					
-					var info = reviews[i];
-
-					var recommenders_arr = [];
-					var recommenders= res[i].recommenders;
-					
-					var recommenders_num = 0;
-					var unix_timestamp = res[i].enroll_time;
-					var date = new Date(unix_timestamp * 1000);
-					var hours = date.getHours();
-					var minutes = "0" + date.getMinutes();
-					var seconds = "0" + date.getSeconds();
-					var mon = (date.getMonth()+1);
-					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2);
-					var img_path = res[i].img_url.replace("public","");
-					
-					if (recommenders == null){
-						info.recommenders = [];
-						//recommenders = [];
-						recommenders_num = 0;
-					}else{
-
-						info.recommenders = JSON.parse(recommenders);
-
-						recommenders_num = JSON.parse(recommenders).length;
-						for(var j =0; j < recommenders_num; j++){
-							recommenders_arr.push(JSON.parse(recommenders)[j]);
-						}
-						console.log(recommenders_arr);
-					}
-					var new_html = `<li>
-											<span class="marketReview_list_thumb"></span>
-											<div class="marketReview_list_text">
-												<h4>${res[i].name}</h4>
-												<div class="marketReview_list_text_star">
-													<h4>${formattedTime} 작성</h4>
-													<select class="star_point" name="star_point">
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-													</select>
-												</div>
-												<p>
-													${res[i].review_text}
-												</p>
-												<p class="marketReview_list_pText" "id="review_id_${res[i].id}" data-index="${i}">
-													도움이 되었어요 ${recommenders_num}
-												</p>
-												<p class="marketReport_list_pText" "id="report_id_${res[i].id}" data-index="${res[i].id}">
-													신고하기
-												</p>
-											</div>
-										</li>`;
-
-					$("#review_load").append(new_html);
-					
-					$('.star_point').barrating({
-						theme: 'fontawesome-stars',
-						initialRating: res[i].review_point,
-						readonly: true
-					});
-
-				}
-
-				
+                review_load_list(reviews);
 
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
@@ -282,4 +285,15 @@
 
 	})
 
+    $(document).on("click","#cart01",function(){
+        if($("#cart01").is(':checked')==true){
+            var search_word = user_id;
+            data = reviews.filter(function(reviews_info){
+                return reviews_info.user_id == search_word;
+            })
+            review_load_list(data);
+        }else{
+            review_load();
+        }
+    })
 </script>

@@ -130,6 +130,7 @@
 	var qnaDict = {};
 	var qnas = [];
 	var qnas_origin = [];
+    var qnas_new = [];
 	var page_num = 0;
 
 	$(document).ready(function() {
@@ -156,19 +157,22 @@
 			
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
 			var img_path = product['data'].main_img_url.replace("public","");
 			
 			var today = new Date();
 			var hours = today.getHours();
 			var minutes = "0" + today.getMinutes();
 			var seconds = "0" + today.getSeconds();
-			var mon = (today.getMonth()+1);
-			var formattedTime2 = today.getFullYear() + "-" + mon + "-" + today.getDate();
+			var mon = "0" + (today.getMonth()+1);
+            var day = "0" + (today.getDate());
+			var formattedTime2 = today.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
 			var typeStr = '';
 
@@ -259,7 +263,7 @@
 
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/inquiries_by_seller?seller_id="+1,      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/inquiries_total",      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
@@ -268,9 +272,25 @@
 				
 				qnas = res;
 				qnas_origin = res;
+                qnas_new = res;
+
+                qnas_new = qnas_origin.filter(function(qna_info){
+                    var unix_timestamp = qna_info.order_time;
+                    var date = new Date(unix_timestamp * 1000);
+                    var mon = "0" + (date.getMonth()+1);
+                    var day = "0" + (date.getDate());
+                    var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+                    var now_date2 = new Date();
+                    var now_mon = "0" + (now_date2.getMonth()+1);
+                    var now_day = "0" + (now_date2.getDate());
+                    var now_formattedTime = now_date2.getFullYear() + "-" + now_mon.substr(-2) + "-" + now_day.substr(-2);
+
+					return formattedTime == now_formattedTime;
+				})
 
 				$('#paging').pagination({
-					dataSource: qnas,
+					dataSource: qnas_new,
 					callback: function(data, pagination) {
 						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 						load_qna_list(data);
@@ -297,7 +317,7 @@
 					return qna_info.typeStr == "deli_qna";
 				})
 				
-				$(".new_span").text(qnas_origin.length);
+				$(".new_span").text(qnas_new.length);
 				$(".qna_span").text(tmp_arr.length);
 				$(".return_span").text(tmp_arr2.length);
 				$(".change_span").text(tmp_arr3.length);
@@ -415,6 +435,21 @@
 	$(".filter_new").click(function(e){
 		
 		$("input[name=search_qna]").val('');
+
+        qnas = qnas_origin.filter(function(qna_info){
+            var unix_timestamp = qna_info.order_time;
+            var date = new Date(unix_timestamp * 1000);
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            var now_date2 = new Date();
+            var now_mon = "0" + (now_date2.getMonth()+1);
+            var now_day = "0" + (now_date2.getDate());
+            var now_formattedTime = now_date2.getFullYear() + "-" + now_mon.substr(-2) + "-" + now_day.substr(-2);
+
+            return formattedTime == now_formattedTime;
+        })
 
 		$('#paging').pagination({
 			dataSource: qnas,

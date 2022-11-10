@@ -12,17 +12,18 @@
 		<div class="marketHeader_ham_menu">
 			<p class="marketHeader_ham_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
 			<ul class="marketHeader_ham_menu_list">
-				<li><a href="" class="arrow">전체</a>
-					<ul>
-						<li><a href="" class="arrow">악세서리</a></li>
-						<li><a href="" class="arrow">의류</a>
+				<li><a href="javascript:void(0)" class="category_all arrow">전체</a>
+					<!-- <ul>
+						<li class="right_1depth"><a href="javascript:void(0)" class="arrow">악세서리</a>
 							<ul>
-								<li><a href="">아동복</a></li>
-								<li><a href="">여성복</a></li>
-								<li><a href="">남성복</a></li>
+								<li class="right_2depth"><a href="javascript:void(0)">아동복</a>
+									<ul>
+										<li class="right_3depth"><a href="javascript:void(0)">아동복1</a></li>
+									</ul>
+								</li>
 							</ul>
 						</li>
-					</ul>
+					</ul> -->
 				</li>
 			</ul>
 		</div>
@@ -36,10 +37,10 @@
 				<h5 id="market_right_name"></h5>
 			</div>
 			<ul class="marketHeader_mypage_menu_list">
-				<li><a href="market_order.html">주문내역</a></li>
+				<!-- <li><a href="market_order.html">주문내역</a></li> -->
 				<li><a href="market_cart.html">장바구니</a></li>
-				<li><a href="market_review.html">후기 게시판</a></li>
-				<li><a href="market_qna.html">문의 게시판</a></li>
+				<!-- <li><a href="market_review.html">후기 게시판</a></li>
+				<li><a href="market_qna.html">문의 게시판</a></li> -->
 				<li><a href="market_see.html">최근 본 상품</a></li>
 			</ul>
 			<ul class="marketHeader_mypage_menu_logout">
@@ -76,6 +77,9 @@
 	$( document ).ready(function() {
 		
 		user_load();
+		category_load();
+		$(".right_2depth").hide();
+		$(".right_3depth").hide();
 
 	});
 	function user_load(){
@@ -94,11 +98,13 @@
 					$("#market_right_logout").show();
 					$("#market_right_join").hide();
 					$("#market_right_login").hide();
+					$(".marketHeader_mypage_menu_list").append("<li><a href='market_order.html'>주문내역</a></li>");
 				}else{
 					$("#market_right_name").text("비회원님, 환영합니다.");
 					$("#market_right_logout").hide();
 					$("#market_right_join").show();
 					$("#market_right_login").show();
+					$(".marketHeader_mypage_menu_list").append("<li><a href='market_non_member_order.html'>주문내역</a></li>");
 				}
 				
 					
@@ -113,5 +119,89 @@
 		localStorage.removeItem('user_id');
 		alert("로그아웃 되었습니다.");
 		location.href="./market_main.html";
+	}
+	
+	$(document).on('click','.category_all',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		
+		$(".right_2depth").slideToggle();
+		$(".right_3depth").slideToggle();
+	})
+
+	$(document).on('click','.right_1depth > a',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		$(this).parent().find(".right_2depth").slideToggle();
+	})
+
+	$(document).on('click','.right_2depth > a',function(){
+		$(this).toggleClass('arrow');
+		$(this).toggleClass('arrow_down');
+		$(this).parent().find(".right_3depth").slideToggle();
+	})
+
+	function category_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/categories",      // 컨트롤러에서 대기중인 URL 주소이다.
+			async : false,
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(datas){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				//console.log(datas);
+				var cate = JSON.parse(datas['categories']);
+				console.log("cate",cate);
+
+				var tag = ``;
+				var tag2 = ``;
+				var tag3 = ``;
+
+				for(var i = 0; i < cate.length; i++){
+					if(cate[i].children.length != 0){
+						for(var j = 0; j < cate[i].children.length; j++){
+							if(cate[i].children[j].children.length != 0){
+								for(var k = 0; k < cate[i].children[j].children.length; k++){
+									tag3 += `<ul>
+												<li class="right_3depth"><a href="javascript:void(0)">${cate[i].children[j].children[k].category_name}</a></li>
+											</ul>`;
+								}
+								
+							}else{
+								tag3 = ``;
+							}
+							tag2 += `<ul>
+										<li class="right_2depth"><a href="javascript:void(0)" class="arrow">${cate[i].children[j].category_name}</a>
+											${tag3}
+										</li>
+									</ul>`;
+
+							tag3 = ``;//초기화
+						}
+						
+					}else{
+						tag2 = ``;
+					}
+					
+
+					tag += `<ul>
+								<li class="right_1depth"><a href="javascript:void(0)" class="arrow">${cate[i].category_name}</a>
+									${tag2}
+								</li>
+							</ul>`;
+
+					tag2 = ``; // 초기화
+					
+
+				}
+				
+				$(".category_all").after(tag);
+				
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
 	}
 </script>

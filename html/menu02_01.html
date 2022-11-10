@@ -11,6 +11,9 @@
 	<link href='../js/fullcalendar/lib/main.css' rel='stylesheet' />
 	<script src='../js/fullcalendar/lib/main.min.js'></script>
 	<script src='../js/fullcalendar/lib/locales-all.min.js'></script>
+    <link href="../js/air-datepicker/dist/css/datepicker.min.css" rel="stylesheet" type="text/css" media="all">
+    <script src="../js/air-datepicker/dist/js/datepicker.js"></script> <!-- Air datepicker js -->
+    <script src="../js/air-datepicker/dist/js/i18n/datepicker.ko.js"></script> <!-- 달력 한글 추가를 위해 커스텀 -->
 </head>
 <body>
 	<div class="container">
@@ -40,7 +43,43 @@
 		<div class="footer"></div>
 	</div>
 </body>
-
+<div id="modal" class="adminModal modalPage04" style="display: none;position: fixed;">
+    <div class="adminModal_ok adminModal_order">
+        <h3 style="text-align:left;">강의 일정</h3>
+        <div style="">
+            <table class="marketSell_top_table">
+                <tr id="name_tr" style="height: 50px;">
+                    <th>강의내용</th>
+                    <td id="">
+                        <input type="text" name="class_content" placeholder="강의내용을 입력해주세요.">
+                    </td>
+                </tr>
+                <tr style="height: 50px;">
+                    <th>강사이름</th>
+                    <td id="">
+                        <input type="text" name="class_name" placeholder="강사이름을 입력해주세요.">
+                    </td>
+                </tr>
+                <tr style="height: 50px;">
+                    <th>강의 시간</th>
+                    <td id="">
+                        <input type="text" id="start_date" name="class_time" placeholder="강의시간을 입력해주세요.">
+                    </td>
+                </tr>
+                <!-- <tr style="height: 50px;">
+                    <th>강의 종료 시간</th>
+                    <td id="">
+                        <input type="text" name="class_time2" placeholder="강의시간을 입력해주세요.">
+                    </td>
+                </tr> -->
+            </table>
+        </div>
+        <div class="adminModal_ok_btn" style="margin:20px auto 5px auto">
+            <a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:48%;float:left;margin:0 5px 5px 0;">취소</a>
+            <a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" onclick="enroll_lecture()" style="width:48%;float:left;margin:0 0 5px 5px;">저장</a>
+        </div>
+    </div>
+</div>
 
 <script>
 	$(document).ready(function() {
@@ -57,35 +96,152 @@
 			$(this).addClass('on');
 			$(this).siblings().removeClass('on')
 		});
+
+        $("#close_btn").click(function(){
+            $("#modal").hide();
+        })
 	});
-	document.addEventListener('DOMContentLoaded', function() {
+
+    $("#start_date").datepicker({
+		language: 'ko',
+		timepicker: true,
+		timeFormat: "hh:ii AA",
+		onSelect: function(dateText, inst) {
+			var new_date = new Date(dateText);
+			
+			$("#new_start_date").val(new_date.getTime()/1000);
+
+     }
+	});
+
+    
+    var schedules = [];
+
+    $.get("http://43.200.169.89/lectures", function(data){
+
+        schedules = data;
+        schedules = schedules.map(function(info){
+
+            var schedule = {};
+
+            var unix_timestamp = info.start_time;
+            var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            schedule['title'] = info.lecture_title;
+            schedule['start'] = formattedTime;
+            schedule['end'] = formattedTime;
+            schedule['backgroundColor'] = '#7E7E7E';
+            schedule['borderColor'] = '#7E7E7E';
+
+            return schedule;
+        })
+
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
 			height: '1100px',
 			width: '100%',
             locale: "ko",
 			initialView: 'dayGridMonth',
+            dateClick: function() {
+                $("#modal").show();
+            },
 			headerToolbar: {
 						  start: "",
 						  center: "prev title next",
 						  end: "today",
 						},
-			events: [
-					  {
-						title: '행사',
-						start: '2022-10-25',
-						backgroundColor: '#8B0000',
-						borderColor:'#8B0000'
-					  },
-					  {
-						title: '이벤트',
-						start: '2022-10-07',
-						end: '2022-10-10',
-						backgroundColor: '#008404',
-						borderColor:'#008404'         
-					  }],
+			events: schedules,
+        });
+        calendar.render();
+
+
+        // $.each(data, function(i, datas){
+        //     var unix_timestamp = datas.start_time;
+        //     var date = new Date(unix_timestamp * 1000);
+        //     var hours = date.getHours();
+        //     var minutes = "0" + date.getMinutes();
+        //     var seconds = "0" + date.getSeconds();
+        //     var mon = "0" + (date.getMonth()+1);
+        //     var day = "0" + (date.getDate());
+        //     var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+
+        //     schedule['title'] = datas.lecture_title;
+        //     schedule['start'] = formattedTime;
+        //     schedule['end'] = formattedTime;
+        //     schedule['backgroundColor'] = '#7E7E7E';
+        //     schedule['borderColor'] = '#7E7E7E';
+        // })
+    });
+
+	document.addEventListener('DOMContentLoaded', function() {
+        
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+			height: '1100px',
+			width: '100%',
+            locale: "ko",
+			initialView: 'dayGridMonth',
+            dateClick: function() {
+                $("#modal").show();
+            },
+			headerToolbar: {
+						  start: "",
+						  center: "prev title next",
+						  end: "today",
+						},
+			events: schedules,
         });
         calendar.render();
       });
+
+     
+
+
+      function enroll_lecture() { 
+        var class_content = $("input[name=class_content]").val();
+        var class_name = $("input[name=class_name]").val();
+        var class_time = $("input[name=class_time]").val();
+        var class_time2 = $("input[name=class_time2]").val();
+
+        var now_date = new Date(class_time);
+        var enroll_time = parseInt(now_date.getTime()/1000);
+
+        if(class_content == ""){
+            alert("강의내용을 입력해주세요.");
+            return;
+        }
+
+        if(class_name == ""){
+            alert("강사이름을 입력해주세요.");
+            return;
+        }
+
+        if(class_time == ""){
+            alert("강의시간을 입력해주세요.");
+            return;
+        }
+
+        $.post("http://43.200.169.89/enroll-lecture",{
+            lecture_title : class_content,
+            teacher_name : class_name,
+            start_time : enroll_time,
+            end_time : enroll_time
+        },result=>{
+            if(result == "success"){
+            //$(e.target).text(`도움이 되었어요 ${recommenders.length}`)
+            alert('일정이 등록되었습니다.');
+            location.reload();
+            }
+        })
+      }
+
+    
 
 </script>

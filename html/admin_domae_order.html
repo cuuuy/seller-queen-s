@@ -152,9 +152,34 @@
 				<div>
 					<h5>택배사</h5>
 					<select name="delivery_company_name">
-						<option value="cj">cj 대한통운</option>
-						<option value="rozen">로젠</option>
-						<option value="woo">우체국</option>
+						<option value="de.dhl">DHL</option>
+						<option value="jp.sagawa">Sagawa</option>
+						<option value="jp.yamato">Kuroneko Yamato</option>
+                        <option value="jp.yuubin">Japan Post</option>
+						<option value="kr.chunilps">천일택배</option>
+                        <option value="kr.cjlogistics">CJ대한통운</option>
+						<option value="kr.cupost">CU 편의점택배</option>
+						<option value="kr.cvsnet">GS Postbox 택배</option>
+                        <option value="kr.cway">CWAY (Woori Express)</option>
+						<option value="kr.daesin">대신택배</option>
+                        <option value="kr.epost">우체국 택배</option>
+						<option value="kr.hanips">한의사랑택배</option>
+						<option value="kr.hanjin">한진택배</option>
+                        <option value="kr.hdexp">합동택배</option>
+						<option value="kr.homepick">홈픽</option>
+                        <option value="kr.honamlogis">한서호남택배</option>
+						<option value="kr.ilyanglogis">일양로지스</option>
+						<option value="kr.kdexp">경동택배</option>
+                        <option value="kr.kunyoung">건영택배</option>
+						<option value="kr.logen">로젠택배</option>
+                        <option value="kr.lotte">롯데택배</option>
+                        <option value="kr.slx">SLX</option>
+						<option value="kr.swgexp">성원글로벌카고</option>
+                        <option value="nl.tnt">TNT</option>
+						<option value="un.upu.ems">EMS</option>
+						<option value="us.fedex">Fedex</option>
+                        <option value="us.ups">UPS</option>
+						<option value="us.usps">USPS</option>
 					</select>
 				</div>
 				<div>
@@ -175,6 +200,7 @@
 
 	var orders = [];
 	var orders_origin = [];
+    var orders_new = [];
 
 	var products = [];
 	var invoices = [];
@@ -191,7 +217,11 @@
 		invoice_load();
 
 	});
-	
+	var user_id = localStorage.getItem('user_id');
+	if(user_id == null){
+		user_id = -1; // 비회원
+	}
+
 	var now_date = Date.now();
 	var enroll_time = now_date/1000;
 
@@ -241,7 +271,7 @@
 		var order_count_deli_ready = 0;
 		var order_count_deli_complete = 0;
 		var order_count_all = 0;
-
+        var statusStr = '';
 		for(var i = 0; i < datas.length; i++){
 			
 			var product = product_load(datas[i].product_id);
@@ -250,11 +280,12 @@
 
 					var unix_timestamp = datas[i].order_time;
 					var date = new Date(unix_timestamp * 1000);
-					var hours = date.getHours();
-					var minutes = "0" + date.getMinutes();
-					var seconds = "0" + date.getSeconds();
-					var mon = (date.getMonth()+1);
-					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+                    var hours = date.getHours();
+                    var minutes = "0" + date.getMinutes();
+                    var seconds = "0" + date.getSeconds();
+                    var mon = "0" + (date.getMonth()+1);
+                    var day = "0" + (date.getDate());
+                    var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
 					var img_path = product['data'].main_img_url.replace("public","");
 					var product_sum = datas[i].product_price + datas[i].delivery_fee;
@@ -273,16 +304,11 @@
 					}else{
 						invoice_num = datas[i].invoice_number;
 					}
-
+					
 					var delivery_company_name = '';
-
-					if(datas[i].delivery_company_name == 'cj'){
-						delivery_company_name = 'cj 대한통운';
-					}else if(datas[i].delivery_company_name == 'rozen'){
-						delivery_company_name = '로젠택배';
-					}else if(datas[i].delivery_company_name == 'woo'){
-						delivery_company_name = '우채국 택배';
-					}
+					delivery_company_name = delivery_company_name_switch(datas[i].delivery_company_name);
+					
+					
 					
 					if(datas[i].statusStr == 'readyForReturn'){
 						statusStr = '수거지시';
@@ -294,7 +320,15 @@
 						statusStr = '발송 완료';
 					}else if(datas[i].statusStr == 'ready-for-sending'){
 						statusStr = '배송 준비중';
-					}
+					}else if(datas[i].statusStr == 'paid'){
+						statusStr = '결제 완료';
+					}else if(datas[i].statusStr == 'resented-exchange'){
+						statusStr = '교환 재발송';
+					}else if(datas[i].statusStr == 'exchanged'){
+						statusStr = '교환 완료';
+					}else{
+                        statusStr = datas[i].statusStr;
+                    }
 
 					new_html += `<tr>
 										<td>
@@ -350,7 +384,23 @@
 				
 				orders = res;
 				orders_origin = res;
-				
+				orders_new = res;
+
+                orders_new = orders_origin.filter(function(order_info){
+                    var unix_timestamp = order_info.order_time;
+                    var date = new Date(unix_timestamp * 1000);
+                    var mon = "0" + (date.getMonth()+1);
+                    var day = "0" + (date.getDate());
+                    var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+                    var now_date2 = new Date();
+                    var now_mon = "0" + (now_date2.getMonth()+1);
+                    var now_day = "0" + (now_date2.getDate());
+                    var now_formattedTime = now_date2.getFullYear() + "-" + now_mon.substr(-2) + "-" + now_day.substr(-2);
+
+					return formattedTime == now_formattedTime;
+				})
+
 				var time_arr = [];
 				$.each(orders_origin, function(i, res){
 					time_arr.push(res.order_time);
@@ -363,7 +413,7 @@
 				var date3 = new Date(Math.min.apply(null, time_arr) * 1000);
 				var mon3 = date3.getMonth()+1;
 				var day3 = date3.getDate();
-				console.log(date3);
+
 				$("select[name=search_year1]").val(date3.getFullYear()).prop("selected",true);
 				$("select[name=search_month1]").val(mon3).prop("selected",true);
 				$("select[name=search_day1]").val(day3).prop("selected",true);
@@ -392,16 +442,21 @@
 					return order_info.statusStr == "sended";
 				})
 
+                var tmp_arr6 = orders_origin.filter(function(order_info){
+					return order_info.statusStr == "ready-for-sending";
+				})
+                
+
 				
-				$(".order_count_new_span").text(tmp_arr2.length);//To Do 신규 주문으로 변경 처리
+				$(".order_count_new_span").text(orders_new.length);//To Do 신규 주문으로 변경 처리
 				$(".order_count_ready_span").text(tmp_arr2.length);
 				$(".order_count_paid_span").text(tmp_arr3.length);
-				$(".order_count_deli_ready_span").text(tmp_arr4.length);
+				$(".order_count_deli_ready_span").text(tmp_arr6.length);
 				$(".order_count_deli_complete_span").text(tmp_arr5.length);
 				$(".order_count_all_span").text(orders_origin.length);
 
 				$('#paging').pagination({
-					dataSource: orders,
+					dataSource: orders_new,
 					callback: function(data, pagination) {
 						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 						load_order_list(data);
@@ -438,6 +493,7 @@
 	function invoice_save(){
 		var delivery_company_name = $("select[name=delivery_company_name]").val();
 		var invoice_number = $("input[name=invoice_number]").val();
+        var order_id = $("input[name=invoice_id]").val();
 		//console.log(delivery_company_name);
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
@@ -445,7 +501,7 @@
 			data : {
 				delivery_company_name : delivery_company_name,
 				invoice_number : invoice_number,
-				order_id : '2',
+				order_id : order_id,
 				enroll_time : enroll_time
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
@@ -453,11 +509,10 @@
 				if(res == "success"){
 					alert("송장입력이 완료 되었습니다.");
 					$("#modal2").hide();
-					//category_road();
+					order_load();
 				}else if(res == "already exist"){
 					alert("이미 송장입력이 완료되었습니다.");
 					$("#modal2").hide();
-					//category_road();already exist
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}
@@ -605,12 +660,23 @@
 		
 		$("input[name=search_order]").val('');
 
-		orders = orders_origin.filter(function(order_info){
-			return order_info.statusStr == "ready";//To Do 신규 주문으로 변경 처리
-		})
+		orders_new = orders_origin.filter(function(order_info){
+            var unix_timestamp = order_info.order_time;
+            var date = new Date(unix_timestamp * 1000);
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            var now_date2 = new Date();
+            var now_mon = "0" + (now_date2.getMonth()+1);
+            var now_day = "0" + (now_date2.getDate());
+            var now_formattedTime = now_date2.getFullYear() + "-" + now_mon.substr(-2) + "-" + now_day.substr(-2);
+
+            return formattedTime == now_formattedTime;
+        })
 
 		$('#paging').pagination({
-			dataSource: orders,
+			dataSource: orders_new,
 			callback: function(data, pagination) {
 				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 				load_order_list(data);
@@ -669,7 +735,7 @@
 		$("input[name=search_order]").val('');
 
 		orders = orders_origin.filter(function(order_info){
-			return order_info.statusStr == "readyForDelivery";
+			return order_info.statusStr == "ready-for-sending";
 		})
 
 		$('#paging').pagination({

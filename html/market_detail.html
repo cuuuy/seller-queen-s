@@ -69,37 +69,39 @@
 								<ul>
 									<li>
 										<h4>배송정보</h4>
-										<div>
-											산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 하는 경우가 있습니다.<br>
-											고객님께서 주문하신 상품은 입금 확인후 배송해 드립니다. 다만, 상품종류에 따라서 상품의 배송이 다소 지연될 수 있습니다.
+										<div class="delivery_info">
+											
 										</div>
 									</li>
 									<li>
 										<h4>상품결제정보</h4>
-										<div>
-											고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.<br><br>
-											무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.<br>
-											주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.
+										<div class="payment_info">
+											
 										</div>
 									</li>
 									<li class="marketDetail_con_btm_price">
 										<table>
 											<tr>
 												<th>총 상품금액</th>
-												<td id="product_amount">52,000원</td>
+												<td id="product_amount">0원</td>
 											</tr>
 											<tr>
 												<th>총 배송비</th>
-												<td id="deli_amount">+3000원</td>
+												<td id="deli_amount">+0원</td>
 											</tr>
 											<tr>
 												<th>최종 주문금액</th>
-												<td id="total_amount">55,000원</td>
+												<td id="total_amount">0원</td>
 											</tr>
 										</table>
 									</li>
 									<li>
 										<h4>쇼핑몰 사업자 정보</h4>
+                                        <div>
+                                            (주)아이제이<br>
+                                            대표자 : 신혜원<br>
+                                            사업자등록번호 000-00-00000<br>
+                                        </div>
 									</li>
 								</ul>
 							</div>
@@ -107,13 +109,18 @@
 						
 						<!--환불정책-->
 						<div class="marketDetail_con_box02">
-							<div class="marketDetail_con_box_text">
+							<div class="marketDetail_con_box_text marketDetail_con_box_text2">
 								<p>&lt;환불정책&gt;</p>
 							</div>
 							<div class="marketDetail_con_btm">
 								<ul>
 									<li>
 										<h4>쇼핑몰 사업자 정보</h4>
+                                        <div>
+                                            (주)아이제이<br>
+                                            대표자 : 신혜원<br>
+                                            사업자등록번호 000-00-00000<br>
+                                        </div>
 									</li>
 								</ul>
 							</div>
@@ -122,13 +129,18 @@
 						
 						<!--교환정책-->
 						<div class="marketDetail_con_box03">
-							<div class="marketDetail_con_box_text">
+							<div class="marketDetail_con_box_text marketDetail_con_box_text3">
 								<p>&lt;교환정책&gt;</p>
 							</div>
 							<div class="marketDetail_con_btm">
 								<ul>
 									<li>
 										<h4>쇼핑몰 사업자 정보</h4>
+                                        <div>
+                                            (주)아이제이<br>
+                                            대표자 : 신혜원<br>
+                                            사업자등록번호 000-00-00000<br>
+                                        </div>
 									</li>
 								</ul>
 							</div>
@@ -146,13 +158,13 @@
 									<h4>배송방법</h4>
 									<ul>
 										<li class="co777 option1">택배</li>
-										<li class="co777 option1">직접수령</li>
+										<!-- <li class="co777 option1">직접수령</li> -->
 									</ul>
 								</li>
 								<li><h4>배송비</h4>
-									<ul>
-										<li class="co777 option2">3,000원</li>
-										<li class="co777 option2">5,000원 (제주, 도서지역 추가 2000원)</li>
+									<ul class="deli_method">
+										<!-- <li class="co777 option2">3,000원</li>
+										<li class="co777 option2">5,000원 (제주, 도서지역 추가 2000원)</li> -->
 									</ul>
 								</li>
 								<li id="bottom_option_li"><h4>수량</h4>
@@ -176,8 +188,8 @@
 								</li> -->
 							</ul>
 							<div class="marketDetail_fixbox_up_box_price">
-								<p>1개 선택</p>
-								<h4>총 <span>52,000원</span></h4>
+								<p><span class="bottom_count">1</span>개 선택</p>
+								<h4>총 <span class="bottom_amount">0원</span></h4>
 							</div>
 						</div>
 					</div>
@@ -198,7 +210,12 @@
 
 
 <script>
+	
+	var count = 1;
+
 	$(document).ready(function() {
+		localStorage.removeItem('local_data');
+
 		$('.header').load('market_subheader.html');
 		
 		// 탭 전환
@@ -262,6 +279,9 @@
 		$(document).on("click",".option3_plus", function(){
 			var option3_num = parseInt($(".option3_num").text());
 			$(".option3_num").text(option3_num+1);
+			$(".bottom_count").text(option3_num+1);
+			count = option3_num+1;
+			product_load_re_amount();
 		});
 
 		$(document).on("click",".option3_minus", function(){
@@ -272,36 +292,48 @@
 				return false;
 			}else{
 				$(".option3_num").text(option3_num-1);
+				$(".bottom_count").text(option3_num-1);
+				count = option3_num-1;
+				product_load_re_amount();
 			}
 		});
 		
 
 		enroll_user_history();
-		product_road();
+		product_load();
 
 	});
 	var user_id = localStorage.getItem('user_id');
+	var test = localStorage.getItem('local_data');
 
-	var now_date = Date.now();
-	var enroll_time = now_date/1000;
+	var now_date = new Date();
+	var enroll_time = parseInt(now_date.getTime()/1000);
 
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
+	var option_length_arr = [];
+	var option_name_arr = [];
+	var options_arr = [];
+	var option_obj = {};
 
+	if(product_id==null){
+		alert("잘못된 접근입니다.");
+		location.href="./market_main.html";
+	}
 	function enroll_user_history(){//최근 본 상품 등록 function
 		// ajax 통신
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/enroll-user-history",      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
-					user_id : '1',
+					user_id : user_id,
 					product_id : product_id,
 					enroll_time : enroll_time
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				// 응답코드 > 0000
-				console.log(res);
+				//console.log(res);
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.")
@@ -310,14 +342,48 @@
 	}
 
 	function add_cart(){ // 장바구니에 상품 추가 function
-		// ajax 통신
+
+		for(var i = 0; i < option_length_arr.length; i++){
+			var top_option_value = $("select[name=option_name_"+i+"]").val();
+			options_arr.push(top_option_value);
+		}
+		console.log(options_arr);
+
+		if(options_arr.includes("")==true){
+			alert("옵션을 선택해주세요.");
+			options_arr = [];
+			return false;
+		}
+
+		var options = [];
+
+		for(var i = 0; i < option_length_arr.length; i++){
+			var top_option_key = $("select[name=option_name_"+i+"]").data('key');
+			var top_option_value = $("select[name=option_name_"+i+"]").val();
+
+			var option_dict = {};
+
+			option_dict[top_option_key] = top_option_value;
+			//option_dict[top_option_value] = top_option_value;
+
+			options.push(option_dict);
+		}
+
+		options = JSON.stringify(options);
+
+		//console.log(count);
+		//console.log(options);
+		//console.log('option_length_arr',option_length_arr);
+		//return;
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/add-to-cart",      // 컨트롤러에서 대기중인 URL 주소이다.
 			data : {
 					user_id : user_id,
 					product_id : product_id,
-					enroll_time : enroll_time
+					enroll_time : enroll_time,
+				    count : count,
+				    options : options
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				// 응답코드 > 0000
@@ -335,8 +401,8 @@
 			}
 		});
 	}
-
-	function product_road(){
+	
+	function product_load_re_amount(){//가격 재설정
 		// ajax 통신
 		$.ajax({
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
@@ -346,51 +412,96 @@
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				console.log(res);
+				
+				//count = 1;
+				var sum_price = (res[0].retail_price * count)+res[0].delivery_fee;
+				
+
+				$("#retail_price").text((res[0].retail_price * count).toLocaleString('ko-KR')+" 원");
+				
+				$("#deli_amount").text("+"+res[0].delivery_fee.toLocaleString('ko-KR')+" 원");
+				
+
+				$("#product_amount").text((res[0].retail_price * count).toLocaleString('ko-KR')+" 원");
+				$(".bottom_amount").text(sum_price.toLocaleString('ko-KR')+" 원");
+				$("#total_amount").text(sum_price.toLocaleString('ko-KR')+" 원");
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function product_load(){
+		// ajax 통신
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/retail_product-detail?product_id="+product_id,      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				console.log(res);
+                
+                $(".marketDetail_con_box_text2 > p").append(res[0].refund_info);
+                $(".marketDetail_con_box_text3 > p").append(res[0].exchange_info);
+                $(".delivery_info").append(res[0].delivery_info);
+                $(".payment_info").append(res[0].payment_info);
 
 				var img_path = res[0].main_img_url.replace("public","");
 				var new_html = `<div class="marketDetail_mainImg" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></div>`;
 				
-				var sum_price = res[0].retail_price+res[0].delivery_fee;
+				count = 1;
+				var sum_price = (res[0].retail_price * count)+res[0].delivery_fee;
+				
+				var tag = `<li class="co777 option2">${res[0].delivery_fee.toLocaleString('ko-KR')} 원</li>`;
 
-				$("#retail_price").text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
+				$(".deli_method").append(tag);
+
+				$("#retail_price").text((res[0].retail_price * count).toLocaleString('ko-KR')+" 원");
 				$("#product_title").text(res[0].product_name);
 				$("#marketDetail_mainImg").prepend(new_html);
-				$("#product_amount").text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
+				$("#product_amount").text((res[0].retail_price * count).toLocaleString('ko-KR')+" 원");
 				$("#deli_amount").text("+"+res[0].delivery_fee.toLocaleString('ko-KR')+" 원");
 				$("#total_amount").text(sum_price.toLocaleString('ko-KR')+" 원");
 				$("#product_descStr").after(res[0].descStr);
+
+				$(".bottom_amount").text(sum_price.toLocaleString('ko-KR')+" 원");
 
 				var new_html2 = ``;
 				var new_html3 = ``;
 				var new_html4 = ``;
 				var new_html5 = ``;
-
+				
 				for(var i = 0; i < res.length; i++){
-
+                    
 					var parse_option_key = Object.keys(JSON.parse(res[i].options));
 					var parse_option_value = Object.values(JSON.parse(res[i].options));
-					console.log(parse_option_key);
-					console.log(parse_option_value);
+					
+					//console.log(parse_option_key);
+					//console.log(parse_option_value);
 
 					for(var j = 0; j < parse_option_value.length; j++){
-						
+						option_length_arr.push(parse_option_key);
+						//console.log(option_length_arr);
 						for(var k = 0; k < parse_option_value[j]['selections'].length; k++){
-							console.log(parse_option_value[j]['selections'][k]);
+							//console.log(parse_option_value[j]['selections'][k]);
 							new_html3 += `<option class="" value="${parse_option_value[j]['selections'][k]}">${parse_option_value[j]['selections'][k]}</option>`;
 
-							new_html5 += `<li class="co777 option_li_${parse_option_value[j].option_name}" value="${parse_option_value[j]['selections'][k]}">${parse_option_value[j]['selections'][k]}</li>`;
+							new_html5 += `<li class="co777 cell option_li_${parse_option_value[j].option_name} 2option_li_${parse_option_value[j]['selections'][k]}" value="${parse_option_value[j]['selections'][k]}" data-key="option_name_${parse_option_key[j]}">${parse_option_value[j]['selections'][k]}</li>`;
 
 						}
 						new_html2 += `<tr>
 								<th>${parse_option_value[j].option_name}</th>
 								<td>
-									<select name="option_name_${parse_option_value[j].option_name}" id="">
+									<select name="option_name_${parse_option_key[j]}" class="top_option_value" data-key="${parse_option_value[j].option_name}" data-num="${j}">
 										<option value="">[선택]</option>
 									${new_html3}	
 									</select>
 								</td>
 							</tr>`;
-						new_html4 += `<li><h4>${parse_option_value[j].option_name}</h4>
+						new_html4 += `<li>
+									<h4 class="option_names_${parse_option_value[j].option_name}">${parse_option_value[j].option_name}</h4>
 									<ul>
 										${new_html5}
 									</ul>
@@ -398,7 +509,12 @@
 
 						new_html3 = ``;
 						new_html5 = ``;
-						
+
+						$(document).on("click",".option_li_"+parse_option_value[j].option_name, function(e){
+							$(this).addClass('on');
+							$(this).siblings().removeClass("on");
+						});
+
 					}
 
 				}
@@ -411,23 +527,68 @@
 		});
 	}
 	
-	$(document).on("click",".option_li_"+parse_option_value[j].option_name, function(){
-		$(this).addClass('on');
-		$(this).siblings().removeClass("on");
-		var classname = parse_option_value[j];
-		console.log(classname);
-		$('.option_name_'+classname);
-
-		//.val('11').prop("selected","selected")
+	$(document).on("click",".cell", function(e){
+		var class_key = $(e.target).data('key');
+		var class_value = $(e.target).text();
+		$("select[name="+class_key+"]").val(class_value);
+		
 	});
-
+	
+	$(document).on("change",".top_option_value", function(e){
+		var class_key = $(e.target).data('key');
+		var class_value = $(e.target).val();
+		$(".2option_li_"+class_value).addClass("on");
+	});
+	
+	
 	function move_order(){
+		
+
+		if($(".option1.on").text()==""){
+			alert("배송방법을 선택해주세요.");
+			$(".marketDetail_fixbox_up").addClass('active');
+			$(".marketDetail_fixbox_up").siblings('div').slideToggle(400);
+			$('.marketDetail_fixbox_show > ul > li > ul').hide();
+			return false;
+		}
+
+		if($(".option2.on").text()==""){
+			alert("배송비를 선택해주세요.");
+			return false;
+		}
+
+		for(var i = 0; i < option_length_arr.length; i++){
+			var top_option_key = $("select[name=option_name_"+i+"]").data('key');
+			var top_option_value = $("select[name=option_name_"+i+"]").val();
+			
+			option_name_arr.push(top_option_key);
+			options_arr.push(top_option_value);
+		}
+
+		if(options_arr.includes("")==true){
+			alert("옵션을 선택해주세요.");
+			return false;
+		}
+
+		var local_data = {
+			"total_amount" : parseInt($("#total_amount").text().replace(" 원","")),
+			"price" : parseInt($("#product_amount").text().replace(" 원","")),
+			"count" : count,
+			"deli_fee" : parseInt($("#deli_amount").text().replace("+","").replace(" 원","")),
+			"deli_method" : $(".option1.on").text(),
+			"option_name" : option_name_arr,
+			"options_arr" : options_arr
+		};
+		
+		console.log(local_data);
+		//return;
+		localStorage.setItem("local_data", JSON.stringify(local_data));
+
 		if(localStorage.getItem('user_id')){
 			location.href="market_sell.html?product_id="+product_id;
 		}else{
 			location.href="./market_login.html?product_id="+product_id;
 		}
-		
 	}
 
 	function market_review(){

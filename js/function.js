@@ -88,3 +88,42 @@ function date_setting(origin, time){
 	$("select[name=search_month2]").val(mon2).prop("selected",true);
 	$("select[name=search_day2]").val(day2).prop("selected",true);
 }
+
+function delivery_company_name_switch($Code=''){
+
+    switch($Code){
+        case "de.dhl" : $returnTxt = "DHL"; break;
+        case "jp.sagawa" : $returnTxt = "Sagawa"; break;
+        case "jp.yamato" : $returnTxt = "Kuroneko"; break;
+        case "jp.yuubin" : $returnTxt = "Japan Post"; break;
+        case "kr.chunilps" : $returnTxt = "천일택배"; break;
+        case "kr.cjlogistics" : $returnTxt = "CJ대한통운"; break;
+        case "kr.cupost" : $returnTxt = "CU 편의점택배"; break;
+        case "kr.cvsnet" : $returnTxt = "GS Postbox 택배"; break;
+        case "kr.cway" : $returnTxt = "CWAY (Woori Express)"; break;
+        case "kr.daesin" : $returnTxt = "대신택배"; break;
+        case "kr.epost" : $returnTxt = "우체국 택배"; break;
+        case "kr.hanips" : $returnTxt = "한의사랑택배"; break;
+        case "kr.hanjin" : $returnTxt = "한진택배"; break;
+        case "kr.hdexp" : $returnTxt = "합동택배"; break;
+        case "kr.homepick" : $returnTxt = "홈픽"; break;
+        case "kr.honamlogis" : $returnTxt = "한서호남택배"; break;
+        case "kr.ilyanglogis" : $returnTxt = "일양로지스"; break;
+        case "kr.kdexp" : $returnTxt = "경동택배"; break;
+        case "kr.kunyoung" : $returnTxt = "건영택배"; break;
+        case "kr.logen" : $returnTxt = "로젠택배"; break;
+        case "kr.lotte" : $returnTxt = "롯데택배"; break;
+        case "kr.slx" : $returnTxt = "SLX"; break;
+        case "kr.swgexp" : $returnTxt = "성원글로벌카고"; break;
+        case "nl.tnt" : $returnTxt = "TNT"; break;
+        case "un.upu.ems" : $returnTxt = "EMS"; break;
+        case "us.fedex" : $returnTxt = "Fedex"; break;
+        case "us.ups" : $returnTxt = "UPS"; break;
+        case "us.usps" : $returnTxt = "USPS"; break;
+		case null : $returnTxt = "-"; break;
+
+		default : $returnTxt = $Code; break;
+    }
+
+    return $returnTxt;
+}
