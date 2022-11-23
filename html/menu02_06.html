@@ -26,7 +26,7 @@
 				<div class="fam_in">
 					<h5>내가 참여중인 팸</h5>
 					<ul class="fam_in_list fam_in_listIng">
-						<li>
+						<!-- <li>
 							<div class="fam_in_list_top">
 								<span class="fam_in_list_top_thumb"></span>
 								<div>
@@ -64,9 +64,9 @@
 								어떤 물건이 인기일까? 셀러의 너도 나도 알고있는 알찬 정보를 함께 공유해요~!
 							</div>
 							<a href="./fam_board.html" class="fam_in_list_btn">참여중</a>
-						</li> 
+						</li>  -->
 					</ul>
-					<ul class="fam_in_list fam_in_listSt">
+					<!-- <ul class="fam_in_list fam_in_listSt">
 						<li>
 							<div class="fam_in_list_top">
 								<span class="fam_in_list_top_thumb"></span>
@@ -145,13 +145,42 @@
 							</div>
 							<a href="" class="fam_in_list_btn">참여하기</a>
 						</li> 
-					</ul>
+					</ul> -->
+                    <div class="adminModal_ok_btn" style="margin:20px auto 5px auto">
+                        <a href="javascript:void(0);" class="ok_btn" id="close_btn" style="width:10%;float:right;" onclick="modal_show()">fam 만들기</a>
+                    </div>
 				</div>
+                
 			</div>
 		</div>
 		
 		<div class="footer"></div>
 	</div>
+    <div id="modal" class="adminModal modalPage04" style="display: none;position: fixed;">
+        <div class="adminModal_ok adminModal_order">
+            <h3 style="text-align:left;">fam 만들기</h3>
+            <div>
+                <table class="marketSell_top_table">
+                    <tr id="name_tr" style="height: 50px;">
+                        <th>제목</th>
+                        <td id="">
+                            <input type="text" name="fam_title" placeholder="제목을 입력해주세요.">
+                        </td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <th>내용</th>
+                        <td id="">
+                            <input type="text" name="fam_content" placeholder="내용을 입력해주세요.">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="adminModal_ok_btn" style="margin:20px auto 5px auto">
+                <a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:48%;float:left;margin:0 5px 5px 0;">취소</a>
+                <a href="javascript:void(0);" class="ok_btn" id="close_btn_2" onclick="make_fam()" style="width:48%;float:left;margin:0 0 5px 5px;">저장</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 
@@ -165,6 +194,92 @@
 			$(this).addClass('active');
 			$(this).siblings().removeClass('active');
 		});
+
+        
 	});
 
+    $(".modalClose").click(function(){
+        $("#modal").hide();
+    })
+
+    var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
+
+    var now_date = new Date();
+    var enroll_time = parseInt(now_date.getTime()/1000);
+
+    $.get("http://43.200.169.89/fams", function(data){
+		console.log(data);
+
+        var tag = ``;
+
+        $.each(data, function(i, res){
+            tag += `<li>
+							<div class="fam_in_list_top">
+								<span class="fam_in_list_top_thumb"></span>
+								<div>
+                                    <a href="./fam_board.html?fam_id=${res.id}" class="">
+                                        <h5>${res.title}</h5>
+                                    </a>
+									<p>팸장 : ${res.owner_name}</p>
+								</div>
+							</div>
+							<div class="fam_in_list_btm">
+								${res.fam_desc}
+							</div>
+							<!--<a href="./fam_board.html?fam_id=${res.id}" class="fam_in_list_btn">이동하기</a>-->
+                            <a href="javascript:void(0)" class="fam_in_list_btn" onclick="apply_fam(${res.id})">참여하기</a>
+						</li>`;
+
+        })
+
+        $(".fam_in_list").append(tag);
+		
+	});
+    function modal_show(){
+        $("#modal").show();
+    }
+    function make_fam(){
+        var fam_title = $("input[name=fam_title]").val();
+        var fam_content = $("input[name=fam_content]").val();
+
+        if(fam_title == ""){
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        if(fam_content == ""){
+            alert("내용을 입력해주세요.");
+            return;
+        }
+        console.log(fam_content)
+        $.post("http://43.200.169.89/make-fam",{
+            title : fam_title,
+            owner_id : user_id,
+            fam_desc : fam_content,
+            enroll_time : enroll_time
+        },result=>{
+            if(result == "success"){
+            alert('fam이 등록되었습니다.');
+            location.reload();
+            }
+        })
+    }
+    function apply_fam(id){
+        $.post("http://43.200.169.89/apply-fam",{
+            fam_id : id,
+            user_id : user_id,
+            enroll_time : enroll_time
+        },result=>{
+            if(result == "success"){
+                alert('fam 지원이 완료되었습니다.');
+                location.reload();
+            }else if(result == "already exist"){
+                alert('이미 지원하신 fam입니다.');
+                location.reload();
+            }
+        })
+    }
 </script>

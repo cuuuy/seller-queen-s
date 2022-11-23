@@ -188,7 +188,7 @@
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
 
-		$.get("http://43.200.169.89/pay_infos?seller_id="+1,result=>{
+		$.get("http://43.200.169.89/pay_infos_total?start_time=0&end_time=9999999999",result=>{
 			console.log(result);
 
 			pay_info = result;

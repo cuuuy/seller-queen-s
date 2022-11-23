@@ -104,7 +104,7 @@
 								<option>정산상태</option>
 							</select>
 						</div>
-						<div>
+						<div style="min-height: 600px;">
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
@@ -302,7 +302,7 @@
 
 	}
 
-	$.get("http://43.200.169.89/profits_by_seller?seller_id="+1,result=>{
+	$.get("http://43.200.169.89/profits_from_ad_for_seller?seller_id="+1,result=>{
 		console.log(result);
 
 		profits = result;

@@ -7,6 +7,10 @@
 <link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
 <link rel="stylesheet" type="text/css" href="../css/new_style.css">
 <link rel="stylesheet" type="text/css" href="../css/admin.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+<script src="../js/pagination.min.js"></script>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <body>
 	<div class="container">
@@ -14,119 +18,6 @@
 			
 		</div>
 		<div class="body">
-			<div id="modal" class="modal-overlay">
-				<div class="modal-window">
-					<div class="title">
-						<h2>승인완료</h2>
-					</div>
-					<div class="close-area">X</div>
-					<div class="content">
-						<table class="modal_table">
-							<colgroup>
-								<col width="3%">
-								<col width="*">
-								<col width="15%">
-								<col width="15%">
-								<col width="15%">
-								<col width="15%">
-								<col width="15%">
-							</colgroup>
-							<thead>
-								<th>No.</th>
-								<th>계정</th>
-								<th>ID</th>
-								<th>회원유형</th>
-								<th>닉네임</th>
-								<th>이름</th>
-								<th>가입일</th>
-							</thead>
-							<tbody>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>
-										<p>abcd@gamil.com</p>
-									</td>
-									<td>tjdwldkdlel</td>
-									<td>도매상</td>
-									<td>시계나라</td>
-									<td>김민지</td>
-									<td>20220401</td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="modal_close_btn">
-							<a href="javascript:void(0);" id="close_btn" onclick="">확인</a>
-						</div>
-						
-					</div>
-				</div>
-			</div>
 			<div class="body_fam_mainImage">
 				<img src="../image/stanby.png">
 			</div>
@@ -134,37 +25,34 @@
 			<div class="adminContent_right" style="width:80%;margin: 20px 10% 200px 10%;">
 				<div class="adminContent_tab">
 					<ul>
-						<li class="active"><a href="">승인대기 30</a></li>
-						<li><a href="">승인완료 0</a></li>
-						<li><a href="">전체 30</a></li>
+						<li class="ready_filter active"><a href="javascript:void(0)">승인대기 <span class="ready_span">0</span></a></li>
+						<li class="yes_filter"><a href="javascript:void(0)">승인완료 <span class="yes_span">0</span></a></li>
+						<li class="all_filter"><a href="javascript:void(0)">전체 <span class="all_span">0</span></a></li>
 					</ul>
 				</div>
 				<div class="adminContent_search">
-					<input type="search" name="" placeholder="사용자 이름이나 닉네임, 아이디를 검색해주세요.">
-					<a href="" id="check_btn">검색</a>
+					<input type="search" name="search_order" placeholder="사용자 이름이나 닉네임, 아이디를 검색해주세요." onkeyup="enterkey()">
+					<a href="" id="check_btn search_btn">검색</a>
 				</div>
-				<div class="adminContent_search">
-					
-				</div>
-				<div class="adminContent_search">
+				<!-- <div class="adminContent_search">
 					<a href="" id="check_btn">반려</a>
 					<a href="" id="check_btn">승인</a>
-					<span class="adminContent_search_span">총 도매상 2명 선택</span>
-				</div>
+					<span class="adminContent_search_span">총 도매상 0명 선택</span>
+				</div> -->
 				<div>
 					<table class="adminContent_table">
 						<colgroup>
 							<col width="3%">
 							<col width="3%">
 							<col width="*">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="10%">
-							<col width="5%">
-							<col width="5%">
-							<col width="5%">
-							<col width="5%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
+							<col width="8%">
 						</colgroup>
 						<thead>
 							<th></th>
@@ -179,8 +67,8 @@
 							<th></th>
 							<th></th>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody id="user_load_tbody">
+							<!-- <tr>
 								<td>
 									<div class="adminContent_table_checkbox">
 										<input id="check02" type="checkbox">
@@ -207,180 +95,13 @@
 										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check02" type="checkbox">
-										<label for="check02"><span></span></label>
-									</div>
-								</td>
-								<td>1</td>
-								<td class="adminContent_table_name">
-									<p>abcd@gamil.com</p>
-								</td>
-								<td>tjdwldkdlel</td>
-								<td>도매상</td>
-								<td>시계나라</td>
-								<td>김민지</td>
-								<td>20220401</td>
-								<td>승인대기</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">승인</a>
-									</div>
-								</td>
-								<td>
-									<div class="adminContent_order">
-										<a href="javascript:void(0);" id="check_btn" onclick="modal_popup();">반려</a>
-									</div>
-								</td>
-							</tr>
-							
+							</tr> -->
 						</tbody>
 					</table>
 				</div>
-			
+				<div class="adminContent_pager" id="paging">
+							
+				</div>
 		</div>	
 
 	</div>
@@ -396,35 +117,227 @@
 	$(document).ready(function(){
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
+
+		user_load();
 	});
 	
-	function modal_popup(){
-		const modal = document.getElementById("modal")
-		modal.style.display = "flex"
+
+	function load_user_list(datas){
+
+		var tag = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var seconds = "0" + date.getSeconds();
+			var mon = (date.getMonth()+1);
+			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+			
+			var allowed = '';
+
+			if(datas[i].allowed == 'NO'){
+				allowed = "승인대기";
+			}else if(datas[i].allowed == 'YES'){
+				allowed = "승인완료";
+			}
+			
+					tag+= `<tr>
+								<td>
+									<div class="adminContent_table_checkbox">
+										<input id="check${datas[i].id}" type="checkbox">
+										<label for="check${datas[i].id}"><span></span></label>
+									</div>
+								</td>
+								<td>${page_num-i}</td>
+								<td class="adminContent_table_name">
+									<p>${datas[i].email}</p>
+								</td>
+								<td>${datas[i].idStr}</td>
+								<td>도매상</td>
+								<td>${datas[i].nickname}</td>
+								<td>${datas[i].name}</td>
+								<td>${formattedTime}</td>
+								<td>${allowed}</td>
+								<td>
+									<div class="adminContent_order">
+										<a href="javascript:void(0);" id="check_btn" onclick="revise_wholesaler(${datas[i].id},'YES');">승인</a>
+									</div>
+								</td>
+								<td>
+									<div class="adminContent_order">
+										<a href="javascript:void(0);" id="check_btn" onclick="revise_wholesaler(${datas[i].id},'NO');">반려</a>
+									</div>
+								</td>
+							</tr>`;
+
+		}
+
+		$("#user_load_tbody").html(tag);
+
 	}
 
-	const modal = document.getElementById("modal")
-	const closeBtn = modal.querySelector(".close-area")
-	const close_btn = modal.querySelector("#close_btn")
+	function user_load(){
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/wholesalers",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				//user_id : user_id,
+				//name : name,
+				//user_id : 1,
+				//name : "테스트의류",
+				//enroll_time : enroll_time
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				userInfoDict = res;
+				users = userInfoDict['users'];
+				users_origin = userInfoDict['users'];
 
-	close_btn.addEventListener("click", e => {
-		modal.style.display = "none"
+				paidInfoDict = userInfoDict['paidInfoDict'];
+				productCountDict = userInfoDict['productCountDict'];
+				profitInfoDict = userInfoDict['profitInfoDict'];
+
+				var tmp_arr = users.filter(function(user_info){
+					return user_info.allowed == "NO";
+				})
+
+				var tmp_arr2 = users.filter(function(user_info){
+					return user_info.allowed == "YES";
+				})
+
+				$(".ready_span").text(tmp_arr.length);
+				$(".yes_span").text(tmp_arr2.length);
+				$(".all_span").text(users.length);
+
+
+				$('#paging').pagination({
+					dataSource: users,
+					callback: function(data, pagination) {
+						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+						load_user_list(data);
+					}
+				});
+
+				$("#user_count").text(users.length);
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+	function revise_wholesaler(id, status){
+		$.post("http://43.200.169.89/revise-state-for-wholesaler",{
+			user_id : id,
+			allowed : status
+		},result=>{
+			if(result == "success"){
+				if(status=="YES"){
+					alert('승인되었습니다.');
+					location.reload();
+				}else if(status=="NO"){
+					alert('반려되었습니다.');
+					location.reload();
+				}
+				
+			}
+		})
+	}
+
+	$(".ready_filter").click(function(e){
+		
+		$("input[name=search_order]").val('');
+
+		users = users_origin.filter(function(user_info){
+			return user_info.allowed == "NO";
+		})
+
+		$('#paging').pagination({
+			dataSource: users,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_user_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
 	})
 
-	closeBtn.addEventListener("click", e => {
-		modal.style.display = "none"
+	$(".yes_filter").click(function(e){
+		
+		$("input[name=search_order]").val('');
+
+		users = users_origin.filter(function(user_info){
+			return user_info.allowed == "YES";
+		})
+
+		$('#paging').pagination({
+			dataSource: users,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_user_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
+	
+	$(".all_filter").click(function(e){
+		
+		$("input[name=search_order]").val('');
+
+		$('#paging').pagination({
+			dataSource: users_origin,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_user_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
 	})
 
-	modal.addEventListener("click", e => {
-		const evTarget = e.target
-		if(evTarget.classList.contains("modal-overlay")) {
-			modal.style.display = "none"
+	$(".search_btn").click(function(e){ //To Do API 변경되면 검색 테스트
+		var search_word = $("input[name=search_order]").val();
+		
+		users = users_origin.filter(function(user_info){
+			return user_info.nickname.indexOf(search_word) > -1 || user_info.idStr.indexOf(search_word) > -1;
+		})
+
+		$('#paging').pagination({
+			dataSource: users,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_user_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) { //To Do API 변경되면 검색 테스트
+			var search_word = $("input[name=search_order]").val();
+		
+			users = users_origin.filter(function(user_info){
+				return user_info.nickname.indexOf(search_word) > -1 || user_info.idStr.indexOf(search_word) > -1;
+			})
+
+			$('#paging').pagination({
+				dataSource: users,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_user_list(data);
+				}
+			});
 		}
-	})
-
-	window.addEventListener("keyup", e => {
-		if(modal.style.display === "flex" && e.key === "Escape") {
-			modal.style.display = "none"
-		}
-	})
+	}
 </script>

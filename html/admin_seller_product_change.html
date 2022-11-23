@@ -62,13 +62,13 @@
 					<div class="adminContent_right">
 						<div class="adminContent_tab">
 							<ul>
-								<li class="filter_new active"><a href="javascript:void(0)">신규 요청 <span>0</span></a></li>
-								<li class="filter_exchange"><a href="javascript:void(0)">교환 요청 <span>0</span></a></li>
-								<li class="filter_returning"><a href="javascript:void(0)">수거중 <span>0</span></a></li>
-								<li class="filter_canceld"><a href="javascript:void(0)">수거/취소 완료 <span>0</span></a></li>
-								<li class="filter_re_deli"><a href="javascript:void(0)">재배송중 <span>0</span></a></li>
-								<li class="filter_exchanged"><a href="javascript:void(0)">교환 완료 <span>0</span></a></li>
-								<li class="filter_all"><a href="javascript:void(0)">전체 <span>0</span></a></li>
+								<li class="filter_new active"><a href="javascript:void(0)">신규 요청 <span class="new_span">0</span></a></li>
+								<li class="filter_exchange"><a href="javascript:void(0)">교환 요청 <span class="exchange_span">0</span></a></li>
+								<li class="filter_returning"><a href="javascript:void(0)">수거중 <span class="returning_span">0</span></a></li>
+								<li class="filter_canceld"><a href="javascript:void(0)">수거/취소 완료 <span class="canceld_span">0</span></a></li>
+								<li class="filter_re_deli"><a href="javascript:void(0)">재배송중 <span class="re_deli_span">0</span></a></li>
+								<li class="filter_exchanged"><a href="javascript:void(0)">교환 완료 <span class="exchanged_span">0</span></a></li>
+								<li class="filter_all"><a href="javascript:void(0)">전체 <span class="all_span">0</span></a></li>
 							</ul>
 						</div>
 						<div class="adminContent_search">
@@ -250,7 +250,10 @@
 			}
 
 			var total_price = datas[i].product_price+datas[i].delivery_fee;
-			
+			var invoice_number = '-';
+            if(datas[i].invoice_number != null){
+                invoice_number = datas[i].invoice_number;
+            }
 			tag+= `<tr>
 						<td>
 							<div class="adminContent_table_checkbox">
@@ -271,7 +274,7 @@
 						<td>${datas[i].delivery_fee.toLocaleString('ko-KR')}원</td>
 						<td>${total_price.toLocaleString('ko-KR')}원</td>
 						<td>${delivery_company_name}</td>
-						<td>${datas[i].invoice_number}</td>
+						<td>${invoice_number}</td>
 						<!-- <td>
 							<div class="adminContent_order">
 								<a href="javascript:void(0)" class="check_btn">수정</a>
@@ -353,9 +356,8 @@
 				$(".new_span").text(orders_origin.length);//To Do 수정
 				$(".return_span").text(tmp_arr.length);
 				$(".return_complete_span").text(tmp_arr2.length);
-				$(".all_span").text(orders_origin.length);
 				$(".return_complete_span").text(tmp_arr2.length);
-				$(".all_span").text(orders_origin.length);
+				$(".all_span").text(orders.length);
 
 
 			},

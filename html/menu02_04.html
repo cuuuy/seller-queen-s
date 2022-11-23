@@ -9,6 +9,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -20,7 +22,7 @@
 		<div id="content">
 			<div class="selClass">
 				<div class="adminContent_right" style="float:none;width:100%;padding:0;">
-					<div>
+					<div class="board_table">
 						<table class="adminContent_table famBoard_table">
 							<colgroup>
 								<col width="*">
@@ -34,87 +36,78 @@
 								<th>시간</th>
 								<th>조회</th>
 							</thead>
-							<tbody>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
+							<tbody id="board_tr">
+								
 							</tbody>
 						</table>
+                        <div class="adminContent_order" style="margin-top: 20px;">
+                            <a href="javascript:void(0);" id="check_btn" onclick="modal_popup3()">글쓰기</a>
+                        </div>
 					</div>
-					<div class="adminContent_order">
-						<a href="javascript:void(0);" id="check_btn" onclick="">글쓰기</a>
-					</div>
+					
+
+                    <div class="board_view" style="display: none;" id="">
+                        
+                    </div>
+
 				</div>
 			</div>
 		</div>
-		
+		<div id="modal3" class="adminModal modalPage03" style="display:none;">
+			<div class="adminModal_cont">
+				<h3>게시글 작성</h3>
+                <div>
+					<h5>글 타입</h5>
+					<input type="radio" name="post_type" value="normal" checked> 일반글
+                    <input type="radio" name="post_type" value="notice"> 공지글
+				</div>
+				<div>
+					<h5>제목</h5>
+					<input type="text" name="fam_title" id="fam_title" style="background-color: #EAE6F2;width: 420px;height: 50px;">
+				</div>
+				<div>
+					<h5 style="margin-bottom:10px;">내용</h5>
+					<!-- 스마트에디터 -->
+					<textarea name="fam_content" id="editor"></textarea>
+					<div>
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modalNext2" onclick="enroll_post()">완료</a>
+				</div>
+			</div>
+		</div>
+
+        <div id="modal4" class="adminModal modalPage03" style="display:none;">
+            <input type="hidden" name="hidden_id">
+			<div class="adminModal_cont">
+				<h3>게시글 작성</h3>
+                <div>
+					<h5>글 타입</h5>
+					<input type="radio" name="post_type2" value="normal" checked> 일반글
+                    <input type="radio" name="post_type2" value="notice"> 공지글
+				</div>
+				<div>
+					<h5>제목</h5>
+					<input type="text" name="fam_title2" id="fam_title2" style="background-color: #EAE6F2;width: 420px;height: 50px;">
+				</div>
+				<div>
+					<h5 style="margin-bottom:10px;">내용</h5>
+					<!-- 스마트에디터 -->
+					<textarea name="fam_content2" id="editor2"></textarea>
+					<div>
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modalNext2" onclick="modify_post()">완료</a>
+				</div>
+			</div>
+		</div>
+
+        
+
 		<div class="footer"></div>
 	</div>
 </body>
@@ -132,4 +125,206 @@
 		});
 	});
 
+    var now_date = new Date();
+    var enroll_time = parseInt(now_date.getTime()/1000);
+
+    var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
+
+    var boards = [];
+    ClassicEditor
+    .create(document.querySelector("#editor"),
+        {
+            language: "ko"
+        })
+    .then(newEditor => {
+        editor = newEditor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+    ClassicEditor
+    .create(document.querySelector("#editor2"),
+        {
+            language: "ko"
+        })
+    .then(newEditor => {
+        editor2 = newEditor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+    function modal_popup3(){
+		const modal3 = document.getElementById("modal3")
+		modal3.style.display = "flex"
+	}
+
+    function modal_popup4(id){
+		const modal4 = document.getElementById("modal4")
+		modal4.style.display = "flex"
+        $("input[name=hidden_id]").val(id);
+	}
+
+    function enroll_post(){
+
+        var title = $("input[name=fam_title]").val();
+        //var descStr = $("input[name=fam_content]").val();
+        var descStr = editor.getData();
+        var post_type = $("input[name=post_type]:checked").val();
+        
+        if(title == ""){
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        if(descStr == ""){
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        $.post("http://43.200.169.89/enroll-post-to-request-help",{
+            user_id : user_id,
+            post_type : post_type,
+            title : title,
+            contents : descStr,
+            enroll_time : enroll_time
+        },result=>{
+            if(result == "success"){
+                alert('작성이 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
+
+    function modify_post(){
+
+        var title = $("input[name=fam_title2]").val();
+        //var descStr = $("input[name=fam_content]").val();
+        var descStr = editor2.getData();
+        var post_type = $("input[name=post_type2]:checked").val();
+        var post_id = $("input[name=hidden_id]").val();
+
+        if(title == ""){
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        if(descStr == ""){
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        $.post("http://43.200.169.89/revise-post-to-request-help",{
+            post_id : post_id,
+            user_id : user_id,
+            post_type : post_type,
+            title : title,
+            contents : descStr,
+        },result=>{
+            if(result == "success"){
+                alert('수정이 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
+
+    function count_up(id){
+        $.post("http://43.200.169.89/view-count-up-for-request-help-views",{
+            post_id : id,
+            user_id : user_id,
+        },result=>{
+            if(result == "success"){
+                //alert('삭제가 완료되었습니다.');
+                //location.reload();
+            }
+        })
+    }
+
+    function board_delete(id){
+        $.post("http://43.200.169.89/delete-post-to-request-help",{
+            post_id : id,
+            user_id : user_id,
+        },result=>{
+            if(result == "success"){
+                alert('삭제가 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
+    $.get("http://43.200.169.89/request-help", function(data){
+		console.log(data);
+        boards = data;
+
+        var tag = ``;
+
+        $.each(data, function(i, res){
+            var unix_timestamp = res.enroll_time;
+            var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            tag += `<tr>
+                        <td class="adminContent_table_name" data-type="${res.id}">
+                            <p>${res.title}</p>
+                        </td>
+                        <td>${res.nickname}</td>
+                        <td>${formattedTime}</td>
+                        <td>${res.views}</td>
+                    </tr>`;
+
+        })
+
+        $("#board_tr").append(tag);
+		
+	});
+
+    $(document).on("click",".adminContent_table_name", function(){
+        var target_id = $(this).data('type');
+        console.log(target_id);
+
+        boards = boards.filter(function(board_info){
+            return board_info.id == target_id;
+        })
+
+        console.log(boards);
+
+        var tag = `<div class="" style="display: block;" id="">
+                        <div class="" id="">
+                        <h3></h3>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>제목</b></h5>
+                            <p style="font-size:15px;" id="board_title">${boards[0].title}</p>
+                            <p style="float:right;">작성자 : ${boards[0].nickname}</p>
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>내용</b></h5>
+                            <p style="font-size:15px;" id="board_content">${boards[0].contents}</p>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="adminModal_cont_btn">
+                            <a href="javascript:void(0)" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;" onclick="board_delete(${boards[0].id});">삭제</a>
+                            <a href="javascript:void(0)" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;" onclick="modal_popup4(${boards[0].id})">수정</a>
+                            <a href="./menu02_04.html" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;">목록으로</a>
+                        </div>
+                    </div>`;
+        
+        $("#fam_title2").val(boards[0].title);
+        editor2.setData(boards[0].contents);
+
+        $(".board_view").html(tag);
+        $(".board_view").show();
+        $(".board_table").hide();
+
+        count_up(boards[0].id);
+    })
 </script>

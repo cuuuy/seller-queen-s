@@ -134,7 +134,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 /* modal */
 .adminModal {position:absolute;width:100%;min-height:100vh;height:100%;top:0;left:0;background:rgba(0,0,0,0.4);z-index:9999;overflow:hidden;}
-.adminModal_cont {position:absolute;width:1000px;padding:46px 36px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
+.adminModal_cont {position:absolute;width:500px;padding:46px 36px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
 .adminModal_cont > div {margin:0 0 40px 0;}
 .adminModal_cont h3 {color:#4E327B;text-align:center;margin:0 0 20px 0;font-size:24px;}
 .adminModal_cont > div h3 {font-size:21px;color:#111;padding:0 0 16px 0;border-bottom:1px solid #bababa;margin:0 0 20px 0;}

@@ -9,6 +9,8 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -35,82 +37,40 @@
 								<th>시간</th>
 								<th>조회</th>
 							</thead>
-							<tbody>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
+							<tbody id="board_tr">
+								<!-- <tr>
 									<td class="adminContent_table_name">
 										<p>게시글 제목</p>
 									</td>
 									<td>작성자 이름</td>
 									<td>2020-09-01</td>
 									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
-								<tr>
-									<!-- <td>
-										<div class="adminContent_table_checkbox">
-											<input id="check02" type="checkbox">
-											<label for="check02"><span></span></label>
-										</div>
-									</td> -->
-									<td class="adminContent_table_name">
-										<p>게시글 제목</p>
-									</td>
-									<td>작성자 이름</td>
-									<td>2020-09-01</td>
-									<td>12</td>
-								</tr>
+								</tr> -->
 							</tbody>
 						</table>
 					</div>
+
+                    <!-- <div class="" style="display: block;" id="">
+                        <div class="" id="">
+                        <h3></h3>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>제목</b></h5>
+                            <p style="font-size:15px;" id="board_title"></p>
+                            <p style="float:right;">작성자 : </p>
+                        </div>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>내용</b></h5>
+                            <p style="font-size:15px;" id="board_content"></p>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="adminModal_cont_btn">
+                            <a href="javascript:void(0)" class="back_btn modalClose">목록으로</a>
+                        </div>
+                    </div> -->
+
 					<div class="adminContent_order" style="margin-top:40px;">
-						<a href="javascript:void(0);" id="check_btn" onclick="">글쓰기</a>
+						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup3()">글쓰기</a>
 						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup2()">가입신청 현황</a>
 						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup()">팸 맴버</a>
 					</div>
@@ -119,7 +79,7 @@
 		</div>
 		<div id="modal" class="adminModal modalPage04" style="display:none;">
 			<div class="adminModal_ok adminModal_order">
-				<h3 style="text-align:left;">팸 맴버 11/20</h3>
+				<h3 style="text-align:left;">팸 맴버 <span class="fam_mem_count"></span></h3>
 				<div>
 					<table class="adminContent_table famBoard_table" style="margin:0;">
 						<colgroup>
@@ -132,8 +92,8 @@
 							<th>팸 맴버</th>
 							<th>방문</th>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody id="fam_tr">
+							<!-- <tr>
 								<td>
 									<div class="">
 										<input id="check02" type="checkbox">
@@ -216,13 +176,13 @@
 									<p>팸 맴버 이름</p>
 								</td>
 								<td>1시간 전</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 					
 				</div>
 				<div class="adminModal_ok_btn" style="margin:20px auto 5px auto">
-					<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:48%;float:left;margin:0 5px 5px 0;">강퇴</a>
+					<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:48%;float:left;margin:0 5px 5px 0;" onclick="ban_fam_member()">강퇴</a>
 					<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" style="width:48%;float:left;margin:0 0 5px 5px;">확인</a>
 				</div>
 			</div>
@@ -242,8 +202,8 @@
 							<th>닉네임</th>
 							<th>등급</th>
 						</thead>
-						<tbody>
-							<tr>
+						<tbody id="tag_tr">
+							<!-- <tr>
 								<td>
 									<div class="">
 										<input id="check02" type="checkbox">
@@ -326,14 +286,39 @@
 									<p>팸 맴버 이름</p>
 								</td>
 								<td>Seller J</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 					
 				</div>
 				<div class="adminModal_ok_btn" style="margin:0 auto 5px auto">
-					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2" style="width:45%;float:left;margin:0 5px 5px 5px;">거부</a>
-					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2_2" style="width:45%;float:left;margin:0 5px 5px 5px;">승인</a>
+					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2" style="width:45%;float:left;margin:0 5px 5px 5px;" onclick="reject_fam_member()">거부</a>
+					<a href="javascript:void(0);" class="ok_btn modalClose2" id="close_btn2_2" style="width:45%;float:left;margin:0 5px 5px 5px;" onclick="allow_fam_member()">승인</a>
+				</div>
+			</div>
+		</div>
+        <div id="modal3" class="adminModal modalPage03" style="display:none;">
+			<div class="adminModal_cont">
+				<h3>게시글 작성</h3>
+                <div>
+					<h5>글 타입</h5>
+					<input type="radio" name="post_type" value="normal" checked> 일반글
+                    <input type="radio" name="post_type" value="notice"> 공지글
+				</div>
+				<div>
+					<h5>제목</h5>
+					<input type="text" name="fam_title" id="fam_title" style="background-color: #EAE6F2;width: 420px;height: 50px;">
+				</div>
+				<div>
+					<h5 style="margin-bottom:10px;">내용</h5>
+					<!-- 스마트에디터 -->
+					<textarea name="fam_content" id="editor"></textarea>
+					<div>
+					</div>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modalNext2" onclick="enroll_fam_post()">다음</a>
 				</div>
 			</div>
 		</div>
@@ -355,66 +340,226 @@
 
 	});
 	
-	
+    ClassicEditor
+    .create(document.querySelector("#editor"),
+        {
+            language: "ko"
+        })
+    .then(newEditor => {
+        editor = newEditor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+	var now_date = new Date();
+    var enroll_time = parseInt(now_date.getTime()/1000);
+
+    var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
+
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var fam_id = urlParams.get('fam_id');
 
 	function modal_popup(){
 		const modal = document.getElementById("modal")
 		modal.style.display = "flex"
 	}
 
-	const modal = document.getElementById("modal")
-	const closeBtn = modal.querySelector(".close-area")
-	const close_btn = modal.querySelector("#close_btn")
-
-	close_btn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
-
-	closeBtn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
-
-	modal.addEventListener("click", e => {
-		const evTarget = e.target
-		if(evTarget.classList.contains("modal-overlay")) {
-			modal.style.display = "none"
-		}
-	})
-
-	window.addEventListener("keyup", e => {
-		if(modal.style.display === "flex" && e.key === "Escape") {
-			modal.style.display = "none"
-		}
-	})
-
 	function modal_popup2(){
 		const modal2 = document.getElementById("modal2")
 		modal2.style.display = "flex"
 	}
 
-	const modal2 = document.getElementById("modal2")
-	const closeBtn2 = modal.querySelector(".close-area2")
-	const close_btn2 = modal.querySelector("#close_btn2")
+    function modal_popup3(){
+		const modal3 = document.getElementById("modal3")
+		modal3.style.display = "flex"
+	}
+    $.get("http://43.200.169.89/fam-apply-list?fam_id="+fam_id, function(data){
+		console.log(data);
 
-	close_btn2.addEventListener("click", e => {
-		modal2.style.display = "none"
-	})
+        var tag = ``;
+        if(data.length != 0){
+            $.each(data, function(i, res){
+                tag += `<tr>
+                            <td>
+                                <div class="">
+                                    <input id="check${res.user_id}" type="checkbox" name="chk" value="${res.user_id}">
+                                    <label for="check${res.user_id}"><span></span></label>
+                                </div>
+                            </td>
+                            <td class="adminContent_table_name">
+                                <p>${res.name}</p>
+                            </td>
+                            <td>${res.user_type}</td>
+                        </tr>`;
 
-	closeBtn2.addEventListener("click", e => {
-		moda2l.style.display = "none"
-	})
+            })
+        }else{
+            tag += `<tr>
+                        <td colspan="3" class="adminContent_table_name">
+                            <p>신청내역이 없습니다.</p>
+                        </td>
+                    </tr>`;
+        }
+        
 
-	modal2.addEventListener("click", e => {
-		const evTarget = e.target
-		if(evTarget.classList.contains("modal-overlay")) {
-			modal2.style.display = "none"
-		}
-	})
+        $("#tag_tr").append(tag);
+		
+	});
+    $.get("http://43.200.169.89/fam-member-list?fam_id="+fam_id, function(data){
+		console.log(data);
 
-	window.addEventListener("keyup", e => {
-		if(modal2.style.display === "flex" && e.key === "Escape") {
-			modal2.style.display = "none"
-		}
-	})
+        var tag = ``;
 
+        $.each(data, function(i, res){
+            tag += `<tr>
+                        <td>
+                            <div class="">
+                                <input id="check${res.user_id}" type="checkbox" name="chk" value="${res.user_id}">
+                                    <label for="check${res.user_id}"><span></span></label>
+                            </div>
+                        </td>
+                        <td class="adminContent_table_name">
+                            <p>${res.name}</p>
+                        </td>
+                        <td>1시간 전</td>
+                    </tr>`;
+
+        })
+
+        $("#fam_tr").append(tag);
+
+        $(".fam_mem_count").text(data.length)
+		
+	});
+
+    $.get("http://43.200.169.89/fam-posts?fam_id="+fam_id, function(data){
+		console.log(data);
+
+        var tag = ``;
+
+        $.each(data, function(i, res){
+            var unix_timestamp = res.enroll_time;
+            var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            tag += `<tr>
+                        <td class="adminContent_table_name">
+                            <p>${res.title}</p>
+                        </td>
+                        <td>${res.nickname}</td>
+                        <td>${formattedTime}</td>
+                        <td>${res.views}</td>
+                    </tr>`;
+
+        })
+
+        $("#board_tr").append(tag);
+		
+	});
+    
+    function allow_fam_member(){
+        
+        var order_id_arr = [];
+
+        $("input[name=chk]:checked").each(function(){
+			order_id_arr.push($(this).val());
+		});
+
+        for(var i = 0; i < order_id_arr.length; i++){
+            $.post("http://43.200.169.89/allow-fam-member",{
+                target_user_id : order_id_arr[i],
+                fam_id : fam_id
+            },result=>{
+                if(result == "success"){
+                    alert('해당 유저가 승인되었습니다.');
+                    location.reload();
+                }
+            })
+        }
+        
+    }
+
+    function reject_fam_member(){
+        
+        var order_id_arr = [];
+
+        $("input[name=chk]:checked").each(function(){
+			order_id_arr.push($(this).val());
+		});
+
+        for(var i = 0; i < order_id_arr.length; i++){
+            $.post("http://43.200.169.89/reject-fam-member",{
+                target_user_id : order_id_arr[i],
+                fam_id : fam_id
+            },result=>{
+                if(result == "success"){
+                    alert('해당 유저가 거부되었습니다.');
+                    location.reload();
+                }
+            })
+        }
+        
+    }
+
+    function ban_fam_member(){
+        var order_id_arr = [];
+
+        $("input[name=chk]:checked").each(function(){
+			order_id_arr.push($(this).val());
+		});
+
+        for(var i = 0; i < order_id_arr.length; i++){
+            $.post("http://43.200.169.89/ban-fam-member",{
+                target_user_id : order_id_arr[i],
+                fam_id : fam_id
+            },result=>{
+                if(result == "success"){
+                    alert('해당 유저가 강퇴되었습니다.');
+                    location.reload();
+                }
+            })
+        }
+    }
+
+    function enroll_fam_post(){
+
+        var title = $("input[name=fam_title]").val();
+        //var descStr = $("input[name=fam_content]").val();
+        var descStr = editor.getData();
+        var post_type = $("input[name=post_type]:checked").val();
+        
+        if(title == ""){
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        if(descStr == ""){
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        $.post("http://43.200.169.89/enroll-fam-post",{
+            user_id : user_id,
+            fam_id : fam_id,
+            post_type : post_type,
+            title : title,
+            descStr : descStr,
+            enroll_time : enroll_time
+        },result=>{
+            if(result == "success"){
+                alert('작성이 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
 </script>

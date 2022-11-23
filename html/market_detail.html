@@ -304,6 +304,9 @@
 
 	});
 	var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
 	var test = localStorage.getItem('local_data');
 
 	var now_date = new Date();

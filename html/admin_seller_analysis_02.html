@@ -71,13 +71,13 @@
 						<!-- <img src="../image/domae_graph2.png"> -->
 						<div class="adminContent_graph" style="height:50%;">
 							<p style="font-size:20px;"><b>누적 판매량</b></p><br>
-							<span style="font-size:15px;">총 판매량 : 1500</span>
+							<span style="font-size:15px;">총 판매량 : <span class="total_count"></span></span>
 							<span style="float:right;font-size:15px;">단위 : 수(량)</span>
 							<canvas id="canvas"></canvas>
 						</div>
 						<div class="adminContent_graph" style="height:50%;">
 							<p style="font-size:20px;"><b>누적 매출</b></p><br>
-							<span style="font-size:15px;">총 판매 매출 : 7,500,000</span>
+							<span style="font-size:15px;">총 판매 매출 : <span class="total_amount"></span></span>
 							<span style="float:right;font-size:15px;">단위 : 만원</span>
 							<canvas id="canvas2"></canvas>
 						</div>
@@ -93,180 +93,191 @@
 <script>
 
 	var pay_info = [];
+    var year_result = [];
+    var count_result = [];
+    var amount_result = [];
 
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_seller_rightmenu.html');
-
-		$.get("http://43.200.169.89/pay_infos?seller_id="+1,result=>{
-			console.log(result);
-
-			pay_info = result;
-			
-			
-		});
 	});
 	
-	var color = Chart.helpers.color;
-	var ChartData = {            
-		labels: ['2018', '2019', '2022', '2021', '2022'], // 챠트의 항목명 설정
-		datasets: [{
-			label: '이전 누적 판매량',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                '#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [10,10,30,60,100]  // 해당 데이터셋의 데이터 리스트
-		},{
-			label: '추가 판매량',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [0,20,30,40,50]  // 해당 데이터셋의 데이터 리스트
-		}]
+    $.get("http://43.200.169.89/analysis-total",result=>{
+        console.log(result);
+        $.each(result, function(i, res){
+            year_result.push(res.year);
+            count_result.push(res.count);
+            amount_result.push(res.amount);
+        })
 
-	};
+        $(".total_count").text(count_result);
+        $(".total_amount").text(amount_result.toLocaleString('ko-KR'));
 
-	window.onload = function() {
-		var ctx = document.getElementById('canvas').getContext('2d');
-		window.myHorizontalBar = new Chart(ctx, {
-			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
-			// ex) horizontalBar, line, bar, pie, bubble
-			type: 'bar', 
-			data: ChartData,
-			options: {
-				responsive: true,
-				scales: {
-				  xAxes: [{
-					stacked: true,
-					gridLines: {
-					  display: false,
-					}
-				  }],
-				  yAxes: [{
-					stacked: true,
-					ticks: {
-					  beginAtZero: true,
-					},
-					type: 'linear',
-				  }]
-				},
-				maintainAspectRatio: false,
-				title: {
-					display: false,
-					text: '판매유형'
-				},
-				legend: {
-					display: true,
-					position: 'top',
-			  }
-			}
-		});
+        var color = Chart.helpers.color;
+        var ChartData = {            
+            labels: year_result, // 챠트의 항목명 설정
+            datasets: [{
+                label: '이전 누적 판매량',  // 데이터셑의 이름
+                barThickness: 100,
+                pointRadius: 15, // 꼭지점의 원크기
+                pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+                backgroundColor: [
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA'
+                ], // 챠트의 백그라운드 색상
+                borderColor: 'white', // 챠트의 테두리 색상
+                borderWidth: 1, // 챠트의 테두리 굵기
+                lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+                fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+                data: count_result  // 해당 데이터셋의 데이터 리스트
+            },{
+                label: '추가 판매량',  // 데이터셑의 이름
+                barThickness: 100,
+                pointRadius: 15, // 꼭지점의 원크기
+                pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+                backgroundColor: [
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)'
+                ], // 챠트의 백그라운드 색상
+                borderColor: 'white', // 챠트의 테두리 색상
+                borderWidth: 1, // 챠트의 테두리 굵기
+                lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+                fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+                data: count_result  // 해당 데이터셋의 데이터 리스트
+            }]
 
-		var ctx2 = document.getElementById('canvas2').getContext('2d');
-		window.myHorizontalBar = new Chart(ctx2, {
-			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
-			// ex) horizontalBar, line, bar, pie, bubble
-			type: 'bar', 
-			data: ChartData2,
-			options: {
-				responsive: true,
-				scales: {
-				  xAxes: [{
-					stacked: true,
-					gridLines: {
-					  display: false,
-					}
-				  }],
-				  yAxes: [{
-					stacked: true,
-					ticks: {
-					  beginAtZero: true,
-					},
-					type: 'linear',
-				  }]
-				},
-				maintainAspectRatio: false,
-				title: {
-					display: false,
-					text: '판매유형'
-				},
-				legend: {
-					display: true,
-					position: 'top',
-			  }
-			}
-		});
+        };
 
-	};
+        var color = Chart.helpers.color;
+        var ChartData2 = {            
+            labels: year_result, // 챠트의 항목명 설정
+            datasets: [{
+                label: '이전 누적 매출',  // 데이터셑의 이름
+                barThickness: 100,
+                pointRadius: 15, // 꼭지점의 원크기
+                pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+                backgroundColor: [
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA',
+                    '#BABABA'
+                ], // 챠트의 백그라운드 색상
+                borderColor: 'white', // 챠트의 테두리 색상
+                borderWidth: 1, // 챠트의 테두리 굵기
+                lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+                fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+                data: amount_result  // 해당 데이터셋의 데이터 리스트
+            },{
+                label: '추가 매출',  // 데이터셑의 이름
+                barThickness: 100,
+                pointRadius: 15, // 꼭지점의 원크기
+                pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+                backgroundColor: [
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)',
+                    'rgba(36, 10, 83, 0.8)'
+                ], // 챠트의 백그라운드 색상
+                borderColor: 'white', // 챠트의 테두리 색상
+                borderWidth: 1, // 챠트의 테두리 굵기
+                lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+                fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+                data: amount_result  // 해당 데이터셋의 데이터 리스트
+            }]
 
-	var color = Chart.helpers.color;
-	var ChartData2 = {            
-		labels: ['2018', '2019', '2022', '2021', '2022'], // 챠트의 항목명 설정
-		datasets: [{
-			label: '이전 누적 매출',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                '#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA',
-				'#BABABA'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [10,10,30,60,100]  // 해당 데이터셋의 데이터 리스트
-		},{
-			label: '추가 매출',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)',
-				'rgba(36, 10, 83, 0.8)'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [0,20,30,40,50]  // 해당 데이터셋의 데이터 리스트
-		}]
+        }
 
-	}
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myHorizontalBar = new Chart(ctx, {
+            // type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
+            // ex) horizontalBar, line, bar, pie, bubble
+            type: 'bar', 
+            data: ChartData,
+            options: {
+                responsive: true,
+                scales: {
+                xAxes: [{
+                    stacked: true,
+                    gridLines: {
+                    display: false,
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                    beginAtZero: true,
+                    },
+                    type: 'linear',
+                }]
+                },
+                maintainAspectRatio: false,
+                title: {
+                    display: false,
+                    text: '판매유형'
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+            }
+            }
+        });
+
+        var ctx2 = document.getElementById('canvas2').getContext('2d');
+        window.myHorizontalBar = new Chart(ctx2, {
+            // type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
+            // ex) horizontalBar, line, bar, pie, bubble
+            type: 'bar', 
+            data: ChartData2,
+            options: {
+                responsive: true,
+                scales: {
+                xAxes: [{
+                    stacked: true,
+                    gridLines: {
+                    display: false,
+                    }
+                }],
+                yAxes: [{
+                    stacked: true,
+                    ticks: {
+                    beginAtZero: true,
+                    },
+                    type: 'linear',
+                }]
+                },
+                maintainAspectRatio: false,
+                title: {
+                    display: false,
+                    text: '판매유형'
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+            }
+            }
+        });
+
+
+    })
+	
 
 </script>
