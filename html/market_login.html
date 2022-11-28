@@ -21,7 +21,7 @@
 					<div class="marketMember_btn">
 						<a href="javascript:void(0)" class="ok_btn" onclick="login()">로그인</a>
 						<a href="market_join_page01.html" class="back_btn">회원가입</a>
-						<a href="javascript:void(0)" onclick="non_member_order()" class="back_btn" style="background-color:#EAE6F2;border:none;">비회원 구매</a>
+						<a href="javascript:void(0)" onclick="non_member_order()" class="back_btn non_member" style="background-color:#EAE6F2;border:none;">비회원 구매</a>
 					</div>
 					<div class="marketMember_find">
 						<a href="market_id_find.html">아이디 찾기</a><br>
@@ -50,6 +50,10 @@
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
+
+    if(!product_id){
+        $(".non_member").hide();
+    }
 
 	function non_member_order(){
 		location.href="market_sell.html?product_id="+product_id;
@@ -83,7 +87,7 @@
 				
 				if(res.includes("success")){
 					alert("로그인 되었습니다.");
-					var user_id_session = res.slice(-1);
+					var user_id_session = res.split('__')[1];
 					//console.log(user_id_session);
 					localStorage.setItem('user_id', user_id_session);
 					location.href="./market_main.html";

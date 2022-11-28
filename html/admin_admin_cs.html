@@ -106,8 +106,8 @@
 							</table>
 						</div>
 						<div class="">
-							<a href="" class="check_btn btm_btn">삭제</a>
-							<a href="" class="check_btn btm_btn">수정</a>
+							<!-- <a href="" class="check_btn btm_btn">삭제</a>
+							<a href="" class="check_btn btm_btn">수정</a> -->
 						</div>
 						<div class="adminContent_pager" id="paging">
 						</div>
@@ -240,7 +240,7 @@
 									</div>
 									<div>
 										<h5 style="margin-bottom:20px;color:#603A8A;"><b>답변</b></h5>
-										<textarea name="answer_text" id="editor" rows="30%" cols="50%" style="padding : 20px;border: none; background-color:#EAE6F2;" placeholder="답변을 입력해주세요.">${inquiry_reply}</textarea></br>
+										<textarea name="answer_text" id="editor" rows="30%" cols="100%" style="padding : 20px;border: none; background-color:#EAE6F2;" placeholder="답변을 입력해주세요.">${inquiry_reply}</textarea></br>
 										<p style="float:right;">${formattedTime2} 작성자 : 관리자</p>
 										<div>
 										</div>
@@ -275,7 +275,7 @@
                 qnas_new = res;
 
                 qnas_new = qnas_origin.filter(function(qna_info){
-                    var unix_timestamp = qna_info.order_time;
+                    var unix_timestamp = qna_info.enroll_time;
                     var date = new Date(unix_timestamp * 1000);
                     var mon = "0" + (date.getMonth()+1);
                     var day = "0" + (date.getDate());
@@ -437,7 +437,7 @@
 		$("input[name=search_qna]").val('');
 
         qnas = qnas_origin.filter(function(qna_info){
-            var unix_timestamp = qna_info.order_time;
+            var unix_timestamp = qna_info.enroll_time;
             var date = new Date(unix_timestamp * 1000);
             var mon = "0" + (date.getMonth()+1);
             var day = "0" + (date.getDate());

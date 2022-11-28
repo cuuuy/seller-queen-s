@@ -57,7 +57,7 @@
 									<col width="10%">
 									<col width="10%">
 									<col width="10%">
-									<col width="10%">
+									<!-- <col width="10%"> -->
 									<col width="10%">
 									<col width="10%">
 									<col width="10%">
@@ -68,14 +68,14 @@
 									<th>제목</th>
 									<th>노출 매체<br>(미리보기)</th>
 									<th>노출 기간</th>
-									<th>등록일</th>
+									<!-- <th>등록일</th> -->
 									<th>상태</th>
 									<th>순위 조정</th>
 									<th>삭제</th>
 									<th>수정</th>
 								</thead>
-								<tbody>
-									<tr>
+								<tbody class="adminContent_banner_list">
+									<!-- <tr>
 										<td>
 											<div class="adminContent_table_checkbox">
 												<input id="check02" type="checkbox">
@@ -101,7 +101,7 @@
 												<a href="" class="check_btn">수정</a>
 											</div>
 										</td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -191,7 +191,7 @@
 				</div>
 				<div class="adminModal_cont_btn">
 					<a href="" class="back_btn modalClose">취소</a>
-					<a href="javascript:void(0)" class="ok_btn modalClose" onclick="add_banner()">저장</a>
+					<a href="javascript:void(0)" class="ok_btn modi_btn" onclick="add_banner()">저장</a>
 				</div>
 			</div>
 		</div>
@@ -234,9 +234,9 @@
 		$('.modalBanner').click(function(){
 			$('#modalBanner').show();
 		});
-		//$('.modalClose').click(function(){
-			//$('.adminModal').hide();
-		//});
+		$('.modalClose').click(function(){
+			$('.adminModal').hide();
+		});
 
 		$("#start_date").datepicker({
 			language: 'ko',
@@ -395,10 +395,11 @@
 										<td>${i+1}</td>
 										<td class="adminContent_table_name">
 											<p>${typeStr}</p>
+											<p>${res[i].title}</p>
 										</td>
 										<td>웹</td>
 										<td>${formattedTime}<br>~${formattedTime2}</td>
-										<td>2022.03.14 13:22:40</td>
+										<!--<td>2022.03.14 13:22:40</td>-->
 										<td>업로드 완료</td>
 										<td></td>
 										<td>
@@ -424,13 +425,14 @@
 	}
 	function modi_banner_show(id){
 		$('#modalBanner').show();
+		$(".modi_btn").attr("onclick","modi_banner("+id+")");
 	}
 
-	function modi_banner(){
+	function modi_banner(banner_id){
 		
-		var banner_id = $(".banner_modi").data('index');
-		console.log(banner_modi);
-		return;
+		//var banner_id = $(".banner_modi").data('index');
+		//console.log(banner_modi);
+		//return;
 		var title = $("input[name=banner_title]").val();
 		var start_time = $("#new_start_date").val();
 		var end_time = $("#new_end_date").val();
@@ -440,7 +442,7 @@
 		var form = $('#uploadForm')[0];
 		var form_data = new FormData();
 
-		form_data.append('banner_id', id);
+		form_data.append('banner_id', banner_id);
 		form_data.append('title', title);
 		form_data.append('user_id', "-1");
 		form_data.append('start_time', start_time);
@@ -454,7 +456,7 @@
 		// ajax 통신
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
-			url : "http://43.200.169.89/enroll-banner",      // 컨트롤러에서 대기중인 URL 주소이다.
+			url : "http://43.200.169.89/revise-banner",      // 컨트롤러에서 대기중인 URL 주소이다.
 			contentType: false,
 			processData: false,
 			//enctype: 'multipart/form-data',

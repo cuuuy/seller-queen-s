@@ -123,7 +123,7 @@
 	if(user_id == '-1'){
 		$("#marketModal").show();
 	}
-
+    var qnas = [];
 	var now_date = Date.now();
 	var enroll_time = now_date/1000;
 
@@ -141,6 +141,60 @@
 		qna_re_load();
 	});
 
+    function qna_load_list(res){
+        var new_html = ``;
+
+        for(var i = 0; i < res.length; i++){
+
+        var unix_timestamp = res[i].enroll_time;
+        var date = new Date(unix_timestamp * 1000);
+        var hours = date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var seconds = "0" + date.getSeconds();
+        var mon = "0" + (date.getMonth()+1);
+        var day = "0" + (date.getDate());
+        var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+        var img_path = res[i].img_url.replace("public","");
+
+        var typeStr = '';
+
+        if(res[i].typeStr == "deli_qna"){
+            typeStr = '배송 문의';
+        }else if(res[i].typeStr == "product_qna"){
+            typeStr = '상품 문의';
+        }else if(res[i].typeStr == "cancel_qna"){
+            typeStr = '반품/취소 문의';
+        }else if(res[i].typeStr == "exchange_qna"){
+            typeStr = '교환 문의';
+        }else if(res[i].typeStr == "etc_qna"){
+            typeStr = '기타 문의';
+        }
+        new_html += `<li>
+            <div class="marketQna_list_thumb" >
+                <span style="background: url(http://43.200.169.89/${img_path}) no-repeat; background-size:cover;"></span>
+                ${typeStr}
+            </div>
+            <div class="marketQna_list_text">
+                <div class="marketQna_list_text_button">
+                    <h4>${res[i].name}</h4>
+                    <a href="" class="a_no">답변 미완료</a>
+                </div>
+                <h4>${formattedTime} 작성</h4>
+                <p>
+                    ${res[i].inquiry_text}
+                </p>
+                <p class="marketReport_list_pText" "id="report_id_${res[i].id}" data-index="${res[i].id}">
+                    신고하기
+                </p>
+            </div>
+        </li>`;
+
+        
+        }
+
+        $("#qna_load").html(new_html);
+    }
 
 	function qna_load(){
 
@@ -152,53 +206,8 @@
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				// 응답코드 > 0000
 				console.log(res);
-
-				for(var i = 0; i < res.length; i++){
-
-					var unix_timestamp = res[i].enroll_time;
-					var date = new Date(unix_timestamp * 1000);
-					var hours = date.getHours();
-					var minutes = "0" + date.getMinutes();
-					var seconds = "0" + date.getSeconds();
-					var mon = (date.getMonth()+1);
-					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate() + " " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-					var img_path = res[i].img_url.replace("public","");
-					
-					var typeStr = '';
-
-					if(res[i].typeStr == "deli_qna"){
-						typeStr = '배송 문의';
-					}else if(res[i].typeStr == "product_qna"){
-						typeStr = '상품 문의';
-					}else if(res[i].typeStr == "cancel_qna"){
-						typeStr = '반품/취소 문의';
-					}else if(res[i].typeStr == "exchange_qna"){
-						typeStr = '교환 문의';
-					}else if(res[i].typeStr == "etc_qna"){
-						typeStr = '기타 문의';
-					}
-					var new_html = `<li>
-						<div class="marketQna_list_thumb" >
-							<span style="background: url(http://43.200.169.89/${img_path}) no-repeat; background-size:cover;"></span>
-							${typeStr}
-						</div>
-						<div class="marketQna_list_text">
-							<div class="marketQna_list_text_button">
-								<h4>${res[i].name}</h4>
-								<a href="" class="a_no">답변 미완료</a>
-							</div>
-							<h4>${formattedTime} 작성</h4>
-							<p>
-								${res[i].inquiry_text}
-							</p>
-							<p class="marketReport_list_pText" "id="report_id_${res[i].id}" data-index="${res[i].id}">
-								신고하기
-							</p>
-						</div>
-					</li>`;
-
-					$("#qna_load").append(new_html);
-				}
+                qnas = res;
+				qna_load_list(qnas);
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
 				alert("통신 실패.");
@@ -242,4 +251,17 @@
 				}
 			})
 	})
+
+    $(document).on("click","#cart01",function(){
+        if($("#cart01").is(':checked')==true){
+            var search_word = user_id;
+            data = qnas.filter(function(qna_info){
+                return qna_info.user_id == search_word;
+            })
+            console.log(data);
+            qna_load_list(data);
+        }else{
+            qna_load();
+        }
+    })
 </script>

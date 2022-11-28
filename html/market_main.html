@@ -96,7 +96,7 @@
 						</select>
 					</div>
 					<ul id="product_ul">
-						<li>
+						<!-- <li>
 							<a href="market_detail.html?product_id=1">
 								<span class="marketMain_all_thumb"></span>
 								<p class="marketMain_all_text">
@@ -104,7 +104,7 @@
 								</p>
 								<p><b>28,800원</b></p>
 							</a>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 			</div>
@@ -359,11 +359,11 @@
             if(datas[i].isShow == "YES"){
                 tag += `<li>
                         <a href="market_detail.html?product_id=${datas[i].id}">
-                            <span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+                            <span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;background-position: center;"></span>
                             <p class="marketMain_all_text">
                                 ${datas[i].product_name}
                             </p>
-                            <p><b>${datas[i].retail_price}원</b></p>
+                            <p><b>${datas[i].retail_price.toLocaleString('ko-KR')}원</b></p>
                         </a>
                     </li>`;
                 
@@ -410,7 +410,10 @@
                         })
                         product_road_list(sort_result);
                     }else if($("select[name=all_product_view]").val() == "popular"){
-                        
+                        sort_result = res.sort(function(a, b){
+                            return b['order_count'] - a['order_count'];
+                        })
+                        product_road_list(sort_result);
                     }
                 })
 

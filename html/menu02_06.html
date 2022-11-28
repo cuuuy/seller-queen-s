@@ -262,8 +262,11 @@
             enroll_time : enroll_time
         },result=>{
             if(result == "success"){
-            alert('fam이 등록되었습니다.');
-            location.reload();
+                alert('fam이 등록되었습니다.');
+                location.reload();
+            }else if(result == "already exist"){
+                alert('이미 fam이 등록되었습니다.');
+                location.reload();
             }
         })
     }

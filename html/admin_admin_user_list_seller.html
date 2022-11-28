@@ -294,7 +294,7 @@
 	var user_count = 0;
 
 	function load_user_list(datas){
-
+        console.log('datas',datas)
 		var tag = ``;
 
 		for(var i = 0; i < datas.length; i++){
@@ -324,9 +324,11 @@
 
 			var profitInfoDictResult = 0;
 			if(profitInfoDict[datas[i].id]){
-				profitInfoDictResult = profitInfoDict[datas[i].id];
+				profitInfoDictResult_retail = profitInfoDict[datas[i].id].retailer_profit;
+                profitInfoDictResult_manager = profitInfoDict[datas[i].id].manager_profit;
 			}else{
-				profitInfoDictResult = 0;
+				profitInfoDictResult_retail = 0;
+                profitInfoDictResult_manager = 0;
 			}
 
 			//var reviewCountDict = 0;
@@ -353,9 +355,9 @@
 								<td>`+datas[i].user_type+`</td>
 								<td>`+datas[i].nickname+`</td>
 								<td>${formattedTime}</td>
-								<td>500,000/300,000</td>
+								<td>${parseInt(profitInfoDictResult_retail).toLocaleString('ko-KR')}/${parseInt(profitInfoDictResult_manager).toLocaleString('ko-KR')}</td>
 								<td>${paidInfoDictResult.toLocaleString('ko-KR')}원</td>
-								<td>이동</td>
+								<td><a href="./market_main.html?market_name=${datas[i].market_name}" target="_blank">이동</a></td>
 								<td>
 									<div class="adminContent_order">
 										<a href="javascript:void(0)" class="check_btn" onclick="modi_modal_pop(${datas[i].id})">수정</a>
@@ -459,6 +461,7 @@
 				if(res == "success"){
 					alert("회원수정이 완료 되었습니다.");
 					//category_road();
+                    location.reload();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
 				}

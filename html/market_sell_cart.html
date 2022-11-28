@@ -214,7 +214,7 @@
 						</div>
 					</p>
 					</b>
-					<a href="./market_order.html" class="ok_btn">주문 내역 보기</a>
+					<a href="./market_non_member_order.html" class="ok_btn">주문 내역 보기</a>
 					<a href="./market_main.html" class="back_btn">메인으로 돌아가기</a>
 				</div>
 			</div>
@@ -476,20 +476,18 @@
 	}
 	
 	function amount_re_minus(product_price){
-		var product_price2 = $("#product_price2").text().replace(" 원", "").replace(",","");
-        product_price2 = parseInt(product_price2);
+		var product_price2 = parseInt($("#product_price2").text().replace(" 원", "").replace(/,/g , ''));
 		var product_deli = parseInt($("#product_deli").text());
-        product_price = parseInt(product_price);
+        product_price = parseInt(product_price.replace(" 원", "").replace(/,/g , ''));
 		$("#product_price2").text((product_price2-product_price).toLocaleString('ko-KR')+" 원");
 		$("#product_total_amount").text(((product_price2-product_price)+product_deli).toLocaleString('ko-KR')+" 원");
 		$("#bottom_price").text(((product_price2-product_price)+product_deli).toLocaleString('ko-KR')+" 원");
 	}
 
     function amount_re_plus(product_price){
-		var product_price2 = $("#product_price2").text().replace(" 원", "").replace(",","");
-        product_price2 = parseInt(product_price2);
+		var product_price2 = parseInt($("#product_price2").text().replace(" 원", "").replace(/,/g , ''));
 		var product_deli = parseInt($("#product_deli").text());
-        product_price = parseInt(product_price);
+        product_price = parseInt(product_price.replace(" 원", "").replace(/,/g , ''));
 		$("#product_price2").text((product_price2+product_price).toLocaleString('ko-KR')+" 원");
 		$("#product_total_amount").text(((product_price2+product_price)+product_deli).toLocaleString('ko-KR')+" 원");
 		$("#bottom_price").text(((product_price2+product_price)+product_deli).toLocaleString('ko-KR')+" 원");
@@ -632,7 +630,7 @@
         //console.log(selected_order_arr);
         var user_id = localStorage.getItem('user_id');
         var count = $(".product_amount_"+cart_id).text();
-        var product_price = $(".product_price_"+cart_id).text().replace(' 원','');
+        var product_price = parseInt($(".product_price_"+cart_id).text().replace(' 원','').replace(/,/g , ''));
         var place_phone = $("input[name=place_phone]").val();
         var address1 = $("input[name=place_addr]").val();
 		var address2 = $("input[name=place_addr2]").val();
@@ -668,7 +666,7 @@
 		var order_num_2 = order_key_full.substr(4,4);
 		var order_num_3 = order_key_full.substr(8,4);
 
-		var order_key = order_num_1+"_"+order_num_2+"_"+order_num_3;
+		var order_key = order_num_1+"-"+order_num_2+"-"+order_num_3;
 
         $.post("http://43.200.169.89/enroll-order",{
             user_id : new_user_id,
@@ -693,7 +691,7 @@
             if(res_split[0] == "success"){
                 money_add(res_split[1],order_key_full);
                 $("#marketModal").show();
-                $("#order_num").text(order_num_1+"_"+order_num_2+"_"+order_num_3);
+                $("#order_num").text(order_num_1+"-"+order_num_2+"-"+order_num_3);
                 $("#order_pw").text($("input[name=place_pw]").val());
             }else{
                 alert("오류 발생. 관리자에게 문의하세요.");
@@ -791,11 +789,11 @@
 				products = res;
 				var img_path = res[0].main_img_url.replace("public","");
 				var tag = `<li class="img_li">
-							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>
+							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;background-position: center;"></span>
 							<table class="marketSell_top_list_table">
-								<tr class="first_tr_${cart_id}">
+								<tr class="first_tr_${cart_id}" >
 									<th>판매가</th>
-									<td class="product_price_${cart_id}"></td>
+									<td colspan="2" class="product_price_${cart_id}"></td>
 								</tr>
 								<tr>
 									<th>수량</th>
@@ -811,10 +809,10 @@
 						</li>`;
 				$(".marketSell_top_list").append(tag);
                 $(".product_amount_"+cart_id).text(cart_count);
-				$(".product_price_"+cart_id).text(res[0].retail_price+" 원");
+				$(".product_price_"+cart_id).text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
 				$("#final_modal_product_name").text(res[0].product_name + " 외 "+parseInt(cart_arr.length-1)+"건");
                 
-                sum_price = sum_price + (parseInt($(".product_price_"+cart_id).text()) * parseInt($(".product_amount_"+cart_id).text()));
+                sum_price = sum_price + (parseInt($(".product_price_"+cart_id).text().replace(/,/g , '')) * parseInt($(".product_amount_"+cart_id).text()));
                 console.log(sum_price);
                 var total_price = sum_price+res[0].delivery_fee;
                 $("#product_price2").text(sum_price.toLocaleString('ko-KR')+" 원");

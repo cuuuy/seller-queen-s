@@ -73,7 +73,7 @@
 							</ul>
 						</div>
 						<div class="adminContent_profit">
-							89,000원
+							<span class="total_profit"></span>원
 						</div>
 						<div class="adminContent_search">
 							<input type="text" name="search_profit" placeholder="상품을 검색하세요." style="width: calc( 100% - 400px );" onkeyup="enterkey()">
@@ -168,6 +168,7 @@
 	var withdraws_origin = [];
 	var user_id = localStorage.getItem('user_id');
     var profit_id_arr = [];
+    var total_profit = 0;
 
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
@@ -178,7 +179,7 @@
 		var tag = ``;
 
 		$.each(datas, function(m, withdraw){
-			
+			total_profit = total_profit + withdraw.withdraw_amount;
 			var unix_timestamp = withdraw.enroll_time;
 			var date = new Date(unix_timestamp * 1000);
 			var hours = date.getHours();
@@ -224,7 +225,7 @@
 						</tr>`;
 		})
 
-
+        $(".total_profit").text(total_profit.toLocaleString('ko-KR'));
 		$("#withdraw_tbody").html(tag);
 
 	}

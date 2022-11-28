@@ -162,8 +162,12 @@
 			$.each(orders, function(n, info){
 				var unix_timestamp = info.enroll_time;
 				var date = new Date(unix_timestamp * 1000);
-				var mon = (date.getMonth()+1);
-				var formattedTime = date.getFullYear() + "." + mon + "." + date.getDate();
+				var hours = date.getHours();
+				var minutes = "0" + date.getMinutes();
+				var seconds = "0" + date.getSeconds();
+				var mon = "0" + (date.getMonth()+1);
+				var day = "0" + (date.getDate());
+				var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
 				if(ordersDict[formattedTime] == null){
 					ordersDict[formattedTime] = [info];
@@ -212,12 +216,12 @@
 							<input class="cart_checkbox" id="cart_`+order.id+`" type="checkbox" value="${order.id}" data-index='${order.id}' data-key='${order.retail_price}'>
 							<label for="cart_`+order.id+`"><span></span></label>
 						</div>
-						<span class="marketCart_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></span>
+						<span class="marketCart_list_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;background-position: center;"></span>
 						<div class="marketCart_list_text">
 							<p class="marketCart_list_text01">상품 정보</p>
 							<p class="marketCart_list_text02">`+order.product_name+`</p>
 							<p class="marketCart_list_text03">
-								<span class="marketCart_list_text03_price">`+order.retail_price+` 원</span>
+								<span class="marketCart_list_text03_price">`+order.retail_price.toLocaleString('ko-KR')+` 원</span>
 								<!-- <span>그린</span>
 								<span>S</span> -->
 								${tag2}
@@ -247,7 +251,7 @@
 		$('body').on('click', '.minus_btn', function(e){
 			var index = $(e.target).data('index');
 			var key = $(e.target).data('key');
-
+            var price = $(e.target).parent().parent().siblings('.marketCart_list_check').children().data('key');
 			var info = ordersDict[key][index];
 			var now_count = parseInt($(e.target).siblings('p').text());
 			if(now_count == 1){
@@ -264,12 +268,14 @@
 						alert('error');
 					}
 			})
+            re_amount(price,'minus');
 		})
 
 		$('body').on('click', '.plus_btn', function(e){
 			var index = $(e.target).data('index');
 			var key = $(e.target).data('key');
-
+            var price = $(e.target).parent().parent().siblings('.marketCart_list_check').children().data('key');
+            //var price_chk = price.checked;
 			var info = ordersDict[key][index];
 			var now_count = parseInt($(e.target).siblings('p').text());
 
@@ -283,6 +289,7 @@
 						alert('error');
 					}
 			})
+            re_amount(price,'plus');
 		})
 
 		$('body').on('click', '.option_change_btn', function(e){
@@ -325,25 +332,37 @@
 
 
 		})
+        function re_amount(price,plus_minus){
+            var new_amount = 0;
+            var chk_amount = parseInt($("#chk_amount").text().replace(/,/g , ''));
+            if(plus_minus == 'plus'){
+                new_amount = chk_amount + price;
+            }else if(plus_minus == 'minus'){
+                new_amount = chk_amount - price;
+            }
+            
 
-		$('body').on('change', '.cart_checkbox', function(e){
+            $("#chk_amount").text(new_amount.toLocaleString('ko-KR'));
+        }
+		
+        $('body').on('change', '.cart_checkbox', function(e){
 
-			var index = $(e.target).data('index');
-			var key = $(e.target).data('key');
-			
-			var target_count = parseInt($(e.target).parent().siblings(".marketCart_list_text").find(".marketCart_list_text_btnbox").find('p').text());
-			
-			if(this.checked) {
-				checkbox_num = checkbox_num + 1;
-				checkbox_amount = checkbox_amount + (key * target_count);
-			}else{
-				checkbox_num = checkbox_num - 1;
-				checkbox_amount = checkbox_amount - (key * target_count);
-			}
-			
-			$("#chk_count").text(checkbox_num);
-			$("#chk_amount").text(checkbox_amount);
-		})
+            var index = $(e.target).data('index');
+            var key = $(e.target).data('key');
+
+            var target_count = parseInt($(e.target).parent().siblings(".marketCart_list_text").find(".marketCart_list_text_btnbox").find('p').text());
+
+            if(this.checked) {
+                checkbox_num = checkbox_num + 1;
+                checkbox_amount = checkbox_amount + (key * target_count);
+            }else{
+                checkbox_num = checkbox_num - 1;
+                checkbox_amount = checkbox_amount - (key * target_count);
+            }
+
+            $("#chk_count").text(checkbox_num);
+            $("#chk_amount").text(checkbox_amount.toLocaleString('ko-KR'));
+        })
 
 
 	});

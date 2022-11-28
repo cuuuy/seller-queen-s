@@ -202,6 +202,8 @@
 			var stateStr = '';
 			if(withdraw.stateStr=="requested"){
 				stateStr = "출금요청중";
+			}else if(withdraw.stateStr=="confirmed"){
+				stateStr = "출금완료";
 			}
 			 tag += `<tr>
 							<td>

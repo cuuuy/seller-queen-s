@@ -23,7 +23,7 @@
 		<div id="content">
 			<div class="selClass">
 				<div class="adminContent_right" style="float:none;width:100%;padding:0;">
-					<div>
+					<div class="board_table">
 						<table class="adminContent_table famBoard_table">
 							<colgroup>
 								<col width="*">
@@ -48,6 +48,11 @@
 								</tr> -->
 							</tbody>
 						</table>
+                        <div class="adminContent_order" style="margin-top:40px;">
+                            <a href="javascript:void(0);" id="check_btn" onclick="modal_popup3()">글쓰기</a>
+                            <a href="javascript:void(0);" id="check_btn" onclick="modal_popup2()">가입신청 현황</a>
+                            <a href="javascript:void(0);" id="check_btn" onclick="modal_popup()">팸 맴버</a>
+                        </div>
 					</div>
 
                     <!-- <div class="" style="display: block;" id="">
@@ -69,15 +74,14 @@
                         </div>
                     </div> -->
 
-					<div class="adminContent_order" style="margin-top:40px;">
-						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup3()">글쓰기</a>
-						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup2()">가입신청 현황</a>
-						<a href="javascript:void(0);" id="check_btn" onclick="modal_popup()">팸 맴버</a>
-					</div>
+					
 				</div>
+                <div class="board_view" style="display: none;" id="">
+                        
+                </div>
 			</div>
 		</div>
-		<div id="modal" class="adminModal modalPage04" style="display:none;">
+		<div id="modal" class="adminModal modalPage04 modal-overlay2" style="display:none;">
 			<div class="adminModal_ok adminModal_order">
 				<h3 style="text-align:left;">팸 맴버 <span class="fam_mem_count"></span></h3>
 				<div>
@@ -187,7 +191,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="modal2" class="adminModal modalPage04" style="display:none;">
+		<div id="modal2" class="adminModal modalPage04 modal-overlay2" style="display:none;">
 			<div class="adminModal_ok adminModal_order">
 				<h3>가입신청 현황</h3>
 				<div>
@@ -328,6 +332,8 @@
 
 
 <script>
+    var boards = [];
+
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
@@ -340,6 +346,24 @@
 
 	});
 	
+    const modal = document.getElementById("modal")
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay2")) {
+			modal.style.display = "none"
+		}
+	})
+
+    const modal2 = document.getElementById("modal2")
+
+	modal2.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay2")) {
+			modal2.style.display = "none"
+		}
+	})
+
     ClassicEditor
     .create(document.querySelector("#editor"),
         {
@@ -380,7 +404,7 @@
 	}
     $.get("http://43.200.169.89/fam-apply-list?fam_id="+fam_id, function(data){
 		console.log(data);
-
+        
         var tag = ``;
         if(data.length != 0){
             $.each(data, function(i, res){
@@ -439,7 +463,7 @@
 
     $.get("http://43.200.169.89/fam-posts?fam_id="+fam_id, function(data){
 		console.log(data);
-
+        boards = data;
         var tag = ``;
 
         $.each(data, function(i, res){
@@ -453,7 +477,7 @@
             var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 
             tag += `<tr>
-                        <td class="adminContent_table_name">
+                        <td class="adminContent_table_name" data-type="${res.id}">
                             <p>${res.title}</p>
                         </td>
                         <td>${res.nickname}</td>
@@ -562,4 +586,102 @@
             }
         })
     }
+
+    function count_up(id){
+        $.post("http://43.200.169.89/view-count-up-for-fam-views",{
+            post_id : id,
+            user_id : user_id,
+        },result=>{
+            if(result == "success"){
+                //alert('삭제가 완료되었습니다.');
+                //location.reload();
+            }
+        })
+    }
+
+    function board_delete(id){
+        $.post("http://43.200.169.89/delete-post-to-fam",{
+            post_id : id,
+            user_id : user_id,
+        },result=>{
+            if(result == "success"){
+                alert('삭제가 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
+
+    function modify_post(){
+
+        var title = $("input[name=fam_title2]").val();
+        //var descStr = $("input[name=fam_content]").val();
+        var descStr = editor2.getData();
+        var post_type = $("input[name=post_type2]:checked").val();
+        var post_id = $("input[name=hidden_id]").val();
+
+        if(title == ""){
+            alert("제목을 입력해주세요.");
+            return;
+        }
+
+        if(descStr == ""){
+            alert("내용을 입력해주세요.");
+            return;
+        }
+
+        $.post("http://43.200.169.89/revise-post-to-fam",{
+            post_id : post_id,
+            user_id : user_id,
+            post_type : post_type,
+            title : title,
+            contents : descStr,
+        },result=>{
+            if(result == "success"){
+                alert('수정이 완료되었습니다.');
+                location.reload();
+            }
+        })
+    }
+
+    $(document).on("click",".adminContent_table_name", function(){
+        var target_id = $(this).data('type');
+        console.log(target_id);
+
+        boards = boards.filter(function(board_info){
+            return board_info.id == target_id;
+        })
+
+        console.log(boards);
+
+        var tag = `<div class="" style="display: block;" id="">
+                        <div class="" id="">
+                        <h3></h3>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>제목</b></h5>
+                            <p style="font-size:15px;" id="board_title">${boards[0].title}</p>
+                            <p style="float:right;">작성자 : ${boards[0].nickname}</p>
+                        </div>
+                        <br><br><br>
+                        <div>
+                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>내용</b></h5>
+                            <p style="font-size:15px;" id="board_content">${boards[0].descStr}</p>
+                            <div>
+                            </div>
+                        </div>
+                        <div class="adminModal_cont_btn">
+                            <a href="javascript:void(0)" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;" onclick="board_delete(${boards[0].id});">삭제</a>
+                            <a href="javascript:void(0)" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;" onclick="modal_popup4(${boards[0].id})">수정</a>
+                            <a href="./fam_board.html?fam_id=${fam_id}" class="back_btn" style="float: right;width: 120px;height: 32px;line-height: 30px;">목록으로</a>
+                        </div>
+                    </div>`;
+        
+        $("#fam_title2").val(boards[0].title);
+        editor.setData(boards[0].descStr);
+
+        $(".board_view").html(tag);
+        $(".board_view").show();
+        $(".board_table").hide();
+
+        count_up(boards[0].id);
+    })
 </script>

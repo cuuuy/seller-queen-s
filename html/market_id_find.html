@@ -23,11 +23,11 @@
 				<div class="marketJoin_form">
 					<dl>
 						<dt>이름</dt>
-						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dd><input type="text" name="name" placeholder="이름을 입력해주세요."></dd>
 						<dt>연락처</dt>
 						<dd>
-							<input type="text" name="" placeholder="+82(한국)" class="w30">
-							<input type="text" name="" placeholder="전화번호를 입력해주세요." class="w70 ml">
+							<input type="text" name="phone_nation" placeholder="+82(한국)" class="w30">
+							<input type="text" name="phone" placeholder="전화번호를 입력해주세요." class="w70 ml">
 							<input type="text" name="" placeholder="인증번호를 입력해주세요." class="w70 mt">
 							<a href="" class="w30 mt ml gray">인증번호 전송</a>
 							<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
@@ -35,14 +35,14 @@
 					</dl>
 				</div>
 				<div class="marketJoin_btn">
-					<a href="javascript:void(0)" class="ok_btn gray modalon">다음</a>
+					<a href="javascript:void(0)" class="ok_btn gray" onclick="find_id();">다음</a>
 				</div>
 			</div>
 			<div id="marketModal" class="marketModal02">
 				<div>
 					<h3>인증완료</h3>
 					<p>	
-						안녕하세요. 김셀러 회원님<br>회원님이 셀러퀸즈에 가입하신 아이디는 abcdef 입니다.
+						안녕하세요. 회원님<br>회원님이 셀러퀸즈에 가입하신 아이디는 <span class="idStr"></span> 입니다.
 					</p>
 					<a href="./market_main.html" class="ok_btn">확 인</a>
 				</div>
@@ -75,4 +75,54 @@
 			$('.marketModal02').show();
 		});
 	});
+
+    function modal_popup(){
+		const modal = document.getElementById("marketModal")
+		modal.style.display = "flex"
+	}
+
+	const modal = document.getElementById("marketModal")
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+    
+    function find_id(){
+
+        var name = $("input[name=name]").val();
+        var phone_nation = $("input[name=phone_nation]").val();
+        var phone = $("input[name=phone]").val();
+
+        if(name == ''){
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+
+        if(phone_nation == ''){
+            alert("국가번호를 입력해주세요.");
+            return false;
+        }
+
+        if(phone == ''){
+            alert("전화번호를 입력해주세요.");
+            return false;
+        }
+
+        $.post("http://43.200.169.89/find-idStr",{
+            name : name,
+            phone_nation : phone_nation,
+            phone : phone
+        },result=>{
+            console.log(result);
+            if(result == "not exist"){
+                alert('정보가 존재 하지 않습니다.');
+            }else{
+                $(".idStr").text(result);
+                modal_popup();
+            }
+        })
+    }
 </script>

@@ -19,18 +19,19 @@
 				<div class="body_idFind_form">
 					<dl>
 						<dt>이름</dt>
-						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dd><input type="text" name="name" placeholder="이름을 입력해주세요."></dd>
 						<dt>연락처</dt>
 						<dd>
-							<input type="text" name="" placeholder="+82(한국)" class="w30">
-							<input type="text" name="" placeholder="전화번호를 입력해주세요." class="w70 ml">	  
+							<input type="text" name="phone_nation" placeholder="+82(한국)" class="w30">
+							<input type="text" name="phone" placeholder="전화번호를 입력해주세요." class="w70 ml">	  
 							<span class="body_idFind_form_phone">인증번호 발송을 요청했습니다. 인증번호가 오지 않으면 입력정보가 정확한지 다시 확인해주세요. 가상 전화번호는 인증번호를 받을 수 없습니다.</span>
 							<input type="text" name="" placeholder="인증번호를 입력해주세요." class="w70 mt">
 							<a href="javascript:void(0)" class="w30 mt ml gray phone">인증번호 전송</a>
 							<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
 						</dd>
 					</dl>
-					<a href="javascript:void(0)" class="ok_btn gray" onclick="modal_popup()">다음</a>
+					<!-- <a href="javascript:void(0)" class="ok_btn gray" onclick="modal_popup()">다음</a> -->
+                    <a href="javascript:void(0)" class="ok_btn gray" onclick="find_id()">다음</a>
 				</div>
 			</div>
 		</div>
@@ -39,16 +40,16 @@
 				<h3>인증완료</h3>
 				<div class="adminModal_ok_text">
 					<p>
-						안녕하세요. <span>김셀러</span> 회원님,
+						안녕하세요. <span class="nameStr"></span> 회원님,
 					</p>
 					<p>
 						회원님이 셀러퀸즈에 가입하신 아이디는<br>
-						<span>abcdef</span>
+						<span class="idStr"></span>
 						입니다.
 					</p>
 				</div>
 				<div class="adminModal_ok_btn">
-					<a href="javascript:void(0)" class="ok_btn" id="close_btn">확인</a>
+					<a href="javascript:void(0)" class="ok_btn" id="close_btn" >확인</a>
 				</div>
 			</div>
 		</div>
@@ -71,6 +72,10 @@
 			$('.gray').removeClass('gray');
 			$('.body_idFind_form_phone').show();
 		});
+
+        $("#close_btn").click(function(){
+            $("#modal").hide();
+        })
 	});
 
 	
@@ -81,16 +86,6 @@
 	}
 
 	const modal = document.getElementById("modal")
-	const closeBtn = modal.querySelector(".close-area")
-	const close_btn = modal.querySelector("#close_btn")
-
-	close_btn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
-
-	closeBtn.addEventListener("click", e => {
-		modal.style.display = "none"
-	})
 
 	modal.addEventListener("click", e => {
 		const evTarget = e.target
@@ -99,9 +94,39 @@
 		}
 	})
 
-	window.addEventListener("keyup", e => {
-		if(modal.style.display === "flex" && e.key === "Escape") {
-			modal.style.display = "none"
-		}
-	})
+    function find_id(){
+
+        var name = $("input[name=name]").val();
+        var phone_nation = $("input[name=phone_nation]").val();
+        var phone = $("input[name=phone]").val();
+
+        if(name == ''){
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+
+        if(phone_nation == ''){
+            alert("국가번호를 입력해주세요.");
+            return false;
+        }
+
+        if(phone == ''){
+            alert("전화번호를 입력해주세요.");
+            return false;
+        }
+
+        $.post("http://43.200.169.89/find-idStr",{
+            name : name,
+            phone_nation : phone_nation,
+            phone : phone
+        },result=>{
+            console.log(result);
+            if(result == "not exist"){
+                alert('정보가 존재 하지 않습니다.');
+            }else{
+                $(".idStr").text(result);
+                modal_popup();
+            }
+        })
+    }
 </script>

@@ -99,6 +99,9 @@
             </table>
         </div>
         <div class="adminModal_ok_btn" style="margin:20px auto 5px auto">
+            <div class="adminModal_ok_btn2">
+
+            </div>
             <a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn" style="width:48%;float:left;margin:0 5px 5px 0;">취소</a>
             <a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" onclick="enroll_lecture()" style="width:48%;float:left;margin:0 0 5px 5px;">저장</a>
         </div>
@@ -252,7 +255,7 @@
             $("#close_btn_2").text('수정');
             $("#close_btn_2").attr("onclick", "revise_lecture("+class_name+")");
             //revise_lecture(class_name);
-            $(".adminModal_ok_btn").append(`<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" onclick="delete_lecture(${class_name})" style="width: 98%;float:left;">삭제</a>`);
+            $(".adminModal_ok_btn2").html(`<a href="javascript:void(0);" class="ok_btn modalClose" id="close_btn_2" onclick="delete_lecture(${class_name})" style="width: 98%;float:left;">삭제</a>`);
         }else{
             $("#close_btn_2").text('저장');
         }

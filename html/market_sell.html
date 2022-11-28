@@ -487,9 +487,9 @@
 	function amount_re(){
 		var one_price = local_data.price/local_data.count;
 		
-		$("#product_price2").text((one_price * count)+" 원");
-		$("#product_total_amount").text(((one_price * count)+local_data.deli_fee)+" 원");
-		$("#bottom_price").text(((one_price * count)+local_data.deli_fee)+" 원");
+		$("#product_price2").text((one_price * count).toLocaleString('ko-KR')+" 원");
+		$("#product_total_amount").text(((one_price * count)+local_data.deli_fee).toLocaleString('ko-KR')+" 원");
+		$("#bottom_price").text(((one_price * count)+local_data.deli_fee).toLocaleString('ko-KR')+" 원");
 	}
     function delivery_load(){
         $.get("http://43.200.169.89/user_address?user_id="+user_id,function(res){
@@ -621,8 +621,8 @@
 		var place_phone = $("input[name=place_phone]").val();
 		var address1 = $("input[name=place_addr]").val();
 		var address2 = $("input[name=place_addr2]").val();
-		var product_price = $("#product_price").text().replace(' 원','');
-		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','');
+		var product_price = $("#product_price").text().replace(' 원','').replace(/,/g , '');
+		var delivery_fee = $("#product_deli").text().replace(' 원','').replace('+','').replace(/,/g , '');
 		var sell_desc = $("select[name=sell_desc]").val();
 		var pay_by = $(".pay_method.on").text();
 
@@ -850,11 +850,11 @@
 				//var tag = ``;
 				//$("#img_li").append(tag);
 				var tag = `<li id="img_li">
-							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;"></span>
+							<span class="marketSell_top_list_thumb" style="background: url(http://43.200.169.89${img_path}) no-repeat; background-size:cover;background-position: center;"></span>
 							<table class="marketSell_top_list_table">
 								<tr>
 									<th>판매가</th>
-									<td id="product_price"></td>
+									<td colspan="2" id="product_price"></td>
 								</tr>
 								<tr id="first_tr">
 									<th>수량</th>
@@ -870,7 +870,7 @@
 						</li>`;
 				$(".marketSell_top_list").append(tag);
 
-				$("#product_price").text(res[0].retail_price+" 원");
+				$("#product_price").text(res[0].retail_price.toLocaleString('ko-KR')+" 원");
 				//$("#product_price2").text(res[0].retail_price+" 원");
 				//$("#product_deli").text("+"+res[0].delivery_fee+" 원");
 				//$("#product_total_amount").text(res[0].retail_price+res[0].delivery_fee+" 원");
@@ -885,10 +885,10 @@
 
 					$("#product_amount").text(local_data.count);
 
-					$("#product_price2").text(local_data.price+" 원");
-					$("#product_deli").text("+ "+local_data.deli_fee+" 원");
-					$("#product_total_amount").text(local_data.total_amount+" 원");
-					$("#bottom_price").text(local_data.total_amount+" 원");
+					$("#product_price2").text(local_data.price.toLocaleString('ko-KR')+" 원");
+					$("#product_deli").text("+ "+local_data.deli_fee.toLocaleString('ko-KR')+" 원");
+					$("#product_total_amount").text(local_data.total_amount.toLocaleString('ko-KR')+" 원");
+					$("#bottom_price").text(local_data.total_amount.toLocaleString('ko-KR')+" 원");
 
 					var option_name_tag = ``;
 					$.each(local_data['option_name'], function(i, r){

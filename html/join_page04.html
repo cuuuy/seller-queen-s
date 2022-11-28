@@ -91,7 +91,7 @@
 								<td>
 									<input type="text" id="nickname" placeholder="닉네임을 입력해주세요.">
 								</td>
-								<td><a href="">중복확인</a></td>
+								<td><a href="javascript:void(0)" onclick="nickname_check()">중복확인</a></td>
 							</tr>
 							<tr id="nickname_tr2">
 								<td colspan="2" class="text">* 닉네임은 최초 입력 후 1회 변경만 가능합니다. 닉네임은 셀러 마켓 메인으로 표시 됩니다.</td>
@@ -132,11 +132,11 @@
 								<td>
 									<input type="text" placeholder="인증번호를 입력해주세요.">
 								</td>
-								<td><a href="">확인</a></td>
+								<td><a href="javascript:alert('인증되었습니다.')">확인</a></td>
 							</tr>
 							<tr id="recommend1">
 								<th>추천인 연락처</th>
-								<td>
+								<td colspan="2">
 									<input type="text" placeholder="+82(한국)" class="w30" id="recommender_phone_nation">
 									<input type="text" placeholder="전화번호를 입력해주세요." class="w70" id="recommender_phone">
 								</td>
@@ -144,7 +144,7 @@
 							</tr>
 							<tr id="recommend2">
 								<th>추천인 이름</th>
-								<td>
+								<td colspan="2">
 									<input type="text" placeholder="추천인 이름을 입력해주세요." id="recommender_name">
 								</td>
 								<td></td>
@@ -285,6 +285,34 @@
 					alert("등록가능한 아이디 입니다.");
 				}else if(res == "already exist"){
 					alert("이미 존재하는 아이디 입니다. 다른 아이디를 사용해 주세요.");
+				}
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.")
+			}
+		});
+	}
+
+    function nickname_check(){
+		var nickname = $("#nickname").val();
+		if(nickname==""){
+			alert("아이디를 입력해주세요.");
+			return false;
+		}
+
+		$.ajax({
+			type : "POST",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/check-nickname",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				nickname : nickname
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				//alert(res);
+
+				if(res == "can make"){
+					alert("등록가능한 닉네임 입니다.");
+				}else if(res == "already exist"){
+					alert("이미 존재하는 닉네임 입니다. 다른 닉네임을 사용해 주세요.");
 				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.

@@ -13,34 +13,9 @@
 <body style="background:#ddd;">
 	<div class="marketContainer">
 		<div class="header">
-			<header class="marketHeader">
-			<div>
-				<a href="./market_qna.html"><img src="../image/market_back.png" alt=""></a>
-			</div>
-			<h2>문의 작성</h2>
 			
-			<div class="marketHeader_mypage">
-				<a href="javascript:void(0);" class="marketHeader_mypage_icon"><img src="../image/market_my.png" alt=""></a>
-				<div class="marketHeader_mypage_menu">
-					<p class="marketHeader_mypage_menu_close"><img src="../image/market_nav_arrow.png" alt=""></p>
-					<div class="marketHeader_mypage_menu_top">
-						<span class="marketHeader_mypage_menu_top_profile"></span>
-						<h5>김셀럽 회원님, 환영합니다.</h5>
-					</div>
-					<ul class="marketHeader_mypage_menu_list">
-						<li><a href="market_order.html">주문내역</a></li>
-						<li><a href="market_cart.html">장바구니</a></li>
-						<li><a href="market_review.html">후기 게시판</a></li>
-						<li><a href="market_qna.html">문의 게시판</a></li>
-						<li><a href="market_see.html">최근 본 상품</a></li>
-					</ul>
-					<ul class="marketHeader_mypage_menu_logout">
-						<li>로그아웃</li>
-					</ul>
-				</div>
-			</div>
-		</header>
 		</div>
+        <form method="POST" enctype="multipart/form-data" id="uploadForm"></form>
 		<div class="marketContent">
 			<div class="marketReview marketBoardWrite">
 				<h3>레몬트리</h3>
@@ -57,7 +32,7 @@
 					<label for="reason4" class="reason_radio_label"><input type="radio" class="reason_radio" name="reason" id="reason4" value="exchange_qna">교환 문의</label>
 					<label for="reason5" class="reason_radio_label"><input type="radio" class="reason_radio" name="reason" id="reason5" value="etc_qna">기타 문의</label>
 				</div>
-				<form method="POST" enctype="multipart/form-data" id="uploadForm">
+				
 				<div class="marketReview_write">
 					<textarea name="qna_text" placeholder="문의 항목에 대한 설명을 자세히 적어주세요. 최대한 빠른 시일내에 답변드리겠습니다. 감사합니다."></textarea>
 					<p>(최소 10자 이상 작성해주세요)</p>
@@ -77,6 +52,8 @@
 
 
 <script>
+    $('.header').load('market_subheader.html');
+    
 	var user_id = localStorage.getItem('user_id');
 	if(user_id == null){
 		user_id = -1; // 비회원
@@ -100,15 +77,17 @@
 		$(this).parent().siblings().removeClass("reason_radio_focus");
 		typeStr = $(".reason").val();
 	});
-	var now_date = Date.now();
-	var enroll_time = now_date/1000;
+	var now_date = new Date();
+    var enroll_time = parseInt(now_date.getTime()/1000);
 
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
 
-	function qna_write(){ // 장바구니에 상품 추가 function
+	function qna_write(){
+		var datas = '';
 		var form_data = new FormData();
+		var contentType = '';
 		var qna_text = $("textarea[name=qna_text]").val();
 		var typeStr = $("input[name=reason]:checked").val();
 		console.log(typeStr);
@@ -123,40 +102,75 @@
 			return false;
 		}
 
-		form_data.append('user_id', user_id);
-		form_data.append('product_id', product_id);
-		form_data.append('seller_id', '1');// 추후 수정 필요 2022-10-18
-		form_data.append('inquiry_text', qna_text);
-		form_data.append('typeStr', typeStr);
-		form_data.append('enroll_time', enroll_time);
+		
 		
 		if($("#main_img").val()==""){
+			contentType = 'application/json; charset=utf-8';
 			url = "http://43.200.169.89/enroll-inquiry-no-image";
+			datas = {
+                        user_id : user_id,
+                        product_id : product_id,
+						seller_id : '1',
+                        inquiry_text : qna_text,
+						typeStr : typeStr,
+                        enroll_time : enroll_time
+                    }
+
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : url,      // 컨트롤러에서 대기중인 URL 주소이다.
+				data : datas,            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					console.log(res);
+
+					if(res == "success"){
+						alert("문의가 등록되었습니다.");
+						location.href="market_qna.html?product_id="+product_id;
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
 		}else{
+			contentType = false;
 			url = "http://43.200.169.89/enroll-inquiry";
+			form_data.append('user_id', user_id);
+			form_data.append('product_id', product_id);
+			form_data.append('seller_id', '1');// 추후 수정 필요 2022-10-18
+			form_data.append('inquiry_text', qna_text);
+			form_data.append('typeStr', typeStr);
+			form_data.append('enroll_time', enroll_time);
 			form_data.append('file', $("#main_img")[0].files[0]);
+
+			datas = form_data;
+
+			$.ajax({
+				type : "POST",            // HTTP method type(GET, POST) 형식이다.
+				url : url,      // 컨트롤러에서 대기중인 URL 주소이다.
+				contentType: contentType,
+				processData: false,
+				data : datas,            // Json 형식의 데이터이다.
+				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+					// 응답코드 > 0000
+					console.log(res);
+
+					if(res == "success"){
+						alert("문의가 등록되었습니다.");
+						location.href="market_qna.html?product_id="+product_id;
+					}else{
+						alert("오류 발생. 관리자에게 문의하세요.");
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+					alert("통신 실패.")
+				}
+			});
 		}
 
-		$.ajax({
-			type : "POST",            // HTTP method type(GET, POST) 형식이다.
-			url : url,      // 컨트롤러에서 대기중인 URL 주소이다.
-			contentType: false,
-			processData: false,
-			data : form_data,            // Json 형식의 데이터이다.
-			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-				// 응답코드 > 0000
-				console.log(res);
-
-				if(res == "success"){
-					alert("문의가 등록되었습니다.");
-					location.href="market_qna.html?product_id="+product_id;
-				}else{
-					alert("오류 발생. 관리자에게 문의하세요.");
-				}
-			},
-			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-				alert("통신 실패.")
-			}
-		});
+		
 	}
 </script>

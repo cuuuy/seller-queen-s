@@ -344,8 +344,10 @@
 			var profitInfoDictResult = 0;
 			if(profitInfoDict[datas[i].id]){
 				profitInfoDictResult = profitInfoDict[datas[i].id];
+                profitInfoDictResult_manager = profitInfoDict[datas[i].id].manager_profit;
 			}else{
 				profitInfoDictResult = 0;
+                profitInfoDictResult_manager = 0;
 			}
 					tag+= `<tr>
 								<td>
@@ -363,7 +365,7 @@
 								<td>${productCountDictResult}</td>
 								<td>${formattedTime}</td>
 								<td>${paidInfoDictResult}</td>
-								<td>${profitInfoDictResult}/0</td>
+								<td>${profitInfoDictResult}/${profitInfoDictResult_manager}</td>
 								<td>
 									<div class="adminContent_order">
 										<a href="javascript:void(0)" class="check_btn" onclick="modi_modal_pop(${datas[i].id})">수정</a>

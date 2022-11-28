@@ -452,7 +452,9 @@
                 $(".payment_info").append(res[0].payment_info);
 
 				var img_path = res[0].main_img_url.replace("public","");
-				var new_html = `<div class="marketDetail_mainImg" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;"></div>`;
+				var new_html = `<div>
+                                    <div class="marketDetail_mainImg" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;background-position: center;"></div>
+                                </div>`;
 				
 				count = 1;
 				var sum_price = (res[0].retail_price * count)+res[0].delivery_fee;
@@ -574,16 +576,16 @@
 		}
 
 		var local_data = {
-			"total_amount" : parseInt($("#total_amount").text().replace(" 원","")),
-			"price" : parseInt($("#product_amount").text().replace(" 원","")),
+			"total_amount" : parseInt($("#total_amount").text().replace(" 원","").replace(/,/g , '')),
+			"price" : parseInt($("#product_amount").text().replace(" 원","").replace(/,/g , '')),
 			"count" : count,
-			"deli_fee" : parseInt($("#deli_amount").text().replace("+","").replace(" 원","")),
+			"deli_fee" : parseInt($("#deli_amount").text().replace("+","").replace(" 원","").replace(/,/g , '')),
 			"deli_method" : $(".option1.on").text(),
 			"option_name" : option_name_arr,
 			"options_arr" : options_arr
 		};
-		
-		console.log(local_data);
+		//console.log(parseInt($("#total_amount").text().replace(" 원","").replace(/,/g , '')));
+		//console.log(local_data);
 		//return;
 		localStorage.setItem("local_data", JSON.stringify(local_data));
 
