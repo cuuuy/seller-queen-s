@@ -45,19 +45,19 @@
 				</a>
 				<div class="join_page_05">
 					<div class="join_page_05_ok join_page_05_pay">
-						<h5>선택 상품 : 셀러 Ⅰ</h5>
+						<h5>선택 상품 : <span class="user_type"></span><span class="seller_type"></span></h5>
 						<p>
 							총 상품금액
-							<span>1,990,000원</span>
+							<span class="user_price"></span>
 						</p>
 						<h5>결제방법</h5>
 						<div class="join_page_05_pay_btn">
-							<a href="">계좌 간편결제</a>
-							<a href="">카드</a>
-							<a href="">무통장 입금</a>
-							<a href="">일반 간편카드</a>
+							<a class="pay_click active" href="javascript:void(0)">계좌 간편결제</a>
+							<a class="pay_click" href="javascript:void(0)">카드</a>
+							<a class="pay_click" href="javascript:void(0)">무통장 입금</a>
+							<a class="pay_click" href="javascript:void(0)">일반 간편카드</a>
 						</div>
-						<a href="./join_page06.html" class="ok_btn">셀러 결제하기</a>
+						<a href="javascript:void(0)" class="ok_btn payment">셀러 결제하기</a>
 					</div>
 				</div>
 				<a href="" id="join_page_next">
@@ -71,6 +71,30 @@
 
 
 <script>
+    var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+	var user_type = urlParams.get('user_type');
+	var seller_type = urlParams.get('seller_type');
+
+    var user_type_string = "";
+    if(user_type=="seller"){
+        user_type_string = "셀러";
+    }else if(user_type=="wholesaler"){
+        user_type_string = "도매";
+    }else if(user_type=="teacher"){
+        user_type_string = "강사";
+    }
+
+    var seller_type_string = "";
+    var seller_price = "";
+    if(seller_type=="I"){
+        seller_type_string = "I";
+        seller_price = '2,990,000원';
+    }else if(seller_type=="J"){
+        seller_type_string = "J";
+        seller_price = '1,990,000원';
+    }
+
 	$(document).ready(function() {
 		$('.header').load('head.html');
 		$('.footer').load('footer.html');
@@ -80,6 +104,29 @@
 			$(this).addClass('active');
 			$(this).siblings().removeClass('active');
 		});
+
+        $(".user_type").text(user_type_string);
+        $(".seller_type").text(seller_type_string);
+        $(".user_price").text(seller_price);
+
+        
+        if(user_type=="seller"){
+            $(".payment").attr("href", "./join_page07.html?user_type="+user_type+"&seller_type="+seller_type);
+        }else if(user_type=="wholesaler"){
+            $(".payment").attr("href", "./join_page08.html?user_type="+user_type+"&seller_type="+seller_type);
+        }else if(user_type=="teacher"){
+            $(".payment").attr("href", "./join_page09.html?user_type="+user_type+"&seller_type="+seller_type);
+        }
+
 	});
 
+    $(document).on("click", ".pay_click", function(e){
+        $(e.target).addClass('active');
+        $(e.target).siblings().removeClass('active');
+    })
+
+    
+
+    
+    
 </script>

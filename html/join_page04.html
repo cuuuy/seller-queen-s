@@ -296,7 +296,7 @@
     function nickname_check(){
 		var nickname = $("#nickname").val();
 		if(nickname==""){
-			alert("아이디를 입력해주세요.");
+			alert("닉네임을 입력해주세요.");
 			return false;
 		}
 
@@ -426,11 +426,11 @@
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
 				alert("회원가입 신청이 완료되었습니다.");
 				if(user_type=="seller"){
-					location.href="./join_page07.html";
+					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type;
 				}else if(user_type=="wholesaler"){
-					location.href="./join_page08.html";
+					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type;
 				}else if(user_type=="teacher"){
-					location.href="./join_page09.html";
+					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type;
 				}
 				
 			},
