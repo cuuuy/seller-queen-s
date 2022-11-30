@@ -86,6 +86,7 @@
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
+    var market_name = urlParams.get('market_name');
 
 	function review_write(){ // 장바구니에 상품 추가 function
         var datas = '';

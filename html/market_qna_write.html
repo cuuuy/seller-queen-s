@@ -16,6 +16,7 @@
 			
 		</div>
         <form method="POST" enctype="multipart/form-data" id="uploadForm"></form>
+        <input type="hidden" name="market_name">
 		<div class="marketContent">
 			<div class="marketReview marketBoardWrite">
 				<h3>레몬트리</h3>
@@ -71,6 +72,8 @@
 			}, 300);
 		});
 	});
+
+    
 	var typeStr = '';
 	$(".reason_radio").click(function(){
 		$(this).parent().addClass("reason_radio_focus");
@@ -83,13 +86,24 @@
 	var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var product_id = urlParams.get('product_id');
+    var market_name = urlParams.get('market_name');
+    var seller_id = 0;
+
+    $.get("http://43.200.169.89/getSellerId_by_marketName?market_name="+market_name, function(data){
+        console.log(data);
+
+        $("input[name=market_name]").val(data.id);
+    });
 
 	function qna_write(){
+        
 		var datas = '';
 		var form_data = new FormData();
 		var contentType = '';
 		var qna_text = $("textarea[name=qna_text]").val();
 		var typeStr = $("input[name=reason]:checked").val();
+        var seller_id = $("input[name=market_name]").val();
+
 		console.log(typeStr);
 		
 		if(typeStr==undefined){
@@ -110,7 +124,7 @@
 			datas = {
                         user_id : user_id,
                         product_id : product_id,
-						seller_id : '1',
+						seller_id : seller_id,
                         inquiry_text : qna_text,
 						typeStr : typeStr,
                         enroll_time : enroll_time
@@ -140,7 +154,7 @@
 			url = "http://43.200.169.89/enroll-inquiry";
 			form_data.append('user_id', user_id);
 			form_data.append('product_id', product_id);
-			form_data.append('seller_id', '1');// 추후 수정 필요 2022-10-18
+			form_data.append('seller_id', seller_id);// 추후 수정 필요 2022-10-18
 			form_data.append('inquiry_text', qna_text);
 			form_data.append('typeStr', typeStr);
 			form_data.append('enroll_time', enroll_time);

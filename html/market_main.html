@@ -360,7 +360,7 @@
             
             if(datas[i].isShow == "YES"){
                 tag += `<li>
-                        <a href="market_detail.html?product_id=${datas[i].id}">
+                        <a href="market_detail.html?product_id=${datas[i].id}&market_name=${market_name}">
                             <span class="marketMain_all_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;background-position: center;"></span>
                             <p class="marketMain_all_text">
                                 ${datas[i].product_name}
@@ -380,7 +380,7 @@
 
             if(datas[j].isBest == "YES"){
                 var tag = `<li>
-                            <a href="market_detail.html?product_id=${datas[j].id}">
+                            <a href="market_detail.html?product_id=${datas[j].id}&market_name=${market_name}">
                                 <span class="marketMain_best_thumb" style="background: url(http://43.200.169.89`+img_path+`) no-repeat; background-size:cover;border-radius: 70px;"></span>
                                 <p>${datas[j].product_name}</p>
                             </a>
