@@ -139,9 +139,11 @@
 			var allowed = '';
 
 			if(datas[i].allowed == 'NO'){
-				allowed = "승인대기";
+				allowed = "반려";
 			}else if(datas[i].allowed == 'YES'){
 				allowed = "승인완료";
+			}else if(datas[i].allowed == 'ready'){
+				allowed = "승인대기";
 			}
 			
 					tag+= `<tr>
@@ -202,7 +204,7 @@
 				profitInfoDict = userInfoDict['profitInfoDict'];
 
 				var tmp_arr = users.filter(function(user_info){
-					return user_info.allowed == "NO";
+					return user_info.allowed == "ready";
 				})
 
 				var tmp_arr2 = users.filter(function(user_info){
@@ -213,6 +215,10 @@
 				$(".yes_span").text(tmp_arr2.length);
 				$(".all_span").text(users.length);
 
+
+                users = users_origin.filter(function(user_info){
+                    return user_info.allowed == "ready";
+                })
 
 				$('#paging').pagination({
 					dataSource: users,
@@ -253,7 +259,7 @@
 		$("input[name=search_order]").val('');
 
 		users = users_origin.filter(function(user_info){
-			return user_info.allowed == "NO";
+			return user_info.allowed == "ready";
 		})
 
 		$('#paging').pagination({
