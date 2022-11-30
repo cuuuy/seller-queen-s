@@ -29,6 +29,7 @@
 						</p>
 					</div>
 				</div>
+                <form method="POST" enctype="multipart/form-data" id="uploadForm">
 				<div class="contact_in">
 					 <div>
 					 	<h2>기본정보 입력</h2>
@@ -40,27 +41,27 @@
 					 			</colgroup>
 					 			<tr>
 					 				<th>이름</th>
-					 				<td><input type="text" placeholder="이름을 입력해주세요"></td>
+					 				<td><input type="text" name="name" placeholder="이름을 입력해주세요"></td>
 					 			</tr>
 					 			<tr>
 					 				<th>셀러명</th>
-					 				<td><input type="text" placeholder="셀러명을 입력해주세요"></td>
+					 				<td><input type="text" name="seller_name" placeholder="셀러명을 입력해주세요"></td>
 					 			</tr>
 					 			<tr>
 					 				<th>이메일</th>
 					 				<td class="contact_in_wrap_form_text">
-					 					<input type="text" placeholder="이메일을 입력해주세요.">
+					 					<input type="text" name="email" placeholder="이메일을 입력해주세요.">
 					 					• 문의주신 내용은 입력한 이메일로 회신 드립니다. 이메일 주소를 정확히 입력해주세요.<br>
 					 					• 메일이 수신되지 않는 경우, 스팸 메일함을 확인해주세요.
 					 				</td>
 					 			</tr>
 					 			<tr>
 					 				<th>아이디</th>
-					 				<td><input type="text" placeholder="아이디를 입력해주세요."></td>
+					 				<td><input type="text" name="id" placeholder="아이디를 입력해주세요."></td>
 					 			</tr>
 					 			<tr>
 					 				<th>휴대폰번호</th>
-					 				<td><input type="text" placeholder="숫자만 입력해주세요."></td>
+					 				<td><input type="text" name="phone" placeholder="숫자만 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"></td>
 					 			</tr>
 					 		</table>
 					 		<label class="contact_in_wrap_check"><input type="checkbox">개인정보수집 동의 자세히보기</label>
@@ -72,26 +73,26 @@
 					 	<div class="contact_in_wrap">
 					 		<table class="contact_in_wrap_form">
 					 			<colgroup>
-					 				<col width="">
-					 				<col width="">
+					 				<col width="20%">
+					 				<col width="*">
 					 			</colgroup>
 					 			<tr>
 					 				<th>서비스 선택</th>
 					 				<td>
-					 					<select name="" id="">
+					 					<select name="service_qna" id="">
 					 						<option value="">
 					 							셀러퀸즈의 서비스를 선택해 주세요.
 					 						</option>
-					 						<option value="">
+					 						<option value="wholesaler_qna">
 					 							도매입점문의
 					 						</option>
-					 						<option value="">
+					 						<option value="pay_qna">
 					 							출금문의
 					 						</option>
-											<option value="">
+											<option value="delete_qna">
 					 							회원탈퇴문의
 					 						</option>
-											<option value="">
+											<option value="etc_qna">
 					 							기타문의
 					 						</option>
 					 					</select>
@@ -99,30 +100,35 @@
 					 			</tr>
 					 			<tr>
 					 				<th>제목</th>
-					 				<td><input type="text" placeholder="제목을 입력해주세요."></td>
+					 				<td><input type="text" name="title" placeholder="제목을 입력해주세요."></td>
 					 			</tr>
 					 			<tr>
 					 				<th>내용</th>
 					 				<td>
-										<textarea name="" id="" placeholder="아이제이에 귀한 시간을 내어주신 점 감사의 인사를 드립니다. 궁금하신 사항을 상세하게 기재해 주시면 상담에 많은 도움이 됩니다. (ex.판매쇼핑몰, 판매상품수, 월평균주문량 등)"></textarea>
+										<textarea name="content" id="content" placeholder="아이제이에 귀한 시간을 내어주신 점 감사의 인사를 드립니다. 궁금하신 사항을 상세하게 기재해 주시면 상담에 많은 도움이 됩니다. (ex.판매쇼핑몰, 판매상품수, 월평균주문량 등)"></textarea>
 									</td>
 					 			</tr>
 					 			<tr>
 					 				<th>파일첨부</th>
 					 				<td class="contact_in_wrap_form_file">
-					 					<a href="">파일업로드</a>
+                                        <input type="file" name="main_file" id="main_file" style="display:none;">
+					 					<a href="javascript:void(0)" onclick="$('#main_file').trigger('click')">파일업로드</a>
 					 					2MB 미만 / pdf, jpg, ppt, pptx, png 가능
 					 				</td>
 					 			</tr>
 					 			<tr>
 					 				<th>자동등록방지</th>
-					 				
+                                    <td>
+					 				    <input type="checkbox" name="robot" id="robot" style="width: auto;">
+                                        <label for="robot">로봇이 아닙니다</label>
+                                    </td>
 					 			</tr>
 					 		</table>
 					 	</div>
 					 </div>
 				</div>
-				<a href="" class="contact_btn">상담 신청하기</a>
+				<a href="javascript:void(0)" class="contact_btn" onclick="enroll_inquiry();">상담 신청하기</a>
+                </form>
 			</div>
 		</div>
 		
@@ -143,4 +149,119 @@
 		});
 	});
 
+    function enroll_inquiry(){
+
+        var form_data = new FormData();
+
+        var name = $("input[name=name]").val();
+        var seller_name = $("input[name=seller_name]").val();
+        var email = $("input[name=email]").val();
+        var id = $("input[name=id]").val();
+        var phone = $("input[name=phone]").val();
+        var service = $("select[name=service_qna] option:selected").val();
+        var title = $("input[name=title]").val();
+        var content = $("textarea[name=content]").val();
+
+        if(name == ""){
+            alert("이름을 입력해주세요.");
+            return false;
+        }
+
+        if(email == ""){
+            alert("이메일을 입력해주세요.");
+            return false;
+        }
+
+        if(id == ""){
+            alert("아이디를 입력해주세요.");
+            return false;
+        }
+
+        if(phone == ""){
+            alert("휴대폰번호를 입력해주세요.");
+            return false;
+        }
+
+        if(service == ""){
+            alert("서비스를 선택해주세요.");
+            return false;
+        }
+
+        if(title == ""){
+            alert("제목을 입력해주세요.");
+            return false;
+        }
+
+        if(content == ""){
+            alert("내용을 입력해주세요.");
+            return false;
+        }
+
+        if(!$("#robot").is(":checked")){
+            alert("자동등록방지를 체크해 주세요.");
+            return false;
+        }
+        
+
+        if($("#main_file").val()==""){
+            $.ajax({
+                type : "POST",            // HTTP method type(GET, POST) 형식이다.
+                url : "http://43.200.169.89/enroll-inquiries_sellerqueens-no-image",      // 컨트롤러에서 대기중인 URL 주소이다.
+                data : {
+                    name : name,
+                    seller_name : seller_name,
+                    email : email,
+                    idStr : id,
+                    phone : phone,
+                    typeStr : service,
+                    title : title,
+                    contents : content,
+                },            // Json 형식의 데이터이다.
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                    console.log(res);
+
+                    if(res == "success"){
+                        alert("문의가 등록되었습니다.");
+                        location.href="./main.html";
+                    }else{
+                        alert("오류 발생. 관리자에게 문의하세요.");
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+            });
+        }else{
+            form_data.append('name',name);
+            form_data.append('seller_name', seller_name);
+            form_data.append('email', email);
+            form_data.append('idStr', id);
+            form_data.append('phone', phone);
+            form_data.append('typeStr', service);
+            form_data.append('title', title);
+            form_data.append('contents', content);
+            form_data.append('file', $("#main_file")[0].files[0]);
+            $.ajax({
+                type : "POST",            // HTTP method type(GET, POST) 형식이다.
+                url : "http://43.200.169.89/enroll-inquiries_sellerqueens",      // 컨트롤러에서 대기중인 URL 주소이다.
+                contentType: false,
+                processData: false,
+                data : form_data,            // Json 형식의 데이터이다.
+                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                    console.log(res);
+
+                    if(res == "success"){
+                        alert("문의가 등록되었습니다.");
+                        location.href="./main.html";
+                    }else{
+                        alert("오류 발생. 관리자에게 문의하세요.");
+                    }
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                    alert("통신 실패.")
+                }
+            });
+        }
+        
+    }
 </script>
