@@ -13,9 +13,8 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
 	<script src="../js/function.js"></script>
-	<script src="../js/pagination.min.js"></script>
 	<script src="../js/admin.js"></script>
-
+    <script src="../js/pagination.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
@@ -170,6 +169,8 @@
     var profit_id_arr = [];
     var total_profit = 0;
 
+    var page_num = 0;
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
 	});
@@ -177,7 +178,7 @@
 	function load_withdraw_list(datas){
 		//console.log('datas',datas);
 		var tag = ``;
-
+        var i = 0;
 		$.each(datas, function(m, withdraw){
 			total_profit = total_profit + withdraw.withdraw_amount;
 			var unix_timestamp = withdraw.enroll_time;
@@ -198,6 +199,8 @@
 			var bank_name = '';
 			if(withdraw.bank == 'sinhan'){
 				bank_name = '신한';
+			}else if(withdraw.bank == 'kookmin'){
+				bank_name = '국민';
 			}else{
 				bank_name = withdraw.bank;
 			}
@@ -209,7 +212,7 @@
 									<label for="check${withdraw.id}"><span></span></label>
 								</div>
 							</td>
-							<td>1</td>
+							<td>${page_num-i}</td>
 							<td class="adminContent_table_name">
 								<p>${withdraw.idStr}</p>
 							</td>
@@ -223,6 +226,7 @@
 							<td></td>
 							<td>${stateStr}</td>
 						</tr>`;
+            i++;
 		})
 
         $(".total_profit").text(total_profit.toLocaleString('ko-KR'));
@@ -260,6 +264,7 @@
 		$('#paging').pagination({
 			dataSource: withdraws,
 			callback: function(data, pagination) {
+                page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 				load_withdraw_list(data);
 			}
 		});
@@ -276,6 +281,7 @@
 		$('#paging').pagination({
 			dataSource: withdraws,
 			callback: function(data, pagination) {
+                page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 				load_withdraw_list(data);
 			}
 		});
@@ -291,6 +297,7 @@
 		$('#paging').pagination({
 			dataSource: withdraws,
 			callback: function(data, pagination) {
+                page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 				load_withdraw_list(data);
 			}
 		});
@@ -307,6 +314,7 @@
 			$('#paging').pagination({
 				dataSource: withdraws,
 				callback: function(data, pagination) {
+                    page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 					load_withdraw_list(data);
 				}
 			});
@@ -384,5 +392,11 @@
             });
         }
         
+    }
+
+    function profit_refund(){
+
+        
+
     }
 </script>

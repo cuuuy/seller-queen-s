@@ -59,8 +59,8 @@
                         </ul>
                         <ul class="marketHeader_mypage_menu_logout">
                             <li id="market_right_logout"><a href="javascript:void(0)" onclick="marker_logout();">로그아웃</a></li>
-                            <li id="market_right_join"><a href="./market_login.html">회원가입</a></li>
-                            <li id="market_right_login"><a href="./market_login.html">로그인</a></li>
+                            <li id="market_right_join"><a href="./market_login.html" class="join">회원가입</a></li>
+                            <li id="market_right_login"><a href="./market_login.html" class="login">로그인</a></li>
                         </ul>
                     </div>
                 </div>
@@ -141,6 +141,8 @@
 		$(".right_3depth").hide();
 		
         $(".marketHeader_logo").text(market_name);
+        $(".join").attr("href","./market_login.html?market_name="+market_name);
+        $(".login").attr("href","./market_login.html?market_name="+market_name);
 		
 	});
     $(function(){
@@ -202,7 +204,7 @@
 	function marker_logout(){
 		localStorage.removeItem('user_id');
 		alert("로그아웃 되었습니다.");
-		location.href="./market_main.html";
+		location.href="./market_main.html?market_name="+market_name;
 	}
 	
 	$(document).on('click','.category_all',function(){

@@ -71,7 +71,7 @@
 							<br><br>
 							감사합니다.
 						</p>
-						<a href="./market_main.html" class="ok_btn">확 인</a>
+						<a href="./market_main.html" class="ok_btn join">확 인</a>
 					</div>
 				</div>
 			</div>
@@ -82,6 +82,10 @@
 
 
 <script>
+    var queryString = window.location.search;
+	var urlParams = new URLSearchParams(queryString);
+    var market_name = urlParams.get('market_name');
+
 	$(function(){
 		$('.marketHeader_mypage_icon').click(function(){
 			$('.marketHeader_mypage_menu').animate({
@@ -93,6 +97,9 @@
 				'right': '-300px'
 			}, 300);
 		});
+
+        $(".join").attr("href", "./market_main.html?market_name="+market_name);
+
 	});
 
 	var option1 = ``;

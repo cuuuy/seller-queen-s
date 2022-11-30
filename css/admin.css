@@ -92,7 +92,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .adminContent_table td {font-size:16px;font-weight:400;text-align:center;color:#000;line-height:22px;padding:12px 8px;vertical-align:middle;}
 .adminContent_table_checkbox {height:42px;}
 .adminContent_table_checkbox input[type="checkbox"] + label{top:8px;}
-.adminContent_table td.adminContent_table_name {text-align:left;}
+.adminContent_table td.adminContent_table_name {text-align:left;min-width: 200px;}
 .adminContent_table td.adminContent_table_name:after {content:"";display:block;clear:both;}
 .adminContent_table td.adminContent_table_name span {float:left;width:42px;height:42px;margin:0 10px 0 0;background:url('../image/admin_imgsample.png') no-repeat;border-radius:50%;}
 .adminContent_table td.adminContent_table_name p {float:right;width:calc( 100% - 52px );line-height:42px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
@@ -159,7 +159,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .modalBanner {margin:0 auto 60px;width:180px;height:40px;line-height:40px;background:#4E327B;color:#fff;text-align:center;border-radius:5px;font-size:16px;}
 
 
-.adminModal_ok {position:absolute;width:600px;padding:60px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
+.adminModal_ok {position:fixed;width:600px;padding:60px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
 .adminModal_ok h3 {text-align:center;color:#4E327B;}
 .adminModal_ok_btn {margin:20px 0 0 0;}
 
@@ -191,7 +191,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .category_2depth > .top {font-weight:bold;color:#603A8A;}
 .category_3depth > .top {color:#9C85B6}
 
-.adminContent_graph {float:left; width:40%; margin: 50px 80px 0 100px;}
+.adminContent_graph {float:left; width:40%; /*margin: 50px 80px 0 100px;*/}
 .adminContent_graph_wrap {width:auto; height:auto;}
 #start_date {width:calc(( 100% -10px )/2.5);margin:50px 20px 50px 0;line-height:32px;color:#818181; z-index:99999;float:left;text-align:center;min-height: 400px;}
 #end_date {width:calc(( 100% -10px )/2.5);margin:50px 20px 50px 0;line-height:32px;/* padding:0 10px; */color:#818181; z-index:99999;float:right;text-align:center;min-height: 400px;}
@@ -303,12 +303,26 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 		float: left;
 		height : auto;
 		margin: 0px 10px 0px 50px;
+		
 	}
 	.adminWrap_title_category {display:none;}
 
 }
 
+
+@media (max-width: 1200px) {
+
+	.adminContent_graph {
+		float: none !important;
+		height : auto;
+		margin: 0px 10px 0px 50px;
+		
+	}
+}
 @media (max-width: 640px) {
+
+	
+
 	.adminWrap {width:100%;padding:0 30px;}
 
 	.adminContent_tab ul li {font-size:16px;margin:0 12px 0 0;}

@@ -252,6 +252,7 @@
 			var index = $(e.target).data('index');
 			var key = $(e.target).data('key');
             var price = $(e.target).parent().parent().siblings('.marketCart_list_check').children().data('key');
+			var price_chk = $(e.target).parent().parent().siblings('.marketCart_list_check').children().is(":checked");
 			var info = ordersDict[key][index];
 			var now_count = parseInt($(e.target).siblings('p').text());
 			if(now_count == 1){
@@ -268,14 +269,14 @@
 						alert('error');
 					}
 			})
-            re_amount(price,'minus');
+            re_amount(price,'minus',price_chk);
 		})
 
 		$('body').on('click', '.plus_btn', function(e){
 			var index = $(e.target).data('index');
 			var key = $(e.target).data('key');
             var price = $(e.target).parent().parent().siblings('.marketCart_list_check').children().data('key');
-            //var price_chk = price.checked;
+            var price_chk = $(e.target).parent().parent().siblings('.marketCart_list_check').children().is(":checked");
 			var info = ordersDict[key][index];
 			var now_count = parseInt($(e.target).siblings('p').text());
 
@@ -289,7 +290,7 @@
 						alert('error');
 					}
 			})
-            re_amount(price,'plus');
+            re_amount(price,'plus',price_chk);
 		})
 
 		$('body').on('click', '.option_change_btn', function(e){
@@ -332,21 +333,27 @@
 
 
 		})
-        function re_amount(price,plus_minus){
+        function re_amount(price,plus_minus,price_chk){
             var new_amount = 0;
             var chk_amount = parseInt($("#chk_amount").text().replace(/,/g , ''));
-            if(plus_minus == 'plus'){
-                new_amount = chk_amount + price;
-            }else if(plus_minus == 'minus'){
-                new_amount = chk_amount - price;
-            }
+
+			if(price_chk){
+				if(plus_minus == 'plus'){
+					new_amount = chk_amount + price;
+					checkbox_amount = checkbox_amount + price;
+				}else if(plus_minus == 'minus'){
+					new_amount = chk_amount - price;
+					checkbox_amount = checkbox_amount - price;
+				}
+			}
+            
             
 
             $("#chk_amount").text(new_amount.toLocaleString('ko-KR'));
         }
 		
         $('body').on('change', '.cart_checkbox', function(e){
-
+			
             var index = $(e.target).data('index');
             var key = $(e.target).data('key');
 
@@ -359,7 +366,7 @@
                 checkbox_num = checkbox_num - 1;
                 checkbox_amount = checkbox_amount - (key * target_count);
             }
-
+			console.log(checkbox_amount);
             $("#chk_count").text(checkbox_num);
             $("#chk_amount").text(checkbox_amount.toLocaleString('ko-KR'));
         })

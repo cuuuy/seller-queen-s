@@ -12,8 +12,10 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
-	<script src="../js/function.js"></script>
 	<script src="../js/admin.js"></script>
+	<script src="../js/function.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 </head>
 <body>
 	<div class="container">
@@ -54,10 +56,10 @@
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href="./admin_admin_main.html"><img src="../image/admin_back.png" alt="" /></a>
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
 					<h3>프로핏</h3>
 				</div> 
-					<div class="adminContent">
+					<div class="adminContent_right">
 						<div class="adminContent_tab">
 							<ul>
 								<li><a href="./admin_admin_profit_01.html">회원 리스트</a></li>
@@ -69,15 +71,10 @@
 								<li><a href="./admin_admin_profit_07.html">광고수수료 출금 현황</a></li>
 							</ul>
 						</div>
-						<div class="adminContent_profit">
-							89,000원
-						</div>
 						<div class="adminContent_search">
-							<input type="search" name="" placeholder="상품을 검색하세요." style="width: calc( 100% - 400px );">
-							<select class="check_btn adminContent_search_select">
-								<option>판매 프로핏</option>
-							</select>
-							<a href="" class="check_btn">검색</a>
+							<input type="search" name="search_profit" placeholder="상품을 검색하세요." onkeyup="enterkey()">
+							<!-- <a href="" class="check_btn">출금하기</a> -->
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
 							<select name="search_year1">
@@ -98,34 +95,38 @@
 							<select  name="search_day2">
 							</select>
 						</div>
-						<div class="adminContent_order">
-							<a href="" class="check_btn">지급하기</a>
-							<a href="" class="check_btn">회수하기</a>
+						
+						<div class="adminContent_date2">
+							<select>
+								<option>회원등급</option>
+							</select>
 						</div>
-						<div>
-							<table class="adminContent_table adminContent_profit_table">
+
+						<div class="adminContent_date2">
+							<select>
+								<option>정산상태</option>
+							</select>
+						</div>
+						<div style="min-height: 600px;">
+							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
 									<col width="3%">
 									<col width="*">
-									<col width="16%">
-									<col width="16%">
-									<col width="16%">
-									<col width="16%">
-									<col width="16%">
+									<col width="20%">
+									<col width="20%">
+									<col width="20%">
 								</colgroup>
 								<thead>
 									<th></th>
 									<th>No.</th>
-									<th>닉네임</th>
-									<th>ID</th>
 									<th>신청 금액</th>
 									<th>신청 일자</th>
 									<th>출금 예정일</th>
-									<th>정산상태</th>
+									<th>진행상태</th>
 								</thead>
-								<tbody>
-									<tr>
+								<tbody id="withdraw_tbody">
+									<!-- <tr>
 										<td>
 											<div class="adminContent_table_checkbox">
 												<input id="check02" type="checkbox">
@@ -133,178 +134,20 @@
 											</div>
 										</td>
 										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
+										<td class="adminContent_table_name">
+											<p>11,600</p>
 										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
 										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
 										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td>김추천마켓</td>
-										<td>seller123</td>
-										<td>1,990,000</td>
-										<td>20220401</td>
-										<td><p class="modalDate">20220401</p></td>
-										<td><p class="modalState">출금대기</p></td>
-									</tr>
-									
+										<td>출금대기</td>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
-						<div class="adminContent_pager">
-							<span class="active">1</span>
-							<span>2</span>
-							<span>3</span>
+						<div class="adminContent_pager" id="paging">
+
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div class="adminModal" id="modalDate" style="display:none;">
-			<div class="adminModal_ok adminModal_date">
-				<h3>출금예정일</h3>
-				<div class="adminModal_date_select">
-					<select>
-						<option>2022</option>
-					</select>
-					<select>
-						<option>4</option>
-					</select>
-					<select>
-						<option>11</option>
-					</select>
-				</div>
-				<div class="adminModal_cont_btn">
-					<a href="" class="back_btn modalClose">취소</a>
-					<a href="" class="ok_btn modalClose">저장</a>
-				</div>
-			</div>
-		</div>
-		<div class="adminModal" id="modalState" style="display:none;">
-			<div class="adminModal_ok adminModal_date">
-				<h3>정산상태</h3>
-				<div class="adminModal_date_select adminModal_date_select_long">
-					<select>
-						<option>출금대기</option>
-						<option>완료</option>
-					</select>
-				</div>
-				<div class="adminModal_cont_btn">
-					<a href="" class="back_btn modalClose">취소</a>
-					<a href="" class="ok_btn modalClose">저장</a>
 				</div>
 			</div>
 		</div>
@@ -314,20 +157,165 @@
 </html>
 
 <script>
+	var withdraws = [];
+	var withdraws_origin = [];
+	var user_id = localStorage.getItem('user_id');
+	
+	var page_num = 0;
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
-
-		$('.adminModal a').attr('href','javascript:void(0)');
-		$('.adminModal').hide();
-		$('.modalDate').click(function(){
-			$('#modalDate').show();
-		});
-		$('.modalState').click(function(){
-			$('#modalState').show();
-		});
-		$('.modalClose').click(function(){
-			$('.adminModal').hide();
-		});
 	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
 
+	const modal = document.getElementById("modal")
+	//const closeBtn = modal.querySelector(".close-area")
+	//const close_btn = modal.querySelector("#close_btn")
+
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	//modal.addEventListener("click", e => {
+	//	const evTarget = e.target
+	//	if(evTarget.classList.contains("modal-overlay")) {
+	//		modal.style.display = "none"
+	//	}
+	//})
+
+	//window.addEventListener("keyup", e => {
+	//	if(modal.style.display === "flex" && e.key === "Escape") {
+	//		modal.style.display = "none"
+	//	}
+	//})
+	
+	function load_withdraw_list(datas){
+		//console.log('datas',datas);
+		var tag = ``;
+		var i = 0;
+
+		$.each(datas, function(m, withdraw){
+			
+			var unix_timestamp = withdraw.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+			
+			
+			var stateStr = '';
+			if(withdraw.stateStr=="requested"){
+				stateStr = "출금요청중";
+			}else if(withdraw.stateStr=="confirmed"){
+				stateStr = "출금완료";
+			}
+
+			if(withdraw.profit_type == "sale"){
+				 tag += `<tr>
+							<td>
+								<div class="adminContent_table_checkbox">
+									<input id="check${withdraw.id}" type="checkbox">
+									<label for="check${withdraw.id}"><span></span></label>
+								</div>
+							</td>
+							<td>${page_num-i}</td>
+							<td>${withdraw.withdraw_amount.toLocaleString('ko-KR')}원</td>
+							<td>${formattedTime}</td>
+							<td></td>
+							<td>${stateStr}</td>
+						</tr>`;
+			}
+			i++;
+			
+		})
+
+		
+		$("#withdraw_tbody").html(tag);
+
+	}
+
+	$.get("http://43.200.169.89/withdraw-infos-by-seller?seller_id="+user_id,result=>{
+		console.log(result);
+
+		withdraws = result;
+		withdraws_origin = result;
+		
+		var time_arr = [];
+		$.each(withdraws_origin, function(i, res){
+			time_arr.push(res.enroll_time);
+		});
+
+		var date2 = new Date(Math.max.apply(null, time_arr) * 1000);
+		var mon2 = date2.getMonth()+1;
+		var day2 = date2.getDate();
+
+		var date3 = new Date(Math.min.apply(null, time_arr) * 1000);
+		var mon3 = date3.getMonth()+1;
+		var day3 = date3.getDate();
+		console.log(date3);
+		$("select[name=search_year1]").val(date3.getFullYear()).prop("selected",true);
+		$("select[name=search_month1]").val(mon3).prop("selected",true);
+		$("select[name=search_day1]").val(day3).prop("selected",true);
+		
+		$("select[name=search_year2]").val(date2.getFullYear()).prop("selected",true);
+		$("select[name=search_month2]").val(mon2).prop("selected",true);
+		$("select[name=search_day2]").val(day2).prop("selected",true);
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+		
+	});
+	
+	var selected_date = 0;
+	var date_filter = '';
+	var selected_date2 = 0;
+	var date_filter2 = '';
+	var selected_day = 0;
+	var selected_day2 = 0;
+
+	$(document).on('change','.date_filter_change',function(){
+		selected_day = "0" + $("select[name=search_day1]").val();
+		selected_date = $("select[name=search_year1]").val()+'-'+$("select[name=search_month1]").val()+'-'+selected_day.substr(-2);
+		//date_filter = (Date.now(selected_date)/1000);
+		selected_day2 = "0" + $("select[name=search_day2]").val();
+		selected_date2 = $("select[name=search_year2]").val()+'-'+$("select[name=search_month2]").val()+'-'+selected_day2.substr(-2);
+		//date_filter2 = (Date.now(selected_date2)/1000);
+
+		withdraws = withdraws_origin.filter(function(info){
+			var unix_timestamp = info.enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+			var mon = "0" + (date.getMonth()+1);
+			var day = "0" + (date.getDate());
+			var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+			console.log('formattedTime', formattedTime);
+			//console.log('selected_date1',selected_date);
+			//console.log('selected_date2',selected_date2);
+			return formattedTime >= selected_date && formattedTime <= selected_date2
+		})
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+		//console.log(withdraws);
+	})
 </script>
