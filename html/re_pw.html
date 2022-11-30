@@ -14,21 +14,20 @@
 		<div class="idfind">
 			<div class="body_idFind">
 				<div class="body_idFind_title">
-					<b>비밀번호 찾기</b>
+					<b>비밀번호 변경</b>
 				</div>
 				<div class="body_idFind_form">
 					<dl>
-						<dt>이름</dt>
-						<dd><input type="text" name="name" placeholder="이름을 입력해주세요."></dd>
 						<dt>아이디</dt>
-						<dd><input type="text" name="idStr" placeholder="아이디를 입력해주세요."></dd>
-						<dt>이메일</dt>
-						<dd><input type="text" name="email" placeholder="이메일을 입력해주세요.">
-						<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
+						<dd><input type="text" name="idStr" placeholder="아이디를 입력해주세요." disabled></dd>
+						<dt>비밀번호</dt>
+						<dd><input type="password" name="pwd" placeholder="비밀번호를 입력해주세요."></dd>
+						<dt>비밀번호 재입력</dt>
+						<dd><input type="password" name="pwd2" placeholder="비밀번호를 재입력해주세요.">
 						</dd>
 					</dl>
 					
-					<a href="javascript:void(0)" class="ok_btn gray" onclick="find_pw()">이메일로 비밀번호 전송</a>
+					<a href="javascript:void(0)" class="ok_btn gray" onclick="re_pw()">비밀번호 변경</a>
 				</div>
 			</div>
 		</div>
@@ -45,7 +44,7 @@
 					안녕하세요. <span></span> 회원님,
 				</p>
 				<p>
-					회원님의 이메일로 보내드린 링크에서 비밀번호 재설정을 해주세요.
+					회원님이 이메일로 보내드린 링크에서 비밀번호 재설정을 해주세요.
 				</p>
 			</div>
 			<div class="adminModal_ok_btn">
@@ -67,43 +66,15 @@
 		$('.gray').click(function(){
 			$('.gray').removeClass('gray');
 		});
+
+		var queryString = window.location.search;
+		var urlParams = new URLSearchParams(queryString);
+		var idStr = urlParams.get('idStr');
+
+		$("input[name=idStr]").val(idStr);
 	});
 	
-    function find_pw(){
-        var name = $("input[name=name]").val();
-        var idStr = $("input[name=idStr]").val();
-        var email = $("input[name=email]").val();
-
-        if(name == ""){
-            alert("이름을 입력해주세요.");
-            return false;
-        }
-
-        if(idStr == ""){
-            alert("아이디를 입력해주세요.");
-            return false;
-        }
-        
-        if(email == ""){
-            alert("이메일을 입력해주세요.");
-            return false;
-        }
-        $.post("http://43.200.169.89/find-pwd",{
-            name : name,
-            idStr : idStr,
-            email : email
-        },result=>{
-            if(result == "success"){
-                modal_popup();
-            }else if(result == "no exist"){
-                alert('존재하지 않는 아이디입니다.');
-            }
-        })
-    }
 	function modal_popup(){
-
-        
-
 		const modal = document.getElementById("modal")
 		modal.style.display = "flex"
 	}
@@ -132,4 +103,37 @@
 			modal.style.display = "none"
 		}
 	})
+
+	function re_pw(){
+		var idStr = $("input[name=idStr]").val();
+		var pwd = $("input[name=pwd]").val();
+		var pwd2 = $("input[name=pwd2]").val();
+
+		if(pwd == ""){
+			alert('비밀번호를 입력해주세요.');
+			return false;
+		}
+
+		if(pwd2 == ""){
+			alert('비밀번호를 입력해주세요.');
+			return false;
+		}
+
+		if(pwd != pwd2){
+			alert('비밀번호가 일치하지 않습니다.');
+			return false;
+		}
+
+		$.post("http://43.200.169.89/change-pwd",{
+            idStr : idStr,
+            pwd : pwd
+        },result=>{
+            if(result == "success"){
+                alert('비밀번호가 변경되었습니다.');
+				location.href="./main.html";
+            }else{
+                alert('에러. 관리자에게 문의하세요.');
+            }
+        })
+	}
 </script>
