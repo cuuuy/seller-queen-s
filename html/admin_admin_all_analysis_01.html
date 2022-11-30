@@ -12,9 +12,9 @@
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/admin.js"></script>
 	<script src="../js/Chart.min.js"></script>
 	<script src="../js/utils.js"></script>
-	<script src="../js/admin.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -66,218 +66,31 @@
 							</ul>
 						</div>
 						<!-- script 들어가야 되는 div -->
-						<!-- <div class="adminContent_graph_wrap">
-							<div class="adminContent_graph" style="height:50%;margin-top:50px;">
-							<p style="font-size:20px;margin-top:100px;margin-left:150px;"><b>총 카테고리 : 8</b></p><br>
-							<canvas id="canvas"></canvas>
-							</div>
-							<div class="adminContent_graph" style="height:60%;margin-top:50px;">
-								<table class="adminContent_table">
-									<colgroup>
-										<col width="20%">
-										<col width="*">
-										<col width="20%">
-										<col width="20%">
-										<col width="20%">
-									</colgroup>
-									<thead>
-										<th>NO</th>
-										<th>카테고리</th>
-										<th>판매량수</th>
-										<th>매출</th>
-										<th>%</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.1);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.2);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.3);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.4);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>5</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.5);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.6);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.7);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.8);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div> -->
-						<div class="adminContent_graph_wrap">
-							<div class="adminContent_graph" style="height:50%;margin-top:50px;">
-							<p style="font-size:20px;margin-top:100px;margin-left:150px;"><b>총 카테고리 : 8</b></p><br>
+						<p style="font-size:20px;margin-top:100px;margin-left:150px;"><b>총 카테고리 : <span class="total_count"></span></b></p><br>
+						<div class="adminContent_graph adminContent_graph2" style="height:50%;margin:50px auto;">
 							<!-- <img src="../image/domae_graph.png"> -->
-							<canvas id="canvas2"></canvas>
-							</div>
-							<div class="adminContent_graph" style="height:60%;margin-top:50px;">
-								<table class="adminContent_table">
-									<colgroup>
-										<col width="20%">
-										<col width="*">
-										<col width="20%">
-										<col width="20%">
-										<col width="20%">
-									</colgroup>
-									<thead>
-										<th>NO</th>
-										<th>카테고리</th>
-										<th>판매량수</th>
-										<th>매출</th>
-										<th>%</th>
-									</thead>
-									<tbody>
-										<tr>
-											<td>1</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.1);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>2</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.2);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>3</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.3);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>4</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.4);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>5</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.5);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>6</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.6);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>7</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.7);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-										<tr>
-											<td>8</td>
-											<td class="adminContent_table_name">
-												<span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.8);"></span>
-												<p>성인의류</p>
-											</td>
-											<td>200</td>
-											<td>200,000</td>
-											<td>20%</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							<canvas id="canvas"></canvas>
+						</div>
+						<div class="adminContent_graph" style="height:60%;margin:50px auto auto 50px; ">
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="20%">
+									<col width="*">
+									<col width="20%">
+									<col width="20%">
+									<col width="20%">
+								</colgroup>
+								<thead>
+									<th>NO</th>
+									<th>카테고리</th>
+									<th>판매량수</th>
+									<th>매출</th>
+									<th>%</th>
+								</thead>
+								<tbody id="tbody_tr">
+									
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -291,139 +104,123 @@
 <script>
 	
 	var pay_info = [];
+    var ordersDict = {};
+    var origin_arr = [];
 
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
 
-		$.get("http://43.200.169.89/pay_infos?seller_id="+1,result=>{
+		$.get("http://43.200.169.89/pay_infos_total?start_time=0&end_time=9999999999",result=>{
 			console.log(result);
-
+            
 			pay_info = result;
+
+            $.each(result, function(n, info){
+
+                if(info.category_id == ""){
+                    info.category_id = "기타";
+                }
+				if(ordersDict[info.category_id] == null){
+                    
+					ordersDict[info.category_id] = [info];
+				}else{
+					var origin_arr = ordersDict[info.category_id];
+					origin_arr.push(info);
+				}
+			})
 			
-			
+            console.log('ordersDict',ordersDict);
+
+			var keys = Object.keys(ordersDict);
+			$(".total_count").text(keys.length);
+            
+            var total_persent = result.length;
+			var tag = ``;
+            var orders_count = 0;
+            var orders_amount = 0;
+            var k = 1;
+            
+
+            var options_count = [];
+            var options_val = [];
+
+			$.each(keys, function(n, key){
+                
+				var data_arr = ordersDict[key];
+                
+                //total_persent = total_persent + data_arr.length;
+
+				
+
+                $.each(data_arr, function(m, order){
+					orders_count = orders_count + order.count;
+                    
+                    orders_amount = orders_amount + ((order.product_price * order.count) + order.delivery_fee);
+				})
+
+                options_count.push(orders_count);
+                options_val.push("rgba(36, 10, 83, 0."+k+")");
+
+                tag += `<tr>
+                            <td>${k}</td>
+                            <td class="adminContent_table_name">
+                                <span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.${k});"></span>
+                                <p style="overflow: unset;">${key}</p>
+                            </td>
+                            <td>${orders_count}</td>
+                            <td>${orders_amount.toLocaleString('ko-KR')}</td>
+                            <td>${parseInt(data_arr.length/total_persent*100)}%</td>
+                        </tr>`;
+                
+                console.log(total_persent);
+                orders_count = 0;
+                orders_amount = 0;
+
+                k++;
+			})
+            
+			$("#tbody_tr").html(tag);
+
+            var color = Chart.helpers.color;
+            var ChartData = {            
+                labels: keys, // 챠트의 항목명 설정
+                datasets: [{
+                    label: '',  // 데이터셑의 이름
+                    pointRadius: 15, // 꼭지점의 원크기
+                    pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
+                    backgroundColor: options_val, // 챠트의 백그라운드 색상
+                    borderColor: 'white', // 챠트의 테두리 색상
+                    borderWidth: 1, // 챠트의 테두리 굵기
+                    lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
+                    fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
+                    data: options_count  // 해당 데이터셋의 데이터 리스트
+                }]
+
+            };
+            
+            var ctx = document.getElementById('canvas').getContext('2d');
+            window.myHorizontalBar = new Chart(ctx, {
+                // type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
+                // ex) horizontalBar, line, bar, pie, bubble
+                type: 'doughnut', 
+                data: ChartData,
+                options: {
+                    responsive: true,                    
+                    maintainAspectRatio: false    ,
+                    title: {
+                        display: false,
+                        text: '판매유형'
+                    },
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+                }
+                }
+            });
+
 		});
 	});
 	
 	
 
-    var color = Chart.helpers.color;
-	var ChartData = {            
-		labels: ['성인의류', '아동의류', '악세서리', '악세서리', '성인의류', '아동의류', '악세서리', '악세서리'], // 챠트의 항목명 설정
-		datasets: [{
-			label: '',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                'rgba(36, 10, 83, 0.1)',
-				'rgba(36, 10, 83, 0.2)',
-				'rgba(36, 10, 83, 0.3)',
-				'rgba(36, 10, 83, 0.4)',
-				'rgba(36, 10, 83, 0.5)',
-				'rgba(36, 10, 83, 0.6)',
-				'rgba(36, 10, 83, 0.7)',
-				'rgba(36, 10, 83, 0.8)'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [18,21,13,44,35,20,19,18]  // 해당 데이터셋의 데이터 리스트
-		}]
-
-	};
-
-    var color2 = Chart.helpers.color;
-	var ChartData2 = {            
-		labels: ['성인의류', '아동의류', '악세서리', '악세서리', '성인의류', '아동의류', '악세서리', '악세서리'], // 챠트의 항목명 설정
-		datasets: [{
-			label: '',  // 데이터셑의 이름
-			pointRadius: 15, // 꼭지점의 원크기
-			pointHoverRadius: 30, // 꼭지점에 마우스 오버시 원크기                                   
-			backgroundColor: [
-                'rgba(36, 10, 83, 0.1)',
-				'rgba(36, 10, 83, 0.2)',
-				'rgba(36, 10, 83, 0.3)',
-				'rgba(36, 10, 83, 0.4)',
-				'rgba(36, 10, 83, 0.5)',
-				'rgba(36, 10, 83, 0.6)',
-				'rgba(36, 10, 83, 0.7)',
-				'rgba(36, 10, 83, 0.8)'
-            ], // 챠트의 백그라운드 색상
-			borderColor: 'white', // 챠트의 테두리 색상
-			borderWidth: 1, // 챠트의 테두리 굵기
-			lineTension:0, // 챠트의 유연성( 클수록 곡선에 가깝게 표시됨)
-			fill:false,  // 선챠트의 경우 하단 부분에 색상을 채울지 여부                  
-			data: [18,21,13,44,35,20,19,18]  // 해당 데이터셋의 데이터 리스트
-		}]
-
-	};
-
-	window.onload = function() {
-		// var ctx = document.getElementById('canvas').getContext('2d');
-		// window.myHorizontalBar = new Chart(ctx, {
-		// 	// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
-		// 	// ex) horizontalBar, line, bar, pie, bubble
-		// 	type: 'doughnut', 
-		// 	data: ChartData,
-		// 	options: {
-		// 		responsive: true,                    
-		// 		maintainAspectRatio: false,
-		// 		title: {
-		// 			display: false,
-		// 			text: '판매유형'
-		// 		},
-		// 		legend: {
-		// 			display: false,
-		// 			position: 'bottom',
-		// 	  }
-		// 	}
-		// });
-        var ctx = document.getElementById('canvas').getContext('2d');
-		window.myHorizontalBar = new Chart(ctx, {
-			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
-			// ex) horizontalBar, line, bar, pie, bubble
-			type: 'doughnut', 
-			data: ChartData,
-			options: {
-				responsive: true,                    
-				maintainAspectRatio: false    ,
-				title: {
-					display: false,
-					text: '판매유형'
-				},
-				legend: {
-					display: false,
-					position: 'bottom',
-			  }
-			}
-		});
-
-	};
-
-    
-
-	window.onload = function() {
-		var ctx2 = document.getElementById('canvas2').getContext('2d');
-		window.myHorizontalBar2 = new Chart(ctx2, {
-			// type 을 변경하면 선차트, 가로막대차트, 세로막대차트 등을 선택할 수 있습니다 
-			// ex) horizontalBar, line, bar, pie, bubble
-			type: 'doughnut', 
-			data: ChartData2,
-			options: {
-				responsive: true,                    
-				maintainAspectRatio: false    ,
-				title: {
-					display: false,
-					text: '판매유형'
-				},
-				legend: {
-					display: false,
-					position: 'bottom',
-			  }
-			}
-		});
-
-	};
-	
-	
 </script>

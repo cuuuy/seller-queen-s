@@ -80,43 +80,28 @@
 									<col width="10%">
 									<col width="10%">
 									<col width="10%">
-									<col width="10%">
-									<col width="10%">
-									<col width="10%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
+									<col width="8%">
 								</colgroup>
 								<thead>
 									<th></th>
 									<th>No.</th>
-									<th>상품명</th>
-									<th>도매처</th>
-									<th>판매가</th>
-									<th>상태</th>
-									<th>정산</th>
-									<th>수량</th>
-									<th>구매일자</th>
-									<th>판매마진</th>
+									<th>ID</th>
+									<th>연락처</th>
+									<th>주민등록번호</th>
+									<th>이름</th>
+									<th>입금은행</th>
+									<th>계좌번호</th>
+									<th>신청금액</th>
+									<th>신청일자</th>
+									<th>출금예정일</th>
+									<th>진행상태</th>
 								</thead>
 								<tbody id="withdraw_tbody">
-									<tr>
-										<td>
-											<div class="adminContent_table_checkbox">
-												<input id="check02" type="checkbox">
-												<label for="check02"><span></span></label>
-											</div>
-										</td>
-										<td>1</td>
-										<td class="adminContent_table_name">
-											<span class="adminContent_table_name_thumb"></span>
-											<p>하트 컬러 볼 시계</p>
-										</td>
-										<td>시계나라</td>
-										<td>900,000원</td>
-										<td>발송완료</td>
-										<td>정산완료</td>
-										<td>1</td>
-										<td>20220401</td>
-										<td>903,000원</td>
-									</tr>
+									
 								</tbody>
 							</table>
 						</div>
@@ -135,6 +120,8 @@
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
 	});
+    var withdraws = [];
+    var withdraws_origin = [];
 
 	var now_date = Date.now();
 	var enroll_time = now_date/1000;
@@ -148,8 +135,10 @@
 	
 	function load_withdraw_list(datas){
 		console.log('datas',datas);
-		
-		var new_html = ``;
+
+        
+
+        var new_html = ``;
 
 		for(var i = 0; i < datas.length; i++){
 					
@@ -177,27 +166,63 @@
 				typeStr = '기타 문의';
 			}
 
+            var stateStr = '';
+			if(datas[i].stateStr=="requested"){
+				stateStr = "출금요청중";
+			}else if(datas[i].stateStr=="confirmed"){
+                stateStr = "지급완료";
+            }
+			
+			var bank_name = '';
+			if(datas[i].bank == 'sinhan'){
+				bank_name = '신한';
+			}else if(datas[i].bank == 'kookmin'){
+				bank_name = '국민';
+			}else{
+				bank_name = withdraw.bank;
+			}
 
-			new_html += `<tr>
-								<td>
-									<div class="adminContent_table_checkbox">
-										<input id="check${datas[i].id}" type="checkbox">
-										<label for="check${datas[i].id}"><span></span></label>
-									</div>
-								</td>
-								<td>${page_num-i}</td>
-								<td class="adminContent_table_name">
-									<span class="adminContent_table_name_thumb"></span>
-									<p>하트 컬러 볼 시계</p>
-								</td>
-								<td>시계나라</td>
-								<td>900,000원</td>
-								<td>발송완료</td>
-								<td>정산완료</td>
-								<td>1</td>
-								<td>20220401</td>
-								<td>903,000원</td>
-							</tr>`;
+			// new_html += `<tr>
+			// 					<td>
+			// 						<div class="adminContent_table_checkbox">
+			// 							<input id="check${datas[i].id}" type="checkbox">
+			// 							<label for="check${datas[i].id}"><span></span></label>
+			// 						</div>
+			// 					</td>
+			// 					<td>${page_num-i}</td>
+			// 					<td class="adminContent_table_name">
+			// 						<span class="adminContent_table_name_thumb"></span>
+			// 						<p>하트 컬러 볼 시계</p>
+			// 					</td>
+			// 					<td>시계나라</td>
+			// 					<td>900,000원</td>
+			// 					<td>발송완료</td>
+			// 					<td>정산완료</td>
+			// 					<td>1</td>
+			// 					<td>20220401</td>
+			// 					<td>903,000원</td>
+			// 				</tr>`;
+            new_html += `<tr>
+							<td>
+								<div class="adminContent_table_checkbox">
+                                    <input id="check${datas[i].id}" type="checkbox" name="chk_name" value="${datas[i].id}">
+									<label for="check${datas[i].id}"><span></span></label>
+								</div>
+							</td>
+							<td>${page_num-i}</td>
+							<td class="adminContent_table_name">
+								<p>${datas[i].idStr}</p>
+							</td>
+							<td>${datas[i].phone}</td>
+							<td>${datas[i].resident_number}</td>
+							<td>${datas[i].name}</td>
+							<td>${bank_name}</td>
+							<td>${datas[i].bank_number}</td>
+							<td>${datas[i].withdraw_amount.toLocaleString('ko-KR')}원</td>
+							<td>${formattedTime}</td>
+							<td></td>
+							<td>${stateStr}</td>
+						</tr>`;
 
 					
 		}
@@ -208,6 +233,27 @@
 	$.get("http://43.200.169.89/withdraw-infos-for-manager",function(data){
 		console.log(data);
 
+        withdraws = data;
+		withdraws_origin = data;
+
+        data = data.filter(function(withdraw_info){
+			return withdraw_info.stateStr == "confirmed";
+		})
+
+
+        var tmp_arr = withdraws_origin.filter(function(withdraw_info){
+			return withdraw_info.stateStr == "confirmed";
+		})
+
+        var tmp_arr2 = withdraws_origin.filter(function(withdraw_info){
+			return withdraw_info.stateStr == "requested";
+		})
+        
+        $(".complete_span").text(tmp_arr.length);
+        $(".ready_span").text(tmp_arr2.length);
+
+
+
 		$('#paging').pagination({
 			dataSource: data,
 			callback: function(data, pagination) {
@@ -215,5 +261,43 @@
 				load_withdraw_list(data);
 			}
 		});
+	})
+
+    $(".filter_complete").click(function(e){
+		var search_word = $("input[name=search_profit]").val();
+		
+		withdraws = withdraws_origin.filter(function(withdraw_info){
+			return withdraw_info.stateStr == "confirmed";
+		})
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+                page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+
+        $(this).addClass("active");
+		$(this).siblings().removeClass("active");
+	})
+
+    $(".filter_ready").click(function(e){
+		var search_word = $("input[name=search_profit]").val();
+		
+		withdraws = withdraws_origin.filter(function(withdraw_info){
+			return withdraw_info.stateStr == "requested";
+		})
+
+		$('#paging').pagination({
+			dataSource: withdraws,
+			callback: function(data, pagination) {
+                page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_withdraw_list(data);
+			}
+		});
+
+        $(this).addClass("active");
+		$(this).siblings().removeClass("active");
 	})
 </script>

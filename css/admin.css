@@ -307,6 +307,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	}
 	.adminWrap_title_category {display:none;}
 
+    
 }
 
 
@@ -315,13 +316,31 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminContent_graph {
 		float: none !important;
 		height : auto;
-		margin: 0px 10px 0px 50px;
+		margin: 0px 10px 0px 50px !important;
 		
 	}
+
+    .adminContent_graph2 {
+		float: none !important;
+		height : auto;
+		margin: 0px 100px 0px 120px !important;
+		
+	}
+
+    .adminContent_graph3 {
+        margin: 200px auto !important;
+    }
+
+    .adminContent_graph4 {
+        margin: 20px auto !important;
+    }
 }
 @media (max-width: 640px) {
 
-	
+	.adminContent_graph2 {
+		/* padding: 20px; */
+		
+	}
 
 	.adminWrap {width:100%;padding:0 30px;}
 
