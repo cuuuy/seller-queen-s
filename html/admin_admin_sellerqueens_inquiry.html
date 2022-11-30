@@ -1,0 +1,354 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+	<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin_defalut.css">
+	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/admin.css">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src="../js/jquery.bxslider.js"></script>
+	<script src="../js/pagination.min.js"></script>
+	<script src="../js/admin.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
+</head>
+<body>
+	<div class="container">
+		<div class="header_messageLine">
+			<div class="header_messageLine_message">
+				<span class="message_first">
+					온라인 셀러들의 도구,
+				</span>
+				<span class="message_second">
+					헬프스토어 셀러퀸즈
+				</span>
+			</div>
+		</div>
+		<div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
+			</div>
+		</div>
+		<div class="adminContainer">
+			<!-- rightmenu -->
+			<div class="rightmenuWrap"></div>
+			<div class="adminWrap">
+				 <div class="adminWrap_topmenu">
+					<ul>
+						<li class="active"><a href="./admin_admin_main.html">관리자 센터</a></li>
+						<li><a href="./admin_seller_main.html">셀러 센터</a></li>
+						<li><a href="./admin_domae_main.html">도매 센터</a></li>
+						<li><a href="./admin_teacher_main.html">강사 센터</a></li>
+					</ul>
+				</div>
+				<div class="adminWrap_title">
+					<a href=""><img src="../image/admin_back.png" alt="" /></a>
+					<h3>본사 문의 관리</h3>
+				</div> 
+					<div class="adminContent_right">
+						<div class="adminContent_search">
+							<input type="search" name="search_qna" placeholder="문의내용/닉네임을 입력해주세요." onkeyup="enterkey()">
+							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
+						</div>
+						<div>
+							<table class="adminContent_table">
+								<colgroup>
+									<col width="3%">
+									<col width="3%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+									<col width="10%">
+                                    <col width="*">
+                                    <col width="10%">
+									<!-- <col width="10%">
+                                    <col width="10%"> -->
+								</colgroup>
+								<thead>
+									<th></th>
+									<th>No.</th>
+									<th>이름</th>
+									<th>이메일</th>
+									<th>휴대폰번호</th>
+									<th>서비스 선택</th>
+									<th>제목</th>
+                                    <th>상세보기</th>
+									<!-- <th>내용</th>
+                                    <th>첨부파일</th> -->
+								</thead>
+								<tbody id="qna_load">
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="">
+							<!-- <a href="" class="check_btn btm_btn">삭제</a>
+							<a href="" class="check_btn btm_btn">수정</a> -->
+						</div>
+						<div class="adminContent_pager" id="paging">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modal_top_div">
+		
+	</div>
+</body>
+
+</html>
+
+<script>
+
+	var qnaDict = {};
+	var qnas = [];
+	var qnas_origin = [];
+    var qnas_new = [];
+	var page_num = 0;
+
+	$(document).ready(function() {
+		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
+		
+		qna_load();
+
+	});
+
+	var now_date = Date.now();
+	var enroll_time = now_date/1000;
+	
+	function load_qna_list(datas){
+		console.log('datas',datas);
+		var tag = ``;
+		var new_html = ``;
+
+		for(var i = 0; i < datas.length; i++){
+					
+			var unix_timestamp = datas[i].enroll_time;
+			var date = new Date(unix_timestamp * 1000);
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+			var today = new Date();
+			var hours = today.getHours();
+			var minutes = "0" + today.getMinutes();
+			var seconds = "0" + today.getSeconds();
+			var mon = "0" + (today.getMonth()+1);
+            var day = "0" + (today.getDate());
+			var formattedTime2 = today.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+            var img_path = datas[i].file_url.replace("public","");
+
+            var typeStr = '';
+            if(datas[i].typeStr == "wholesaler_qna"){
+                typeStr = "도매입점문의";
+            }else if(datas[i].typeStr == "pay_qna"){
+                typeStr = "출금문의";
+            }else if(datas[i].typeStr == "delete_qna"){
+                typeStr = "회원탈퇴문의";
+            }else if(datas[i].typeStr == "etc_qna"){
+                typeStr = "기타문의";
+            }
+					new_html += `<tr>
+                                    <td>
+                                        <div class="adminContent_table_checkbox">
+                                            <input id="check${datas[i].id}" type="checkbox">
+                                            <label for="check${datas[i].id}"><span></span></label>
+                                        </div>
+                                    </td>
+                                    <td>${page_num-i}</td>
+                                    <td>${datas[i].name}</td>
+                                    <td>${datas[i].email}</td>
+                                    <td>${datas[i].phone}</td>
+                                    <td>${typeStr}</td>
+                                    <td>${datas[i].title}</td>
+                                    <td>
+                                        <div class="adminContent_order">
+                                            <a href="javascript:void(0)" onclick="modal_view(${datas[i].id})">상세보기</a>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                    tag += `<div class="adminModal modalPage01" style="display: block;" id="modal_reply_id_${datas[i].id}">
+                                <div class="adminModal_cont" id="">
+                                <h3>문의 답변</h3>
+                                <table>
+                                    <colgroup>
+                                        <col width="30%">
+                                        <col width="20%">
+                                        <col width="30%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>이름</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].name}</p>
+                                        </td>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>셀러명</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].seller_name}</p>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>이메일</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].email}</p>
+                                        </td>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>아이디</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].idStr}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>휴대폰번호</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].phone}</p>
+                                        </td>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>서비스 선택</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${typeStr}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>제목</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].title}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>내용</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text">${datas[i].contents}</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <h5 style="margin-bottom:20px;color:#603A8A;"><b>첨부파일</b></h5>
+                                        </td>
+                                        <td>
+                                            <p style="font-size:15px;" id="qna_text"><a href="javascript:void(0)">첨부파일 다운로드</a></p>
+                                        </td>
+                                    </tr>
+                                    
+                                </table>
+                                <div>
+                                    <h5 style="margin-bottom:20px;color:#603A8A;"><b>답변</b></h5>
+                                    <textarea name="answer_text" id="editor" rows="20%" cols="120%" style="resize: none;padding : 20px;border: none; background-color:#EAE6F2;" placeholder="답변을 입력해주세요."></textarea></br>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div class="adminModal_cont_btn">
+                                    <a href="javascript:window.location.reload()" class="back_btn modalClose">취소</a>
+                                    <a href="javascript:void(0)" class="ok_btn modalNext1" onclick="save_reply(${datas[i].id})">답변하기</a>
+                                </div>
+                            </div>
+                        </div>`;
+					
+		}
+		
+		$("#qna_load").html(new_html);
+        $("#modal_top_div").html(tag);
+        $('.adminModal').hide();
+	}
+
+    function modal_view(id){
+        $("#modal_reply_id_"+id).show();
+    }
+
+	function qna_load(){
+
+		$.ajax({
+			type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			url : "http://43.200.169.89/inquiries_sellerqueens",      // 컨트롤러에서 대기중인 URL 주소이다.
+			data : {
+				},            // Json 형식의 데이터이다.
+			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+				// 응답코드 > 0000
+				console.log(res);
+				
+				qnas = res;
+				qnas_origin = res;
+
+				$('#paging').pagination({
+					dataSource: qnas,
+					callback: function(data, pagination) {
+						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+						load_qna_list(data);
+					}
+				});
+				
+
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+				alert("통신 실패.");
+			}
+		});
+	}
+
+	$(".search_btn").click(function(e){ //To Do API 변경되면 검색 테스트
+		var search_word = $("input[name=search_qna]").val();
+		
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.contents.indexOf(search_word) > -1;
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+	})
+	
+	function enterkey(){
+		if (window.event.keyCode == 13) { //To Do API 변경되면 검색 테스트
+			var search_word = $("input[name=search_qna]").val();
+		
+			qnas = qnas_origin.filter(function(qna_info){
+				return qna_info.contents.indexOf(search_word) > -1;
+			})
+
+			$('#paging').pagination({
+				dataSource: qnas,
+				callback: function(data, pagination) {
+					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+					load_qna_list(data);
+				}
+			});
+		}
+	}
+</script>
