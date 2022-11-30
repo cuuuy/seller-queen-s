@@ -288,14 +288,14 @@
         var minutes = "0" + date.getMinutes();
         var seconds = "0" + date.getSeconds();
         var mon = "0" + (date.getMonth()+1);
-        var day = "0" + (date.getDate()+1);
+        var day = "0" + (date.getDate());
         var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
-		$("select[name=user_modi_year]").val(year);
-		$("select[name=user_modi_month]").val(mon);
-		$("select[name=user_modi_day]").val(day);
+		$("select[name=user_modi_year]").val(date.getFullYear());
+		$("select[name=user_modi_month]").val(date.getMonth()+1);
+		$("select[name=user_modi_day]").val(date.getDate());
 
 		$(".domae_selection_btn").removeClass('active');
-
+        console.log(user_info.allowed);
 		if(user_info.allowed=="YES"){
 			$("#domae_y_btn").addClass('active');
 		}else if(user_info.allowed=="NO"){
@@ -468,6 +468,7 @@
 				console.log(res);
 				if(res == "success"){
 					alert("회원수정이 완료 되었습니다.");
+                    location.reload();
 					//category_road();
 				}else{
 					alert("오류 발생. 관리자에게 문의하세요.");
