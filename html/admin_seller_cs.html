@@ -62,6 +62,7 @@
 						<div class="adminContent_tab">
 							<ul>
 								<li class="filter_new active"><a href="javascript:void(0)">신규 문의 <span class="new_span">0</span></a></li>
+								<li class="filter_deli"><a href="javascript:void(0)">배송 문의 <span class="deli_span">0</span></a></li>
 								<li class="filter_qna"><a href="javascript:void(0)">상품 문의 <span class="qna_span">0</span></a></li>
 								<li class="filter_return"><a href="javascript:void(0)">반품/취소 문의 <span class="return_span">0</span></a></li>
 								<li class="filter_change"><a href="javascript:void(0)">교환 문의 <span class="change_span">0</span></a></li>
@@ -130,7 +131,8 @@
 	var qnaDict = {};
 	var qnas = [];
 	var qnas_origin = [];
-	
+	var qnas_new = [];
+
 	var page_num = 0;
 
 	var now_date2 = new Date();
@@ -277,9 +279,25 @@
 				
 				qnas = res;
 				qnas_origin = res;
+				qnas_new = res;
+
+				qnas_new = qnas_origin.filter(function(qna_info){
+                    var unix_timestamp = qna_info.enroll_time;
+                    var date = new Date(unix_timestamp * 1000);
+                    var mon = "0" + (date.getMonth()+1);
+                    var day = "0" + (date.getDate());
+                    var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
+
+                    var now_date2 = new Date();
+                    var now_mon = "0" + (now_date2.getMonth()+1);
+                    var now_day = "0" + (now_date2.getDate());
+                    var now_formattedTime = now_date2.getFullYear() + "-" + now_mon.substr(-2) + "-" + now_day.substr(-2);
+
+					return formattedTime == now_formattedTime;
+				})
 
 				$('#paging').pagination({
-					dataSource: qnas,
+					dataSource: qnas_new,
 					callback: function(data, pagination) {
 						page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 						load_qna_list(data);
@@ -303,20 +321,16 @@
 				})
 
 				var tmp_arr5 = qnas_origin.filter(function(qna_info){
-					var unix_timestamp = qna_info.enroll_time;
-					var date = new Date(unix_timestamp * 1000);
-					var mon = (date.getMonth()+1);
-					var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
-
-					return formattedTime == now_formattedTime;
+					return qna_info.typeStr == "deli_qna";
 				})
 				
-				$(".new_span").text(tmp_arr5.length);
+				$(".new_span").text(qnas_new.length);
 				$(".qna_span").text(tmp_arr.length);
 				$(".return_span").text(tmp_arr2.length);
 				$(".change_span").text(tmp_arr3.length);
 				$(".etc_span").text(tmp_arr4.length);
 				$(".all_span").text(qnas_origin.length);
+				$(".deli_span").text(tmp_arr5.length);
 
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
@@ -449,13 +463,34 @@
 		$(this).siblings().removeClass("active");
 
 	})
+	
+	$(".filter_deli").click(function(e){
+		
+		$("input[name=search_qna]").val('');
+
+		qnas = qnas_origin.filter(function(qna_info){
+			return qna_info.typeStr == "deli_qna";
+		})
+
+		$('#paging').pagination({
+			dataSource: qnas,
+			callback: function(data, pagination) {
+				page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
+				load_qna_list(data);
+			}
+		});
+
+		$(this).addClass("active");
+		$(this).siblings().removeClass("active");
+
+	})
 
 	$(".filter_qna").click(function(e){
 		
 		$("input[name=search_qna]").val('');
 
 		qnas = qnas_origin.filter(function(qna_info){
-			return qna_info.typeStr == "etc_qna";
+			return qna_info.typeStr == "product_qna";
 		})
 
 		$('#paging').pagination({
