@@ -139,7 +139,7 @@
             var orders_count = 0;
             var orders_amount = 0;
             var k = 1;
-            
+            var j = 9;
 
             var options_count = [];
             var options_val = [];
@@ -159,12 +159,12 @@
 				})
 
                 options_count.push(orders_count);
-                options_val.push("rgba(36, 10, 83, 0."+k+")");
+                options_val.push("rgba(36, 10, 83, 0."+j+")");
 
                 tag += `<tr>
                             <td>${k}</td>
                             <td class="adminContent_table_name">
-                                <span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.${k});"></span>
+                                <span class="adminContent_table_name_thumb" style="background: none;background-color:rgba(36, 10, 83, 0.${j});"></span>
                                 <p style="overflow: unset;">${key}</p>
                             </td>
                             <td>${orders_count}</td>
@@ -177,6 +177,7 @@
                 orders_amount = 0;
 
                 k++;
+                j = j-2;
 			})
             
 			$("#tbody_tr").html(tag);
