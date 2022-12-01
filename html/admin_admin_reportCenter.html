@@ -207,10 +207,14 @@
         reports = sum_arr;
         reports_origin = sum_arr;
 
+        reports = reports_origin.filter(function(report_info){
+            return report_info.reported == "YES" && report_info.banned == "NO";
+        })
+
 		$.each(data, function(i, result){
 			
 			$('#paging').pagination({
-				dataSource: sum_arr,
+				dataSource: reports,
 				callback: function(data, pagination) {
 					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 					load_report_list(data);
@@ -219,11 +223,11 @@
 		})
 
         var tmp_arr = reports_origin.filter(function(report_info){
-            return report_info.reported == "YES";
+            return report_info.reported == "YES" && report_info.banned == "NO";
         })
 
         var tmp_arr2 = reports_origin.filter(function(report_info){
-            return report_info.typeStr == "cancel_qna";
+            return report_info.banned == "YES";
         })
 
         $(".report_span").text(tmp_arr.length);
@@ -252,7 +256,7 @@
 		$("input[name=search_qna]").val('');
 
         reports = reports_origin.filter(function(report_info){
-            return report_info.reported == "YES";
+            return report_info.reported == "YES" && report_info.banned == "NO";
         })
 
 		$('#paging').pagination({
@@ -268,9 +272,13 @@
 
 	})
 
-    $(".filter_all").click(function(e){
+    $(".filter_ban").click(function(e){
 		
 		$("input[name=search_qna]").val('');
+
+        reports = reports_origin.filter(function(report_info){
+            return report_info.banned == "YES";
+        })
 
 		$('#paging').pagination({
 			dataSource: reports,
