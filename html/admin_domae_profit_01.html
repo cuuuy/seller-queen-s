@@ -94,7 +94,7 @@
 						<div style="min-height: 800px;">
 							<table class="adminContent_table">
 								<colgroup>
-									<col width="3%">
+									<!-- <col width="3%"> -->
 									<col width="3%">
 									<col width="*">
 									<col width="10%">
@@ -105,7 +105,7 @@
 									<col width="10%">
 								</colgroup>
 								<thead>
-									<th></th>
+									<!-- <th></th> -->
 									<th>No.</th>
 									<th>제품명</th>
 									<th>닉네임</th>
@@ -216,16 +216,16 @@
 	function modal_popup(){
         var total_price = 0;
         $("input[name=chk_name]:checked").each(function(){
-			profit_id_arr.push($(this).val());
-            total_price = total_price + $(this).data("price");
+			//profit_id_arr.push($(this).val());
+            //total_price = total_price + $(this).data("price");
 		});
         //console.log(total_price);
 		if(profit_id_arr.length == 0){
-			alert("대상을 선택해주세요.");
-			return false;
+			//alert("대상을 선택해주세요.");
+			//return false;
 		}
 
-        $("#profit_amount").text(total_price.toLocaleString('ko-KR')+" 원");
+        //$("#profit_amount").text(total_price.toLocaleString('ko-KR')+" 원");
 		const modal = document.getElementById("modal")
 		modal.style.display = "flex"
 	}
@@ -259,6 +259,7 @@
 		//console.log('datas',datas);
 		var tag = ``;
 		var i = 0;
+        var total_amount = 0;
 
 		$.each(datas, function(m, profit){
 			
@@ -271,13 +272,14 @@
             var day = "0" + (date.getDate());
             var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
+            total_amount = total_amount + parseInt(profit.profit_amount);
 			 tag += `<tr>
-							<td>
+							<!--<td>
 								<div class="adminContent_table_checkbox">
 									<input id="check${profit.id}" type="checkbox" name="chk_name" value="${profit.id}" data-price="${parseInt(profit.profit_amount)}">
 									<label for="check${profit.id}"><span></span></label>
 								</div>
-							</td>
+							</td>-->
 							<td>${page_num-i}</td>
 							<td class="adminContent_table_name">
 								<p>${profit.product_name}</p>
@@ -292,7 +294,7 @@
 			i++ ;
 		})
 
-
+        $("#profit_amount").text(total_amount.toLocaleString('ko-KR')+" 원");
 		$("#profit_tbody").html(tag);
 
 	}
@@ -337,79 +339,80 @@
 
 	function profit_withdraw(){
 
-		var name = $("input[name=withdraw_name").val();
-		var bank = $("select[name=withdraw_bank").val();
-		var bank_number = $("input[name=withdraw_acount").val();
-		var withdraw_amount = $("input[name=withdraw_price").val();
-		var withdraw_jumin = $("input[name=withdraw_jumin").val();
-		var profit_amount = $("#profit_amount").text();
-		if(name == ""){
-			alert("이름을 입력해주세요.");
-			return false;
-		}else if(withdraw_jumin == ""){
-			alert("주민번호를을 입력해주세요.");
-			return false;
-		}else if(bank == ""){
-			alert("은행을 입력해주세요.");
-			return false;
-		}else if(bank_number == ""){
-			alert("계좌번호를 입력해주세요.");
-			return false;
-		}else if(withdraw_amount == ""){
-			alert("신청금액을 입력해주세요.");
-			return false;
-		}
-        profit_amount = parseInt(profit_amount.replace(" 원",""));
-
-        if(withdraw_amount > profit_amount){
-            alert("신청금액은 판매 프로핏보다 작아야합니다.");
+        var name = $("input[name=withdraw_name").val();
+        var bank = $("select[name=withdraw_bank").val();
+        var bank_number = $("input[name=withdraw_acount").val();
+        var withdraw_amount = $("input[name=withdraw_price").val();
+        var withdraw_jumin = $("input[name=withdraw_jumin").val();
+        var withdraw_profit = $("select[name=withdraw_profit]").val();
+        var total_profit = 0;
+        if(name == ""){
+            alert("이름을 입력해주세요.");
             return false;
         }
-        
-		$("input[name=chk_name]:checked").each(function(){
-			profit_id_arr.push($(this).val());
-		});
+        if(withdraw_jumin == ""){
+            alert("주민번호를을 입력해주세요.");
+            return false;
+        }
+        if(bank == ""){
+            alert("은행을 입력해주세요.");
+            return false;
+        }
+        if(bank_number == ""){
+            alert("계좌번호를 입력해주세요.");
+            return false;
+        }
+        if(withdraw_amount == ""){
+            alert("신청금액을 입력해주세요.");
+            return false;
+        }
 
-		if(profit_id_arr.length == 0){
-			alert("대상을 선택해주세요.");
-			return false;
-		}
+        $("input[name=chk_name]:checked").each(function(){
+            profit_id_arr.push($(this).val());
+        });
 
-		console.log(profit_id_arr);
-		//return;
-		for(var i = 0; i < profit_id_arr.length; i++){
-			$.ajax({
-				type : "POST",            // HTTP method type(GET, POST) 형식이다.
-				url : "http://43.200.169.89/request-widthdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
-				data : {
-						profit_id : profit_id_arr[i],
-						user_id : user_id,
-						name : name,
-						bank : bank,
-						bank_number : bank_number,
-						profit_type : 'sale',
-						withdraw_amount : withdraw_amount,
-						resident_number : withdraw_jumin,
-						enroll_time : enroll_time
-					},            // Json 형식의 데이터이다.
-				success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-					// 응답코드 > 0000
-					console.log(res);
+        if(profit_id_arr.length == 0){
+            //alert("대상을 선택해주세요.");
+            //return false;
+        }
 
-					if(res == "success"){
-						alert("프로핏 출금신청이 완료되었습니다.");
-						location.reload();
-					}else{
-						alert("오류 발생. 관리자에게 문의하세요.");
-					}
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-					alert("통신 실패.")
-				}
-			});
-		}
-		
-	}
+        console.log(profit_id_arr);
+        //var profit_id_arr_string = JSON.stringify(profit_id_arr);
+        //return;
+        total_profit = total_profit + withdraw_amount;
+        $.ajax({
+            type : "POST",            // HTTP method type(GET, POST) 형식이다.
+            url : "http://43.200.169.89/request-withdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
+            data : {
+                    user_id : user_id,
+                    //profit_ids : profit_id_arr_string,
+                    name : name,
+                    bank : bank,
+                    bank_number : bank_number,
+                    profit_type : withdraw_profit,
+                    withdraw_amount : withdraw_amount,
+                    resident_number : withdraw_jumin,
+                    enroll_time : enroll_time
+                },            // Json 형식의 데이터이다.
+            success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                // 응답코드 > 0000
+                console.log(res);
+
+                if(res == "success"){
+                    alert("프로핏 출금신청이 완료되었습니다.");
+                    location.reload();
+                }else{
+                    alert("오류 발생. 관리자에게 문의하세요.");
+                }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                alert("통신 실패.")
+            }
+        });
+
+        $(".total_profit").text(total_profit);
+
+    }
 
 	var selected_date = 0;
 	var date_filter = '';

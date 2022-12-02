@@ -101,7 +101,12 @@
 		$('.rightmenuWrap').load('admin_domae_rightmenu.html');
 	});
 	
-    $.get("http://43.200.169.89/analysis-total",result=>{
+    var user_id = localStorage.getItem('user_id');
+    if(user_id == null){
+        user_id = -1; // 비회원
+    }
+    
+    $.get("http://43.200.169.89/analysis-by-wholesaler?seller_id="+user_id,result=>{
         console.log(result);
         $.each(result, function(i, res){
             year_result.push(res.year);

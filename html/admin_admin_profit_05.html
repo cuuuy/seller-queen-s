@@ -64,7 +64,7 @@
 							<ul>
 								<li><a href="./admin_admin_profit_01.html">회원 리스트</a></li>
 								<li><a href="./admin_admin_profit_02.html">출금신청 리스트</a></li>
-								<li><a href="./admin_admin_profit_03.html">판매수수료 리스트</a></li>
+								<!-- <li><a href="./admin_admin_profit_03.html">판매수수료 리스트</a></li> -->
 								<li><a href="./admin_admin_profit_04.html">판매수수료 적립현황</a></li>
 								<li class="active"><a href="./admin_admin_profit_05.html">광고수수료 적립현황</a></li>
 								<li><a href="./admin_admin_profit_06.html">판매수수료 출금 현황</a></li>
@@ -105,10 +105,7 @@
 							<table class="adminContent_table">
 								<colgroup>
 									<col width="3%">
-									<col width="3%">
 									<col width="*">
-									<col width="10%">
-									<col width="10%">
 									<col width="10%">
 									<col width="10%">
 									<col width="10%">
@@ -117,19 +114,35 @@
 									<col width="10%">
 								</colgroup>
 								<thead>
-									<th></th>
 									<th>No.</th>
-									<th>제품명</th>
-									<th>닉네임</th>
-									<th>회원 등급</th>
+									<th>추천인 닉네임</th>
+									<th>가입자 닉네임</th>
+									<th>추천인 등급</th>
+									<th>가입자 등급</th>
 									<th>적립일자</th>
-									<th>판매금액</th>
-									<th>수수료 비율(%)</th>
-									<th>수수료</th>
-									<th>부가세</th>
-									<th>순수익</th>
+									<th>가입금액</th>
+									<th>광고수익</th>
 								</thead>
 								<tbody id="profit_tbody">
+									<!-- <tr>
+										<td>
+											<div class="adminContent_table_checkbox">
+												<input id="check02" type="checkbox">
+												<label for="check02"><span></span></label>
+											</div>
+										</td>
+										<td>1</td>
+										<td class="adminContent_table_name">
+											<p>김추천인</p>
+										</td>
+										<td>레몬트리</td>
+										<td>셀러 J</td>
+										<td>셀러 J</td>
+										<td>20220401</td>
+										<td>1,990,000</td>
+										<td>990,000</td>
+									</tr> -->
+									
 									
 								</tbody>
 							</table>
@@ -242,7 +255,7 @@
 	})
 	
 	function load_profit_list(datas){
-		//console.log('datas',datas);
+		console.log('datas',datas);
 		var tag = ``;
 		var i = 0;
 
@@ -257,31 +270,39 @@
             var day = "0" + (date.getDate());
             var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
+            var statusStr = '';
+			if(profit.statusStr=="requested"){
+				statusStr = "출금요청중";
+			}else if(profit.statusStr=="confirmed"){
+				statusStr = "출금완료";
+			}else if(profit.statusStr=="enrolled"){
+				statusStr = "지급대기";
+			}
+
             var persent = 0;
             if(profit.user_type == 'seller_I'){
                 persent = 0.04;
             }else if(profit.user_type == 'seller_J'){
                 persent = 0.07;
             }
+
+            var join_amount = '';
+            if(profit.user_type == "seller_I"){
+                join_amount = "2,990,000";
+            }else if(profit.user_type == "seller_J"){
+                join_amount = "1,990,000";
+            }
 			 tag += `<tr>
-						<td>
-							<div class="adminContent_table_checkbox">
-								<input id="check${profit.id}" type="checkbox" name="chk_name" value="${profit.id}">
-								<label for="check${profit.id}"><span></span></label>
-							</div>
-						</td>
 						<td>${page_num-i}</td>
 						<td class="adminContent_table_name">
-							<p>${profit.product_name}</p>
+							<p>${profit.target_nickname}</p>
 						</td>
 						<td>${profit.nickname}</td>
-						<td></td>
+						<td>${profit.target_type}</td>
+						<td>${profit.user_type}</td>
 						<td>${formattedTime}</td>
-						<td>${profit.retail_price.toLocaleString('ko-KR')}원</td>
-						<td>${parseInt(persent*100)}%</td>
-						<td>${parseInt(profit.profit_amount*persent).toLocaleString('ko-KR')}</td>
-						<td>${parseInt(profit.profit_amount*0.1).toLocaleString('ko-KR')}</td>
-						<td>${parseInt(profit.profit_amount - profit.profit_amount*0.1 - profit.profit_amount*persent).toLocaleString('ko-KR')}</td>
+						<td>${join_amount}</td>
+						<td>${profit.profit_amount.toLocaleString('ko-KR')}</td>
 					</tr>`;
 			i ++;
 		})
@@ -297,9 +318,9 @@
 		profits = result;
 		profits_origin = result;
 		
-        profits = profits.filter(function(profit_info){
-            return profit_info.profit_type == 'retailer_profit'; // 광고 프로핏으로 변경
-        })
+        // profits = profits.filter(function(profit_info){
+        //     return profit_info.profit_type == 'retailer_profit'; // 광고 프로핏으로 변경
+        // })
 
 		var time_arr = [];
 		$.each(profits_origin, function(i, res){

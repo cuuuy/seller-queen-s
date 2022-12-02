@@ -64,7 +64,7 @@
 							<ul>
 								<li><a href="./admin_admin_profit_01.html">회원 리스트</a></li>
 								<li class="active"><a href="./admin_admin_profit_02.html">출금신청 리스트</a></li>
-								<li><a href="./admin_admin_profit_03.html">판매수수료 리스트</a></li>
+								<!-- <li><a href="./admin_admin_profit_03.html">판매수수료 리스트</a></li> -->
 								<li><a href="./admin_admin_profit_04.html">판매수수료 적립현황</a></li>
 								<li><a href="./admin_admin_profit_05.html">광고수수료 적립현황</a></li>
 								<li><a href="./admin_admin_profit_06.html">판매수수료 출금 현황</a></li>
@@ -157,6 +157,29 @@
 			</div>
 		</div>
 	</div>
+    <input type="hidden" name="profit_id">
+	<div class="adminModal modal-overlay" id="modal" style="display:none;background: rgba(0,0,0,0.4);">
+		<div class="adminModal_ok adminModal_profit">
+			<h3>출금예정일 입력</h3>
+			<table class="adminModal_profit_table" >
+				<colgroup>
+					<col width="30%">
+					<col width="70%">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td colspan="2">
+							<input type="text" name="expected_date_str" placeholder="출금예정일">
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" class="ok_btn" id="close_btn" onclick="select_day();">완료</a>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -171,6 +194,31 @@
 
     var page_num = 0;
 
+    const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_admin_rightmenu.html');
 	});
@@ -183,11 +231,9 @@
 			total_profit = total_profit + withdraw.withdraw_amount;
 			var unix_timestamp = withdraw.enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();	
+			var mon = "0" + (date.getMonth()+1);
+			var day = "0" + (date.getDate());
+			var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			
 			var stateStr = '';
 			if(withdraw.stateStr=="requested"){
@@ -204,7 +250,11 @@
 			}else{
 				bank_name = withdraw.bank;
 			}
+            var expected_date_str = '';
 
+            if (withdraw.expected_date_str != "-"){
+                expected_date_str = withdraw.expected_date_str;
+            }
 			 tag += `<tr>
 							<td>
 								<div class="adminContent_table_checkbox">
@@ -223,7 +273,7 @@
 							<td>${withdraw.bank_number}</td>
 							<td>${withdraw.withdraw_amount.toLocaleString('ko-KR')}원</td>
 							<td>${formattedTime}</td>
-							<td></td>
+							<td style="display: flex;align-items: center;justify-content: center;line-height: 40px;">${expected_date_str}<a herf="javascript:void(0)" class="edit_btn" onclick="modal_pop(${withdraw.id})"><img src="../image/edit_btn.png"></a></td>
 							<td>${stateStr}</td>
 						</tr>`;
             i++;
@@ -368,29 +418,29 @@
 			alert("대상을 선택해주세요.");
 			return false;
 		}
-        for(var i = 0; i < profit_id_arr.length; i++){
-            $.ajax({
-                type : "POST",            // HTTP method type(GET, POST) 형식이다.
-                url : "http://43.200.169.89/confirm-withdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
-                data : {
-                    request_id : profit_id_arr[i]
-                    },            // Json 형식의 데이터이다.
-                success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
-                    // 응답코드 > 0000
-                    console.log(res);
 
-                    if(res == "success"){
-                        alert("프로핏 지급이 완료되었습니다.");
-                        location.reload();
-                    }else{
-                        alert("오류 발생. 관리자에게 문의하세요.");
-                    }
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
-                    alert("통신 실패.")
+        var profit_id_arr_string = JSON.stringify(profit_id_arr);
+        $.ajax({
+            type : "POST",            // HTTP method type(GET, POST) 형식이다.
+            url : "http://43.200.169.89/confirm-withdraw",      // 컨트롤러에서 대기중인 URL 주소이다.
+            data : {
+                request_ids : profit_id_arr_string
+                },            // Json 형식의 데이터이다.
+            success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                // 응답코드 > 0000
+                console.log(res);
+
+                if(res == "success"){
+                    alert("프로핏 지급이 완료되었습니다.");
+                    location.reload();
+                }else{
+                    alert("오류 발생. 관리자에게 문의하세요.");
                 }
-            });
-        }
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                alert("통신 실패.")
+            }
+        });
         
     }
 
@@ -398,5 +448,27 @@
 
         
 
+    }
+
+    function modal_pop(id){
+        $(".adminModal").show();
+        $("input[name=profit_id]").val(id);
+    }
+
+
+    function select_day(){
+        var request_id = $("input[name=profit_id]").val();
+        var expected_date_str = $("input[name=expected_date_str]").val();
+
+        $.post("http://43.200.169.89/revise-expected-withdraw-date",{
+            request_id : request_id,
+            expected_date_str : expected_date_str
+        },result=>{
+            if(result == "success"){
+                alert('예정일이 입력되었습니다.');
+                $(".adminModal").hide();
+                location.reload();
+            }
+        })
     }
 </script>

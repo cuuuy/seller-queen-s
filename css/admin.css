@@ -32,7 +32,7 @@ body {min-width:1600px;}
 .adminWrap_title2 p {font-size:14px;color:black;}
 
 .adminContent:after {content:"";display:block;clear:both;}
-.adminContent {height:1000px;overflow-y:scroll;width: 96%;margin: auto;}
+.adminContent {height:1000px;overflow-y:scroll;width: 96%;margin: auto;    min-width: 1513px;}
 .adminContent{ -ms-overflow-style: none; } .adminContent::-webkit-scrollbar{ display:none; }
 .rightmenu{ -ms-overflow-style: none; } .rightmenu::-webkit-scrollbar{ display:none; }
 
@@ -89,7 +89,9 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .adminContent_table {margin:36px 0 0 0;}
 .adminContent_table tr {height:50px;}
 .adminContent_table th {font-size:16px;font-weight:400;text-align:center;color:#000;line-height:30px;vertical-align:middle;border-bottom:1px solid #bababa;padding:0 0 10px 0;}
+.adminContent_table2 th {font-size:16px;font-weight:400;text-align:center;color:gray;line-height:30px;vertical-align:middle;border-bottom:1px solid #bababa;padding:0 0 10px 0;}
 .adminContent_table td {font-size:16px;font-weight:400;text-align:center;color:#000;line-height:22px;padding:12px 8px;vertical-align:middle;}
+.adminContent_table2 td {font-size:16px;font-weight:400;text-align:center;color:gray !important;line-height:22px;padding:12px 8px;vertical-align:middle;}
 .adminContent_table_checkbox {height:42px;}
 .adminContent_table_checkbox input[type="checkbox"] + label{top:8px;}
 .adminContent_table td.adminContent_table_name {text-align:left;min-width: 200px;}

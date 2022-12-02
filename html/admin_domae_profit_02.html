@@ -205,7 +205,9 @@
 			}else if(withdraw.stateStr=="confirmed"){
 				stateStr = "출금완료";
 			}
-			 tag += `<tr>
+
+            if(withdraw.profit_type == "sale"){
+                tag += `<tr>
 							<td>
 								<div class="adminContent_table_checkbox">
 									<input id="check${withdraw.id}" type="checkbox">
@@ -215,9 +217,11 @@
 							<td>${page_num-i}</td>
 							<td>${withdraw.withdraw_amount.toLocaleString('ko-KR')}원</td>
 							<td>${formattedTime}</td>
-							<td></td>
+							<td>${withdraw.expected_date_str}</td>
 							<td>${stateStr}</td>
 						</tr>`;
+            }
+			 
 			i++;
 		})
 

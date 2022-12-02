@@ -424,9 +424,10 @@
 				 enroll_time : enroll_time
 				},            // Json 형식의 데이터이다.
 			success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                var get_id = res.split("__")[1];
 				alert("회원가입 신청이 완료되었습니다.");
 				if(user_type=="seller"){
-					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type;
+					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type+"&id="+get_id+"&recommender_name="+recommender_name+"&recommender_phone="+recommender_phone;
 				}else if(user_type=="wholesaler"){
 					location.href="./join_page06.html?user_type="+user_type+"&seller_type="+seller_type;
 				}else if(user_type=="teacher"){

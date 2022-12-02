@@ -57,7 +57,7 @@
 							<a class="pay_click" href="javascript:void(0)">무통장 입금</a>
 							<a class="pay_click" href="javascript:void(0)">일반 간편카드</a>
 						</div>
-						<a href="javascript:void(0)" class="ok_btn payment">셀러 결제하기</a>
+						<a href="javascript:void(0)" class="ok_btn payment" onclick="join_pay();">셀러 결제하기</a>
 					</div>
 				</div>
 				<a href="" id="join_page_next">
@@ -75,6 +75,12 @@
 	var urlParams = new URLSearchParams(queryString);
 	var user_type = urlParams.get('user_type');
 	var seller_type = urlParams.get('seller_type');
+    var id = urlParams.get('id');
+    var recommender_name = urlParams.get('recommender_name');
+    var recommender_phone = urlParams.get('recommender_phone');
+
+    var now_date = new Date();
+    var enroll_time = parseInt(now_date.getTime()/1000);
 
     var user_type_string = "";
     if(user_type=="seller"){
@@ -110,13 +116,7 @@
         $(".user_price").text(seller_price);
 
         
-        if(user_type=="seller"){
-            $(".payment").attr("href", "./join_page07.html?user_type="+user_type+"&seller_type="+seller_type);
-        }else if(user_type=="wholesaler"){
-            $(".payment").attr("href", "./join_page08.html?user_type="+user_type+"&seller_type="+seller_type);
-        }else if(user_type=="teacher"){
-            $(".payment").attr("href", "./join_page09.html?user_type="+user_type+"&seller_type="+seller_type);
-        }
+        
 
 	});
 
@@ -127,6 +127,41 @@
 
     
 
-    
+    function join_pay(){
+        var pay_type = '';
+
+        if(seller_type){
+            pay_type = user_type+"_"+seller_type;
+        }else{
+            pay_type = user_type;
+        }
+
+        var pay_amount = $(".user_price").text().replace("원","").replace(/,/g , '');
+        var pay_method = $(".pay_click.active").text();
+
+        $.post("http://43.200.169.89/paidForJoin",{
+            user_id : id,
+            pay_type : pay_type,
+            pay_amount : pay_amount,
+            recommender_name : recommender_name,
+            recommender_phone : recommender_phone,
+            pay_method : pay_method,
+            pay_time : enroll_time
+        },result=>{
+            if(result == "success" || result == "recommender not exist"){
+                if(user_type=="seller"){
+                    location.href = "./join_page07.html?user_type="+user_type+"&seller_type="+seller_type;
+                }else if(user_type=="wholesaler"){
+                    location.href = "href", "./join_page08.html?user_type="+user_type+"&seller_type="+seller_type;
+                }else if(user_type=="teacher"){
+                    location.href = "href", "./join_page09.html?user_type="+user_type+"&seller_type="+seller_type;
+                }
+            }else{
+                alert("에러. 관리자에게 문의하세요.");
+                return;
+            }
+            
+        })
+    }
     
 </script>
