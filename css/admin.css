@@ -3,7 +3,9 @@ body {min-width:1600px;}
 .select-arrow {
 	color : red;
 }
-
+input::placeholder {
+    color: #CEC6DE;
+}
 .adminContainer {position:relative;}
 .adminContainer {position:relative;}
 .rightmenu {position:fixed;width:360px;top:0;right:0;height:100%;background:#EAE6F2;padding:100px 56px 60px;z-index:50;overflow:scroll;}
@@ -207,8 +209,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 
 .adminModal_invoice h5 {text-align:center;margin:0 0 10px 0;}
-.adminModal_invoice input, .adminModal_invoice select {display:block;background:#EAE6F2;font-size:16px;text-align:center;color:#111;padding:5px 0;margin:0 10px 0 0;width:100%;}
-.adminModal_invoice > div > div {margin:40px 0;}
+.adminModal_invoice input, .adminModal_invoice select {height: 45px;display:block;background:#EAE6F2;font-size:16px;text-align:center;color:#111;padding:5px 0;margin:0 10px 0 0;width:100%;}
+.adminModal_invoice > div > div {margin:20px 0;}
 
 .adminModal_cs h5 {margin:0 0 10px 0;}
 .adminModal_cs > div {margin: 0 0 40px 0;}
@@ -224,11 +226,11 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .adminModal_cs_title input {font-size:16px;}
 
 .adminModal_profit_top {display:flex;border-top:1px solid #bababa;width:100%;margin:30px 0;}
-.adminModal_profit_top p {padding:20px; width:50%;text-align:center;}
+.adminModal_profit_top p {padding:20px; width:50%;text-align:center;font-weight: 600;}
 .adminModal_profit_top p:first-child {border-right:1px solid #bababa;}
 .adminModal_profit_table {margin: 0 0 40px 0;}
-.adminModal_profit_table td {padding:2px;}
-.adminModal_profit_table input, .adminModal_profit_table select {padding:0 20px;width:100%;height:32px;line-height:32px;background: #EAE6F2;box-sizing:border-box;text-align:left;}
+.adminModal_profit_table td {padding:2px;height: 43px;}
+.adminModal_profit_table input, .adminModal_profit_table select {padding:0 20px;width:95%;height:32px;line-height:32px;background: #EAE6F2;box-sizing:border-box;text-align:left;}
 
 .adminModal_date_select {text-align:center;margin:30px 0 40px;}
 .adminModal_date_select select {padding:0 20px;width:calc( 98% / 3 );height:32px;line-height:32px;background: #EAE6F2;box-sizing:border-box;text-align:left;}

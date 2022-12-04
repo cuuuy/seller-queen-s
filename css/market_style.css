@@ -27,14 +27,14 @@
 .marketContent {min-height:100%;}
 .marketContent h3 {font-size: 16px;font-weight: 400;/*border-bottom: 1px solid #BABABA;*/    line-height: 24px;
     padding: 0 0 6px;
-    margin: 0 0 18px;}
-.marketContent h4 {font-size: 14px;font-weight: 500;}
+    /*margin: 0 0 18px;*/}
+.marketContent h4 {font-size: 16px;font-weight: 500;}
 .marketContent h5 {font-size: 12px;font-weight: 400;}
 .marketContent p {font-size: 10px;font-weight: 400;color: #000;}
 .marketContent .co777 {color:#707070;}
 .marketContent .tac {text-align: center;}
-.marketContent a.ok_btn {display:block;width:100%;height:45px;line-height:45px;text-align:Center;border-radius: 5px;background: #563b80;color:#fff;font-size: 14px;font-weight: 500;}
-.marketContent a.back_btn {display:block;width:100%;height:45px;line-height:45px;margin:0 0 5px 0;text-align:Center;border-radius: 5px;border:1px solid #563b80;color:#563b80;font-size: 14px;font-weight: 500;}
+.marketContent a.ok_btn {display:block;width:100%;height:45px;line-height:45px;text-align:Center;border-radius: 5px;background: #563b80;color:#fff;font-size: 16px;font-weight: 400;}
+.marketContent a.back_btn {display:block;width:100%;height:45px;line-height:45px;margin:0 0 5px 0;text-align:Center;border-radius: 5px;border:1px solid #563b80;color:#563b80;font-size: 16px;font-weight: 400;}
 
 .co777.on {color:#563B80;font-weight: 600;}
 
@@ -264,18 +264,23 @@
 .marketSell_payment > div {display:flex;justify-content: space-between;}
 .marketSell_payment > div a {width:81px;height:32px;line-height:30px;border:1px solid #603A8A;border-radius:5px;color:#000;text-align:center;font-size:12px;}
 
-#marketModal{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
-#marketModal > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;}
+#non_member_div {    padding: 0px 24px 24px 24px  !important;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+#marketModal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
+#marketModal > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;height: 422px;line-height: 20px;}
 #marketModal > div > div {padding:32px 24px;}
-#marketModal > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;border-bottom:1px solid #bababa;}
-#marketModal > div p {padding:32px 24px;font-size:16px;}
-#marketModal > div p span {color:#603A8A;}
+#marketModal > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;/*border-bottom:1px solid #bababa;*/}
+#marketModal > div p {padding:0px 24px;font-size:16px;font-weight: 400;}
+#marketModal > div p span {color:#603A8A;font-weight: 500;}
 #marketModal a.ok_btn {margin:0 0 6px 0;}
 
 #marketModal1{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.2);padding:0 19px;}
 #marketModal1 > div {position:absolute;width:block;width:341px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:5px;padding:32px 24px;}
 #marketModal1 > div > div {padding:32px 24px;}
-#marketModal1 > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;border-bottom:1px solid #bababa;}
+#marketModal1 > div h3 {text-align:center;font-weight:600;color:#603A8A;font-size:18px;padding:0 0 12px;/*border-bottom:1px solid #bababa;*/}
 #marketModal1 > div p {padding:32px 24px;font-size:14px;}
 #marketModal1 > div p span {color:#603A8A;}
 #marketModal1 a.ok_btn {margin:0 0 6px 0;}
@@ -296,9 +301,9 @@
 #marketModal3 > div p span {color:#603A8A;}
 #marketModal3 a.ok_btn {margin:0 0 6px 0;}
 
-.marketModal_box span {display:block;padding:20px 0;}
+.marketModal_box span {display:block;padding:20px 0 0 0;font-size: 16px;color: #603A8A;}
 .marketModal_box_button {display:flex;justify-content: space-between;margin-top:10px;}
-.marketModal_box_button button {color:#BABABA;cursor:pointer}
+.marketModal_box_button button {color:#BABABA;cursor:pointer; font-size: 15;}
 .marketModal_box_button button:active, .marketModal_box_button button:focus {color:#563b80;}
 
 
@@ -477,9 +482,9 @@
 
 
 /* 로그인 */
-.marketMember_btn a.ok_btn {height:41px;line-height:41px;margin:0 0 6px;}
+.marketMember_btn a.ok_btn {height:55px;line-height:55px;margin:0 0 6px;border-radius: 5px;}
 .marketJoin_btn a.gray {background: #bababa;}
-.marketMember_btn a.back_btn {height:41px;line-height:41px;}
+.marketMember_btn a.back_btn {height:55px;line-height:55px;border-radius: 5px;}
 
 .marketJoin_btn a.ok_btn {height:41px;line-height:41px;margin:0 0 6px;}
 #marketModal1 a.w50 {display:inline-block;width:49%;margin:0;height:41px;line-height:41px;}
@@ -506,7 +511,7 @@
 .marketJoin_form .w30 {width:30%;}
 .marketJoin_form .mt {margin:6px 0 0 0;}
 .marketJoin_form .ml {margin: 0 0 0 3px;}
-.marketJoin_form dt {font-size:12px;margin:0 0 6px;}
+.marketJoin_form dt {font-size:12px;margin:0 0 6px;font-weight: 500;}
 .marketJoin_form dd {margin:0 0 20px;}
 .marketJoin_form dt span {color:#603A8A;}
 .marketJoin_form dd a {display:inline-block;height:47px;border-radius:5px;background:#603A8A;color:#fff;text-align:center;line-height:47px;margin:0 0 0 auto;}

@@ -66,7 +66,7 @@
 			<!-- <li><a href="./login.html" id="log_text">로그인</a></li> -->
 			<li style="font-size:15px;" id="login_name_li"><span id="login_name" style="display:none;"></span></li>
 			<li><a href="javascript:void(0)" id="log_text" onclick="login_logout()">로그인</a></li>
-			<li><a href="./join_page01.html">회원가입</a></li>
+			<li><a href="./join_page01.html" id="join_text">회원가입</a></li>
 		</ul>
 		<div id="mypage_hover2">
 			<a href="javascript:void(0)" onclick="mypage_modal_popup();" ></a>
@@ -170,6 +170,10 @@ function session_load(){
 
 		market_name = user['data'].market_name;
 		$("#log_text").text("로그아웃");
+        $("#join_text").text("마이프로필");
+        $("#join_text").attr("href","javascript:void(0)")
+        $(".header_gnb_loginSection").css("width","450px");
+        $(".header_gnb_loginSection").css("min-width","450px");
 		$("#login_name").show();
 		$("#login_name").text(user['data'].name+"님 환영합니다");
 		var a_href = "./market_main.html?market_name="+market_name;

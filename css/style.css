@@ -681,9 +681,9 @@ border-radius: 31px;margin:0 0 42px 0;color:#040404;font-size: 22px;font-weight:
 
 .fc-col-header{
 
-    height: 50px !important;
+    height: 45px !important;
     border-top: 5px solid #4E327B !important;
-    line-height:52px !important;
+    line-height:45px !important;
 }
 
 .datepickers-container{z-index: 9999999!important}
