@@ -43,12 +43,12 @@ body {min-width:1600px;}
 	position: relative;
 }
 .menus > li {
-	position:relative;width:230px;padding:0;font-size: 22px;text-align: center;font-weight: 600;height: 124px;line-height: 124px;cursor: pointer;
+	position:relative;width:230px;padding:0;font-size: 22px;text-align: center;font-weight: 600;height: 124px;line-height: 124px;cursor: pointer;min-width: 230px;
 }
 .menus > li:first-child {
 	margin-left:0;
 }
-.menus_2depth {display:none;position: absolute;top:0;left:-70px;width: 230px;height: 311px; border-right: 1px solid #C7C7C7;margin-top: 124px;padding-top: 12px;z-index:9999;}
+.menus_2depth {display:none;position: absolute;top:0;left:-70px;width: 230px;height: 311px; border-right: 1px solid #C7C7C7;margin-top: 124px;padding-top: 12px;z-index:9999;max-width: 230px;}
 .menus_2depth:hover  {background: none;}
 .menus_2depth li:hover {background: #EAE6F2;}
 .menus > li:first-child .menus_2depth {left:0;border-left: 1px solid #C7C7C7;}
