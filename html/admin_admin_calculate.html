@@ -144,11 +144,12 @@
 					
 			var unix_timestamp = datas[i].enroll_time;
 			var date = new Date(unix_timestamp * 1000);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var seconds = "0" + date.getSeconds();
-			var mon = (date.getMonth()+1);
-			var formattedTime = date.getFullYear() + "-" + mon + "-" + date.getDate();
+            var hours = date.getHours();
+            var minutes = "0" + date.getMinutes();
+            var seconds = "0" + date.getSeconds();
+            var mon = "0" + (date.getMonth()+1);
+            var day = "0" + (date.getDate());
+            var formattedTime = date.getFullYear() + "-" + mon.substr(-2) + "-" + day.substr(-2);
 			//var img_path = product['data'].main_img_url.replace("public","");
 			
 
@@ -220,7 +221,7 @@
 							<td>${datas[i].bank_number}</td>
 							<td>${datas[i].withdraw_amount.toLocaleString('ko-KR')}원</td>
 							<td>${formattedTime}</td>
-							<td></td>
+							<td>${datas[i].expected_date_str}</td>
 							<td>${stateStr}</td>
 						</tr>`;
 

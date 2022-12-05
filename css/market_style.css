@@ -482,9 +482,9 @@
 
 
 /* 로그인 */
-.marketMember_btn a.ok_btn {height:55px;line-height:55px;margin:0 0 6px;border-radius: 5px;}
+.marketMember_btn a.ok_btn {height:41px;line-height:41px;margin:0 0 6px;border-radius: 5px;}
 .marketJoin_btn a.gray {background: #bababa;}
-.marketMember_btn a.back_btn {height:55px;line-height:55px;border-radius: 5px;}
+.marketMember_btn a.back_btn {height:41px;line-height:41px;border-radius: 5px;}
 
 .marketJoin_btn a.ok_btn {height:41px;line-height:41px;margin:0 0 6px;}
 #marketModal1 a.w50 {display:inline-block;width:49%;margin:0;height:41px;line-height:41px;}
