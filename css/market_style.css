@@ -30,7 +30,7 @@
     /*margin: 0 0 18px;*/}
 .marketContent h4 {font-size: 16px;font-weight: 500;}
 .marketContent h5 {font-size: 12px;font-weight: 400;}
-.marketContent p {font-size: 10px;font-weight: 400;color: #000;}
+.marketContent p {font-size: 10px;font-weight: 400;color: #000;white-space: normal;}
 .marketContent .co777 {color:#707070;}
 .marketContent .tac {text-align: center;}
 .marketContent a.ok_btn {display:block;width:100%;height:45px;line-height:45px;text-align:Center;border-radius: 5px;background: #563b80;color:#fff;font-size: 16px;font-weight: 400;}
@@ -41,7 +41,7 @@
 /*main*/
 #mainvisual {width:100%;height:140px;background: #EAE6F2;}
 .marketMain {margin-top: 22px;padding:0 17px;}
-.marketMain .marketMain_title {border-bottom: 1px solid #E9E6F1;/*margin-bottom:12px;*/}
+.marketMain .marketMain_title {border-bottom: 1px solid #E9E6F1;margin-bottom:12px;}
 .marketMain .marketMain_title h3 {font-weight: 700;line-height:31px;color: #563B80;}
 .marketMain_best {margin-bottom: 14px;}
 .marketMain_best ul {display:flex;text-align:center;/* justify-content: space-between; */overflow: auto;  white-space: nowrap;-ms-overflow-style: none;}
@@ -555,7 +555,7 @@
 .right_3depth{font-size: 12px !important; border:none !important; line-height:32px !important;}
 
 .reason_radio_focus {color:#5A3E86;font-weight: 700;}
-.marketHeader_logo {color: #563B80;font-weight: 700;font-size: 18px;}
+.marketHeader_logo {color: #563B80;font-weight: 700;font-size: 18px;font-weight: 500;}
 .address_btn {    display: inline-block;
     width: 79px;
     height: 27px;
