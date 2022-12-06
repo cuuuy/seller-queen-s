@@ -85,11 +85,11 @@
 						<h3 style="border:none;">배송지 정보<a href="javascript:void(0)" class="address_btn">배송지 변경</a></h3>
 						<div class="marketSell_form_check">
 							<div>
-								<input name="sell" id="sell01" type="radio" onclick="same_addr()">
+								<input name="sell" id="sell01" type="checkbox" onclick="same_addr()">
 								<label for="sell01"><span></span>주문자 정보와 동일</label>
 							</div>
 							<div id="default_deli">
-								<input name="sell02" id="sell02" type="radio">
+								<input name="sell02" id="sell02" type="checkbox">
 								<label for="sell02"><span></span>기본 배송지로 지정</label>
 							</div>
 						</div>
@@ -466,18 +466,27 @@
 	}
 
 	function same_addr(){
-		if(user_id == "-1"){
-			$("input[name=place_name]").val($("input[name=place_name_non_member]").val());
-			$("input[name=place_pw]").val($("input[name=place_pw_non_member]").val());
-			$("input[name=place_phone]").val($("input[name=place_phone_non_member]").val());
-			$("input[name=place_addr]").val($("input[name=place_addr_non_member]").val());
-			$("input[name=place_addr2]").val($("input[name=place_addr2_non_member]").val());
+		if($("#sell01").is(":checked")){
+			if(user_id == "-1"){
+				$("input[name=place_name]").val($("input[name=place_name_non_member]").val());
+				$("input[name=place_pw]").val($("input[name=place_pw_non_member]").val());
+				$("input[name=place_phone]").val($("input[name=place_phone_non_member]").val());
+				$("input[name=place_addr]").val($("input[name=place_addr_non_member]").val());
+				$("input[name=place_addr2]").val($("input[name=place_addr2_non_member]").val());
+			}else{
+				$("input[name=place_name]").val($("#user_name").text());
+				$("input[name=place_phone]").val($("#user_phone").text());
+				$("input[name=place_addr]").val($("#user_addr").text());
+				$("input[name=place_addr2]").val($("#user_addr2").text());
+			}
 		}else{
-			$("input[name=place_name]").val($("#user_name").text());
-			$("input[name=place_phone]").val($("#user_phone").text());
-			$("input[name=place_addr]").val($("#user_addr").text());
-			$("input[name=place_addr2]").val($("#user_addr2").text());
+			$("input[name=place_name]").val("");
+			$("input[name=place_pw]").val("");
+			$("input[name=place_phone]").val("");
+			$("input[name=place_addr]").val("");
+			$("input[name=place_addr2]").val("");
 		}
+		
 		
 	}
 

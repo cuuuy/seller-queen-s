@@ -199,6 +199,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .adminContent_graph_wrap {width:auto; height:auto;}
 #start_date {width:calc(( 100% -10px )/2.5);margin:50px 20px 50px 0;line-height:32px;color:#818181; z-index:99999;float:left;text-align:center;min-height: 400px;}
 #end_date {width:calc(( 100% -10px )/2.5);margin:50px 20px 50px 0;line-height:32px;/* padding:0 10px; */color:#818181; z-index:99999;float:right;text-align:center;min-height: 400px;}
+#start_date h5 {margin-bottom: 20px;}
+#end_date h5 {margin-bottom: 20px;}
 .datepickers-container {z-index:99999;}
 .datepicker{ width: 100%; }
 .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
@@ -493,3 +495,6 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 .s_date {margin-right: 20px;font-weight: 500;}
 .e_date {margin-left: 20px;font-weight: 500;}
+
+
+.datepicker-inline {/*width: 307px;height: 269px;*/}

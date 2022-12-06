@@ -154,14 +154,15 @@
 						<a href="javascript:void(0);" class="marketDetail_fixbox_up"></a>
 						<div class="marketDetail_fixbox_show">
 							<ul>
-								<li>
+								<li class="active">
 									<h4>배송방법</h4>
 									<ul>
-										<li class="co777 option1">택배</li>
+										<li class="co777 option1 on">택배</li>
 										<!-- <li class="co777 option1">직접수령</li> -->
 									</ul>
 								</li>
-								<li><h4>배송비</h4>
+								<li class="active">
+                                    <h4>배송비</h4>
 									<ul class="deli_method">
 										<!-- <li class="co777 option2">3,000원</li>
 										<li class="co777 option2">5,000원 (제주, 도서지역 추가 2000원)</li> -->
@@ -247,7 +248,7 @@
 		});
 		
 		// 드롭다운
-		$('.marketDetail_fixbox_show > ul > li > ul').hide()
+		//$('.marketDetail_fixbox_show > ul > li > ul').hide()
 		$('.marketDetail_fixbox_show > ul > li h4').click(function(){
 			//$(this).siblings().slideToggle(400);
 			//$(this).parent('li').toggleClass('active');
@@ -265,7 +266,7 @@
 		});
 
 		$(document).on("click",".marketDetail_fixbox_up", function(){
-			$('.marketDetail_fixbox_show > ul > li > ul').hide()
+			//$('.marketDetail_fixbox_show > ul > li > ul').hide()
 		});
 		$(document).on("click",".option1", function(){
 			$(this).addClass('on');
@@ -459,7 +460,7 @@
 				count = 1;
 				var sum_price = (res[0].retail_price * count)+res[0].delivery_fee;
 				
-				var tag = `<li class="co777 option2">${res[0].delivery_fee.toLocaleString('ko-KR')} 원</li>`;
+				var tag = `<li class="co777 option2 on">${res[0].delivery_fee.toLocaleString('ko-KR')} 원</li>`;
 
 				$(".deli_method").append(tag);
 
@@ -550,16 +551,16 @@
 		
 
 		if($(".option1.on").text()==""){
-			alert("배송방법을 선택해주세요.");
-			$(".marketDetail_fixbox_up").addClass('active');
-			$(".marketDetail_fixbox_up").siblings('div').slideToggle(400);
-			$('.marketDetail_fixbox_show > ul > li > ul').hide();
-			return false;
+			 alert("배송방법을 선택해주세요.");
+			// $(".marketDetail_fixbox_up").addClass('active');
+			// $(".marketDetail_fixbox_up").siblings('div').slideToggle(400);
+			// $('.marketDetail_fixbox_show > ul > li > ul').hide();
+			// return false;
 		}
 
 		if($(".option2.on").text()==""){
-			alert("배송비를 선택해주세요.");
-			return false;
+			 alert("배송비를 선택해주세요.");
+			// return false;
 		}
 
 		for(var i = 0; i < option_length_arr.length; i++){
@@ -572,6 +573,9 @@
 
 		if(options_arr.includes("")==true){
 			alert("옵션을 선택해주세요.");
+            $(".marketDetail_fixbox_up").addClass('active');
+			$(".marketDetail_fixbox_up").siblings('div').slideToggle(400);
+			//$('.marketDetail_fixbox_show > ul > li > ul').hide();
 			return false;
 		}
 

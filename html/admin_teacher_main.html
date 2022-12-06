@@ -65,7 +65,7 @@
 						</div>
 						<div class="adminContent_search">
 							<input type="search" name="" placeholder="상품을 검색하세요.">
-							<a href="" class="check_btn">출금하기</a>
+							<a href="javascript:void(0)" class="check_btn" onclick="modal_popup();">출금하기</a>
 							<a href="" class="check_btn">검색</a>
 						</div>
 						<div class="adminContent_date">
@@ -202,6 +202,67 @@
 			</div>
 		</div>
 	</div>
+	<input type="hidden" name="profit_id">
+	<div class="adminModal modal-overlay" id="modal" style="display:none;background: rgba(0,0,0,0.4);">
+		<div class="adminModal_ok adminModal_profit">
+			<h3>프로핏 출금하기</h3>
+            <div class="adminModal_profit_top">
+				<p>판매 프로핏<br><br>광고 프로핏</p>
+                <input type="hidden" name="total_amount">
+                <input type="hidden" name="total_amount2">
+				<p><span id="profit_amount">0원</span><br><br><span id="profit_amount2">0원</span></p>
+			</div>
+			<!-- <div class="adminModal_profit_top">
+				<p>판매 프로핏</p>
+                <input type="hidden" name="total_amount">
+				<p id="profit_amount">0원</p>
+			</div> -->
+			<table class="adminModal_profit_table" >
+				<colgroup>
+					<col width="30%">
+					<col width="70%">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" name="withdraw_name" placeholder="이름">
+						</td>
+						<td>
+							<input type="text" name="withdraw_jumin" placeholder="주민번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<select name="withdraw_bank">
+								<option value="sinhan">신한은행</option>
+								<option value="kookmin">국민은행</option>
+								<option value="woori">우리은행</option>
+								<option value="hana">하나은행</option>
+								<option value="nonghyup">농협은행</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="withdraw_acount" placeholder="계좌번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
+						</td>
+					</tr>
+					<tr>
+                        <td>
+							<select name="withdraw_profit">
+								<option value="sale">판매 프로핏</option>
+								<option value="ad">광고 프로핏</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" name="withdraw_price" placeholder="신청금액을 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" class="ok_btn" id="close_btn" onclick="profit_withdraw();">출금하기</a>
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
@@ -211,4 +272,38 @@
 		$('.rightmenuWrap').load('admin_teacher_rightmenu.html');
 	});
 
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	//close_btn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+	//
+	//closeBtn.addEventListener("click", e => {
+	//	modal.style.display = "none"
+	//})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+	
+	function modal_popup(){
+        
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
+
+	function profit_withdraw(){
+		alert('출금내역이 없습니다.');
+	}
 </script>
