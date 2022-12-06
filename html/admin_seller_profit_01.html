@@ -314,9 +314,9 @@
 						<td>${formattedTime}</td>
 						<td>${profit.retail_price.toLocaleString('ko-KR')}원</td>
 						<td>${parseInt(persent*100)}%</td>
-						<td>${parseInt(profit.profit_amount*persent).toLocaleString('ko-KR')}</td>
-						<td>${parseInt(profit.profit_amount*0.1).toLocaleString('ko-KR')}</td>
-						<td>${parseInt(profit.profit_amount - (profit.profit_amount*0.1) - (profit.profit_amount*persent)).toLocaleString('ko-KR')}</td>
+						<td>${parseInt((profit.retail_price+profit.delivery_fee)*persent).toLocaleString('ko-KR')}</td>
+						<td>${parseInt(profit.retail_price/11).toLocaleString('ko-KR')}</td>
+						<td>${parseInt(profit.profit_amount).toLocaleString('ko-KR')}</td>
 					</tr>`;
 			i ++;
 		})
@@ -345,7 +345,7 @@
 		profits_origin = result;
 		
         profits = profits_origin.filter(function(profit_info){
-			return profit_info.statusStr != "requested";
+			return profit_info.statusStr != "requested" && profit_info.profit_type == 'retailer_profit';;
 		})
 
 		var time_arr = [];

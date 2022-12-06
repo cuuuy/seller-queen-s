@@ -110,10 +110,10 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 .adminContent_date{position:relative;width: 360px;float : left;bottom: 25px;}
 .adminContent_date_middle{position:relative;width: 70px;float : left; margin-top: 7px; color:#9F8EB8;bottom: 25px;}
 
-.adminContent_date select { font-size:15px;width:30%;color:#D5CCE3;background-color: #EAE6F2;padding : 0 10px 0 10px;margin:0 5px 0 0;height: 32px;text-align:center;}
+.adminContent_date select { font-size:16px;width:30%;color:#D5CCE3;background-color: #EAE6F2;padding : 0 10px 0 10px;margin:0 5px 0 0;height: 32px;text-align:center;}
 
 .adminContent_date2 {position:relative;width: 140px;float : left;bottom: 25px;}
-.adminContent_date2 select { font-size:15px;width:90%;color:#D5CCE3;background-color: #EAE6F2;padding : 0 10px 0 10px;margin:0 5px 0 0;height: 32px;text-align:center;}
+.adminContent_date2 select { font-size:16px;width:90%;color:#D5CCE3;background-color: #EAE6F2;padding : 0 10px 0 10px;margin:0 5px 0 0;height: 32px;text-align:center;}
 
 .adminContent_order:after {content:"";display:block;clear:both;}
 .adminContent_order input {float:left;padding:0 26px;width:calc( 100% - 260px );height:32px;line-height:32px;background:no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
@@ -490,3 +490,6 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     font-size: 18px;
     font-weight: 500;
 }
+
+.s_date {margin-right: 20px;font-weight: 500;}
+.e_date {margin-left: 20px;font-weight: 500;}

@@ -256,7 +256,7 @@
 	})
 	
 	function load_profit_list(datas){
-		//console.log('datas',datas);
+		console.log('datas',datas);
 		var tag = ``;
 		var i = 0;
         var total_amount = 0;
@@ -305,6 +305,10 @@
 		profits = result;
 		profits_origin = result;
 		
+		profits = profits_origin.filter(function(profit_info){
+			return profit_info.statusStr != "requested" && profit_info.profit_type == 'wholesaler_profit';;
+		})
+
 		var time_arr = [];
 		$.each(profits_origin, function(i, res){
 			time_arr.push(res.enroll_time);

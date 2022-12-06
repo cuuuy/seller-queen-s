@@ -169,6 +169,22 @@
 		$.get("http://43.200.169.89/statistics-by-total_wholesaler?start_time=0&end_time=9999999999",result=>{
 			console.log(result);
             
+            var date2 = new Date(result[0].max_time * 1000);
+            var mon2 = date2.getMonth()+1;
+            var day2 = date2.getDate();
+
+            var date3 = new Date(result[0].min_time * 1000);
+            var mon3 = date3.getMonth()+1;
+            var day3 = date3.getDate();
+            console.log(date3);
+            $("select[name=search_year1]").val(date3.getFullYear()).prop("selected",true);
+            $("select[name=search_month1]").val(mon3).prop("selected",true);
+            $("select[name=search_day1]").val(day3).prop("selected",true);
+            
+            $("select[name=search_year2]").val(date2.getFullYear()).prop("selected",true);
+            $("select[name=search_month2]").val(mon2).prop("selected",true);
+            $("select[name=search_day2]").val(day2).prop("selected",true);
+            
             result = result.filter(function(result_info){
                 return result_info.market_name != null;
             })
