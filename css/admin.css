@@ -1,5 +1,7 @@
 body {min-width:1600px;}
 
+.adminContent_table_div { width: 100%; overflow-x: auto;margin-top: 70px;}
+
 .select-arrow {
 	color : red;
 }
@@ -8,7 +10,7 @@ input::placeholder {
 }
 .adminContainer {position:relative;}
 .adminContainer {position:relative;}
-.rightmenu {position:fixed;width:360px;top:0;right:0;height:100%;background:#EAE6F2;padding:100px 56px 60px;z-index:50;overflow:scroll;}
+.rightmenu {position:fixed;width:15%;top:0;right:0;height:100%;background:#EAE6F2;padding:100px 56px 60px;z-index:50;overflow:scroll;}
 .rightmenu > ul > li {margin:0 0 40px;}
 .rightmenu > ul > li > h5 {color:#4E327B;border-bottom:1px solid #bababa;line-height:36px;text-align:right;}
 .rightmenu > ul > li > ul > li {line-height:26px;margin:4px 0;text-align:right;}
@@ -476,6 +478,51 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	
 }
 
+@media screen and (max-width: 1900px) {
+
+	.adminContent {width: 1900px;;padding:0 350px 0 0;}
+	
+}
+@media screen and (max-width: 1600px) {
+
+    /*.adminContent {width:1600px;padding:0 350px 0 0;}*/
+	
+}
+@media screen and (max-width: 1500px) {
+
+	.adminContent_table_div { width: 69%; overflow-x: auto;margin-top: 70px;}
+	
+}
+
+@media screen and (max-width: 1330px) {
+
+	.adminContent_table_div { width: 60%; overflow-x: auto;margin-top: 70px;}
+	
+}
+
+@media screen and (max-width: 1150px) {
+
+	.adminContent_table_div { width: 45%; overflow-x: auto;margin-top: 70px;}
+	
+}
+
+@media screen and (max-width: 1000px) {
+
+	.adminContent_table_div { width: 40%; overflow-x: auto;margin-top: 70px;}
+	
+}
+
+@media screen and (max-width: 900px) {
+
+	.adminContent_table_div { width: 35%; overflow-x: auto;margin-top: 70px;}
+	
+}
+
+@media screen and (max-width: 800px) {
+
+	.adminContent_table_div { width: 25%; overflow-x: auto;margin-top: 70px;}
+	
+}
 .category_text {background-color:#EAE6F2; width: 120px;}
 
 .ok_btn_cate {

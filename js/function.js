@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	
+    $(".adminContent_table").parent().addClass("adminContent_table_div");
+    
 	var js_now_date = new Date();
 	var new_js_now_date_year = js_now_date.getFullYear();
 	var new_js_now_date_month = js_now_date.getMonth()+1;
