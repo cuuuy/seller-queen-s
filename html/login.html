@@ -7,7 +7,9 @@
 <link rel="stylesheet" type="text/css" href="../css/new_style.css">
 <link rel="stylesheet" type="text/css" href="../css/market_style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<body>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+<body class="login_body">
 	<div class="container">
 		<div class="header">
 			
@@ -30,16 +32,55 @@
 		</div>
 		<div class="footer"></div>
 	</div>
-
+    <div class="marketContainer">
+        <div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href="./main.html"><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>로그인</h2>
+		    </header>
+        </div>
+		<div class="marketContent">
+			<div class="marketMember">
+				<div>
+					<div class="marketMember_input">
+						<input type="text" name="idStr" placeholder="아이디 입력">
+						<input type="password" name="pwdStr" placeholder="비밀번호 입력">
+					</div>
+					<div class="marketMember_btn">
+						<a href="javascript:void(0)" class="ok_btn" onclick="login()">로그인</a>
+						<a href="join_page01.html" class="back_btn">회원가입</a>
+					</div>
+					<div class="marketMember_find">
+						<a href="./find_id.html">아이디 찾기</a><br>
+					<a href="./find_pw.html">비밀번호 찾기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 
 <script>
 	$(document).ready(function(){
-		$('.header').load('head.html');
-		$('.footer').load('footer.html');
+		
 	});
 	
+    function Mobile(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".marketContainer").show();
+        $(".container").remove();
+    } else {// 모바일 외
+        $(".marketContainer").remove();
+        $(".container").show();
+        $('.header').load('head.html');
+		$('.footer').load('footer.html');
+    }
+    
 	function login(){
 		var idStr = $("input[name=idStr]").val();
 		var pwdStr = $("input[name=pwdStr]").val();
@@ -67,7 +108,7 @@
 				console.log(res);
 				
 				if(res.includes("success")){
-					alert("로그인 되었습니다.");
+					//alert("로그인 되었습니다.");
 					var user_id_session = res.split('__')[1];
 					//console.log(user_id_session);
 					localStorage.setItem('user_id', user_id_session);

@@ -5,8 +5,11 @@
 <link rel="stylesheet" type="text/css" href="../css/defalut.css">
 <link rel="stylesheet" type="text/css" href="../css/style.css">
 <link rel="stylesheet" type="text/css" href="../css/new_style.css">
+<link rel="stylesheet" type="text/css" href="../css/market_style.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<body>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+<body class="join_body">
 	<div class="container">
 		<div class="header">
 			
@@ -16,6 +19,38 @@
 				<div class="body_idFind_title">
 					<b>비밀번호 찾기</b>
 				</div>
+				<div class="body_idFind_form">
+					<dl>
+						<dt>이름</dt>
+						<dd><input type="text" name="name" placeholder="이름을 입력해주세요."></dd>
+						<dt>아이디</dt>
+						<dd><input type="text" name="idStr" placeholder="아이디를 입력해주세요."></dd>
+						<dt>이메일</dt>
+						<dd><input type="text" name="email" placeholder="이메일을 입력해주세요.">
+						<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
+						</dd>
+					</dl>
+					
+					<a href="javascript:void(0)" class="ok_btn gray" onclick="find_pw()">이메일로 비밀번호 전송</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+			
+		</div>
+	</div>
+    <div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href="./main.html"><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>비밀번호 찾기</h2>
+		    </header>
+        </div>
+		<div class="idfind">
+			<div class="body_idFind">
 				<div class="body_idFind_form">
 					<dl>
 						<dt>이름</dt>
@@ -57,9 +92,20 @@
 </html>
 
 <script>
-	$(document).ready(function(){
-		$('.header').load('head.html');
+    function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".marketContainer").show();
+        $(".container").remove();
+    } else {// 모바일 외
+        $(".marketContainer").remove();
+        $(".container").show();
+        $('.header').load('head.html');
 		$('.footer').load('footer.html');
+    }
+
+	$(document).ready(function(){
 
 		$('.body_idFind_form_phone').hide();
 		$('.adminModal').hide();

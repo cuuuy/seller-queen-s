@@ -5,11 +5,14 @@
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/market_style.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 </head>
-<body>
+<body class="join_body">
 	<div class="container">
 		<div class="header"></div>
 		<div class="join">
@@ -64,18 +67,55 @@
 		</div>
 		<div class="footer"></div>
 	</div>
+    <div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href="./main.html"><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>안내</h2>
+		    </header>
+        </div>
+		<div class="join">
+			<div class="join_page">
+				<div class="join_page_01">
+					<a href="./join_page02.html?user_type=seller" class="user_type" id="seller">
+						<h3>셀러</h3>
+						<p>메인페이지 셀러 입점 신청에서도<br> 진행하실 수 있습니다.</p>
+					</a>
+					<a href="./join_page03.html?user_type=wholesaler" class="user_type" id="wholesaler">
+						<h3>도매</h3>
+						<p>회원 가입 후 본사에서 승인을 받아야<br> 이용하실 수 있습니다.</p>
+					</a>
+					<a href="./join_page03.html?user_type=teacher" class="user_type" id="teacher">
+						<h3>강사</h3>
+						<p>게시판 기능 및 강의 판매 포인트를<br> 출금하실 수 있습니다.</p>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
 </body>
 
 
 <script>
 
+    function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
 	
+    if (Mobile()){// 모바일일 경우
+        $(".marketContainer").show();
+        $(".container").remove();
+    } else {// 모바일 외
+        $(".marketContainer").remove();
+        $(".container").show();
+        $('.header').load('head.html');
+		$('.footer').load('footer.html');
+    }
 	var user_type = '';
 
 	$(document).ready(function() {
-		$('.header').load('head.html');
-		$('.footer').load('footer.html');
-		
 		//클릭이벤트
 		$('.join_page_01 > a').click(function(){
 			$(this).addClass('active');

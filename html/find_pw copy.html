@@ -1,0 +1,101 @@
+<html>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css" href="../css/defalut.css">
+<link rel="stylesheet" type="text/css" href="../css/style.css">
+<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<body>
+	<div class="container">
+		<div class="header">
+			
+		</div>
+		<div class="idfind">
+			<div class="body_idFind">
+				<div class="body_idFind_title">
+					<b>비밀번호 찾기</b>
+				</div>
+				<div class="body_idFind_form">
+					<dl>
+						<dt>이름</dt>
+						<dd><input type="text" name="" placeholder="이름을 입력해주세요."></dd>
+						<dt>아이디</dt>
+						<dd><input type="text" name="" placeholder="아이디를 입력해주세요."></dd>
+						<dt>이메일</dt>
+						<dd><input type="text" name="" placeholder="이메일을 입력해주세요.">
+						<span>*3분 이내로 인증번호(6자리)를 입력해 주세요. 입력시간 초과시 "재전송" 버튼을 눌러주세요. *</span>
+						</dd>
+					</dl>
+					
+					<a href="javascript:void(0)" class="ok_btn gray" onclick="modal_popup()">이메일로 비밀번호 전송</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="footer">
+			
+		</div>
+	</div>
+	<div id="modal" class="adminModal">
+		<div class="adminModal_ok">
+			<h3>전송완료</h3>
+			<div class="adminModal_ok_text">
+				<p>
+					안녕하세요. <span>김셀러</span> 회원님,
+				</p>
+				<p>
+					회원님이 이메일로 보내드린 링크에서 비밀번호 재설정을 해주세요.
+				</p>
+			</div>
+			<div class="adminModal_ok_btn">
+				<a href="javascript:void(0)" class="ok_btn" id="close_btn">확인</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script>
+	$(document).ready(function(){
+		$('.header').load('head.html');
+		$('.footer').load('footer.html');
+
+		$('.body_idFind_form_phone').hide();
+		$('.adminModal').hide();
+
+		$('.gray').click(function(){
+			$('.gray').removeClass('gray');
+		});
+	});
+	
+	function modal_popup(){
+		const modal = document.getElementById("modal")
+		modal.style.display = "flex"
+	}
+
+	const modal = document.getElementById("modal")
+	const closeBtn = modal.querySelector(".close-area")
+	const close_btn = modal.querySelector("#close_btn")
+
+	close_btn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	closeBtn.addEventListener("click", e => {
+		modal.style.display = "none"
+	})
+
+	modal.addEventListener("click", e => {
+		const evTarget = e.target
+		if(evTarget.classList.contains("modal-overlay")) {
+			modal.style.display = "none"
+		}
+	})
+
+	window.addEventListener("keyup", e => {
+		if(modal.style.display === "flex" && e.key === "Escape") {
+			modal.style.display = "none"
+		}
+	})
+</script>

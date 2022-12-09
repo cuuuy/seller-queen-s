@@ -5,11 +5,14 @@
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/market_style.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 </head>
-<body>
+<body class="join_body">
 	<div class="container">
 		<div class="header"></div>
 		<div class="join">
@@ -40,7 +43,7 @@
 				</li>
 			</ul>
 			<div class="join_page">
-				<a href="join_page04.html" id="join_page_prev">
+				<a href="join_page01.html" id="join_page_prev">
 					<img src="../image/join_arrow_prev.png" alt="">
 				</a>
 				<div class="join_page_05">
@@ -57,7 +60,7 @@
 							<a class="pay_click" href="javascript:void(0)">무통장 입금</a>
 							<a class="pay_click" href="javascript:void(0)">일반 간편카드</a>
 						</div>
-						<a href="javascript:void(0)" class="ok_btn payment" onclick="join_pay();">셀러 결제하기</a>
+						<a href="javascript:void(0)" class="ok_btn payment" onclick="join_pay();"><span class="user_type"></span> 결제하기</a>
 					</div>
 				</div>
 				<a href="" id="join_page_next">
@@ -67,10 +70,54 @@
 		</div>
 		<div class="footer"></div>
 	</div>
+    <div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href="./join_page02.html"><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>결제</h2>
+		    </header>
+        </div>
+		<div class="join">
+			<div class="join_page">
+				<div class="join_page_05">
+					<div class="join_page_05_ok join_page_05_pay">
+						<h5>선택 상품 : <span class="user_type"></span><span class="seller_type"></span></h5>
+						<p>
+							총 상품금액
+							<span class="user_price"></span>
+						</p>
+						<h5>결제방법</h5>
+						<div class="join_page_05_pay_btn">
+							<a class="pay_click active" href="javascript:void(0)">계좌 간편결제</a>
+							<a class="pay_click" href="javascript:void(0)">카드</a>
+							<a class="pay_click" href="javascript:void(0)">무통장 입금</a>
+							<a class="pay_click" href="javascript:void(0)">일반 간편카드</a>
+						</div>
+						<a href="javascript:void(0)" class="ok_btn payment" onclick="join_pay();"><span class="user_type"></span> 결제하기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
 </body>
 
 
 <script>
+    function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".marketContainer").show();
+        $(".container").remove();
+    } else {// 모바일 외
+        $(".marketContainer").remove();
+        $(".container").show();
+        $('.header').load('head.html');
+		$('.footer').load('footer.html');
+    }
     var queryString = window.location.search;
 	var urlParams = new URLSearchParams(queryString);
 	var user_type = urlParams.get('user_type');
@@ -101,9 +148,15 @@
         seller_price = '1,990,000원';
     }
 
+    if(user_type=="wholesaler"){
+        seller_price = '0원';
+    }
+
+    if(user_type=="teacher"){
+        seller_price = '0원';
+    }
+
 	$(document).ready(function() {
-		$('.header').load('head.html');
-		$('.footer').load('footer.html');
 		
 		//클릭이벤트
 		$('.join_page_02 > a').click(function(){
@@ -152,9 +205,9 @@
                 if(user_type=="seller"){
                     location.href = "./join_page07.html?user_type="+user_type+"&seller_type="+seller_type;
                 }else if(user_type=="wholesaler"){
-                    location.href = "href", "./join_page08.html?user_type="+user_type+"&seller_type="+seller_type;
+                    location.href = "./join_page08.html?user_type="+user_type+"&seller_type="+seller_type;
                 }else if(user_type=="teacher"){
-                    location.href = "href", "./join_page09.html?user_type="+user_type+"&seller_type="+seller_type;
+                    location.href = "./join_page09.html?user_type="+user_type+"&seller_type="+seller_type;
                 }
             }else{
                 alert("에러. 관리자에게 문의하세요.");
