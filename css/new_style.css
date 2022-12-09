@@ -905,7 +905,7 @@ border-radius: 5px;box-sizing: border-box;}
         padding: 0;
         font-size: 30px;
         text-align: center;
-        font-weight: 600;
+        font-weight: 500;
         height: 124px;
         line-height: 124px;
         cursor: pointer;
@@ -918,7 +918,7 @@ border-radius: 5px;box-sizing: border-box;}
 
     .header_gnb {
         margin: 0 10px;
-        height: 270px;
+        height: 180px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -930,17 +930,20 @@ border-radius: 5px;box-sizing: border-box;}
 
     .mainSlede_text a {
         display: block;
-        margin: 200px 0 0 400px;
-        width: 421px;
-        height: 111px;
-        line-height: 111px;
+        margin: 270px 0 0 470px;
+        width: 280px;
+        height: 80px;
+        line-height: 80px;
         background: #fff;
         box-shadow: 3px 3px 6px #0000001a;
         border-radius: 60px;
         color: #5A3E86;
-        font-size: 52px;
+        font-size: 32px;
         font-weight: 500;
         text-align: center;
+    }
+    .body_mainSlide ul li {
+        height: 500px;
     }
     .header_gnb_logo {
         width: 40px;
@@ -971,7 +974,7 @@ border-radius: 5px;box-sizing: border-box;}
         height: 75px;
     }
     .header_messageLine_message {
-        font-size: 35px;
+        font-size: 28px;
         font-weight: 300;
     }
 
@@ -982,7 +985,7 @@ border-radius: 5px;box-sizing: border-box;}
         text-align: left !important;
         position: absolute;
         width: 600px;
-        height: 768px;
+        height: 882px;
         z-index: 1;
         background-color: white;
         padding: 75px 56px;
@@ -990,22 +993,25 @@ border-radius: 5px;box-sizing: border-box;}
     }
     .header_gnb_loginSection_modal_content > h5 {
         text-align: left;
-        font-size: 30px;
-        line-height: 47px;
+        font-size: 26px;
+        line-height: 60px;
         color: #4E327B;
+        margin-bottom: 43px;
     }
     .modal_content_btn a {
         width: 100%;
         height: 50px;
         line-height: 50px;
-        font-size: 30px;
+        font-size: 29px;
+        font-weight: 400;
     }
     .header_gnb_loginSection_modal_content_list div {
-        margin: 0 0 50px 0;
+        margin: 0 0 100px 0;
     }
     .header_gnb_loginSection_modal_content_list div h5 {
         border-top: 5px solid #333;
         font-size: 30px;
+        font-weight: 600;
     }
     .header_gnb_loginSection_modal_content_list div p {
         font-size: 28px;
@@ -1019,23 +1025,26 @@ border-radius: 5px;box-sizing: border-box;}
     }
 
     .contact .contact_intro .contact_intro_in p {
-        font-size: 16px;
+        font-size: 18px;
         line-height: 37px;
         font-weight: 500;
+        position: relative;
+        bottom: 54px;
+        left: 116px;
     }
 
     .contact_in .contact_in_wrap table th {
         width: 138px;
         line-height: 59px;
         padding: 0 0 49px;
-        font-size: 40px;
+        font-size: 30px;
         color: #000;
         font-weight: 500;
         text-align: left;
         vertical-align: top;
     }
     .contact_in .contact_in_wrap {
-        padding: 101px 100px;
+        padding: 30px 30px;
     }
     .contact_in .contact_in_wrap table td input {
         font-family: inherit;
@@ -1044,12 +1053,13 @@ border-radius: 5px;box-sizing: border-box;}
         border-bottom: 1px solid #CBCBCB;
         padding: 0 0 8.5px;
         background: none;
-        font-size: 17px;
+        font-size: 24px;
         line-height: 30px;
         font-weight: 500;
         margin-bottom: 10px;
         background-color: white;
         height: 60px;
+        padding-left: 17px;
     }
     .contact_in .contact_in_wrap table td textarea {
         background-color: white;
@@ -1188,6 +1198,7 @@ border-radius: 5px;box-sizing: border-box;}
     .body_section {
         width: 100%;
         margin: 0 auto;
+        height: 108px;
     }
     .menus_2depth {
         width: 100% !important;
@@ -1212,10 +1223,93 @@ border-radius: 5px;box-sizing: border-box;}
     .contact_in {
         width: 100%;
         margin: 0 auto;
+        padding: 50px;
     }
     .contact .contact_intro .contact_intro_in {
         width: 100%;
         margin: 0 auto;
+        padding: 30px 30px 0 92px;
+    }
+    .body_infoModify_in {
+        width: 100%;
+        padding: 128px 10px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    .header_gnb_loginSection_modal_content_list {margin-top: 35px;}
+    .modal_content_btn a {
+        border-radius: 20px;
+        margin-bottom: 12px;
+    }
+    .contact_in h2 {
+        margin: 0 0 39px 0;
+        font-weight: 600;
+        font-size: 30px;
+    }
+    .subvisual2 {
+        height: 238px !important;
+    }
+    .fam_in .fam_in_list li a.fam_in_list_btn {
+        display: block;
+        width: 100%;
+        height: 51px;
+        line-height: 51px;
+        background: #5A3E86;
+        border-radius: 20px;
+        text-align: center;
+        color: #fff;
+        margin-top: 39px;
+        font-size: 22px;
+        font-weight: 500;
+    }
+    .board_table {
+        padding: 50px;
+    }
+    .board_view {
+        padding: 50px;
+    }
+    .fam_in {
+        padding: 50px;
+    }
+
+    .fam_in .fam_in_list li .fam_in_list_top div {
+        float: left;
+        width: calc( 100% - 104px );
+        padding: 10px 0 0 18px;
+        box-sizing: border-box;
+    }
+
+    .contact .contact_intro {
+        margin: 0;
+        padding: 28px 0 0 0;
+    }
+
+    .contact_intro_in > h2 {font-size: 23px;}
+
+    .header {border: 1px solid white;}
+
+    .contact_in .contact_in_wrap table td select {
+        background-color: white;
+        color: #CBCBCB;
+        padding: 5px;
+    }
+
+    .adminContent_tab_ready {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 63px;
+        position: relative;
+        height: 161px !important;
+    }
+
+    .adminContent_search_ready {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 149px !important;
+        position: relative;
     }
 }
 

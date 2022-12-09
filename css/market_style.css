@@ -384,7 +384,7 @@
 .marketReview_top:after {content:"";display:block;clear:both;}
 .marketReview_top {padding:0 0 16px 0; border-bottom:1px solid #bababa;}
 .marketReview_top > div {float:left;display:inline-block;width:150px;}
-.marketReview_top_write {float:right;display:inline-block;text-align:right;color:##707070;}
+.marketReview_top_write {float:right;display:inline-block;text-align:right;color:#707070;}
 
 .marketReview_list li {padding:16px 0;border-bottom:1px solid #BABABA;}
 .marketReview_list li:after {content:"";display:block;clear:both;}

@@ -375,7 +375,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 	/* title */
 	.adminWrap_title a {display:none;}
-	.adminWrap_title {border:none;margin:0;background:#EAE6F2;padding:20px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
+	.adminWrap_title {border:none;margin:0;background:#EDEBF4;padding:20px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
 	.adminWrap_title h3 {border-left:5px solid #4E327B;font-size:16px;text-align:left;}
 
 	.adminWrap_title2 a {display:none;}
@@ -554,7 +554,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         padding: 0 0 0 0 !important;
     }
     .adminWrap_topmenu ul li {
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .adminModal_ok {
@@ -564,7 +564,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         margin: 0px !important;
     }
     .m_btn {
-        width: 71px !important;
+        width: 60px !important;
     }
 
     .adminContent_table_div {
@@ -576,11 +576,19 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_search {
         margin: 0;
         padding: 0 15px 20px 15px;
-        background: white !important;
+        background: #EAE6F2 !important;
         margin-bottom: 10px;
+        bottom: 364px;
+        position: relative;
     }
     .adminContent_search input {
-        width: 50%;
+        width: 77% !important;
+        padding: 0;
+        border-radius: 5px;
+    }
+    .adminContent_search_short input {
+        width: 50% !important;
+        padding: 0;
     }
     .adminModal_cont {
         width: 100%;
@@ -589,5 +597,346 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     }
     .adminModal_cont_btn {
         margin: 60px 0 60px 0 !important;
+    }
+    a.check_btn {
+        float: right;
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 5px;
+        background: #4E327B;
+        text-align: center;
+        color: #fff;
+        margin: 2px 8px 2px 2px;
+        font-size: 14px;
+        font-weight: 200;
+    }
+
+    .adminContent_order a {
+        float: right;
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 5px;
+        background: #4E327B;
+        text-align: center;
+        color: #fff;
+        margin: 2px 8px 2px 2px;
+        font-size: 12px;
+        font-weight: 300;
+    }
+    .adminContent_date_middle {
+        display: none;
+    }
+    .adminContent_tab ul li {
+        width: calc(( 100% - 24px ) /3);
+        float: left;
+        background: #fff;
+        height: 102px !important;
+        border-radius: 8px;
+        display: flex;
+        line-height: 24px;
+        font-weight: 400;
+    }
+    .adminContent_tab ul li a span {
+        font-weight: 400;
+        font-size: 19px;
+        bottom: 53px;
+        position: relative;
+    }
+
+    .adminContent_date {
+        /*position: relative;
+        bottom: 11px !important;*/
+        width: 100%;
+        float: left;
+        bottom: 320px;
+        position: relative;
+        padding-left: 16px;
+    }
+    .adminContent_search_long input {
+        background: white;
+        background-position: left 10px center;
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .adminContent_tab {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 56px;
+        position: relative;
+        height: 364px;
+    }
+
+    .adminContent_search2 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 189px;
+        position: relative;
+    }
+
+    .adminContent_tab2 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 56px;
+        position: relative;
+        height: 189px;
+    }
+
+    .adminContent_tab ul li a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 24px 0;
+        top: 25px;
+        position: relative;
+    }
+
+    .adminContent_date select {
+        width: 31%;
+        background: #fff;
+    }
+    .adminWrap_title h3 {
+        border-left: 8px solid #4E327B;
+        font-size: 16px;
+        text-align: left;
+    }
+    .adminContent_tab ul li.active a {
+        border: none;
+        font-size: 12px;
+    }
+
+    .adminContent_search_m{
+        bottom: 100px;
+        height: 55px;
+        background-color: transparent !important;
+    }
+
+    .adminContent_date3{
+        bottom: 339px;
+    }
+
+    .adminContent_date4{
+        bottom: 386px;
+    }
+
+    .adminContent_tab3 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 130px;
+        position: relative;
+        height: 310px;
+    }
+
+    .adminContent_tab4 {
+        height: 367px;
+        top: 151px;
+    }
+
+    .adminContent_date5 {
+        width: 100%;
+        float: left;
+        bottom: 390px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .adminContent_tab5 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 135px;
+        position: relative;
+        height: 365px;
+    }
+
+    .adminContent_search6 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 310px;
+        position: relative;
+    }
+    .search_profit{width: 77% !important;}
+
+    .adminContent_date6 {
+        width: 100%;
+        float: left;
+        bottom: 325px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .adminContent_tab6 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 126px;
+        position: relative;
+        height: 297px;
+    }
+
+    .adminContent_search6 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 298px;
+        position: relative;
+    }
+
+    .adminContent_tab6 ul li {
+        width: calc(( 100% - 24px ) /3);
+        float: left;
+        background: #fff;
+        height: 102px !important;
+        border-radius: 8px;
+        display: flex;
+        line-height: 0px;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .adminContent_date_hidden {display: none;}
+
+    .totalAmountBottom {
+        float: left !important;
+        font-size: 14px !important;
+        line-height: 128px !important;
+        font-weight: 500 !important;
+        margin-top: 0px !important; 
+        margin-right: 0px !important;
+    }
+
+    .adminContent_tab7 ul li {
+        width: calc(( 100% - 24px ) /3);
+        float: left;
+        background: #fff;
+        height: 102px !important;
+        border-radius: 8px;
+        display: flex;
+        line-height: 0px;
+        font-weight: 400;
+        font-size: 12px;
+    }
+
+    .adminContent_tab7 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 126px;
+        position: relative;
+        height: 328px;
+    }
+
+    .adminContent_search7 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 328px;
+        position: relative;
+    }
+
+    .adminContent_date7 {
+        width: 100%;
+        float: left;
+        bottom: 339px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .bottom_btn {
+        position: relative;
+        bottom: 25px;
+        height: 0px; 
+        top: -109px;
+        background: transparent;
+    }
+
+    .adminContent_search8 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 380px;
+        position: relative;
+    }
+
+    .adminContent_date8 {
+        width: 100%;
+        float: left;
+        bottom: 399px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .bottom_btn2 {
+        position: relative;
+        bottom: 25px;
+        height: 0px;
+        top: -147px;
+        background: transparent;
+    }
+
+    .adminContent_date9 {
+        width: 100%;
+        float: left;
+        bottom: 249px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .adminContent_tab9 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 92px;
+        position: relative;
+        height: 182px;
+    }
+
+    .adminContent_tab10 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 0px;
+        position: relative;
+        height: 177px;
+    }
+
+    .adminContent_graph {
+        padding: 24px;
+    }
+    .adminContent_date11 {
+        width: 100%;
+        float: left;
+        bottom: 240px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .adminContent_tab11 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 95px;
+        position: relative;
+        height: 177px;
+    }
+
+    .adminContent_search66 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 311px;
+        position: relative;
     }
 }

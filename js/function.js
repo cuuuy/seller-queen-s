@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	
+    $(".admin_m_header").children("div:last-child").css("display","none");
     $(".adminContent_table").parent().addClass("adminContent_table_div");
     
 	var js_now_date = new Date();

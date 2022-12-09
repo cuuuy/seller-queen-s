@@ -60,7 +60,7 @@
 					<h3>프로핏</h3>
 				</div> 
 					<div class="adminContent_right">
-						<div class="adminContent_tab">
+						<div class="adminContent_tab adminContent_tab6">
 							<ul>
 								<li><a href="./admin_admin_profit_01.html">회원 리스트</a></li>
 								<li><a href="./admin_admin_profit_02.html">출금신청 리스트</a></li>
@@ -71,12 +71,12 @@
 								<li><a href="./admin_admin_profit_07.html">광고수수료 출금 현황</a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search">
-							<input type="search" name="search_profit" placeholder="상품을 검색하세요." onkeyup="enterkey()">
+						<div class="adminContent_search adminContent_search6">
+							<input type="search" name="search_profit" class="search_profit" placeholder="상품을 검색하세요." onkeyup="enterkey()">
 							<!-- <a href="javascript:void(0)" class="check_btn" onclick="modal_popup();">출금하기</a> -->
 							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
-						<div class="adminContent_date">
+						<div class="adminContent_date adminContent_date6">
 							<select name="search_year1">
 							</select>
 							<select  name="search_month1">
@@ -87,7 +87,7 @@
 						<div class="adminContent_date_middle">
 							<b>────</b>
 						</div>
-						<div class="adminContent_date">
+						<div class="adminContent_date adminContent_date6">
 							<select name="search_year2">
 							</select>
 							<select  name="search_month2">
@@ -96,7 +96,7 @@
 							</select>
 						</div>
 
-						<div class="adminContent_date">
+						<div class="adminContent_date adminContent_date_hidden">
 							<select>
 								<option>정산상태</option>
 							</select>
@@ -137,7 +137,7 @@
 							</table>
                                 
                                 <a href="javascript:void(0)" class="check_btn withdraw_btn" style="margin-top: 50px;" onclick="profit_withdraw();">출금하기</a>
-                                <span style="float: right;margin-top:50px; margin-right: 50px;font-size: 16px;line-height: 30px;font-weight: 500;">누적프로핏 (수수료 + 부가세) : <span class="profit_total"></span></span>
+                                <span class="totalAmountBottom" style="float: right;margin-top:50px; margin-right: 50px;font-size: 16px;line-height: 30px;font-weight: 500;">누적프로핏 (수수료 + 부가세) : <span class="profit_total"></span></span>
 						</div>
 						<div class="adminContent_pager" id="paging">
 							

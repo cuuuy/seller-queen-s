@@ -16,6 +16,7 @@
 	<script src="../js/admin.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"/>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="../js/function.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -73,7 +74,7 @@
 								<li class="active"><a href="">사용자 목록</a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search ">
+						<div class="adminContent_search adminContent_search_short">
 							<a href="javascript:void(0)" class="check_btn search_btn">사용자 추가</a>
 							<input type="search" name="search_product" placeholder="사용자 이름/ 아이디/ 가입 마켓을 검색해주세요." onkeyup="enterkey()">
 							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
@@ -130,7 +131,7 @@
 	<div id="modal" class="adminModal modal-overlay" style="display:none;">
 		<div class="adminModal_ok adminModal_invoice" style="width:1000px;">
 			<h3 style="font-size:30px;font-weight: 500;">회원 수정</h3>
-			<div style="margin: 0 100px 0 100px;">
+			<div class="modi_domae_mem" style="margin: 0 100px 0 100px;">
 				<div>
 					<div href="javascript:void(0)" id="seller_j_btn" class="seller_selection_btn" data-type="J" style="width: 110px;float:left;height: 45px;line-height: 45px;border-radius: unset;">셀러 J</div>
 					<div href="javascript:void(0)" id="seller_i_btn" class="seller_selection_btn" data-type="I" style="width: 110px;float:right;height: 45px;line-height: 45px;border-radius: unset;">셀러 I</div>
@@ -162,8 +163,8 @@
 					<h5 style="text-align:left;font-size: 20px;font-weight: 400;margin: 35px 0 0 0;">주소</h5>
 					
 					<div class="adminModal_ok_btn" style="margin: 10px 0 0 0;">
-						<input type="text" id="user_modi_addr" name="user_modi_addr" placeholder="" style="margin-bottom:5px;width:75%;float:left;text-align:left;">
-						<a href="javascript:void(0)" id="" class="ok_btn" onclick="findAddr()" style="width: 100px;float:right;height: 40px;line-height: 40px;font-size: 15px;font-weight: 100;border-radius: 5px;">주소검색</a>
+						<input type="text" id="user_modi_addr" name="user_modi_addr" placeholder="" style="margin-bottom:5px;width:70%;float:left;text-align:left;">
+						<a href="javascript:void(0)" id="" class="ok_btn m_btn" onclick="findAddr()" style="width: 100px;float:right;height: 40px;line-height: 40px;font-size: 15px;font-weight: 100;border-radius: 5px;">주소검색</a>
 					</div>
 					<input type="text" name="user_modi_addr2" placeholder="" style="text-align:left;">
 				</div>

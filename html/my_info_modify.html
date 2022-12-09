@@ -5,12 +5,15 @@
 	<link rel="stylesheet" type="text/css" href="../css/defalut.css">
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../css/new_style.css">
+	<link rel="stylesheet" type="text/css" href="../css/market_style.css">
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
 </head>
-<body>
+<body class="login_body">
 	<div class="container">
 		<div class="header">
 			
@@ -88,13 +91,117 @@
 		<div class="footer">
 			
 		</div>
+	</div>
+	<div class="marketContainer">
+		<div class="header">
+			<header class="marketHeader marketMemberHeader">
+			<div>
+				<a href="./main.html"><img src="../image/market_back.png" alt=""></a>
+			</div>
+			<h2>나의 정보 관리</h2>
+		    </header>
+        </div>
+		<div class="body">
+			<div class="body_infoModify ">
+				<div class="body_infoModify_in">
+					<h5>나의 정보 관리</h5>
+						<table class="join_form">
+							<colgroup>
+								<col width="21%">
+								<col width="*">
+								<col width="16.3%">
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>이름</th>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input type="text" name="name" placeholder="이름을 입력해주세요.">
+									</td>
+								</tr>
+								<tr>
+									<th>이메일</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" name="email" placeholder="이메일 주소를 입력해주세요.">
+									</td>
+									<td><a href="javascript:void(0)" onclick="emil_check()">중복확인</a></td>
+								</tr>
+								<tr>
+									<th>비밀번호</th>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input type="password" name="pw" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요.">
+									</td>
+								</tr>
+								<tr>
+									<th>비밀번호 확인</th>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input type="password" name="pw2" placeholder="비밀번호를 한 번 더 입력해주세요.">
+									</td>
+								</tr>
+								<tr>
+									<th>주소</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" id="addr" name="addr" placeholder="주소를 입력해주세요.">
+									</td>
+									<td><a href="javascript:void(0)" onclick="findAddr()">주소검색</a></td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<input type="text" name="addr2" placeholder="상세주소를 입력해주세요.">
+									</td>
+								</tr>
+								<tr>
+									<th>연락처</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" name="phone_nation" placeholder="+82(한국)" class="">
+										<input type="text" name="phone" placeholder="전화번호를 입력해주세요." class="">
+									</td>
+                                    <td><a href="javascript:alert('인증번호가 전송되었습니다.')" onclick="">인증번호 전송</a></td>
+								</tr>
+							</tbody>
+						</table>
+						<input type="hidden" name="birth_time">
+						<input type="hidden" name="nickname">
+						<input type="hidden" name="user_type">
+						<a href="javascript:void(0)" class="ok_btn" onclick="modify_submit();">변경 정보 저장</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			
+		</div>
+	</div>
 </body>
 </html>
 
 <script>
-	$(document).ready(function(){
-		$('.header').load('head.html');
+	function Mobile(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".marketContainer").show();
+        $(".container").remove();
+    } else {// 모바일 외
+        $(".marketContainer").remove();
+        $(".container").show();
+        $('.header').load('head.html');
 		$('.footer').load('footer.html');
+    }
+
+	$(document).ready(function(){
 	});
 	
 	var now_date = new Date();
