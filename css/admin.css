@@ -364,7 +364,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminWrap_title p {display:none;}
 	.adminContent {width:100%;margin:0;}
 	/* header */
-	.admin_m_header {display:block;position:static;align-items: center; justify-content: space-between;box-sizing:border-box;padding:15px;height:auto;cursor:pointer;}
+	.admin_m_header {display:block;position:static;align-items: center; justify-content: space-between;box-sizing:border-box;padding:15px;height: 46px;cursor:pointer;}
 	.admin_m_header:after {content:"";display:block;clear:both;}
 	.admin_m_header > div {float:left;}
 	.admin_m_header .ham {margin:0 10px 0 0;}
@@ -375,7 +375,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 	/* title */
 	.adminWrap_title a {display:none;}
-	.adminWrap_title {border:none;margin:0;background:#EDEBF4;padding:20px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
+	.adminWrap_title {border:none;margin:0;background:#EDEBF4;padding:10px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
 	.adminWrap_title h3 {border-left:5px solid #4E327B;font-size:16px;text-align:left;}
 
 	.adminWrap_title2 a {display:none;}
@@ -406,7 +406,16 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminContent_table td {font-size:14px;padding:5px;word-break:keep-all;line-height:20px;}
 	.adminContent_table th {font-size:14px;word-break:keep-all;line-height:20px;}
 
-	.adminWrap_title_category {float:right;display:inline-block;font-size:14px;font-weight:500;color:#4E327B;border-bottom:2px solid #4E327B;padding: 0 5px;cursor:pointer;}
+	.adminWrap_title_category {
+        float: right;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 300;
+        color: #4E327B;
+        border-bottom: 1px solid #4E327B;
+        padding: 0 5px;
+        cursor: pointer;
+    }
 	.adminContent_leftmenu {float:none;position:absolute;top:0;left:0;z-index:999;}
 	.adminModal_cont {width:90%;}
 	.admUserList .adminContent_tab{display:none;}
@@ -578,13 +587,14 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         padding: 0 15px 20px 15px;
         background: #EAE6F2 !important;
         margin-bottom: 10px;
-        bottom: 364px;
+        bottom: 260px;
         position: relative;
     }
     .adminContent_search input {
         width: 77% !important;
         padding: 0;
         border-radius: 5px;
+        padding-left: 7px;
     }
     .adminContent_search_short input {
         width: 50% !important;
@@ -640,8 +650,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     }
     .adminContent_tab ul li a span {
         font-weight: 400;
-        font-size: 19px;
-        bottom: 53px;
+        font-size: 16px;
+        bottom: 60px;
         position: relative;
     }
 
@@ -674,7 +684,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         padding: 0 15px 20px 15px;
         background: #EDEBF4 !important;
         margin-bottom: 10px;
-        bottom: 189px;
+        bottom: 139px;
         position: relative;
     }
 
@@ -682,9 +692,9 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         margin: 0;
         padding: 20px 15px;
         background: #EDEBF4;
-        top: 56px;
+        top: 36px;
         position: relative;
-        height: 189px;
+        height: 139px;
     }
 
     .adminContent_tab ul li a {
@@ -692,7 +702,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         width: 100%;
         height: 100%;
         padding: 24px 0;
-        top: 25px;
+        top: 40px;
         position: relative;
     }
 
@@ -741,7 +751,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_date5 {
         width: 100%;
         float: left;
-        bottom: 390px;
+        bottom: 286px;
         position: relative;
         padding-left: 16px;
     }
@@ -752,7 +762,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         background: #EDEBF4;
         top: 135px;
         position: relative;
-        height: 365px;
+        height: 260px;
     }
 
     .adminContent_search6 {
@@ -768,7 +778,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_date6 {
         width: 100%;
         float: left;
-        bottom: 325px;
+        bottom: 283px;
         position: relative;
         padding-left: 16px;
     }
@@ -779,7 +789,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         background: #EDEBF4;
         top: 126px;
         position: relative;
-        height: 297px;
+        height: 255px;
     }
 
     .adminContent_search6 {
@@ -787,7 +797,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         padding: 0 15px 20px 15px;
         background: #EDEBF4 !important;
         margin-bottom: 10px;
-        bottom: 298px;
+        bottom: 255px;
         position: relative;
     }
 
@@ -908,7 +918,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         background: #EDEBF4;
         top: 0px;
         position: relative;
-        height: 177px;
+        height: 140px;
     }
 
     .adminContent_graph {
@@ -938,5 +948,119 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         margin-bottom: 10px;
         bottom: 311px;
         position: relative;
+    }
+
+    .adminContent_tab ul li a {
+        border: none;
+        font-size: 12px;
+    }
+
+    .header_gnb_logo > img {width: 16px !important;
+        margin-left: 11px;
+        top: -2px;
+        position: relative;
+    }
+
+    .adminContent_tab_ready ul li a span {
+        font-weight: 400;
+        font-size: 19px;
+        bottom: 30px;
+        position: relative;
+        right: 22px;
+    }
+    .adminModal_order {
+        width: 50% !important;
+    }
+
+    .admin_m_header div:last-child {
+        float: right;
+        width: 150px;
+        font-size: 16px;
+        text-align: center;
+        background: none;
+        padding-left: 70px;
+    }
+
+    .admin_m_header div:last-child span {
+        color: #603A8A;
+    }
+
+    .adminContent_search input::placeholder {
+        font-size: 14px;
+    }
+
+    .adminContent_search11 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 364px;
+        position: relative;
+    }
+    .adminContent_tab11 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 37px;
+        position: relative;
+        height: 364px;
+    }
+
+    .adminContent_tab12 {
+        height: 144px;
+        top: 55px;
+    }
+    .adminContent_search12 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 144px;
+        position: relative;
+    }
+
+    .adminContent_search13 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 0px;
+        position: relative;
+    }
+
+    .adminContent_search14 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 140px;
+        position: relative;
+    }
+
+    .adminContent_tab14 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 38px;
+        position: relative;
+        height: 140px;
+    }
+
+    .middle_line_m {display: none;}
+
+    .adminContent_tab15 {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 90px;
+        position: relative;
+        height: 140px;
+    }
+    .adminContent_date15{
+        width: 100%;
+        float: left;
+        bottom: 200px;
+        position: relative;
+        padding-left: 16px;
     }
 }

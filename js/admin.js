@@ -6,11 +6,16 @@ $(function(){
 			$('.adminContent_table').parent('div').css({'overflow-x':'scroll','min-height':'320px','padding':'0 20px','margin-top':'20px'});
 
 			//leftmenu
-			$('.ham').click(function(){
-				$('.rightmenu').animate({
-						'left': '0'
-					}, 300);
-			});
+			// $('.ham').click(function(){
+			// 	$('.rightmenu').animate({
+			// 			'left': '0'
+			// 		}, 300);
+            //     $(this).addClass("rightmenu_on");
+			// });
+
+            // $('.rightmenu_on').click(function(){
+			// 	alert();
+			// });
 
 			//카테고리관리
 			$('.adminWrap_title_category').click(function(){
@@ -24,10 +29,31 @@ $(function(){
 				$('.adminContent_tab li a').css('padding','32px 0');
 			}
 
-			$('.header_gnb_logo').hide();
+			//$('.header_gnb_logo').hide();
+            $('.header_gnb_logo').children().attr("src","../image/market_m_logo2.png");
 
 
 		}
-
+        
 
 });
+
+$(document).ready(function(){
+    $(".ham").click(function(){
+        //alert('2')    
+    })
+});
+
+$(document).on("click",".ham", function(){
+    $('.rightmenu').animate({
+        'left': '0'
+    }, 300);
+    $('.ham').addClass("rightmenu_on");
+})
+
+$(document).on("click",".rightmenu_on", function(){
+    $('.rightmenu').animate({
+        'left': '-280'
+    }, 300);
+    $('.ham').removeClass("rightmenu_on");
+})
