@@ -1362,6 +1362,28 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     #end_date {
         margin: 0 0px 0 0;
     }
+    .option_div p input {
+        width: 90px;
+        margin: 5px 5px 5px 5px;
+        padding: 6px;
+        background: #EAE6F2;
+        text-align: center;
+        font-size: 12px;
+    }
+    .option_div a {width: 100px;}
+
+    .adminModal_cont_btn a {
+        font-size: 15px;
+        font-weight: 400;
+        height: 38px;
+        line-height: 38px;
+    }
+    .option_div {
+        margin: 0;
+        padding: 0;
+        width: 30%;
+    }
+    .adminContent b {padding: 30px;}
 }
 
 .seller_btn_m_view {display: none;}
