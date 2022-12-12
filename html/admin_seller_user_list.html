@@ -67,12 +67,12 @@
 					<h3>일반회원관리</h3>
 				</div> 
 					<div class="adminContent" style="height:auto;">
-						<div class="adminContent_tab">
+						<div class="adminContent_tab adminContent_tab2">
 							<ul>
-								<li class="active"><a href="">사용자 목록</a></li>
+								<li class="active"><a href="" class="title_middle_m">사용자 목록</a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search adminContent_search_long">
+						<div class="adminContent_search adminContent_search2 adminContent_search_long">
 							<input type="search" name="search_product" placeholder="사용자 이름/ 아이디/ 가입 마켓을 검색해주세요." onkeyup="enterkey()">
 							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
 						</div>
@@ -125,7 +125,7 @@
 	<div id="modal" class="adminModal modal-overlay" style="display:none;">
 		<div class="adminModal_ok adminModal_invoice" style="width:1000px;">
 			<h3 style="font-size:30px;">회원 수정</h3>
-			<div style="margin: 0 100px 0 100px;">
+			<div class="modi_domae_mem" style="margin: 0 100px 0 100px;">
 				<div>
 					<h5 style="text-align:left;">이름</h5>
 					<input type="text" name="user_modi_name" placeholder="" style="text-align:left;">
@@ -140,11 +140,11 @@
 				</div>
 				<div>
 					<h5 style="text-align:left;">생년월일</h5>
-					<select name="user_modi_year" style="float:left; width:20%;">
+					<select class="user_modal_date_m" name="user_modi_year" style="float:left; width:20%;">
 					</select>
-					<select name="user_modi_month" style="float:left; width:20%;">
+					<select class="user_modal_date_m" name="user_modi_month" style="float:left; width:20%;">
 					</select>
-					<select name="user_modi_day" style="float:left; width:20%;">
+					<select class="user_modal_date_m" name="user_modi_day" style="float:left; width:20%;">
 					</select>
 				</div>
 				<br>

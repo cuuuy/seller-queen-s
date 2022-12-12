@@ -138,6 +138,66 @@
 					</div>
 				</div>
 			</div>
+            <div class="adminModal_m" id="modalBanner" style="display:none;">
+				<div class="adminModal_cont">
+					<h3>배너 추가</h3>
+					<div>
+						<table class="modalBanner_table">
+							<colgroup>
+								<col width="15%">
+								<col width="*">
+							</colgroup>
+							<tbody>
+                                <tr>
+									<th>
+										제목
+									</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="text" name="banner_title" placeholder="제목을 입력해주세요">
+									</td>
+								</tr>
+								<tr>
+									<th>
+										노출기간
+									</th>
+								</tr>
+                                <tr>
+									<td class="2">
+										<div id="start_date">
+											<h5 style="text-align:left;">배너 업로드 시작</h5>
+											<input type="text" id="new_start_date" name="start_date" style="display:none;">
+										</div>
+									</td>
+								</tr>
+                                <tr>
+									<td class="2">
+										<div id="end_date" style="margin: 0 0px 0 0;">
+											<h5 style="text-align:left;">배너 업로드 종료</h5>
+											<input type="text" id="new_end_date" name="end_date" style="display:none;">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										이미지
+									</th>
+								</tr>
+                                <tr>
+									<td colspan="2">
+										<input type="file" name="main_img" id="main_img">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="adminModal_cont_btn">
+						<a href="" class="back_btn modalClose">취소</a>
+						<a href="javascript:void(0)" class="ok_btn modi_btn" onclick="add_banner()">저장</a>
+					</div>
+				</div>
+			</div>
 		</form>
 	</div>
 </body>
@@ -145,6 +205,16 @@
 </html>
 
 <script>
+    function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".adminModal_m").hide();
+        $(".adminModal").remove();
+    } else {// 모바일 외
+        $(".adminModal_m").remove();
+        $(".adminModal").hide();
+    }
 
 	var now_date = Date.now();
 	var enroll_time = now_date/1000;

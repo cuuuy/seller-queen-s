@@ -72,7 +72,7 @@ input::placeholder {
 
 .adminContent_search2 {margin:24px 0 36px;}
 .adminContent_search2:after {content:"";display:block;clear:both;}
-.adminContent_search2 input {float:left;padding:0 16px;width:calc( 100% - 280px );height:32px;line-height:32px;background:url('../image/market_serch.png') no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
+.adminContent_search2 input {float:left;padding:0 16px;width:calc( 100% - 280px );height:41px;line-height:41px;background:url('../image/market_serch.png') no-repeat #EAE6F2;background-position:left 10px center;box-sizing:border-box;}
 
 
 .adminContent_search input::placeholder {color:#D5CCE3; padding-left:25px;}
@@ -139,7 +139,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 
 /* modal */
-.adminModal {position:absolute;width:100%;min-height:100vh;height:100%;top:0;left:0;background:rgba(0,0,0,0.4);z-index:9999;overflow:hidden;}
+.adminModal {position:absolute;width:100%;min-height:900px;height:100%;top:0;left:0;background:rgba(0,0,0,0.4);z-index:9999;overflow:hidden;overflow-y: scroll;}
 .adminModal_cont {position:absolute;width:1000px;padding:46px 36px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
 .adminModal_cont > div {margin:0 0 40px 0;}
 .adminModal_cont h3 {color:#4E327B;text-align:center;margin:0 0 20px 0;font-size:24px;}
@@ -364,22 +364,30 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminWrap_title p {display:none;}
 	.adminContent {width:100%;margin:0;}
 	/* header */
-	.admin_m_header {display:block;position:static;align-items: center; justify-content: space-between;box-sizing:border-box;padding:15px;height: 46px;cursor:pointer;}
+	.admin_m_header {display:block;position:static;align-items: center; justify-content: space-between;box-sizing:border-box;padding:15px;height: 45px;cursor:pointer;}
 	.admin_m_header:after {content:"";display:block;clear:both;}
 	.admin_m_header > div {float:left;}
 	.admin_m_header .ham {margin:0 10px 0 0;}
 	.admin_m_header > a {float:left;}
-	.admin_m_header div:first-child span {width:24px;height:3px;display:block;background:#4E327B;margin:0 0 5px 0;}
+	.admin_m_header div:first-child span {
+        width: 14px;
+        height: 2px;
+        display: block;
+        background: #4E327B;
+        margin: 0 0 3px 0;
+    }
 	.admin_m_header div:last-child {float:right;width:150px;font-size:16px;text-align:center;background:url('../image/market_arrow_down.png') right center no-repeat;}
-	.admin_m_header a img {width:12px;}
+	.admin_m_header a img {
+        width: 8px;
+    }
 
 	/* title */
 	.adminWrap_title a {display:none;}
-	.adminWrap_title {border:none;margin:0;background:#EDEBF4;padding:10px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
+	.adminWrap_title {border:none;margin:0;background: #EAE6F2;padding:10px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
 	.adminWrap_title h3 {border-left:5px solid #4E327B;font-size:16px;text-align:left;}
 
 	.adminWrap_title2 a {display:none;}
-	.adminWrap_title2 {border:none;margin:0;background:#EAE6F2;padding:20px 15px;height:auto;justify-content: space-between;margin:0;display:block;}
+	.adminWrap_title2 {border:none;margin:0;background:#EAE6F2;padding: 0px 5px 20px;height:auto;justify-content: space-between;margin:0;display:block;}
 	.adminWrap_title2 h3 {font-size:16px;text-align:left;}
 	.adminWrap_title2 p {font-size:14px;text-align:left;padding:0 10px;font-weight: 700;}
 
@@ -420,7 +428,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminModal_cont {width:90%;}
 	.admUserList .adminContent_tab{display:none;}
 	.adminWrap_title_m:after {content:"";display:block;clear:both;}
-	.adminWrap_title_m h3 {display:inline-block;}
+	.adminWrap_title_m h3 {display:inline-block;    FONT-WEIGHT: 500;}
 
 	.adminContent_date {float:none;width:100%;background:#EAE6F2;padding:10px;}
 	.adminContent_date select {width:25%;background:#fff;}
@@ -432,7 +440,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminContent_order {padding:10px 20px; background:#EAE6F2;}
 	.adminContent_date2 select {background:#fff;}
 
-	.adminWrap p {margin:20px 0 0 !important;}
+	.adminWrap p {margin:8px 0 0 !important;}
 	.adminContent_graph {margin:0 !important;float:none;width:100%;height:auto !important;}
 
 	.adminPageConpig .adminContent_search  {background:#fff;}
@@ -454,7 +462,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.adminContent_leftmenu > ul > li > ul > li {font-size:14px;}
 
 
-	.adminContent_drop_wrap {background: #EAE6F2;padding:0 20px 60px;}
+	.adminContent_drop_wrap {background: #EAE6F2;padding:0 0px 60px;}
 	.adminContent_drop {border-radius:20px;background:#fff;padding:30px;box-sizing:border-box;}
 	.adminContent_drop_title {display:flex;padding:10px 0;  justify-content: space-between;align-items: center;color:gray;}
 	.adminContent_drop_1depth > .adminContent_drop_title {border-bottom:1px solid #ccc;cursor:pointer;}
@@ -579,7 +587,10 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_table_div {
         width: 100%;
         overflow-x: auto;
-        margin-top: 70px;
+        /* margin-top: 70px; */
+        padding: 0px 40px !important;
+        margin-top: 0px !important;
+
     }
 
     .adminContent_search {
@@ -602,17 +613,18 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     }
     .adminModal_cont {
         width: 100%;
-        height: 100%;
+        height: 1000px;
         padding: 15px;
+        overflow-y: auto;
     }
     .adminModal_cont_btn {
         margin: 60px 0 60px 0 !important;
     }
     a.check_btn {
         float: right;
-        width: 60px;
-        height: 32px;
-        line-height: 32px;
+        width: 56px;
+        height: 29px;
+        line-height: 29px;
         border-radius: 5px;
         background: #4E327B;
         text-align: center;
@@ -714,6 +726,9 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         border-left: 8px solid #4E327B;
         font-size: 16px;
         text-align: left;
+        color: black;
+        letter-spacing: 0px;
+        font-weight: 500;
     }
     .adminContent_tab ul li.active a {
         border: none;
@@ -727,11 +742,11 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     }
 
     .adminContent_date3{
-        bottom: 339px;
+        bottom: 360px;
     }
 
     .adminContent_date4{
-        bottom: 386px;
+        bottom: 494px;
     }
 
     .adminContent_tab3 {
@@ -740,11 +755,11 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         background: #EDEBF4;
         top: 130px;
         position: relative;
-        height: 310px;
+        height: 333px;
     }
 
     .adminContent_tab4 {
-        height: 367px;
+        height: 478px;
         top: 151px;
     }
 
@@ -946,7 +961,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         padding: 0 15px 20px 15px;
         background: #EDEBF4 !important;
         margin-bottom: 10px;
-        bottom: 311px;
+        bottom: 333px;
         position: relative;
     }
 
@@ -955,7 +970,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         font-size: 12px;
     }
 
-    .header_gnb_logo > img {width: 16px !important;
+    .header_gnb_logo > img {
+        width: 12px !important;
         margin-left: 11px;
         top: -2px;
         position: relative;
@@ -975,7 +991,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .admin_m_header div:last-child {
         float: right;
         width: 150px;
-        font-size: 16px;
+        font-size: 12px;
         text-align: center;
         background: none;
         padding-left: 70px;
@@ -1008,7 +1024,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .adminContent_tab12 {
         height: 144px;
-        top: 55px;
+        top: 53px;
     }
     .adminContent_search12 {
         margin: 0;
@@ -1063,4 +1079,255 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         position: relative;
         padding-left: 16px;
     }
+
+    .adminContent_table {
+        margin: 0 0 0 0;
+    }
+
+    a.check_btn_long {
+        width: 46%;
+        height: 38px;
+        line-height: 38px;
+        font-size: 16px;
+        font-weight: 300;
+        margin: -7px 8px 2px 2px;
+    }
+
+    a.check_btn_long2 {
+        width: 30%;
+        height: 38px;
+        line-height: 38px;
+        font-size: 16px;
+        font-weight: 300;
+        margin: -7px 8px 2px 2px;
+    }
+
+    .adminWrap_title h3 {
+        margin: 0 0px;
+    }
+    .adminContent_search_category {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 11px;
+        position: relative;
+    }
+    a.check_btn2 {
+        float: right;
+        width: 106px;
+        height: 37px;
+        line-height: 37px;
+        border-radius: 5px;
+        background: #4E327B;
+        text-align: center;
+        color: #fff;
+        margin: 8px 8px 2px 2px;
+    }
+    .adminModal_cont_btn_m a {
+        float: left;
+        width: 131px;
+        height: 38px;
+        margin : 0 auto;
+    }
+    .adminModal_cont_btn_m {
+        margin: 0 0 0 0 !important;
+        justify-content: center;
+        display: flex;
+    }
+    .adminModal_cont_btn_m a {
+        margin: 0 10px 0 0;
+        line-height: 36px;
+        font-size: 17px;
+    }
+
+    .adminModal_ok_btn{
+        justify-content: center;
+        display: flex;
+    }
+    .title_middle_m {
+        top: 20px !important;
+    }
+
+    .adminCotent_parent {
+        width: 100% !important;
+        height: 800px;
+    }
+    .adminContent_table_div {
+        width: 100% !important;
+    }
+    .adminContent_graph3{
+        text-align: center;
+    }
+    .width100{
+        width: 100% !important;
+    }
+    .user_modal_date_m{
+        width: 29% !important;
+    }
+    .adminContent_search44 {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 478px;
+        position: relative;
+    }
+    .adminContent_tab3_seller {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 130px;
+        position: relative;
+        height: 256px;
+    }
+    .adminContent_date3_seller {
+        bottom: 280px;
+    }
+    .adminContent_search66_seller {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EDEBF4 !important;
+        margin-bottom: 10px;
+        bottom: 256px;
+        position: relative;
+    }
+    .adminContent_tab4_seller {
+        height: 367px;
+        top: 151px;
+    }
+    .adminContent_date4_seller {
+        bottom: 378px;
+    }
+
+    .adminContent_search44_seller {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 367px;
+        position: relative;
+    }
+    .adminContent_tab6_seller {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 140px;
+        position: relative;
+        height: 320px;
+    }
+    .adminModal_profit_top p {
+        font-size: 14px;
+    }
+    .adminModal_profit_top {
+        border-top: none;
+    }
+
+    .seller_btn_m {display: none;}
+
+    .adminContent_search77_seller {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 320px;
+        position: relative;
+    }
+
+    .adminContent_date77_seller {
+        width: 100%;
+        float: left;
+        bottom: 331px;
+        position: relative;
+        padding-left: 16px;
+    }
+    a.check_btn_long3 {
+        width: 100%;
+        height: 38px;
+        line-height: 38px;
+        font-size: 16px;
+        font-weight: 300;
+        margin: 10px 0;
+    }
+    .seller_btn_m_view {display: block !important;}
+    .modalBanner_table th, .modalBanner_table td {
+        padding: 5px;
+        text-align: left;
+        vertical-align: top;
+        font-size: 10px;
+    }
+    #start_date > h5 {font-size: 10px;}
+    #end_date > h5 {font-size: 10px;}
+    .adminContent_banner {padding: 50px;}
+
+    .adminContent_tab5_domae {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 135px;
+        position: relative;
+        height: 327px;
+    }
+
+    .adminContent_search5_domae {
+        bottom: 327px;
+    }
+
+    .adminContent_date5_domae {
+        width: 100%;
+        float: left;
+        bottom: 344px;
+        position: relative;
+        padding-left: 16px;
+    }
+    .adminContent_tab6_domae {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 140px;
+        position: relative;
+        height: 210px;
+    }
+
+    .adminContent_date77_domae {
+        width: 100%;
+        float: left;
+        bottom: 235px;
+        position: relative;
+        padding-left: 16px;
+    }
+
+    .adminContent_search77_domae {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 210px;
+        position: relative;
+    }
+
+    .adminContent_tab11_domae {
+        margin: 0;
+        padding: 20px 15px;
+        background: #EDEBF4;
+        top: 35px;
+        position: relative;
+        height: 193px;
+    }
+    .adminContent_search11_domae {
+        margin: 0;
+        padding: 0 15px 20px 15px;
+        background: #EAE6F2 !important;
+        margin-bottom: 10px;
+        bottom: 193px;
+        position: relative;
+    }
+    .adminContent_search_m_domae {
+        bottom: 94px;
+        height: 55px;
+        background-color: transparent !important;
+    }
+
 }
+
+.seller_btn_m_view {display: none;}
