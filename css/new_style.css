@@ -1194,6 +1194,7 @@ border-radius: 5px;box-sizing: border-box;}
         font-size: 13px;
         font-weight: 200;
         letter-spacing: 0px;
+        margin-left: 10px;
     }
     .join {
         background: #F4F2F8;
@@ -1375,7 +1376,16 @@ border-radius: 5px;box-sizing: border-box;}
         height: 240px;
     }
     .adminContent_right_stanby {width: 100% !important;margin: 0px !important}
-    
+    .body_quick ul li {
+        width: 25%;
+        height: 112px;
+        border-right: 1px solid #C7C7C7;
+        box-sizing: border-box;
+    }
+    .maintab_02_section img {
+        position: absolute;
+        margin-left: 24px;
+    }
 }
 
 .m_main_logo {display: none;}

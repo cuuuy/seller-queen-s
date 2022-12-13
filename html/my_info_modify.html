@@ -107,16 +107,14 @@
 					<h5>나의 정보 관리</h5>
 						<table class="join_form">
 							<colgroup>
-								<col width="21%">
 								<col width="*">
-								<col width="16.3%">
 							</colgroup>
 							<tbody>
 								<tr>
 									<th>이름</th>
 								</tr>
 								<tr>
-									<td colspan="3">
+									<td colspan="6">
 										<input type="text" name="name" placeholder="이름을 입력해주세요.">
 									</td>
 								</tr>
@@ -124,16 +122,18 @@
 									<th>이메일</th>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="5">
 										<input type="text" name="email" placeholder="이메일 주소를 입력해주세요.">
 									</td>
-									<td><a href="javascript:void(0)" onclick="emil_check()">중복확인</a></td>
+									<td>
+                                        <a href="javascript:void(0)" onclick="emil_check()">중복확인</a>
+                                    </td>
 								</tr>
 								<tr>
 									<th>비밀번호</th>
 								</tr>
 								<tr>
-									<td colspan="3">
+									<td colspan="6">
 										<input type="password" name="pw" placeholder="영문,숫자 조합 8~12자리 이내로 입력해주세요.">
 									</td>
 								</tr>
@@ -141,7 +141,7 @@
 									<th>비밀번호 확인</th>
 								</tr>
 								<tr>
-									<td colspan="3">
+									<td colspan="6">
 										<input type="password" name="pw2" placeholder="비밀번호를 한 번 더 입력해주세요.">
 									</td>
 								</tr>
@@ -149,13 +149,15 @@
 									<th>주소</th>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="5">
 										<input type="text" id="addr" name="addr" placeholder="주소를 입력해주세요.">
 									</td>
-									<td><a href="javascript:void(0)" onclick="findAddr()">주소검색</a></td>
+									<td>
+                                        <a href="javascript:void(0)" onclick="findAddr()">주소검색</a>
+                                    </td>
 								</tr>
 								<tr>
-									<td colspan="3">
+									<td colspan="6">
 										<input type="text" name="addr2" placeholder="상세주소를 입력해주세요.">
 									</td>
 								</tr>
@@ -163,12 +165,19 @@
 									<th>연락처</th>
 								</tr>
 								<tr>
-									<td colspan="2">
+									<td colspan="5">
 										<input type="text" name="phone_nation" placeholder="+82(한국)" class="">
-										<input type="text" name="phone" placeholder="전화번호를 입력해주세요." class="">
+										
 									</td>
-                                    <td><a href="javascript:alert('인증번호가 전송되었습니다.')" onclick="">인증번호 전송</a></td>
+                                    <td>
+                                        <a href="javascript:alert('인증번호가 전송되었습니다.')" onclick="">인증번호 전송</a>
+                                    </td>
 								</tr>
+                                <tr>
+                                    <td colspan="6">
+                                        <input type="text" name="phone" placeholder="전화번호를 입력해주세요." class="">
+                                    </td>
+                                </tr>
 							</tbody>
 						</table>
 						<input type="hidden" name="birth_time">
