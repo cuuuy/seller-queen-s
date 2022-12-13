@@ -1176,12 +1176,12 @@ border-radius: 5px;box-sizing: border-box;}
     }
 
     .join_form tr th {
-        font-size: 13px !important;
+        font-size: 12px !important;
         color: #000;
         line-height: 27px;
         text-align: left;
-        font-weight: 400;
-        height: 60px;
+        font-weight: 500;
+        height: 38px;
     }
     .join_form tr td select {
         width: 93px;
@@ -1264,7 +1264,7 @@ border-radius: 5px;box-sizing: border-box;}
     }
     .body_infoModify_in {
         width: 100%;
-        padding: 128px 10px;
+        padding: 0px 15px;
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -1385,6 +1385,18 @@ border-radius: 5px;box-sizing: border-box;}
     .maintab_02_section img {
         position: absolute;
         margin-left: 24px;
+    }
+    .body_infoModify_in h5 {
+        display: none;
+    }
+    .body_infoModify_in a.ok_btn {
+        margin: 10px 0 0 0 !important;
+        height: 46px;
+        border-radius: 10px;
+        line-height: 46px;
+    }
+    .body_infoModify {
+        min-height: 1000px;
     }
 }
 
