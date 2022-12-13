@@ -1374,6 +1374,7 @@ border-radius: 5px;box-sizing: border-box;}
     #editor {
         height: 240px;
     }
+    .adminContent_right_stanby {width: 100% !important;margin: 0px !important}
     
 }
 

@@ -213,7 +213,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 
 .adminModal_invoice h5 {text-align:center;margin:0 0 10px 0;}
-.adminModal_invoice input, .adminModal_invoice select {height: 45px;display:block;background:#EAE6F2;font-size:16px;text-align:center;color:#111;padding:5px 0;margin:0 10px 0 0;width:100%;}
+.adminModal_invoice input, .adminModal_invoice select {height: 45px;display:block;background:#EAE6F2;font-size:16px;text-align:center;color:#111;padding:5px 5px;margin:0 10px 0 0;width:100%;}
 .adminModal_invoice > div > div {margin:20px 0;}
 
 .adminModal_cs h5 {margin:0 0 10px 0;}
@@ -576,6 +576,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .adminModal_ok {
         width: 100% !important;
+        height: 100%;
+        overflow-y: auto;
     }
     .modi_domae_mem {
         margin: 0px !important;
