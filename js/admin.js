@@ -57,3 +57,7 @@ $(document).on("click",".rightmenu_on", function(){
     }, 300);
     $('.ham').removeClass("rightmenu_on");
 })
+
+$(document).on("click",".admin_m_header>a:first", function(){
+    $(this).attr("href","javascript:history.back()");
+})
