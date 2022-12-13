@@ -1169,6 +1169,8 @@ border-radius: 5px;box-sizing: border-box;}
     a.ok_btn {
         font-size: 15px;
         font-weight: 400;
+        height: 33px;
+        line-height: 33px;
     }
     a.back_btn {
         font-size: 15px;

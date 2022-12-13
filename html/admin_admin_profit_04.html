@@ -352,6 +352,11 @@
         var withdraw_amount = $("input[name=withdraw_price").val();
         var withdraw_jumin = $("input[name=withdraw_jumin").val();
 
+        if(profit_id_arr.length == 0 ){
+            alert('출금내역이 없습니다.');
+            return;
+        }
+        
         var profit_id_arr_string = JSON.stringify(profit_id_arr);
 
         $.ajax({

@@ -139,7 +139,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
 
 /* modal */
-.adminModal {position:absolute;width:100%;min-height:900px;height:100%;top:0;left:0;background:rgba(0,0,0,0.4);z-index:9999;overflow:hidden;overflow-y: scroll;}
+.adminModal {position:fixed;width:100%;min-height:900px;height:100%;top:0;left:0;background:rgba(0,0,0,0.4);z-index:9999;overflow:hidden;overflow-y: scroll;}
 .adminModal_cont {position:absolute;width:1000px;padding:46px 36px;background:#fff;top:50%;left:50%;transform:translate(-50%, -50%);border-radius:10px;}
 .adminModal_cont > div {margin:0 0 40px 0;}
 .adminModal_cont h3 {color:#4E327B;text-align:center;margin:0 0 20px 0;font-size:24px;}
@@ -875,7 +875,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_date7 {
         width: 100%;
         float: left;
-        bottom: 339px;
+        bottom: 357px;
         position: relative;
         padding-left: 16px;
     }
@@ -1349,6 +1349,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .adminModal_profit {
         width: 84% !important;
+        height: 34% !important;
     }
 
     .adminModal_ok h3 {

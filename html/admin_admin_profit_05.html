@@ -370,6 +370,11 @@
         
         var profit_id_arr_string = JSON.stringify(profit_id_arr);
 
+        if(profit_id_arr.length == 0 ){
+            alert('출금내역이 없습니다.');
+            return;
+        }
+        
         $.ajax({
             type : "POST",            // HTTP method type(GET, POST) 형식이다.
             url : "http://43.200.169.89/request-withdraw-for-admin",      // 컨트롤러에서 대기중인 URL 주소이다.
