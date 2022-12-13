@@ -31,6 +31,20 @@
 				</span>
 			</div>
 		</div>
+        <div class="admin_m_header">
+			<div class="ham">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<a href=""><img src="../image/admin_back.png" alt="" /></a>
+			<a href="../html/main.html" class="header_gnb_logo">
+				<img src="../image/logo.png">
+			</a>
+			<div>
+				<span>김관리자</span> 님
+			</div>
+		</div>
 		<div class="adminContainer">
 			<!-- rightmenu -->
 			<div class="rightmenuWrap"></div>
@@ -195,12 +209,109 @@
 				</div>
 			</div>
 		</div>
+        <div class="adminModal_m" id="modalBanner" style="display:none;">
+			<div class="adminModal_cont" style="overflow-y: auto;height: 88%;">
+				<h3>배너 추가</h3>
+				<div>
+					<table class="modalBanner_table">
+						<colgroup>
+							<col width="90%">
+						</colgroup>
+						<tbody>
+                            <tr>
+								<th>
+									제목
+								</th>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="text" name="banner_title" placeholder="제목을 입력해주세요">
+								</td>
+							</tr>
+                            <tr>
+								<th>
+									노출기간
+								</th>
+							</tr>
+							<tr>
+                                <td class="2">
+                                    <div id="start_date">
+                                        <h5 style="text-align:left;">배너 업로드 시작</h5>
+                                        <input type="text" id="new_start_date" name="start_date" style="display:none;">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="2">
+                                    <div id="end_date" style="margin: 0 0px 0 0;">
+                                        <h5 style="text-align:left;">배너 업로드 종료</h5>
+                                        <input type="text" id="new_end_date" name="end_date" style="display:none;">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+								<th>
+									위치
+								</th>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<select name="typeStr">
+										<option value="main_banner">메인배너</option>
+										<option value="bottom_menu1">하단메뉴1</option>
+										<option value="bottom_menu2">하단메뉴2</option>
+										<option value="bottom_menu3">하단메뉴3</option>
+										<option value="bottom_menu4">하단메뉴4</option>
+									<select>
+								</td>
+							</tr>
+                            <tr>
+								<th>
+									텍스트
+								</th>
+							</tr>
+							<tr>
+								<td>
+									<textarea name="descStr" id="editor"></textarea>
+								</td>
+							</tr>
+                            <tr>
+								<th>
+									이미지
+								</th>
+							</tr>
+							<tr>
+								<td>
+									<input type="file" name="main_img" id="main_img">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="adminModal_cont_btn">
+					<a href="" class="back_btn modalClose">취소</a>
+					<a href="javascript:void(0)" class="ok_btn modi_btn" onclick="add_banner()">저장</a>
+				</div>
+			</div>
+		</div>
+        
 	</form>
 </body>
 
 </html>
 
 <script>
+
+    function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".adminModal_m").hide();
+        $(".adminModal").remove();
+    } else {// 모바일 외
+        $(".adminModal_m").remove();
+        $(".adminModal").hide();
+    }
 
 	var now_date = Date.now();
 	var enroll_time = now_date/1000;
