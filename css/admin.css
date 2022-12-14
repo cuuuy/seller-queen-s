@@ -367,7 +367,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 	.admin_m_header {display:block;position:static;align-items: center; justify-content: space-between;box-sizing:border-box;padding:15px;height: 45px;cursor:pointer;}
 	.admin_m_header:after {content:"";display:block;clear:both;}
 	.admin_m_header > div {float:left;}
-	.admin_m_header .ham {margin:0 10px 0 0;}
+	.admin_m_header .ham {margin:0 10px 0 0;min-width: 15px;min-height: 15px;}
 	.admin_m_header > a {float:left;}
 	.admin_m_header div:first-child span {
         width: 14px;
@@ -993,11 +993,11 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .admin_m_header div:last-child {
         float: right;
-        width: 110px;
+        width: 100px;
         font-size: 12px;
         text-align: center;
         background: none;
-        padding-left: 50px;
+        padding-left: 40px;
     }
 
     .admin_m_header div:last-child span {
