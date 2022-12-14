@@ -31,17 +31,16 @@ $(function(){
 
 			//$('.header_gnb_logo').hide();
             $('.header_gnb_logo').children().attr("src","../image/market_m_logo2.png");
-
+            
+            
+            $(".header_gnb_logo").after('<div class="test_top_menu_m"><a href="./admin_teacher_main.html">강사</div>');
+            $(".header_gnb_logo").after('<div class="test_top_menu_m"><a href="./admin_domae_main.html">도매</div>');
+            $(".header_gnb_logo").after('<div class="test_top_menu_m"><a href="./admin_seller_main.html">셀러</div>');
+            $(".header_gnb_logo").after('<div class="test_top_menu_m"><a href="./admin_admin_main.html">관리자</div>');
 
 		}
         
 
-});
-
-$(document).ready(function(){
-    $(".ham").click(function(){
-        //alert('2')    
-    })
 });
 
 $(document).on("click",".ham", function(){

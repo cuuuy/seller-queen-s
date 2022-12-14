@@ -13,6 +13,7 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="../js/jquery.bxslider.js"></script>
 	<script src="../js/admin.js"></script>
+	<script src="../js/function.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -57,42 +58,41 @@
 					<h3>프로핏</h3>
 				</div> 
 					<div class="adminContent">
-						<div class="adminContent_tab">
+						<div class="adminContent_tab adminContent_tab6_domae">
 							<ul>
-								<li><a href="./admin_teacher_main.html">판매 프로핏 적립 현황</a></li>
-								<li class="active"><a href="./admin_teacher_main_02.html">판매 프로핏 출금 현황</a></li>
+								<li><a href="./admin_teacher_main.html" class="title_middle_m">판매 프로핏 적립 현황</a></li>
+								<li class="active"><a href="./admin_teacher_main_02.html" class="title_middle_m">판매 프로핏 출금 현황</a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search">
+						<div class="adminContent_search adminContent_search77_domae">
 							<input type="search" name="" placeholder="상품을 검색하세요.">
-							<a href="javascript:void(0)" class="check_btn" onclick="modal_popup();">출금하기</a>
+							<a href="javascript:void(0)" class="check_btn seller_btn_m" onclick="modal_popup();">출금하기</a>
 							<a href="" class="check_btn">검색</a>
 						</div>
-						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+						<div class="adminContent_date adminContent_date77_domae">
+							<select name="search_year1">
 							</select>
-							<select>
-								<option>4</option>
+							<select  name="search_month1">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day1">
 							</select>
 						</div>
-						
-						<div class="adminContent_date">
-							<select>
-								<option>2022</option>
+						<div class="adminContent_date_middle">
+							<b>────</b>
+						</div>
+						<div class="adminContent_date adminContent_date77_domae">
+							<select name="search_year2">
 							</select>
-							<select>
-								<option>6</option>
+							<select  name="search_month2">
 							</select>
-							<select>
-								<option>11</option>
+							<select  name="search_day2">
 							</select>
+						</div>
+						<div class="adminContent_search adminContent_search_m" style="height: 0px;">
+							<a href="javascript:void(0)" class="check_btn check_btn_long3 seller_btn_m_view" onclick="modal_popup();">출금하기</a>
 						</div>
 
-						<div class="adminContent_date">
+						<div class="adminContent_date adminContent_date_hidden">
 							<select>
 								<option>정산상태</option>
 							</select>
@@ -235,7 +235,7 @@
                 <input type="hidden" name="total_amount">
 				<p id="profit_amount">0원</p>
 			</div> -->
-			<table class="adminModal_profit_table" >
+			<table class="adminModal_profit_table pc" >
 				<colgroup>
 					<col width="30%">
 					<col width="70%">
@@ -276,6 +276,52 @@
 					</tr>
 				</tbody>
 			</table>
+			<table class="adminModal_profit_table mobile" >
+				<colgroup>
+					<col width="*">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" name="withdraw_name" placeholder="이름">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="withdraw_jumin" placeholder="주민번호를 입력해주세요.">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<select name="withdraw_bank">
+								<option value="sinhan">신한은행</option>
+								<option value="kookmin">국민은행</option>
+								<option value="woori">우리은행</option>
+								<option value="hana">하나은행</option>
+								<option value="nonghyup">농협은행</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="withdraw_acount" placeholder="계좌번호를 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
+						</td>
+					</tr>
+					<tr>
+                        <td>
+							<select name="withdraw_profit">
+								<option value="sale">판매 프로핏</option>
+								<option value="ad">광고 프로핏</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" name="withdraw_price" placeholder="신청금액을 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');">
+						</td>
+					</tr>
+				</tbody>
+			</table>
 			<div class="adminModal_ok_btn">
 				<a href="javascript:void(0)" class="ok_btn" id="close_btn" onclick="profit_withdraw();">출금하기</a>
 			</div>
@@ -286,6 +332,17 @@
 </html>
 
 <script>
+	function Mobile(){
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);}
+	
+    if (Mobile()){// 모바일일 경우
+        $(".mobile").show();
+        $(".pc").remove();
+    } else {// 모바일 외
+        $(".mobile").remove();
+        $(".pc").show();
+    }
+	
 	$(document).ready(function() {
 		$('.rightmenuWrap').load('admin_teacher_rightmenu.html');
 	});

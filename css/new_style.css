@@ -1175,6 +1175,8 @@ border-radius: 5px;box-sizing: border-box;}
     a.back_btn {
         font-size: 15px;
         font-weight: 400;
+        height: 33px;
+        line-height: 33px;
     }
 
     .join_form tr th {

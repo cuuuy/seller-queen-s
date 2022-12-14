@@ -659,7 +659,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         height: 102px !important;
         border-radius: 8px;
         display: flex;
-        line-height: 24px;
+        line-height: 10px;
         font-weight: 400;
     }
     .adminContent_tab ul li a span {
@@ -993,11 +993,11 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .admin_m_header div:last-child {
         float: right;
-        width: 150px;
+        width: 110px;
         font-size: 12px;
         text-align: center;
         background: none;
-        padding-left: 70px;
+        padding-left: 50px;
     }
 
     .admin_m_header div:last-child span {
@@ -1215,7 +1215,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         margin: 0;
         padding: 20px 15px;
         background: #EDEBF4;
-        top: 140px;
+        top: 127px;
         position: relative;
         height: 320px;
     }
@@ -1240,7 +1240,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_date77_seller {
         width: 100%;
         float: left;
-        bottom: 331px;
+        bottom: 345px;
         position: relative;
         padding-left: 16px;
     }
@@ -1349,7 +1349,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
 
     .adminModal_profit {
         width: 84% !important;
-        height: 34% !important;
+        height: 84% !important;
+        padding: 30px;
     }
 
     .adminModal_ok h3 {
@@ -1387,6 +1388,8 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         width: 30%;
     }
     .adminContent b {padding: 30px;}
+
+    .test_top_menu_m {margin: 0 5px 0 5px;}
 }
 
 .seller_btn_m_view {display: none;}

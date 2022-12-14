@@ -407,6 +407,19 @@
 			return false;
 		}
 
+        function fn_emailChk(email){
+            var regExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
+            if(!regExp.test(email)){
+                return false;
+            }
+            return true;
+        }
+
+        if(!fn_emailChk(email)){
+            alert('이메일 형식이 옳바르지 않습니다.');
+            return false;
+        }
+
 		$.ajax({
 			type : "POST",            // HTTP method type(GET, POST) 형식이다.
 			url : "http://43.200.169.89/check-email",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -512,6 +525,19 @@
 			return false;
 		}
 
+        function fn_emailChk(email){
+            var regExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.[a-zA-Z]{2,4}$/;
+            if(!regExp.test(email)){
+                return false;
+            }
+            return true;
+        }
+
+        if(!fn_emailChk(email)){
+            alert('이메일 형식이 옳바르지 않습니다.');
+            return false;
+        }
+        
 		if(id==""){
 			alert("아이디를 입력해주세요.");
 			return false;
