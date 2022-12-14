@@ -1160,7 +1160,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         width: 100% !important;
     }
     .adminContent_graph3{
-        text-align: center;
+        /* text-align: center; */
     }
     .width100{
         width: 100% !important;
