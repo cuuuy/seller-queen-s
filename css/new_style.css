@@ -1402,6 +1402,12 @@ border-radius: 5px;box-sizing: border-box;}
     .body_infoModify {
         min-height: 1000px;
     }
+    .header_gnb_logo > img {
+        width: none;
+        margin-left: 11px;
+        top: -2px;
+        position: relative;
+    }
 }
 
 .m_main_logo {display: none;}

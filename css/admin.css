@@ -665,7 +665,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
     .adminContent_tab ul li a span {
         font-weight: 400;
         font-size: 16px;
-        bottom: 60px;
+        bottom: 40px;
         position: relative;
     }
 
@@ -973,7 +973,7 @@ a.check_btn2 {float:right;width:120px;height:32px;line-height:32px;border-radius
         font-size: 12px;
     }
 
-    .header_gnb_logo > img {
+    .m_logo_img {
         width: 12px !important;
         margin-left: 11px;
         top: -2px;

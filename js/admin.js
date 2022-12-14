@@ -31,6 +31,7 @@ $(function(){
 
 			//$('.header_gnb_logo').hide();
             $('.header_gnb_logo').children().attr("src","../image/market_m_logo2.png");
+            $('.header_gnb_logo').children().addClass('m_logo_img')
             
             
             $(".header_gnb_logo").after('<div class="test_top_menu_m"><a href="./admin_teacher_main.html">강사</div>');
