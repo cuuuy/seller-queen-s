@@ -55,7 +55,7 @@
 					</ul>
 				</div>
 				<div class="adminWrap_title">
-					<a href="./admin_admin_main.html"><img src="../image/admin_back.png" alt="" /></a>
+					<a href="./admin_seller_main.html"><img src="../image/admin_back.png" alt="" /></a>
 					<h3>신고/차단 관리</h3>
 				</div> 
 					<div class="adminContent_right">
@@ -65,7 +65,7 @@
 								<li class="filter_ban"><a href="javascript:void(0)">차단 <span class="ban_span">0</span></a></li>
 							</ul>
 						</div>
-						<div class="adminContent_search adminContent_search12">
+						<div class="adminContent_search adminContent_search_long adminContent_search12">
 							<input type="search" name="" placeholder="신고내용/닉네임을 입력해주세요." onkeyup="enterkey()">
 							<!-- <a href="javascript:void(0)" class="check_btn">신고/차단하기</a> -->
 							<a href="javascript:void(0)" class="check_btn search_btn">검색</a>
@@ -185,7 +185,7 @@
 						<td>${desc}</td>
 						<td>
 							<div class="adminContent_order">
-								<a href="javascript:void(0)" class="check_btn" onclick="report_ban(${datas[i].id},'${typeStr}')">차단하기</a>
+								<a href="javascript:void(0)" class="check_btn ban_flag ban_flag_1" onclick="report_ban(${datas[i].id},'${typeStr}')">차단하기</a>
 							</div>
 						</td>
 					</tr>`;
@@ -207,10 +207,14 @@
         reports = sum_arr;
         reports_origin = sum_arr;
 
+        reports = reports_origin.filter(function(report_info){
+            return report_info.reported == "YES" && report_info.banned == "NO";
+        })
+
 		$.each(data, function(i, result){
 			
 			$('#paging').pagination({
-				dataSource: sum_arr,
+				dataSource: reports,
 				callback: function(data, pagination) {
 					page_num = pagination.totalNumber - ((pagination.pageNumber-1) * pagination.pageSize);
 					load_report_list(data);
@@ -219,11 +223,11 @@
 		})
 
         var tmp_arr = reports_origin.filter(function(report_info){
-            return report_info.reported == "YES";
+            return report_info.reported == "YES" && report_info.banned == "NO";
         })
 
         var tmp_arr2 = reports_origin.filter(function(report_info){
-            return report_info.typeStr == "cancel_qna";
+            return report_info.banned == "YES";
         })
 
         $(".report_span").text(tmp_arr.length);
@@ -231,20 +235,38 @@
 
 	});
 	function report_ban(target_id,typeStr){
-		var new_typeStr = '';
+
+        var new_typeStr = '';
 		if(typeStr=="문의글"){
 			new_typeStr = "inquiry";
 		}else if(typeStr=="후기글"){
 			new_typeStr = "review";
 		}
-		$.post("http://43.200.169.89/ban",{
-			typeStr : new_typeStr,
-			target_id : target_id,
-			},result=>{
-				if(result == "success"){
-					alert("차단되었습니다.");
-				}
-		})
+
+        var class_flag = $('.ban_flag').attr('class');
+        class_flag = class_flag.split(" ")[2];
+
+        if(class_flag == 'ban_flag_1'){
+            $.post("http://43.200.169.89/ban",{
+                typeStr : new_typeStr,
+                target_id : target_id,
+                },result=>{
+                    if(result == "success"){
+                        alert("차단되었습니다.");
+                    }
+            })
+        }else if(class_flag == 'ban_flag_2'){
+            $.post("http://43.200.169.89/un-ban",{
+                typeStr : new_typeStr,
+                target_id : target_id,
+                },result=>{
+                    if(result == "success"){
+                        alert("차단 해제되었습니다.");
+                    }
+            })
+        }
+		
+		
 	}
 	
     $(".filter_report").click(function(e){
@@ -252,7 +274,7 @@
 		$("input[name=search_qna]").val('');
 
         reports = reports_origin.filter(function(report_info){
-            return report_info.reported == "YES";
+            return report_info.reported == "YES" && report_info.banned == "NO";
         })
 
 		$('#paging').pagination({
@@ -266,11 +288,21 @@
 		$(this).addClass("active");
 		$(this).siblings().removeClass("active");
 
+        $(".ban_flag").text('차단 하기');
+        $(".ban_flag").addClass('ban_flag_1');
+        $(".ban_flag").removeClass('ban_flag_2');
+
 	})
 
-    $(".filter_all").click(function(e){
+    $(".filter_ban").click(function(e){
 		
+        
+
 		$("input[name=search_qna]").val('');
+
+        reports = reports_origin.filter(function(report_info){
+            return report_info.banned == "YES";
+        })
 
 		$('#paging').pagination({
 			dataSource: reports,
@@ -282,6 +314,10 @@
 
 		$(this).addClass("active");
 		$(this).siblings().removeClass("active");
+
+        $(".ban_flag").text('차단 해제');
+        $(".ban_flag").addClass('ban_flag_2');
+        $(".ban_flag").removeClass('ban_flag_1');
 
 	})
 
